@@ -34,16 +34,10 @@
         .gallery-img:hover {
             transform: scale(1.05);
         }
-        /* Efeito de fade do copiado */
-        .fade-out {
-            opacity: 0;
-            transition: opacity 1s ease-out;
-        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Navegação / Idiomas -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-sm transition-all duration-300 border-b border-gray-100">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="font-serif text-xl tracking-wider text-[#5a6b47]">F <span class="italic font-light">&amp;</span> A</div>
@@ -54,7 +48,6 @@
         </div>
     </nav>
 
-    <!-- Header / Hero Section -->
     <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
         <p class="text-[#a3b18a] tracking-[0.2em] uppercase text-sm mb-4" data-i18n="invite">Você está convidado para o casamento de</p>
         <h1 class="text-4xl md:text-6xl lg:text-7xl mb-6 text-[#2d3326] leading-tight">
@@ -64,10 +57,9 @@
         </h1>
         <div class="w-24 h-[1px] bg-[#a3b18a] my-6"></div>
         <p class="text-lg md:text-xl text-gray-600 tracking-widest uppercase mb-2" data-i18n="date">18 de Dezembro de 2026</p>
-        <p class="text-md text-gray-500 mb-12" data-i18n="time">Início às 18:00</p>
+        <p class="text-md text-gray-500 mb-12" data-i18n="time">Início às 17:30</p>
     </header>
 
-    <!-- Countdown Section -->
     <section class="py-16 bg-white text-center border-y border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-8 text-[#2d3326]" data-i18n="countdown_title">Faltam...</h2>
@@ -95,12 +87,11 @@
         </div>
     </section>
 
-    <!-- Location & Links Section -->
-    <section class="py-24 bg-[#fcfbf9]">
+    <section class="py-20 bg-[#fcfbf9]">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
+            <h2 class="font-serif text-4xl mb-12 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
             
-            <div class="grid md:grid-cols-2 gap-12 text-center">
+            <div class="grid md:grid-cols-2 gap-8 text-center">
                 <!-- Igreja -->
                 <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50">
                     <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -111,21 +102,103 @@
                     <a href="https://share.google/6bhxnbrxetTUDTa1n" target="_blank" class="inline-block px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto" data-i18n="map_btn">Ver no Mapa</a>
                 </div>
 
-                <!-- Jantar -->
+                <!-- Jantar/Recepção -->
                 <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50">
                     <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-6 h-6 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
                     </div>
                     <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                     <p class="text-gray-600 mb-6 font-medium" data-i18n="dinner_desc">Local do Jantar</p>
-                    <a href="https://share.google/hXtiAiy1uG2Pxkjgw" target="_blank" class="inline-block px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto" data-i18n="map_btn">Ver no Mapa</a>
+                    <a href="https://share.google/cg5NCtP8iw0GhWker" target="_blank" class="inline-block px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto" data-i18n="map_btn">Ver no Mapa</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RSVP Section -->
     <section class="py-20 bg-white border-y border-gray-100">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <!-- Cronograma -->
+                <div>
+                    <h2 class="font-serif text-3xl mb-8 text-[#2d3326] text-center md:text-left" data-i18n="itinerary_title">Programação</h2>
+                    <div class="space-y-6 border-l-2 border-[#e9eddf] pl-6 ml-3 relative">
+                        
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_1">17:30</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_1">Cerimônia Religiosa</h4>
+                        </div>
+                        
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_2">18:30</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_2">Sessão de Fotos</h4>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_3">19:30</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_3">Jantar</h4>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_4">21:00</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_4">Brinde aos Noivos</h4>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_5">21:30</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_5">Baile</h4>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_6">01:00</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_6">Petiscos</h4>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute w-3 h-3 bg-[#2d3326] rounded-full -left-[31px] top-1.5"></div>
+                            <span class="text-[#2d3326] font-bold text-lg" data-i18n="iti_time_7">02:30</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_7">Despedida</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Importante (Crianças / Traje) -->
+                <div>
+                    <h2 class="font-serif text-3xl mb-8 text-[#2d3326] text-center md:text-left" data-i18n="info_title">Informações Importantes</h2>
+                    
+                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 mb-6 flex items-start space-x-4">
+                        <div class="text-[#5a6b47] mt-1">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="dress_code_title">Traje: Passeio Completo (Formal)</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed" data-i18n="dress_code_desc">Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 flex items-start space-x-4">
+                        <div class="text-[#5a6b47] mt-1">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="kids_title">Festa Exclusiva para Adultos</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed" data-i18n="kids_desc">Amamos muito os pequenos! Porém, por questões de segurança no local e para que os pais possam relaxar e aproveitar ao máximo, nossa festa será exclusiva para adultos. Agradecemos imensamente a compreensão de coração!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="py-20 bg-[#fcfbf9] border-b border-gray-100">
         <div class="container mx-auto px-6 text-center max-w-2xl">
             <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
             <p class="text-gray-600 mb-8" data-i18n="rsvp_desc">Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho.</p>
@@ -139,53 +212,64 @@
         </div>
     </section>
 
-    <!-- Gifts / Pix Section -->
-    <section class="py-20 bg-[#fcfbf9]">
-        <div class="container mx-auto px-6 text-center max-w-xl">
+    <!-- Gifts Section (Brasil e Bolívia) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
             <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
-            <p class="text-gray-600 mb-8" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossa chave Pix abaixo.</p>
+            <p class="text-gray-600 mb-12 max-w-2xl mx-auto" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa casa, disponibilizamos nossas opções abaixo.</p>
             
-            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center justify-center">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=5542999215431&color=5a6b47" alt="QR Code Pix" class="w-40 h-40 mb-6">
-                
-                <p class="font-semibold text-[#2d3326] mb-1" data-i18n="pix_key_label">Chave Celular / Pix</p>
-                <p class="text-lg text-[#5a6b47] tracking-widest mb-6">(42) 99921-5431</p>
-                
-                <button onclick="copyPix()" class="px-6 py-2 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors duration-300 rounded-full text-sm font-semibold uppercase tracking-wider">
-                    <span data-i18n="copy_btn">Copiar Chave</span>
-                </button>
-                <p id="copy-msg" class="text-green-600 text-sm mt-3 opacity-0 font-medium" data-i18n="copy_success">Chave copiada com sucesso! ✓</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- PIX Brasil -->
+                <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative">
+                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_br_title">Para convidados no Brasil</h3>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=5542999215431&color=5a6b47" alt="QR Code Pix" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
+                    
+                    <p class="font-semibold text-[#2d3326] text-sm mb-1 uppercase tracking-wider">Chave PIX (Celular)</p>
+                    <p class="text-lg text-[#5a6b47] tracking-widest mb-6 font-bold">(42) 99921-5431</p>
+                    
+                    <button onclick="copyPix()" class="px-6 py-2 bg-[#e9eddf] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors duration-300 rounded-full text-sm font-semibold uppercase tracking-wider w-full max-w-[200px]">
+                        <span data-i18n="copy_btn">Copiar Chave</span>
+                    </button>
+                    <p id="copy-msg" class="text-green-600 text-xs mt-3 opacity-0 font-medium absolute bottom-3 transition-opacity duration-300" data-i18n="copy_success">Copiado com sucesso! ✓</p>
+                </div>
+
+                <!-- QR Bolívia -->
+                <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center">
+                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_bo_title">Para invitados en Bolivia</h3>
+                    <!-- Nota: Você pode substituir a URL abaixo pelo arquivo da foto do seu QR boliviano (ex: qr-bolivia.jpg) -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=QR_BOLIVIA_PLACEHOLDER&color=5a6b47" alt="QR Code Bolivia" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
+                    
+                    <p class="font-semibold text-[#2d3326] text-sm mb-2 uppercase tracking-wider" data-i18n="gifts_bo_label">Código QR Simple</p>
+                    <p class="text-sm text-gray-500 mb-6 px-4" data-i18n="gifts_bo_desc">Também disponibilizamos um QR Code para transferências diretas na Bolívia.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-[#fcfbf9] border-t border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
             
-            <!-- Grid das 4 fotos -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
-                <div class="overflow-hidden rounded-sm bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
+                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
                     <img src="20260127_184015.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal na praia" class="w-full h-full object-cover gallery-img" style="object-position: center 30%;">
                 </div>
                 
-                <div class="overflow-hidden rounded-sm bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
+                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
                     <img src="20251121_200121.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal no Natal" class="w-full h-full object-cover gallery-img">
                 </div>
                 
-                <div class="overflow-hidden rounded-sm bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
+                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
                     <img src="20241214_183121.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal na cidade" class="w-full h-full object-cover gallery-img">
                 </div>
 
-                <div class="overflow-hidden rounded-sm bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
+                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
                     <img src="20231225_174621.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal no campo" class="w-full h-full object-cover gallery-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-[#2d3326] text-white py-12 text-center">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&amp;</span> Ana Isabel</h2>
@@ -194,9 +278,13 @@
         </div>
     </footer>
 
-    <!-- Audio Player and Controls -->
+    <!-- 
+        MÚSICA LOCAL: Para o GitHub aceitar tocar sem erros, 
+        coloque o arquivo da música com o nome "musica.mp3" 
+        na mesma pasta onde salvar este arquivo HTML.
+    -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-acoustic-guitar-2423.mp3" type="audio/mpeg">
+        <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-lg z-50 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110">
@@ -206,11 +294,10 @@
         <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
-    <!-- Scripts unificados e protegidos -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // --- 1. EFEITO DO MENU ---
+            // EFEITO DO MENU
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
@@ -222,10 +309,9 @@
                 }
             });
 
-            // --- 2. CONTAGEM REGRESSIVA (Formato ISO para evitar falhas) ---
+            // CONTAGEM REGRESSIVA (Seguro para GitHub)
             try {
-                // Formato Ano-Mes-DiaTHora:Minuto:Segundo é obrigatório para não falhar no iOS/Safari/Github
-                const targetDate = new Date("2026-12-18T18:00:00").getTime();
+                const targetDate = new Date("2026-12-18T17:30:00").getTime();
                 
                 const countdown = setInterval(function() {
                     const now = new Date().getTime();
@@ -250,11 +336,9 @@
                     document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
                     document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
                 }, 1000);
-            } catch (e) {
-                console.error("Erro na contagem regressiva:", e);
-            }
+            } catch (e) { console.error("Erro na contagem regressiva:", e); }
 
-            // --- 3. MÚSICA COM PROTEÇÃO ---
+            // PLAYER DE MÚSICA
             try {
                 const musicBtn = document.getElementById('music-btn');
                 const bgMusic = document.getElementById('bg-music');
@@ -269,7 +353,6 @@
                         iconPause.classList.add('hidden');
                         isPlaying = false;
                     } else {
-                        // try-catch interno para contornar bloqueio de navegadores
                         let playPromise = bgMusic.play();
                         if (playPromise !== undefined) {
                             playPromise.then(function() {
@@ -277,21 +360,19 @@
                                 iconPause.classList.remove('hidden');
                                 isPlaying = true;
                             }).catch(function(error) {
-                                console.log("Erro ao tocar música:", error);
+                                console.log("O arquivo musica.mp3 não foi encontrado. Adicione-o na pasta do GitHub.", error);
+                                alert("Arquivo musica.mp3 não encontrado. Adicione a música na pasta do site para que ela toque.");
                             });
                         }
                     }
                 });
-            } catch (e) {
-                console.error("Erro no player de música:", e);
-            }
+            } catch (e) { console.error("Erro no player de música:", e); }
 
-            // --- 4. FUNÇÃO DO PIX NO ESCOPO GLOBAL ---
+            // FUNÇÃO COPIAR PIX
             window.copyPix = function() {
                 const pixKey = "42999215431";
                 const msgEl = document.getElementById('copy-msg');
                 
-                // Modo antigo fallback caso navigator.clipboard não funcione em HTTP
                 let textArea = document.createElement("textarea");
                 textArea.value = pixKey;
                 document.body.appendChild(textArea);
@@ -299,16 +380,14 @@
                 try {
                     document.execCommand('copy');
                     msgEl.classList.remove('opacity-0');
-                    setTimeout(() => {
-                        msgEl.classList.add('opacity-0');
-                    }, 3000);
+                    setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
                 } catch (err) {
                     console.error('Falha ao copiar', err);
                 }
                 document.body.removeChild(textArea);
             };
 
-            // --- 5. SISTEMA DE TRADUÇÃO ---
+            // SISTEMA DE TRADUÇÃO PT / ES
             window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
@@ -337,7 +416,7 @@
                 pt: {
                     invite: "Você está convidado para o casamento de",
                     date: "18 de Dezembro de 2026",
-                    time: "Início às 18:00",
+                    time: "Início às 17:30",
                     countdown_title: "Faltam...",
                     days: "Dias",
                     hours: "Horas",
@@ -348,21 +427,42 @@
                     dinner_title: "Recepção",
                     dinner_desc: "Local do Jantar",
                     map_btn: "Ver no Mapa",
+                    
+                    itinerary_title: "Programação",
+                    iti_time_1: "17:30", iti_desc_1: "Cerimônia Religiosa",
+                    iti_time_2: "18:30", iti_desc_2: "Sessão de Fotos",
+                    iti_time_3: "19:30", iti_desc_3: "Jantar",
+                    iti_time_4: "21:00", iti_desc_4: "Brinde aos Noivos",
+                    iti_time_5: "21:30", iti_desc_5: "Baile",
+                    iti_time_6: "01:00", iti_desc_6: "Petiscos",
+                    iti_time_7: "02:30", iti_desc_7: "Despedida",
+
+                    info_title: "Informações Importantes",
+                    dress_code_title: "Traje: Passeio Completo (Formal)",
+                    dress_code_desc: "Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!",
+                    kids_title: "Festa Exclusiva para Adultos",
+                    kids_desc: "Amamos muito os pequenos! Porém, por questões de segurança no local e para que os pais possam relaxar e aproveitar ao máximo, nossa festa será exclusiva para adultos. Agradecemos imensamente a compreensão de coração!",
+
                     rsvp_title: "Confirme sua Presença",
                     rsvp_desc: "Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho.",
                     rsvp_btn: "Confirmar pelo WhatsApp",
-                    gallery_title: "Nossos Momentos",
-                    date_value_short: "18 Dezembro 2026",
+                    
                     gifts_title: "Sugestão de Presentes",
-                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossa chave Pix abaixo.",
-                    pix_key_label: "Chave Celular / Pix",
+                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa casa, disponibilizamos nossas opções abaixo.",
+                    gifts_br_title: "Para convidados no Brasil",
                     copy_btn: "Copiar Chave",
-                    copy_success: "Chave copiada com sucesso! ✓"
+                    copy_success: "Copiado com sucesso! ✓",
+                    gifts_bo_title: "Para convidados na Bolívia",
+                    gifts_bo_label: "Código QR Simple",
+                    gifts_bo_desc: "Também disponibilizamos um QR Code para transferências diretas na Bolívia.",
+
+                    gallery_title: "Nossos Momentos",
+                    date_value_short: "18 Dezembro 2026"
                 },
                 es: {
                     invite: "Estás invitado a la boda de",
                     date: "18 de Diciembre de 2026",
-                    time: "Inicio a las 18:00",
+                    time: "Inicio a las 17:30",
                     countdown_title: "Faltan...",
                     days: "Días",
                     hours: "Horas",
@@ -373,16 +473,37 @@
                     dinner_title: "Recepción",
                     dinner_desc: "Lugar de la Cena",
                     map_btn: "Ver en el Mapa",
+
+                    itinerary_title: "Itinerario",
+                    iti_time_1: "17:30", iti_desc_1: "Ceremonia Religiosa",
+                    iti_time_2: "18:30", iti_desc_2: "Sesión de Fotos",
+                    iti_time_3: "19:30", iti_desc_3: "Cena",
+                    iti_time_4: "21:00", iti_desc_4: "Brindis por los Novios",
+                    iti_time_5: "21:30", iti_desc_5: "Fiesta",
+                    iti_time_6: "01:00", iti_desc_6: "Bocadillos",
+                    iti_time_7: "02:30", iti_desc_7: "Despedida",
+
+                    info_title: "Información Importante",
+                    dress_code_title: "Vestimenta: Formal",
+                    dress_code_desc: "Sugerimos traje formal. ¡Queremos verlos a todos hermosos y cómodos para celebrar este momento con nosotros!",
+                    kids_title: "Fiesta Exclusiva para Adultos",
+                    kids_desc: "¡Amamos mucho a los pequeños! Sin embargo, por razones de seguridad en el lugar y para que los padres puedan relajarse y disfrutar al máximo, nuestra fiesta será exclusiva para adultos. ¡Agradecemos su comprensión de corazón!",
+
                     rsvp_title: "Confirma tu Asistencia",
                     rsvp_desc: "Por favor, confirma tu asistencia para ayudarnos a organizar todo con mucho cariño.",
                     rsvp_btn: "Confirmar por WhatsApp",
-                    gallery_title: "Nuestros Momentos",
-                    date_value_short: "18 Diciembre 2026",
+                    
                     gifts_title: "Sugerencia de Regalos",
-                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, dejamos nuestra cuenta / Pix abajo.",
-                    pix_key_label: "Cuenta / Pix (Brasil)",
+                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas regalarnos algo para ayudarnos con nuestro hogar, dejamos nuestras opciones abajo.",
+                    gifts_br_title: "Para invitados en Brasil",
                     copy_btn: "Copiar Cuenta",
-                    copy_success: "¡Cuenta copiada con éxito! ✓"
+                    copy_success: "¡Copiado con éxito! ✓",
+                    gifts_bo_title: "Para invitados en Bolivia",
+                    gifts_bo_label: "Código QR Simple",
+                    gifts_bo_desc: "También compartimos nuestro código QR para transferencias directas en Bolivia.",
+
+                    gallery_title: "Nuestros Momentos",
+                    date_value_short: "18 Diciembre 2026"
                 }
             };
         });
