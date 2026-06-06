@@ -279,30 +279,80 @@
         </div>
     </section>
 
+    <!-- Chatbot / Dúvidas Section -->
+    <section class="py-20 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 text-center max-w-3xl">
+            <div class="bg-[#fcfbf9] p-8 md:p-12 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
+                <!-- Ícone do WhatsApp -->
+                <div class="w-16 h-16 bg-[#25D366]/10 rounded-full flex items-center justify-center mx-auto mb-6 text-[#25D366]">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.383 0 0 5.383 0 12.031c0 2.124.552 4.195 1.6 6.012L.165 24l6.115-1.604A11.94 11.94 0 0 0 12.031 24c6.648 0 12.031-5.383 12.031-12.031S18.679 0 12.031 0zm0 22.016c-1.802 0-3.565-.483-5.114-1.401l-.367-.217-3.801.996.996-3.801-.217-.367c-.918-1.549-1.401-3.312-1.401-5.114 0-5.553 4.518-10.071 10.071-10.071 5.553 0 10.071 4.518 10.071 10.071s-4.518 10.071-10.071 10.071zm5.524-7.545c-.303-.152-1.792-.885-2.069-.986-.277-.101-.48-.152-.682.152-.202.303-.783.986-.96 1.188-.177.202-.354.227-.657.076-1.558-.781-2.735-1.92-3.415-3.085-.177-.303-.019-.467.132-.619.136-.136.303-.354.455-.531.152-.177.202-.303.303-.505.101-.202.051-.38-.025-.531-.076-.152-.682-1.644-.935-2.25-.246-.593-.496-.513-.682-.522-.177-.008-.38-.008-.582-.008-.202 0-.531.076-.808.38-.277.303-1.061 1.037-1.061 2.528s1.087 2.933 1.239 3.135c.152.202 2.137 3.262 5.176 4.57 2.052.884 2.846.96 3.916.808 1.188-.168 3.615-1.479 4.12-2.908.505-1.429.505-2.655.354-2.908-.152-.253-.556-.404-.859-.556z"/></svg>
+                </div>
+                <h2 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="chat_title">Dúvidas ou Comentários?</h2>
+                <p class="text-gray-600 mb-8 text-sm md:text-base leading-relaxed" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual no WhatsApp está pronto para te atender!</p>
+                
+                <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20ou%20deixar%20um%20coment%C3%A1rio%20sobre%20o%20casamento." 
+                   target="_blank" 
+                   class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-md transition-all">
+                    <span data-i18n="chat_btn">Acessar Chatbot</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="py-20 bg-[#fcfbf9] border-t border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
-                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
-                    <img src="20260127_184015.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal na praia" class="w-full h-full object-cover gallery-img" style="object-position: center 30%;">
-                </div>
+            <!-- Mosaico de 10 Fotos -->
+            <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 max-w-6xl mx-auto" id="gallery-container">
                 
-                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
-                    <img src="20251121_200121.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal no Natal" class="w-full h-full object-cover gallery-img">
-                </div>
+                <!-- O loop do JavaScript preencherá as fotos aqui, mas deixamos os elementos estruturados para não quebrar o layout -->
+                <script>
+                    const photoFiles = [
+                        "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
+                        "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
+                    ];
+                    
+                    photoFiles.forEach((file, index) => {
+                        document.write(`
+                            <div class="overflow-hidden rounded-lg shadow-sm relative group cursor-pointer mb-4 bg-gray-200" onclick="openLightbox(${index})">
+                                <img src="${file}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Nossos Momentos ${index + 1}" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
                 
-                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm">
-                    <img src="20241214_183121.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal na cidade" class="w-full h-full object-cover gallery-img">
-                </div>
-
-                <div class="overflow-hidden rounded-lg bg-gray-200 aspect-square md:aspect-[4/3] shadow-sm mt-0 md:mt-12">
-                    <img src="20231225_174621.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Casal no campo" class="w-full h-full object-cover gallery-img">
-                </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <!-- Fechar -->
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white focus:outline-none z-50 transition-colors">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <!-- Seta Esquerda -->
+        <button onclick="prevImage()" class="absolute left-4 md:left-10 text-white/50 hover:text-white focus:outline-none z-50 transition-colors p-2">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        
+        <!-- Seta Direita -->
+        <button onclick="nextImage()" class="absolute right-4 md:right-10 text-white/50 hover:text-white focus:outline-none z-50 transition-colors p-2">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        
+        <!-- Imagem -->
+        <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[80vh] object-contain rounded-md shadow-2xl transition-transform duration-300 scale-95" alt="Foto Ampliada">
+        
+        <!-- Contador -->
+        <div id="lightbox-counter" class="absolute bottom-8 text-white/70 font-medium tracking-widest text-sm bg-black/50 px-4 py-1 rounded-full"></div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-[#2d3326] text-white py-12 text-center">
@@ -395,25 +445,83 @@
             } catch (e) { console.error(e); }
 
             // Pix Copy
-            window.copyPix = function() {
-                const pixKey = "42999215431";
-                const msgEl = document.getElementById('copy-msg');
-                let textArea = document.createElement("textarea");
-                textArea.value = pixKey;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    msgEl.classList.remove('opacity-0');
-                    setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
-                } catch (err) {
-                    console.error(err);
-                }
-                document.body.removeChild(textArea);
-            };
+        window.copyPix = function() {
+            const pixKey = "42999215431";
+            const msgEl = document.getElementById('copy-msg');
+            let textArea = document.createElement("textarea");
+            textArea.value = pixKey;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                msgEl.classList.remove('opacity-0');
+                setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
+            } catch (err) {
+                console.error(err);
+            }
+            document.body.removeChild(textArea);
+        };
 
-            // Translations
-            window.setLanguage = function(lang) {
+        // Lógica do Lightbox
+        const images = [
+            "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
+            "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
+        ];
+        let currentImgIndex = 0;
+
+        window.openLightbox = function(index) {
+            currentImgIndex = index;
+            updateLightbox();
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('hidden');
+            // Pequeno delay para a transição de fade funcionar
+            setTimeout(() => lb.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden'; // Bloqueia a rolagem da página
+        };
+
+        window.closeLightbox = function() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('opacity-0');
+            setTimeout(() => {
+                lb.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restaura a rolagem
+            }, 300);
+        };
+
+        window.prevImage = function() {
+            currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
+            updateLightbox();
+        };
+
+        window.nextImage = function() {
+            currentImgIndex = (currentImgIndex + 1) % images.length;
+            updateLightbox();
+        };
+
+        function updateLightbox() {
+            const imgEl = document.getElementById('lightbox-img');
+            imgEl.classList.remove('scale-100');
+            imgEl.classList.add('scale-95', 'opacity-50');
+            
+            setTimeout(() => {
+                imgEl.src = images[currentImgIndex];
+                document.getElementById('lightbox-counter').innerText = `${currentImgIndex + 1} / ${images.length}`;
+                imgEl.classList.remove('scale-95', 'opacity-50');
+                imgEl.classList.add('scale-100');
+            }, 150);
+        }
+
+        // Navegação por Teclado no Lightbox
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+            }
+        });
+
+        // Translations
+        window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
 
@@ -482,6 +590,10 @@
                     gifts_bo_label: "Código QR Simple",
                     gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
 
+                    chat_title: "Dúvidas ou Comentários?",
+                    chat_desc: "Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual no WhatsApp está pronto para te atender!",
+                    chat_btn: "Acessar Chatbot",
+
                     gallery_title: "Nossos Momentos",
                     date_value_short: "18 Dezembro 2026"
                 },
@@ -528,6 +640,10 @@
                     gifts_bo_title: "Invitados en Bolivia",
                     gifts_bo_label: "Código QR Simple",
                     gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
+
+                    chat_title: "¿Dudas o Comentarios?",
+                    chat_desc: "¿Tienes alguna duda sobre la boda, vestimenta, regalos o quieres dejarnos un mensaje especial? ¡Nuestro asistente en WhatsApp está listo para atenderte!",
+                    chat_btn: "Acceder al Chatbot",
 
                     gallery_title: "Nuestros Momentos",
                     date_value_short: "18 Diciembre 2026"
