@@ -279,20 +279,21 @@
         </div>
     </section>
 
-    <!-- Chatbot / Dúvidas Section -->
+    <!-- Chatbot / Dúvidas Section (Atualizada para o Link Gemini) -->
     <section class="py-20 bg-white border-b border-gray-100">
         <div class="container mx-auto px-6 text-center max-w-3xl">
             <div class="bg-[#fcfbf9] p-8 md:p-12 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                <!-- Ícone do WhatsApp -->
-                <div class="w-16 h-16 bg-[#25D366]/10 rounded-full flex items-center justify-center mx-auto mb-6 text-[#25D366]">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.383 0 0 5.383 0 12.031c0 2.124.552 4.195 1.6 6.012L.165 24l6.115-1.604A11.94 11.94 0 0 0 12.031 24c6.648 0 12.031-5.383 12.031-12.031S18.679 0 12.031 0zm0 22.016c-1.802 0-3.565-.483-5.114-1.401l-.367-.217-3.801.996.996-3.801-.217-.367c-.918-1.549-1.401-3.312-1.401-5.114 0-5.553 4.518-10.071 10.071-10.071 5.553 0 10.071 4.518 10.071 10.071s-4.518 10.071-10.071 10.071zm5.524-7.545c-.303-.152-1.792-.885-2.069-.986-.277-.101-.48-.152-.682.152-.202.303-.783.986-.96 1.188-.177.202-.354.227-.657.076-1.558-.781-2.735-1.92-3.415-3.085-.177-.303-.019-.467.132-.619.136-.136.303-.354.455-.531.152-.177.202-.303.303-.505.101-.202.051-.38-.025-.531-.076-.152-.682-1.644-.935-2.25-.246-.593-.496-.513-.682-.522-.177-.008-.38-.008-.582-.008-.202 0-.531.076-.808.38-.277.303-1.061 1.037-1.061 2.528s1.087 2.933 1.239 3.135c.152.202 2.137 3.262 5.176 4.57 2.052.884 2.846.96 3.916.808 1.188-.168 3.615-1.479 4.12-2.908.505-1.429.505-2.655.354-2.908-.152-.253-.556-.404-.859-.556z"/></svg>
+                <!-- Ícone de Assistente / IA -->
+                <div class="w-16 h-16 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                 </div>
                 <h2 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="chat_title">Dúvidas ou Comentários?</h2>
-                <p class="text-gray-600 mb-8 text-sm md:text-base leading-relaxed" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual no WhatsApp está pronto para te atender!</p>
+                <p class="text-gray-600 mb-8 text-sm md:text-base leading-relaxed" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual está pronto para te atender!</p>
                 
-                <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20ou%20deixar%20um%20coment%C3%A1rio%20sobre%20o%20casamento." 
+                <a href="https://gemini.google.com/gem/2422624668ed" 
                    target="_blank" 
-                   class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-md transition-all">
+                   class="inline-flex items-center justify-center px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-md transition-all">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     <span data-i18n="chat_btn">Acessar Chatbot</span>
                 </a>
             </div>
@@ -307,7 +308,6 @@
             <!-- Mosaico de 10 Fotos -->
             <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 max-w-6xl mx-auto" id="gallery-container">
                 
-                <!-- O loop do JavaScript preencherá as fotos aqui, mas deixamos os elementos estruturados para não quebrar o layout -->
                 <script>
                     const photoFiles = [
                         "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
@@ -445,83 +445,82 @@
             } catch (e) { console.error(e); }
 
             // Pix Copy
-        window.copyPix = function() {
-            const pixKey = "42999215431";
-            const msgEl = document.getElementById('copy-msg');
-            let textArea = document.createElement("textarea");
-            textArea.value = pixKey;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                msgEl.classList.remove('opacity-0');
-                setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
-            } catch (err) {
-                console.error(err);
+            window.copyPix = function() {
+                const pixKey = "42999215431";
+                const msgEl = document.getElementById('copy-msg');
+                let textArea = document.createElement("textarea");
+                textArea.value = pixKey;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    msgEl.classList.remove('opacity-0');
+                    setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
+                } catch (err) {
+                    console.error(err);
+                }
+                document.body.removeChild(textArea);
+            };
+
+            // Lógica do Lightbox
+            const images = [
+                "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
+                "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
+            ];
+            let currentImgIndex = 0;
+
+            window.openLightbox = function(index) {
+                currentImgIndex = index;
+                updateLightbox();
+                const lb = document.getElementById('lightbox');
+                lb.classList.remove('hidden');
+                setTimeout(() => lb.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeLightbox = function() {
+                const lb = document.getElementById('lightbox');
+                lb.classList.add('opacity-0');
+                setTimeout(() => {
+                    lb.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            };
+
+            window.prevImage = function() {
+                currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
+                updateLightbox();
+            };
+
+            window.nextImage = function() {
+                currentImgIndex = (currentImgIndex + 1) % images.length;
+                updateLightbox();
+            };
+
+            function updateLightbox() {
+                const imgEl = document.getElementById('lightbox-img');
+                imgEl.classList.remove('scale-100');
+                imgEl.classList.add('scale-95', 'opacity-50');
+                
+                setTimeout(() => {
+                    imgEl.src = images[currentImgIndex];
+                    document.getElementById('lightbox-counter').innerText = `${currentImgIndex + 1} / ${images.length}`;
+                    imgEl.classList.remove('scale-95', 'opacity-50');
+                    imgEl.classList.add('scale-100');
+                }, 150);
             }
-            document.body.removeChild(textArea);
-        };
 
-        // Lógica do Lightbox
-        const images = [
-            "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
-            "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
-        ];
-        let currentImgIndex = 0;
+            // Navegação por Teclado no Lightbox
+            document.addEventListener('keydown', function(e) {
+                if (!document.getElementById('lightbox').classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') prevImage();
+                    if (e.key === 'ArrowRight') nextImage();
+                }
+            });
 
-        window.openLightbox = function(index) {
-            currentImgIndex = index;
-            updateLightbox();
-            const lb = document.getElementById('lightbox');
-            lb.classList.remove('hidden');
-            // Pequeno delay para a transição de fade funcionar
-            setTimeout(() => lb.classList.remove('opacity-0'), 10);
-            document.body.style.overflow = 'hidden'; // Bloqueia a rolagem da página
-        };
-
-        window.closeLightbox = function() {
-            const lb = document.getElementById('lightbox');
-            lb.classList.add('opacity-0');
-            setTimeout(() => {
-                lb.classList.add('hidden');
-                document.body.style.overflow = 'auto'; // Restaura a rolagem
-            }, 300);
-        };
-
-        window.prevImage = function() {
-            currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
-            updateLightbox();
-        };
-
-        window.nextImage = function() {
-            currentImgIndex = (currentImgIndex + 1) % images.length;
-            updateLightbox();
-        };
-
-        function updateLightbox() {
-            const imgEl = document.getElementById('lightbox-img');
-            imgEl.classList.remove('scale-100');
-            imgEl.classList.add('scale-95', 'opacity-50');
-            
-            setTimeout(() => {
-                imgEl.src = images[currentImgIndex];
-                document.getElementById('lightbox-counter').innerText = `${currentImgIndex + 1} / ${images.length}`;
-                imgEl.classList.remove('scale-95', 'opacity-50');
-                imgEl.classList.add('scale-100');
-            }, 150);
-        }
-
-        // Navegação por Teclado no Lightbox
-        document.addEventListener('keydown', function(e) {
-            if (!document.getElementById('lightbox').classList.contains('hidden')) {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevImage();
-                if (e.key === 'ArrowRight') nextImage();
-            }
-        });
-
-        // Translations
-        window.setLanguage = function(lang) {
+            // Translations
+            window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
 
@@ -591,7 +590,7 @@
                     gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
 
                     chat_title: "Dúvidas ou Comentários?",
-                    chat_desc: "Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual no WhatsApp está pronto para te atender!",
+                    chat_desc: "Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual está pronto para te atender!",
                     chat_btn: "Acessar Chatbot",
 
                     gallery_title: "Nossos Momentos",
@@ -642,7 +641,7 @@
                     gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
 
                     chat_title: "¿Dudas o Comentarios?",
-                    chat_desc: "¿Tienes alguna duda sobre la boda, vestimenta, regalos o quieres dejarnos un mensaje especial? ¡Nuestro asistente en WhatsApp está listo para atenderte!",
+                    chat_desc: "¿Tienes alguna duda sobre la boda, vestimenta, regalos o quieres dejarnos un mensaje especial? ¡Nuestro asistente virtual está listo para atenderte!",
                     chat_btn: "Acceder al Chatbot",
 
                     gallery_title: "Nuestros Momentos",
