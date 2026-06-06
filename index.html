@@ -38,6 +38,7 @@
 </head>
 <body class="antialiased">
 
+    <!-- Navegação / Idiomas -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-sm transition-all duration-300 border-b border-gray-100">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="font-serif text-xl tracking-wider text-[#5a6b47]">F <span class="italic font-light">&amp;</span> A</div>
@@ -48,6 +49,7 @@
         </div>
     </nav>
 
+    <!-- Header / Hero Section -->
     <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
         <p class="text-[#a3b18a] tracking-[0.2em] uppercase text-sm mb-4" data-i18n="invite">Você está convidado para o casamento de</p>
         <h1 class="text-4xl md:text-6xl lg:text-7xl mb-6 text-[#2d3326] leading-tight">
@@ -60,6 +62,7 @@
         <p class="text-md text-gray-500 mb-12" data-i18n="time">Início às 17:30</p>
     </header>
 
+    <!-- Countdown Section -->
     <section class="py-16 bg-white text-center border-y border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-8 text-[#2d3326]" data-i18n="countdown_title">Faltam...</h2>
@@ -87,34 +90,46 @@
         </div>
     </section>
 
-    <section class="py-20 bg-[#fcfbf9]">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="font-serif text-4xl mb-12 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
+    <!-- Location & Links Section -->
+    <section class="py-24 bg-[#fcfbf9]">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
             
-            <div class="grid md:grid-cols-2 gap-8 text-center">
+            <div class="grid md:grid-cols-2 gap-12 text-center">
                 <!-- Igreja -->
-                <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50">
+                <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col h-full">
                     <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-6 h-6 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     </div>
-                    <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia</h3>
-                    <p class="text-gray-600 mb-6 font-medium">Parroquia La Resurrección</p>
-                    <a href="https://share.google/6bhxnbrxetTUDTa1n" target="_blank" class="inline-block px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto" data-i18n="map_btn">Ver no Mapa</a>
+                    <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
+                    <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
+                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="church_address">Av. Beni, 587 - Santa Cruz de la Sierra</p>
+                    
+                    <a href="https://www.google.com/maps/place/Parroquia+La+Resurrecci%C3%B3n/data=!4m2!3m1!1s0x0:0x7b0ba4ed26d8eb18?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span data-i18n="map_btn">Abrir GPS / Maps</span>
+                    </a>
                 </div>
 
-                <!-- Jantar/Recepção -->
-                <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50">
+                <!-- Jantar -->
+                <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col h-full">
                     <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-6 h-6 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
                     </div>
                     <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
-                    <p class="text-gray-600 mb-6 font-medium" data-i18n="dinner_desc">Local do Jantar</p>
-                    <a href="https://share.google/cg5NCtP8iw0GhWker" target="_blank" class="inline-block px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto" data-i18n="map_btn">Ver no Mapa</a>
+                    <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
+                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="dinner_address">Santa Cruz de la Sierra - Bolívia</p>
+                    
+                    <a href="https://www.google.com/maps/place/Garden+House+Eventos+Boutique/data=!4m2!3m1!1s0x0:0x91be73e13c48923d?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span data-i18n="map_btn">Abrir GPS / Maps</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Itinerary & Important Info -->
     <section class="py-20 bg-white border-y border-gray-100">
         <div class="container mx-auto px-6 max-w-5xl">
             <div class="grid md:grid-cols-2 gap-16">
@@ -132,20 +147,20 @@
                         
                         <div class="relative">
                             <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_2">18:30</span>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_2">19:00</span>
                             <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_2">Sessão de Fotos</h4>
                         </div>
 
                         <div class="relative">
                             <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
                             <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_3">19:30</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_3">Jantar</h4>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_3">Brinde aos Noivos</h4>
                         </div>
 
                         <div class="relative">
                             <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_4">21:00</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_4">Brinde aos Noivos</h4>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_4">20:00</span>
+                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_4">Jantar</h4>
                         </div>
 
                         <div class="relative">
@@ -156,7 +171,7 @@
 
                         <div class="relative">
                             <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_6">01:00</span>
+                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_6">00:00</span>
                             <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_6">Petiscos</h4>
                         </div>
 
@@ -172,13 +187,31 @@
                 <div>
                     <h2 class="font-serif text-3xl mb-8 text-[#2d3326] text-center md:text-left" data-i18n="info_title">Informações Importantes</h2>
                     
-                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 mb-6 flex items-start space-x-4">
-                        <div class="text-[#5a6b47] mt-1">
+                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 mb-6 flex flex-col sm:flex-row items-start space-x-0 sm:space-x-4">
+                        <div class="text-[#5a6b47] mt-1 hidden sm:block">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <div>
+                        <div class="w-full">
                             <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="dress_code_title">Traje: Passeio Completo (Formal)</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed" data-i18n="dress_code_desc">Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4" data-i18n="dress_code_desc">Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!</p>
+                            
+                            <!-- Desenhos Simples de Traje -->
+                            <div class="flex items-center space-x-6 text-[#5a6b47]">
+                                <!-- Terno (Masculino) -->
+                                <div class="flex flex-col items-center">
+                                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 3h10l3 5v13H4V8l3-5z"/>
+                                        <path d="M12 3v18"/>
+                                        <path d="M7 8l5 5 5-5"/>
+                                    </svg>
+                                </div>
+                                <!-- Vestido (Feminino) -->
+                                <div class="flex flex-col items-center">
+                                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9 3h6l2 7-3 2v9H10v-9l-3-2 2-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -212,16 +245,16 @@
         </div>
     </section>
 
-    <!-- Gifts Section (Brasil e Bolívia) -->
+    <!-- Gifts / Pix Section (Brasil & Bolívia) -->
     <section class="py-20 bg-white">
         <div class="container mx-auto px-6 text-center max-w-4xl">
             <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
-            <p class="text-gray-600 mb-12 max-w-2xl mx-auto" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa casa, disponibilizamos nossas opções abaixo.</p>
+            <p class="text-gray-600 mb-12 max-w-2xl mx-auto" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossas opções abaixo.</p>
             
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- PIX Brasil -->
                 <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative">
-                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_br_title">Para convidados no Brasil</h3>
+                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_br_title">Convidados no Brasil</h3>
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=5542999215431&color=5a6b47" alt="QR Code Pix" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
                     
                     <p class="font-semibold text-[#2d3326] text-sm mb-1 uppercase tracking-wider">Chave PIX (Celular)</p>
@@ -235,17 +268,18 @@
 
                 <!-- QR Bolívia -->
                 <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center">
-                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_bo_title">Para invitados en Bolivia</h3>
-                    <!-- Nota: Você pode substituir a URL abaixo pelo arquivo da foto do seu QR boliviano (ex: qr-bolivia.jpg) -->
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=QR_BOLIVIA_PLACEHOLDER&color=5a6b47" alt="QR Code Bolivia" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
+                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_bo_title">Invitados en Bolivia</h3>
+                    <!-- Importante: Substitua 'qr-bolivia.jpg' pelo nome do arquivo do seu QR Code real da Bolívia no GitHub -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=QR_FAKE_BOLIVIA&color=5a6b47" alt="QR Code Bolivia" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
                     
                     <p class="font-semibold text-[#2d3326] text-sm mb-2 uppercase tracking-wider" data-i18n="gifts_bo_label">Código QR Simple</p>
-                    <p class="text-sm text-gray-500 mb-6 px-4" data-i18n="gifts_bo_desc">Também disponibilizamos um QR Code para transferências diretas na Bolívia.</p>
+                    <p class="text-sm text-gray-500 mb-6 px-4" data-i18n="gifts_bo_desc">Compartimos nuestro código QR para transferencias directas en Bolivia.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Gallery Section -->
     <section class="py-20 bg-[#fcfbf9] border-t border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
@@ -270,6 +304,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="bg-[#2d3326] text-white py-12 text-center">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&amp;</span> Ana Isabel</h2>
@@ -278,26 +313,20 @@
         </div>
     </footer>
 
-    <!-- 
-        MÚSICA LOCAL: Para o GitHub aceitar tocar sem erros, 
-        coloque o arquivo da música com o nome "musica.mp3" 
-        na mesma pasta onde salvar este arquivo HTML.
-    -->
+    <!-- Audio Player -->
     <audio id="bg-music" loop preload="auto">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-lg z-50 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110">
-        <!-- Icon Play -->
         <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <!-- Icon Pause -->
         <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // EFEITO DO MENU
+            // Navbar Scroll
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
@@ -309,10 +338,9 @@
                 }
             });
 
-            // CONTAGEM REGRESSIVA (Seguro para GitHub)
+            // Countdown
             try {
                 const targetDate = new Date("2026-12-18T17:30:00").getTime();
-                
                 const countdown = setInterval(function() {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
@@ -325,7 +353,6 @@
                         document.getElementById("seconds").innerText = "00";
                         return;
                     }
-
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -336,9 +363,9 @@
                     document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
                     document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
                 }, 1000);
-            } catch (e) { console.error("Erro na contagem regressiva:", e); }
+            } catch (e) { console.error(e); }
 
-            // PLAYER DE MÚSICA
+            // Music Player
             try {
                 const musicBtn = document.getElementById('music-btn');
                 const bgMusic = document.getElementById('bg-music');
@@ -360,19 +387,17 @@
                                 iconPause.classList.remove('hidden');
                                 isPlaying = true;
                             }).catch(function(error) {
-                                console.log("O arquivo musica.mp3 não foi encontrado. Adicione-o na pasta do GitHub.", error);
-                                alert("Arquivo musica.mp3 não encontrado. Adicione a música na pasta do site para que ela toque.");
+                                console.log("Música bloqueada ou não encontrada", error);
                             });
                         }
                     }
                 });
-            } catch (e) { console.error("Erro no player de música:", e); }
+            } catch (e) { console.error(e); }
 
-            // FUNÇÃO COPIAR PIX
+            // Pix Copy
             window.copyPix = function() {
                 const pixKey = "42999215431";
                 const msgEl = document.getElementById('copy-msg');
-                
                 let textArea = document.createElement("textarea");
                 textArea.value = pixKey;
                 document.body.appendChild(textArea);
@@ -382,12 +407,12 @@
                     msgEl.classList.remove('opacity-0');
                     setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
                 } catch (err) {
-                    console.error('Falha ao copiar', err);
+                    console.error(err);
                 }
                 document.body.removeChild(textArea);
             };
 
-            // SISTEMA DE TRADUÇÃO PT / ES
+            // Translations
             window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
@@ -423,18 +448,19 @@
                     minutes: "Minutos",
                     seconds: "Segundos",
                     location_title: "Locais",
-                    church_title: "Cerimônia",
+                    church_title: "Cerimônia Religiosa",
+                    church_address: "Av. Beni, 587 - Santa Cruz de la Sierra",
                     dinner_title: "Recepção",
-                    dinner_desc: "Local do Jantar",
-                    map_btn: "Ver no Mapa",
+                    dinner_address: "Santa Cruz de la Sierra - Bolívia",
+                    map_btn: "Abrir GPS / Maps",
                     
                     itinerary_title: "Programação",
                     iti_time_1: "17:30", iti_desc_1: "Cerimônia Religiosa",
-                    iti_time_2: "18:30", iti_desc_2: "Sessão de Fotos",
-                    iti_time_3: "19:30", iti_desc_3: "Jantar",
-                    iti_time_4: "21:00", iti_desc_4: "Brinde aos Noivos",
+                    iti_time_2: "19:00", iti_desc_2: "Sessão de Fotos",
+                    iti_time_3: "19:30", iti_desc_3: "Brinde aos Noivos",
+                    iti_time_4: "20:00", iti_desc_4: "Jantar",
                     iti_time_5: "21:30", iti_desc_5: "Baile",
-                    iti_time_6: "01:00", iti_desc_6: "Petiscos",
+                    iti_time_6: "00:00", iti_desc_6: "Petiscos",
                     iti_time_7: "02:30", iti_desc_7: "Despedida",
 
                     info_title: "Informações Importantes",
@@ -448,13 +474,13 @@
                     rsvp_btn: "Confirmar pelo WhatsApp",
                     
                     gifts_title: "Sugestão de Presentes",
-                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa casa, disponibilizamos nossas opções abaixo.",
-                    gifts_br_title: "Para convidados no Brasil",
+                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossas opções abaixo.",
+                    gifts_br_title: "Convidados no Brasil",
                     copy_btn: "Copiar Chave",
                     copy_success: "Copiado com sucesso! ✓",
-                    gifts_bo_title: "Para convidados na Bolívia",
+                    gifts_bo_title: "Invitados en Bolivia",
                     gifts_bo_label: "Código QR Simple",
-                    gifts_bo_desc: "Também disponibilizamos um QR Code para transferências diretas na Bolívia.",
+                    gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
 
                     gallery_title: "Nossos Momentos",
                     date_value_short: "18 Dezembro 2026"
@@ -469,18 +495,19 @@
                     minutes: "Minutos",
                     seconds: "Segundos",
                     location_title: "Ubicaciones",
-                    church_title: "Ceremonia",
+                    church_title: "Ceremonia Religiosa",
+                    church_address: "Av. Beni, 587 - Santa Cruz de la Sierra",
                     dinner_title: "Recepción",
-                    dinner_desc: "Lugar de la Cena",
-                    map_btn: "Ver en el Mapa",
+                    dinner_address: "Santa Cruz de la Sierra - Bolivia",
+                    map_btn: "Abrir GPS / Maps",
 
                     itinerary_title: "Itinerario",
                     iti_time_1: "17:30", iti_desc_1: "Ceremonia Religiosa",
-                    iti_time_2: "18:30", iti_desc_2: "Sesión de Fotos",
-                    iti_time_3: "19:30", iti_desc_3: "Cena",
-                    iti_time_4: "21:00", iti_desc_4: "Brindis por los Novios",
+                    iti_time_2: "19:00", iti_desc_2: "Sesión de Fotos",
+                    iti_time_3: "19:30", iti_desc_3: "Brindis por los Novios",
+                    iti_time_4: "20:00", iti_desc_4: "Cena",
                     iti_time_5: "21:30", iti_desc_5: "Fiesta",
-                    iti_time_6: "01:00", iti_desc_6: "Bocadillos",
+                    iti_time_6: "00:00", iti_desc_6: "Bocadillos",
                     iti_time_7: "02:30", iti_desc_7: "Despedida",
 
                     info_title: "Información Importante",
@@ -494,13 +521,13 @@
                     rsvp_btn: "Confirmar por WhatsApp",
                     
                     gifts_title: "Sugerencia de Regalos",
-                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas regalarnos algo para ayudarnos con nuestro hogar, dejamos nuestras opciones abajo.",
-                    gifts_br_title: "Para invitados en Brasil",
+                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, dejamos nuestras opciones abajo.",
+                    gifts_br_title: "Invitados en Brasil",
                     copy_btn: "Copiar Cuenta",
                     copy_success: "¡Copiado con éxito! ✓",
-                    gifts_bo_title: "Para invitados en Bolivia",
+                    gifts_bo_title: "Invitados en Bolivia",
                     gifts_bo_label: "Código QR Simple",
-                    gifts_bo_desc: "También compartimos nuestro código QR para transferencias directas en Bolivia.",
+                    gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
 
                     gallery_title: "Nuestros Momentos",
                     date_value_short: "18 Diciembre 2026"
