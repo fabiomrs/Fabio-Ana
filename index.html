@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casamento - Fabio & Ana Isabel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Lato', sans-serif;
@@ -16,7 +16,7 @@
             font-family: 'Playfair Display', serif;
         }
         .hero-bg {
-            background-image: linear-gradient(rgba(252, 251, 249, 0.7), rgba(252, 251, 249, 0.9)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(45, 51, 38, 0.5), rgba(45, 51, 38, 0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -26,71 +26,114 @@
         }
         .btn-hover:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .gallery-img {
-            transition: transform 0.5s ease;
+        
+        /* Estilos do Mosaico (Masonry) da Galeria */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1rem;
         }
-        .gallery-img:hover {
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        .masonry-item:hover img {
             transform: scale(1.05);
+            filter: brightness(0.8);
+        }
+        .masonry-item .overlay-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            color: white;
+            transition: opacity 0.3s ease;
+        }
+        .masonry-item:hover .overlay-icon {
+            opacity: 1;
+        }
+
+        /* Animações e Lightbox */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        #lightbox {
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
 
-    <!-- Navegação / Idiomas -->
-    <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-sm transition-all duration-300 border-b border-gray-100">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-serif text-xl tracking-wider text-[#5a6b47]">F <span class="italic font-light">&amp;</span> A</div>
+    <nav id="navbar" class="fixed w-full z-40 bg-white/90 backdrop-blur-sm transition-all duration-300 border-b border-gray-100 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-semibold">F <span class="italic font-light">&amp;</span> A</div>
             <div class="flex space-x-4">
-                <button onclick="setLanguage('pt')" id="btn-pt" class="text-sm font-semibold text-[#5a6b47] border-b-2 border-[#5a6b47] pb-1">PT</button>
-                <button onclick="setLanguage('es')" id="btn-es" class="text-sm text-gray-400 hover:text-[#5a6b47] transition-colors pb-1">ES</button>
+                <button onclick="setLanguage('pt')" id="btn-pt" class="text-sm font-bold text-[#5a6b47] border-b-2 border-[#5a6b47] pb-1 transition-colors">PT</button>
+                <button onclick="setLanguage('es')" id="btn-es" class="text-sm font-medium text-gray-400 hover:text-[#5a6b47] transition-colors pb-1 border-b-2 border-transparent">ES</button>
             </div>
         </div>
     </nav>
 
-    <!-- Header / Hero Section -->
-    <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
-        <p class="text-[#a3b18a] tracking-[0.2em] uppercase text-sm mb-4" data-i18n="invite">Você está convidado para o casamento de</p>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl mb-6 text-[#2d3326] leading-tight">
+    <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative">
+        <p class="text-white/90 tracking-[0.25em] uppercase text-sm md:text-base mb-6 font-medium" data-i18n="invite">Você está convidado para o casamento de</p>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-lg">
             Fabio Miguel<br>
-            <span class="text-2xl md:text-4xl italic font-light my-2 block">&amp;</span>
+            <span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&amp;</span>
             Ana Isabel
         </h1>
-        <div class="w-24 h-[1px] bg-[#a3b18a] my-6"></div>
-        <p class="text-lg md:text-xl text-gray-600 tracking-widest uppercase mb-2" data-i18n="date">18 de Dezembro de 2026</p>
-        <p class="text-md text-gray-500 mb-12" data-i18n="time">Início às 17:30</p>
+        <div class="w-24 h-[1px] bg-[#d1daba] my-8 opacity-70"></div>
+        <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-light drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
+        <p class="text-lg text-white/90 font-medium tracking-wide drop-shadow-md" data-i18n="time">Início às 17:30</p>
+        
+        <!-- Seta apontando para baixo -->
+        <div class="absolute bottom-10 animate-bounce text-white/70">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
     </header>
 
-    <!-- Countdown Section -->
-    <section class="py-16 bg-white text-center border-y border-gray-100">
+    <section class="py-16 bg-white text-center border-b border-gray-100 shadow-sm relative z-10">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-8 text-[#2d3326]" data-i18n="countdown_title">Faltam...</h2>
-            <div class="flex justify-center space-x-4 md:space-x-8 max-w-2xl mx-auto">
+            <div class="flex justify-center space-x-6 md:space-x-12 max-w-3xl mx-auto">
                 <div class="flex flex-col">
-                    <span id="days" class="text-3xl md:text-5xl font-serif text-[#5a6b47]">00</span>
-                    <span class="text-xs uppercase tracking-wider text-gray-500 mt-2" data-i18n="days">Dias</span>
+                    <span id="days" class="text-4xl md:text-6xl font-serif text-[#5a6b47]">00</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mt-2 font-bold" data-i18n="days">Dias</span>
                 </div>
-                <span class="text-3xl md:text-5xl font-serif text-gray-300">:</span>
+                <span class="text-3xl md:text-5xl font-serif text-gray-300 mt-1">:</span>
                 <div class="flex flex-col">
-                    <span id="hours" class="text-3xl md:text-5xl font-serif text-[#5a6b47]">00</span>
-                    <span class="text-xs uppercase tracking-wider text-gray-500 mt-2" data-i18n="hours">Horas</span>
+                    <span id="hours" class="text-4xl md:text-6xl font-serif text-[#5a6b47]">00</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mt-2 font-bold" data-i18n="hours">Horas</span>
                 </div>
-                <span class="text-3xl md:text-5xl font-serif text-gray-300">:</span>
+                <span class="text-3xl md:text-5xl font-serif text-gray-300 mt-1">:</span>
                 <div class="flex flex-col">
-                    <span id="minutes" class="text-3xl md:text-5xl font-serif text-[#5a6b47]">00</span>
-                    <span class="text-xs uppercase tracking-wider text-gray-500 mt-2" data-i18n="minutes">Minutos</span>
+                    <span id="minutes" class="text-4xl md:text-6xl font-serif text-[#5a6b47]">00</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mt-2 font-bold" data-i18n="minutes">Minutos</span>
                 </div>
-                <span class="text-3xl md:text-5xl font-serif text-gray-300">:</span>
-                <div class="flex flex-col">
-                    <span id="seconds" class="text-3xl md:text-5xl font-serif text-[#5a6b47]">00</span>
-                    <span class="text-xs uppercase tracking-wider text-gray-500 mt-2" data-i18n="seconds">Segundos</span>
+                <span class="text-3xl md:text-5xl font-serif text-gray-300 mt-1 hidden md:inline">:</span>
+                <div class="flex flex-col hidden md:flex">
+                    <span id="seconds" class="text-4xl md:text-6xl font-serif text-[#5a6b47]">00</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mt-2 font-bold" data-i18n="seconds">Segundos</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Location & Links Section -->
     <section class="py-24 bg-[#fcfbf9]">
         <div class="container mx-auto px-6 max-w-5xl">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
@@ -98,14 +141,18 @@
             <div class="grid md:grid-cols-2 gap-12 text-center">
                 <!-- Igreja -->
                 <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-6 h-6 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <div class="w-16 h-16 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
+                        <!-- Ícone de Igreja atualizado -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v6m-3-3h6m-3 3l-6 6v10h12V14l-6-6z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-4a2 2 0 014 0v4" />
+                        </svg>
                     </div>
                     <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                     <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
-                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="church_address">Av. Beni, 587 - Santa Cruz de la Sierra</p>
+                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="church_address">6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia</p>
                     
-                    <a href="https://www.google.com/maps/place/Parroquia+La+Resurrecci%C3%B3n/data=!4m2!3m1!1s0x0:0x7b0ba4ed26d8eb18?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
+                    <a href="https://www.google.com/maps/place/Parroquia+La+Resurrecci%C3%B3n/data=!4m2!3m1!1s0x0:0x7b0ba4ed26d8eb18?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span data-i18n="map_btn">Abrir GPS / Maps</span>
                     </a>
@@ -113,14 +160,22 @@
 
                 <!-- Jantar -->
                 <div class="bg-white p-8 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-6 h-6 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
+                    <div class="w-16 h-16 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
+                        <!-- Ícone de Recepção (Taças) atualizado -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 3h4l-2 10-2-10z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 3h4l-2 10-2-10z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13v8" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 13v8" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 21h14" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 8h8" />
+                        </svg>
                     </div>
                     <h3 class="font-serif text-2xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                     <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
-                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="dinner_address">Santa Cruz de la Sierra - Bolívia</p>
+                    <p class="text-gray-500 mb-8 font-medium text-sm flex-grow" data-i18n="dinner_address">1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra</p>
                     
-                    <a href="https://www.google.com/maps/place/Garden+House+Eventos+Boutique/data=!4m2!3m1!1s0x0:0x91be73e13c48923d?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
+                    <a href="https://www.google.com/maps/place/Garden+House+Eventos+Boutique/data=!4m2!3m1!1s0x0:0x91be73e13c48923d?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm tracking-wider uppercase rounded-sm btn-hover w-full md:w-auto mx-auto mt-auto">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span data-i18n="map_btn">Abrir GPS / Maps</span>
                     </a>
@@ -129,254 +184,303 @@
         </div>
     </section>
 
-    <!-- Itinerary & Important Info -->
-    <section class="py-20 bg-white border-y border-gray-100">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="grid md:grid-cols-2 gap-16">
-                
-                <!-- Cronograma -->
-                <div>
-                    <h2 class="font-serif text-3xl mb-8 text-[#2d3326] text-center md:text-left" data-i18n="itinerary_title">Programação</h2>
-                    <div class="space-y-6 border-l-2 border-[#e9eddf] pl-6 ml-3 relative">
-                        
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_1">17:30</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_1">Cerimônia Religiosa</h4>
-                        </div>
-                        
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_2">19:00</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_2">Sessão de Fotos</h4>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_3">19:30</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_3">Brinde aos Noivos</h4>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_4">20:00</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_4">Jantar</h4>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#5a6b47] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#5a6b47] font-bold text-lg" data-i18n="iti_time_5">21:30</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_5">Baile</h4>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#a3b18a] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#a3b18a] font-bold text-lg" data-i18n="iti_time_6">00:00</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_6">Petiscos</h4>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute w-3 h-3 bg-[#2d3326] rounded-full -left-[31px] top-1.5"></div>
-                            <span class="text-[#2d3326] font-bold text-lg" data-i18n="iti_time_7">02:30</span>
-                            <h4 class="text-gray-800 text-lg font-medium" data-i18n="iti_desc_7">Despedida</h4>
-                        </div>
-                    </div>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="timeline_title">Programação</h2>
+            
+            <div class="relative border-l border-[#a3b18a]/40 ml-4 md:ml-12">
+                <!-- Item 1 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#5a6b47] font-serif text-xl mr-4">17:30</span>
+                        <span data-i18n="time_1">Cerimônia Religiosa</span>
+                    </h3>
                 </div>
-
-                <!-- Info Importante (Crianças / Traje) -->
-                <div>
-                    <h2 class="font-serif text-3xl mb-8 text-[#2d3326] text-center md:text-left" data-i18n="info_title">Informações Importantes</h2>
-                    
-                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 mb-6 flex flex-col sm:flex-row items-start space-x-0 sm:space-x-4">
-                        <div class="text-[#5a6b47] mt-1 hidden sm:block">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <div class="w-full">
-                            <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="dress_code_title">Traje: Passeio Completo (Formal)</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-4" data-i18n="dress_code_desc">Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!</p>
-                            
-                            <!-- Desenhos Simples de Traje -->
-                            <div class="flex items-center space-x-6 text-[#5a6b47]">
-                                <!-- Terno (Masculino) -->
-                                <div class="flex flex-col items-center">
-                                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M7 3h10l3 5v13H4V8l3-5z"/>
-                                        <path d="M12 3v18"/>
-                                        <path d="M7 8l5 5 5-5"/>
-                                    </svg>
-                                </div>
-                                <!-- Vestido (Feminino) -->
-                                <div class="flex flex-col items-center">
-                                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M9 3h6l2 7-3 2v9H10v-9l-3-2 2-7z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#fcfbf9] p-6 rounded-lg border border-gray-100 flex items-start space-x-4">
-                        <div class="text-[#5a6b47] mt-1">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="kids_title">Festa Exclusiva para Adultos</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed" data-i18n="kids_desc">Amamos muito os pequenos! Porém, por questões de segurança no local e para que os pais possam relaxar e aproveitar ao máximo, nossa festa será exclusiva para adultos. Agradecemos imensamente a compreensão de coração!</p>
-                        </div>
-                    </div>
+                <!-- Item 2 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#a3b18a] font-serif text-xl mr-4">19:00</span>
+                        <span data-i18n="time_2">Sessão de Fotos</span>
+                    </h3>
                 </div>
-
+                <!-- Item 3 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#a3b18a] font-serif text-xl mr-4">19:30</span>
+                        <span data-i18n="time_3">Brinde aos Noivos</span>
+                    </h3>
+                </div>
+                <!-- Item 4 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#5a6b47] font-serif text-xl mr-4">20:00</span>
+                        <span data-i18n="time_4">Jantar</span>
+                    </h3>
+                </div>
+                <!-- Item 5 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#a3b18a] font-serif text-xl mr-4">21:30</span>
+                        <span data-i18n="time_5">Baile</span>
+                    </h3>
+                </div>
+                <!-- Item 6 -->
+                <div class="mb-10 ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#a3b18a] font-serif text-xl mr-4">00:00</span>
+                        <span data-i18n="time_6">Petiscos</span>
+                    </h3>
+                </div>
+                <!-- Item 7 -->
+                <div class="ml-8 relative group">
+                    <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-[#2d3326] ring-4 ring-white group-hover:scale-125 transition-transform duration-300"></span>
+                    <h3 class="flex flex-col md:flex-row md:items-center text-lg font-bold text-[#2d3326]">
+                        <span class="text-[#2d3326] font-serif text-xl mr-4">02:30</span>
+                        <span data-i18n="time_7">Despedida</span>
+                    </h3>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- RSVP Section -->
-    <section class="py-20 bg-[#fcfbf9] border-b border-gray-100">
+    <section class="py-20 bg-[#f9f9f7] border-y border-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-serif text-4xl mb-12 text-center text-[#2d3326]" data-i18n="info_title">Informações Importantes</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Dress Code com Ícones Atualizados -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-50 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+                    <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+                        <div class="w-16 h-16 bg-[#e9eddf] rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-[#2d3326] text-lg mb-1" data-i18n="dress_code_title">Traje: Passeio Completo (Formal)</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4" data-i18n="dress_code_desc">Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!</p>
+                        
+                        <!-- Desenhos Elegantes de Traje Formais -->
+                        <div class="flex items-center justify-center sm:justify-start space-x-6 text-[#5a6b47]">
+                            <!-- Terno/Smoking (Masculino) -->
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Lapela e Paletó -->
+                                    <path d="M7 3l2 8 3 3 3-3 2-8" />
+                                    <path d="M4 3h16l-1 18H5z" />
+                                    <!-- Gravata Borboleta e camisa -->
+                                    <path d="M10 5l2 1 2-1v2l-2-1-2 1z" fill="currentColor"/>
+                                    <path d="M12 8v13" />
+                                    <!-- Botões -->
+                                    <circle cx="12" cy="12" r="0.5" fill="currentColor"/>
+                                    <circle cx="12" cy="16" r="0.5" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <!-- Vestido Longo Elegante (Feminino) -->
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Alças e busto -->
+                                    <path d="M9 3v4c0 1.5 1 3 3 3s3-1.5 3-3V3" />
+                                    <!-- Cintura e Saia Longa -->
+                                    <path d="M9 10c-1.5 3-4 11-4 11h14s-2.5-8-4-11" />
+                                    <!-- Detalhe da Cintura -->
+                                    <path d="M9 10h6" />
+                                    <path d="M10 11h4" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aviso Crianças -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-50 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+                    <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+                        <div class="w-16 h-16 bg-[#e9eddf] rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-[#2d3326] text-lg mb-2" data-i18n="kids_title">Evento para Adultos</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic" data-i18n="kids_desc">"Amamos os seus pequenos, mas para garantir a segurança de todos e permitir que os papais e mamães aproveitem a festa com tranquilidade e descansem, nossa recepção será um evento exclusivo para adultos. Agradecemos a compreensão de coração!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
         <div class="container mx-auto px-6 text-center max-w-2xl">
-            <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
-            <p class="text-gray-600 mb-8" data-i18n="rsvp_desc">Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho.</p>
+            <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
+            <p class="text-gray-600 mb-10 text-lg" data-i18n="rsvp_desc">Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho e precisão.</p>
             
             <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20do%20Fabio%20e%20da%20Ana%20Isabel." 
                target="_blank" 
-               class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-lg">
-                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+               class="inline-flex items-center justify-center px-10 py-4 bg-[#2d3326] hover:bg-[#1a1e16] text-white text-sm tracking-widest uppercase rounded-sm btn-hover font-bold shadow-lg transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
                 <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
             </a>
         </div>
     </section>
 
-    <!-- Gifts / Pix Section (Brasil & Bolívia) -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6 text-center max-w-4xl">
-            <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
-            <p class="text-gray-600 mb-12 max-w-2xl mx-auto" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossas opções abaixo.</p>
+    <section class="py-24 bg-[#fcfbf9] border-t border-gray-100">
+        <div class="container mx-auto px-6 text-center max-w-5xl">
+            <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
+            <p class="text-gray-600 mb-12 text-lg max-w-2xl mx-auto" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear para nossa nova etapa, disponibilizamos nossas contas abaixo.</p>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- PIX Brasil -->
-                <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative">
-                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_br_title">Convidados no Brasil</h3>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=5542999215431&color=5a6b47" alt="QR Code Pix" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <!-- Card Brasil (Pix) -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center justify-between">
+                    <h3 class="font-bold text-[#5a6b47] mb-6 uppercase tracking-widest text-sm" data-i18n="gift_br">Para Convidados do Brasil</h3>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=5542999215431&color=5a6b47" alt="QR Code Pix" class="w-36 h-36 mb-6">
                     
-                    <p class="font-semibold text-[#2d3326] text-sm mb-1 uppercase tracking-wider">Chave PIX (Celular)</p>
-                    <p class="text-lg text-[#5a6b47] tracking-widest mb-6 font-bold">(42) 99921-5431</p>
+                    <p class="font-semibold text-[#2d3326] mb-1" data-i18n="pix_key_label">Chave Celular / Pix</p>
+                    <p class="text-lg text-gray-500 tracking-widest mb-6 font-mono">(42) 99921-5431</p>
                     
-                    <button onclick="copyPix()" class="px-6 py-2 bg-[#e9eddf] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors duration-300 rounded-full text-sm font-semibold uppercase tracking-wider w-full max-w-[200px]">
+                    <button onclick="copyPix()" class="w-full px-6 py-3 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors duration-300 rounded-sm text-sm font-bold uppercase tracking-wider">
                         <span data-i18n="copy_btn">Copiar Chave</span>
                     </button>
-                    <p id="copy-msg" class="text-green-600 text-xs mt-3 opacity-0 font-medium absolute bottom-3 transition-opacity duration-300" data-i18n="copy_success">Copiado com sucesso! ✓</p>
+                    <p id="copy-msg" class="text-[#5a6b47] text-sm mt-3 opacity-0 font-bold h-4" data-i18n="copy_success">Chave copiada com sucesso! ✓</p>
                 </div>
 
-                <!-- QR Bolívia -->
-                <div class="bg-[#fcfbf9] p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center">
-                    <h3 class="font-serif text-2xl mb-4 text-[#5a6b47]" data-i18n="gifts_bo_title">Invitados en Bolivia</h3>
-                    <!-- Importante: Substitua 'qr-bolivia.jpg' pelo nome do arquivo do seu QR Code real da Bolívia no GitHub -->
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=QR_FAKE_BOLIVIA&color=5a6b47" alt="QR Code Bolivia" class="w-36 h-36 mb-4 p-2 bg-white rounded-lg shadow-sm">
+                <!-- Card Bolívia (QR) -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center justify-between">
+                    <h3 class="font-bold text-[#5a6b47] mb-6 uppercase tracking-widest text-sm" data-i18n="gift_bo">Para Invitados de Bolivia</h3>
+                    <!-- IMPORTANTE: Substitua a imagem genérica abaixo pela foto do seu QR da Bolívia (ex: qr-bolivia.jpg) -->
+                    <img src="qr-bolivia.jpg" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Cuenta+Bolivia+Aqui&color=5a6b47'" alt="QR Code Bolivia" class="w-36 h-36 mb-6 border border-gray-100 p-2 rounded-md">
                     
-                    <p class="font-semibold text-[#2d3326] text-sm mb-2 uppercase tracking-wider" data-i18n="gifts_bo_label">Código QR Simple</p>
-                    <p class="text-sm text-gray-500 mb-6 px-4" data-i18n="gifts_bo_desc">Compartimos nuestro código QR para transferencias directas en Bolivia.</p>
+                    <p class="font-semibold text-[#2d3326] mb-1" data-i18n="bo_account_label">Escanea el código QR</p>
+                    <p class="text-sm text-gray-500 mb-6 text-center" data-i18n="bo_account_desc">Usa la aplicación de tu banco para transferir.</p>
+                    
+                    <div class="w-full px-6 py-3 border border-dashed border-[#a3b18a] text-[#5a6b47] rounded-sm text-sm font-bold uppercase tracking-wider opacity-70">
+                        <span data-i18n="qr_bo_info">Transferencia QR</span>
+                    </div>
+                    <p class="h-4 mt-3"></p> <!-- Spacer para alinhar com o card do lado -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Chatbot / Dúvidas Section (Atualizada para o Link Gemini) -->
     <section class="py-20 bg-white border-b border-gray-100">
-        <div class="container mx-auto px-6 text-center max-w-3xl">
-            <div class="bg-[#fcfbf9] p-8 md:p-12 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                <!-- Ícone de Assistente / IA -->
-                <div class="w-16 h-16 bg-[#a3b18a]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                </div>
-                <h2 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="chat_title">Dúvidas ou Comentários?</h2>
-                <p class="text-gray-600 mb-8 text-sm md:text-base leading-relaxed" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual está pronto para te atender!</p>
-                
-                <a href="https://gemini.google.com/gem/2422624668ed" 
-                   target="_blank" 
-                   class="inline-flex items-center justify-center px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-md transition-all">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    <span data-i18n="chat_btn">Acessar Chatbot</span>
-                </a>
+        <div class="container mx-auto px-6 text-center max-w-2xl">
+            <div class="w-16 h-16 bg-[#e9eddf] rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
             </div>
+            <h2 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="chat_title">Dúvidas ou Comentários?</h2>
+            <p class="text-gray-600 mb-10 leading-relaxed" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual inteligente está pronto para te atender!</p>
+            
+            <!-- LINK DO CHATBOT GEMINI AQUI -->
+            <a href="https://gemini.google.com/gem/1gmbO0OXUvM58MzJG-5spZuCztjbB1NIg?usp=sharing" 
+               target="_blank" 
+               class="inline-flex items-center justify-center px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-md transition-all">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span data-i18n="chat_btn">Dúvidas? Pergunte para nossa IA</span>
+            </a>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="py-20 bg-[#fcfbf9] border-t border-gray-100">
+    <section class="py-24 bg-[#fcfbf9]">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
             
-            <!-- Mosaico de 10 Fotos -->
-            <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 max-w-6xl mx-auto" id="gallery-container">
-                
-                <script>
-                    const photoFiles = [
-                        "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
-                        "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
-                    ];
-                    
-                    photoFiles.forEach((file, index) => {
-                        document.write(`
-                            <div class="overflow-hidden rounded-lg shadow-sm relative group cursor-pointer mb-4 bg-gray-200" onclick="openLightbox(${index})">
-                                <img src="${file}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Nossos Momentos ${index + 1}" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110">
-                                <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                </div>
-                            </div>
-                        `);
-                    });
-                </script>
-                
+            <!-- Grade Mosaico (Pinterest Style) -->
+            <div class="masonry-grid max-w-6xl mx-auto">
+                <!-- Imagem 1 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (1).jpg" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 1" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 2 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (2).jpg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 2" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 3 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (3).jpg" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 3" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 4 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (4).jpg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 4" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 5 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (5).jpg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 5" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 6 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (6).jpg" onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 6" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 7 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (7).jpg" onerror="this.src='https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 7" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 8 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (8).jpg" onerror="this.src='https://images.unsplash.com/photo-1478146896981-b80fe463b330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 8" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 9 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (9).jpg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 9" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
+                <!-- Imagem 10 -->
+                <div class="masonry-item" onclick="openLightbox(this)">
+                    <img src="foto (10).jpg" onerror="this.src='https://images.unsplash.com/photo-1510076857177-7470076d4098?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Foto Casal 10" loading="lazy">
+                    <div class="overlay-icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <!-- Fechar -->
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white focus:outline-none z-50 transition-colors">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <!-- Lightbox Modal (Invisível por padrão) -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden flex justify-center items-center opacity-0">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-gray-300 focus:outline-none">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        
-        <!-- Seta Esquerda -->
-        <button onclick="prevImage()" class="absolute left-4 md:left-10 text-white/50 hover:text-white focus:outline-none z-50 transition-colors p-2">
-            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+        <button onclick="prevImage(event)" class="absolute left-4 md:left-10 text-white hover:text-gray-300 focus:outline-none bg-black/30 p-2 rounded-full">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </button>
-        
-        <!-- Seta Direita -->
-        <button onclick="nextImage()" class="absolute right-4 md:right-10 text-white/50 hover:text-white focus:outline-none z-50 transition-colors p-2">
-            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+        <img id="lightbox-img" src="" alt="Imagem Ampliada" class="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl rounded-sm fade-in">
+        <button onclick="nextImage(event)" class="absolute right-4 md:right-10 text-white hover:text-gray-300 focus:outline-none bg-black/30 p-2 rounded-full">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
-        
-        <!-- Imagem -->
-        <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[80vh] object-contain rounded-md shadow-2xl transition-transform duration-300 scale-95" alt="Foto Ampliada">
-        
-        <!-- Contador -->
-        <div id="lightbox-counter" class="absolute bottom-8 text-white/70 font-medium tracking-widest text-sm bg-black/50 px-4 py-1 rounded-full"></div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-[#2d3326] text-white py-12 text-center">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&amp;</span> Ana Isabel</h2>
-            <p class="text-gray-400 text-sm tracking-widest uppercase mb-8" data-i18n="date_value_short">18 Dezembro 2026</p>
+            <p class="text-[#a3b18a] text-sm tracking-widest uppercase mb-8" data-i18n="date_value_short">18 Dezembro 2026</p>
             <p class="text-gray-500 text-xs">Feito com ❤️ para o nosso grande dia.</p>
         </div>
     </footer>
 
-    <!-- Audio Player -->
     <audio id="bg-music" loop preload="auto">
-        <source src="musica.mp3" type="audio/mpeg">
+        <!-- Substitua 'musica.mp3' no src pelo link ou arquivo local exato da música desejada. O link mixkit é um fallback caso o musica.mp3 falhe. -->
+        <source src="musica.mp3" onerror="this.src='https://assets.mixkit.co/music/preview/mixkit-romantic-acoustic-guitar-2423.mp3'" type="audio/mpeg">
     </audio>
 
-    <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-lg z-50 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110">
+    <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-lg z-30 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110">
+        <!-- Icon Play -->
         <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <!-- Icon Pause -->
         <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // Navbar Scroll
+            // --- 1. EFEITO DO MENU (Scroll) ---
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
@@ -388,9 +492,11 @@
                 }
             });
 
-            // Countdown
+            // --- 2. CONTAGEM REGRESSIVA (Formato ISO rigoroso) ---
             try {
+                // 18 de Dezembro de 2026 às 17:30
                 const targetDate = new Date("2026-12-18T17:30:00").getTime();
+                
                 const countdown = setInterval(function() {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
@@ -403,6 +509,7 @@
                         document.getElementById("seconds").innerText = "00";
                         return;
                     }
+
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -413,9 +520,11 @@
                     document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
                     document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
                 }, 1000);
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error("Erro na contagem regressiva:", e);
+            }
 
-            // Music Player
+            // --- 3. MÚSICA COM PROTEÇÃO ---
             try {
                 const musicBtn = document.getElementById('music-btn');
                 const bgMusic = document.getElementById('bg-music');
@@ -437,17 +546,20 @@
                                 iconPause.classList.remove('hidden');
                                 isPlaying = true;
                             }).catch(function(error) {
-                                console.log("Música bloqueada ou não encontrada", error);
+                                console.log("Erro ao tocar música:", error);
                             });
                         }
                     }
                 });
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error("Erro no player de música:", e);
+            }
 
-            // Pix Copy
+            // --- 4. FUNÇÃO DE COPIAR PIX ---
             window.copyPix = function() {
                 const pixKey = "42999215431";
                 const msgEl = document.getElementById('copy-msg');
+                
                 let textArea = document.createElement("textarea");
                 textArea.value = pixKey;
                 document.body.appendChild(textArea);
@@ -455,85 +567,94 @@
                 try {
                     document.execCommand('copy');
                     msgEl.classList.remove('opacity-0');
-                    setTimeout(() => { msgEl.classList.add('opacity-0'); }, 2500);
+                    setTimeout(() => {
+                        msgEl.classList.add('opacity-0');
+                    }, 3000);
                 } catch (err) {
-                    console.error(err);
+                    console.error('Falha ao copiar', err);
                 }
                 document.body.removeChild(textArea);
             };
 
-            // Lógica do Lightbox
-            const images = [
-                "foto (1).jpg", "foto (2).jpg", "foto (3).jpg", "foto (4).jpg", "foto (5).jpg",
-                "foto (6).jpg", "foto (7).jpg", "foto (8).jpg", "foto (9).jpg", "foto (10).jpg"
-            ];
-            let currentImgIndex = 0;
+            // --- 5. LÓGICA DO LIGHTBOX DA GALERIA ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            let currentImageIndex = 0;
+            // Pega todas as imagens dentro da classe masonry-item
+            const galleryImages = Array.from(document.querySelectorAll('.masonry-item img'));
 
-            window.openLightbox = function(index) {
-                currentImgIndex = index;
-                updateLightbox();
-                const lb = document.getElementById('lightbox');
-                lb.classList.remove('hidden');
-                setTimeout(() => lb.classList.remove('opacity-0'), 10);
-                document.body.style.overflow = 'hidden';
+            window.openLightbox = function(element) {
+                const img = element.querySelector('img');
+                currentImageIndex = galleryImages.indexOf(img);
+                lightboxImg.src = img.src;
+                lightbox.classList.remove('hidden');
+                setTimeout(() => { lightbox.classList.remove('opacity-0'); }, 10);
+                document.body.style.overflow = 'hidden'; // Bloqueia scroll da página
             };
 
             window.closeLightbox = function() {
-                const lb = document.getElementById('lightbox');
-                lb.classList.add('opacity-0');
-                setTimeout(() => {
-                    lb.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
+                lightbox.classList.add('opacity-0');
+                setTimeout(() => { 
+                    lightbox.classList.add('hidden'); 
+                    document.body.style.overflow = 'auto'; // Restaura scroll
                 }, 300);
             };
 
-            window.prevImage = function() {
-                currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
-                updateLightbox();
+            window.nextImage = function(e) {
+                if(e) e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateLightboxImage();
             };
 
-            window.nextImage = function() {
-                currentImgIndex = (currentImgIndex + 1) % images.length;
-                updateLightbox();
+            window.prevImage = function(e) {
+                if(e) e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateLightboxImage();
             };
 
-            function updateLightbox() {
-                const imgEl = document.getElementById('lightbox-img');
-                imgEl.classList.remove('scale-100');
-                imgEl.classList.add('scale-95', 'opacity-50');
-                
-                setTimeout(() => {
-                    imgEl.src = images[currentImgIndex];
-                    document.getElementById('lightbox-counter').innerText = `${currentImgIndex + 1} / ${images.length}`;
-                    imgEl.classList.remove('scale-95', 'opacity-50');
-                    imgEl.classList.add('scale-100');
-                }, 150);
+            function updateLightboxImage() {
+                // Remove e adiciona a classe para resetar a animação de fade-in
+                lightboxImg.classList.remove('fade-in');
+                void lightboxImg.offsetWidth; // trigger reflow
+                lightboxImg.src = galleryImages[currentImageIndex].src;
+                lightboxImg.classList.add('fade-in');
             }
 
-            // Navegação por Teclado no Lightbox
-            document.addEventListener('keydown', function(e) {
-                if (!document.getElementById('lightbox').classList.contains('hidden')) {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowLeft') prevImage();
-                    if (e.key === 'ArrowRight') nextImage();
+            // Fechar lightbox ao clicar no fundo escuro
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
                 }
             });
 
-            // Translations
+            // Navegação por teclado (Setas e Esc)
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextImage();
+                    if (e.key === 'ArrowLeft') prevImage();
+                }
+            });
+
+            // --- 6. SISTEMA BILINGUE (TRADUÇÃO) ---
             window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
 
                 if (lang === 'pt') {
-                    ptBtn.classList.add('text-[#5a6b47]', 'border-b-2', 'border-[#5a6b47]');
-                    ptBtn.classList.remove('text-gray-400');
-                    esBtn.classList.remove('text-[#5a6b47]', 'border-b-2', 'border-[#5a6b47]');
-                    esBtn.classList.add('text-gray-400');
+                    ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]');
+                    ptBtn.classList.remove('text-gray-400', 'border-transparent', 'font-medium');
+                    ptBtn.classList.add('font-bold');
+                    
+                    esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]', 'font-bold');
+                    esBtn.classList.add('text-gray-400', 'border-transparent', 'font-medium');
                 } else {
-                    esBtn.classList.add('text-[#5a6b47]', 'border-b-2', 'border-[#5a6b47]');
-                    esBtn.classList.remove('text-gray-400');
-                    ptBtn.classList.remove('text-[#5a6b47]', 'border-b-2', 'border-[#5a6b47]');
-                    ptBtn.classList.add('text-gray-400');
+                    esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]');
+                    esBtn.classList.remove('text-gray-400', 'border-transparent', 'font-medium');
+                    esBtn.classList.add('font-bold');
+                    
+                    ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]', 'font-bold');
+                    ptBtn.classList.add('text-gray-400', 'border-transparent', 'font-medium');
                 }
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -554,44 +675,47 @@
                     hours: "Horas",
                     minutes: "Minutos",
                     seconds: "Segundos",
+                    
                     location_title: "Locais",
                     church_title: "Cerimônia Religiosa",
-                    church_address: "Av. Beni, 587 - Santa Cruz de la Sierra",
+                    church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
                     dinner_title: "Recepção",
-                    dinner_address: "Santa Cruz de la Sierra - Bolívia",
+                    dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra",
                     map_btn: "Abrir GPS / Maps",
                     
-                    itinerary_title: "Programação",
-                    iti_time_1: "17:30", iti_desc_1: "Cerimônia Religiosa",
-                    iti_time_2: "19:00", iti_desc_2: "Sessão de Fotos",
-                    iti_time_3: "19:30", iti_desc_3: "Brinde aos Noivos",
-                    iti_time_4: "20:00", iti_desc_4: "Jantar",
-                    iti_time_5: "21:30", iti_desc_5: "Baile",
-                    iti_time_6: "00:00", iti_desc_6: "Petiscos",
-                    iti_time_7: "02:30", iti_desc_7: "Despedida",
+                    timeline_title: "Programação",
+                    time_1: "Cerimônia Religiosa",
+                    time_2: "Sessão de Fotos",
+                    time_3: "Brinde aos Noivos",
+                    time_4: "Jantar",
+                    time_5: "Baile",
+                    time_6: "Petiscos",
+                    time_7: "Despedida",
 
                     info_title: "Informações Importantes",
                     dress_code_title: "Traje: Passeio Completo (Formal)",
                     dress_code_desc: "Sugerimos traje formal. Queremos ver todos lindos e confortáveis para celebrar esse momento conosco!",
-                    kids_title: "Festa Exclusiva para Adultos",
-                    kids_desc: "Amamos muito os pequenos! Porém, por questões de segurança no local e para que os pais possam relaxar e aproveitar ao máximo, nossa festa será exclusiva para adultos. Agradecemos imensamente a compreensão de coração!",
+                    kids_title: "Evento para Adultos",
+                    kids_desc: "\"Amamos os seus pequenos, mas para garantir a segurança de todos e permitir que os papais e mamães aproveitem a festa com tranquilidade e descansem, nossa recepção será um evento exclusivo para adultos. Agradecemos a compreensão de coração!\"",
 
                     rsvp_title: "Confirme sua Presença",
-                    rsvp_desc: "Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho.",
+                    rsvp_desc: "Por favor, confirme sua presença para nos ajudar a organizar tudo com muito carinho e precisão.",
                     rsvp_btn: "Confirmar pelo WhatsApp",
-                    
+
                     gifts_title: "Sugestão de Presentes",
-                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear, disponibilizamos nossas opções abaixo.",
-                    gifts_br_title: "Convidados no Brasil",
+                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear para nossa nova etapa, disponibilizamos nossas contas abaixo.",
+                    gift_br: "Para Convidados do Brasil",
+                    pix_key_label: "Chave Celular / Pix",
                     copy_btn: "Copiar Chave",
-                    copy_success: "Copiado com sucesso! ✓",
-                    gifts_bo_title: "Invitados en Bolivia",
-                    gifts_bo_label: "Código QR Simple",
-                    gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
+                    copy_success: "Chave copiada com sucesso! ✓",
+                    gift_bo: "Para Convidados da Bolívia",
+                    bo_account_label: "Escaneie o código QR",
+                    bo_account_desc: "Use o aplicativo do seu banco para transferir.",
+                    qr_bo_info: "Transferência QR",
 
                     chat_title: "Dúvidas ou Comentários?",
-                    chat_desc: "Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual está pronto para te atender!",
-                    chat_btn: "Acessar Chatbot",
+                    chat_desc: "Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual inteligente está pronto para te atender!",
+                    chat_btn: "Dúvidas? Pergunte para nossa IA",
 
                     gallery_title: "Nossos Momentos",
                     date_value_short: "18 Dezembro 2026"
@@ -605,44 +729,47 @@
                     hours: "Horas",
                     minutes: "Minutos",
                     seconds: "Segundos",
+                    
                     location_title: "Ubicaciones",
                     church_title: "Ceremonia Religiosa",
-                    church_address: "Av. Beni, 587 - Santa Cruz de la Sierra",
+                    church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolivia",
                     dinner_title: "Recepción",
-                    dinner_address: "Santa Cruz de la Sierra - Bolivia",
+                    dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra",
                     map_btn: "Abrir GPS / Maps",
-
-                    itinerary_title: "Itinerario",
-                    iti_time_1: "17:30", iti_desc_1: "Ceremonia Religiosa",
-                    iti_time_2: "19:00", iti_desc_2: "Sesión de Fotos",
-                    iti_time_3: "19:30", iti_desc_3: "Brindis por los Novios",
-                    iti_time_4: "20:00", iti_desc_4: "Cena",
-                    iti_time_5: "21:30", iti_desc_5: "Fiesta",
-                    iti_time_6: "00:00", iti_desc_6: "Bocadillos",
-                    iti_time_7: "02:30", iti_desc_7: "Despedida",
+                    
+                    timeline_title: "Itinerario",
+                    time_1: "Ceremonia Religiosa",
+                    time_2: "Sesión de Fotos",
+                    time_3: "Brindis por los Novios",
+                    time_4: "Cena",
+                    time_5: "Baile",
+                    time_6: "Aperitivos / Bocaditos",
+                    time_7: "Despedida",
 
                     info_title: "Información Importante",
                     dress_code_title: "Vestimenta: Formal",
                     dress_code_desc: "Sugerimos traje formal. ¡Queremos verlos a todos hermosos y cómodos para celebrar este momento con nosotros!",
-                    kids_title: "Fiesta Exclusiva para Adultos",
-                    kids_desc: "¡Amamos mucho a los pequeños! Sin embargo, por razones de seguridad en el lugar y para que los padres puedan relajarse y disfrutar al máximo, nuestra fiesta será exclusiva para adultos. ¡Agradecemos su comprensión de corazón!",
+                    kids_title: "Evento para Adultos",
+                    kids_desc: "\"Amamos a sus pequeños, pero para garantizar la seguridad de todos y permitir que los papás y mamás disfruten de la fiesta con tranquilidad, nuestra recepción será un evento exclusivo para adultos. ¡Agradecemos de corazón su comprensión!\"",
 
                     rsvp_title: "Confirma tu Asistencia",
-                    rsvp_desc: "Por favor, confirma tu asistencia para ayudarnos a organizar todo con mucho cariño.",
+                    rsvp_desc: "Por favor, confirma tu asistencia para ayudarnos a organizar todo con mucho cariño y precisión.",
                     rsvp_btn: "Confirmar por WhatsApp",
-                    
+
                     gifts_title: "Sugerencia de Regalos",
-                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, dejamos nuestras opciones abajo.",
-                    gifts_br_title: "Invitados en Brasil",
+                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo para nuestra nueva etapa, dejamos nuestras cuentas abajo.",
+                    gift_br: "Para Invitados de Brasil",
+                    pix_key_label: "Cuenta Celular / Pix",
                     copy_btn: "Copiar Cuenta",
-                    copy_success: "¡Copiado con éxito! ✓",
-                    gifts_bo_title: "Invitados en Bolivia",
-                    gifts_bo_label: "Código QR Simple",
-                    gifts_bo_desc: "Compartimos nuestro código QR para transferencias directas en Bolivia.",
+                    copy_success: "¡Cuenta copiada con éxito! ✓",
+                    gift_bo: "Para Invitados de Bolivia",
+                    bo_account_label: "Escanea el código QR",
+                    bo_account_desc: "Usa la aplicación de tu banco para transferir.",
+                    qr_bo_info: "Transferencia QR",
 
                     chat_title: "¿Dudas o Comentarios?",
-                    chat_desc: "¿Tienes alguna duda sobre la boda, vestimenta, regalos o quieres dejarnos un mensaje especial? ¡Nuestro asistente virtual está listo para atenderte!",
-                    chat_btn: "Acceder al Chatbot",
+                    chat_desc: "¿Tienes alguna duda sobre la boda, vestimenta, regalos o quieres dejarnos un mensaje especial? ¡Nuestro asistente virtual inteligente está listo para atenderte!",
+                    chat_btn: "¿Dudas? Pregunta a nuestra IA",
 
                     gallery_title: "Nuestros Momentos",
                     date_value_short: "18 Diciembre 2026"
