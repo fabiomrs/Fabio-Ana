@@ -361,9 +361,219 @@
             <h2 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="chat_title">Dúvidas ou Comentários?</h2>
             <p class="text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto" data-i18n="chat_desc">Tem alguma dúvida sobre o casamento, traje, presentes, ou quer deixar uma mensagem de carinho? Nosso assistente virtual inteligente está pronto para te atender logo abaixo!</p>
             
-            <div class="w-full bg-[#f9f9f7] rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-[#e9eddf] overflow-hidden">
-                <iframe src="https://claude.site/public/artifacts/927f02f0-b261-44d6-a68a-2aa401637012/embed" title="Assistente Casamento Fábio &amp; Ana" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
-            </div>
+<!-- ============================================================ -->
+<!-- ASSISTENTE VIRTUAL — Substituir o bloco do iframe anterior -->
+<!-- ATENÇÃO: Troque SUA_CHAVE_AQUI pela sua chave sk-ant-...   -->
+<!-- ============================================================ -->
+<div class="w-full bg-[#f9f9f7] rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-[#e9eddf] overflow-hidden">
+  <div id="chat-widget" style="font-family:'Lato',sans-serif;height:600px;display:flex;flex-direction:column;background:#fcfbf9;">
+
+    <!-- Cabeçalho -->
+    <div style="background:#5a6b47;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+      <div style="flex:1;">
+        <div style="color:white;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;">Fábio & Ana 💍</div>
+        <div style="color:rgba(255,255,255,0.75);font-size:12px;">Santa Cruz de la Sierra • 18.12.2026</div>
+      </div>
+      <div id="chat-lang-switcher" style="display:flex;gap:8px;">
+        <button onclick="chatSetLang('pt')" id="chat-btn-pt" style="background:rgba(255,255,255,0.3);border:none;color:white;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;">🇧🇷 PT</button>
+        <button onclick="chatSetLang('es')" id="chat-btn-es" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:12px;">🇧🇴 ES</button>
+      </div>
+    </div>
+
+    <!-- Mensagens -->
+    <div id="chat-messages" style="flex:1;overflow-y:auto;padding:20px 16px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;justify-content:flex-start;">
+        <div id="chat-greeting" style="background:white;border-radius:18px 18px 18px 4px;padding:12px 16px;max-width:85%;box-shadow:0 1px 4px rgba(0,0,0,0.08);color:#333;font-size:14px;line-height:1.6;white-space:pre-line;">Olá! Sou o assistente do casamento do Fábio & Ana 💍
+Pode me perguntar sobre documentação, voos, hospedagem, clima, câmbio, passeios e muito mais!</div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:12px 16px;background:white;border-top:1px solid #f0e8e0;display:flex;gap:10px;align-items:flex-end;flex-shrink:0;">
+      <textarea id="chat-input" rows="1"
+        placeholder="Digite sua dúvida sobre a viagem..."
+        style="flex:1;border:1.5px solid #c5d4ae;border-radius:12px;padding:10px 14px;font-size:14px;resize:none;outline:none;font-family:inherit;line-height:1.5;max-height:100px;overflow-y:auto;background:#fcfbf9;color:#333;"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();chatSend();}"></textarea>
+      <button onclick="chatSend()" id="chat-send-btn"
+        style="background:#5a6b47;color:white;border:none;border-radius:12px;padding:10px 16px;cursor:pointer;font-size:18px;flex-shrink:0;transition:background 0.2s;">➤</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ⚠️ TROQUE PELA SUA CHAVE DA ANTHROPIC (console.anthropic.com)
+  const API_KEY = "SUA_CHAVE_AQUI";
+
+  const WHATSAPP = "5542999215431";
+  let chatLang = "pt";
+  let chatHistory = [];
+
+  const GUIDE = `GUIA COMPLETO: CASAMENTO FÁBIO & ANA — SANTA CRUZ DE LA SIERRA, BOLÍVIA 2026
+
+RESUMO GERAL:
+- Data: 18/12/2026 às 17h30
+- Cerimônia: Parroquia La Resurrección
+- Festa: Garden House Eventos Boutique
+- Período sugerido: 16/12/2026 a 22/12/2026
+- Origem: Curitiba, Paraná (CWB)
+
+DOCUMENTAÇÃO:
+- RG/CIN obrigatório, perfeito estado, preferencialmente menos de 10 anos. Passaporte opcional.
+- Emissão PR: Polícia Civil do Paraná. 1ª via CIN gratuita, 2ª via R$51,51.
+- CIVP (vacina febre amarela): obrigatório, mínimo 10 dias antes. Emissão gratuita via Gov.br/ConecteSUS.
+- Menores sem RG: certidão de nascimento. Menor viajando sem um dos pais: autorização judicial.
+
+SAÚDE E SEGURO:
+- Seguro viagem recomendado. Cartões Platinum/Black/Infinite oferecem gratuito se passagem paga com o cartão.
+- Cobertura mínima: USD 30.000. Hospital Japonés: +591 (3) 346-1000. Clínica Foianini: +591 (3) 336-2211.
+- Levar: paracetamol, dipirona, ibuprofeno, Engov, Floratil, antialérgico, repelente DEET, protetor solar. Remédios contínuos na bagagem de mão com receita.
+
+CLIMA E VESTUÁRIO:
+- Dezembro: 24–33°C, úmido, chuvas no fim do dia. Sem risco de altitude (400m).
+- Homens: linho, algodão leve. Mulheres: vestidos fluidos, fixador de maquiagem.
+- Mala 5-6 dias: camisetas leves, bermudas/calça sarja, casaco corta-vento, roupa de banho, traje do casamento, tênis e chinelo.
+
+VOOS:
+- Rota: CWB → GRU → VVI (Santa Cruz). Companhias: GOL e BoA.
+- Monitorar a partir de maio/2026 no Skyscanner/Google Flights. Preço estimado: R$1.500–2.200.
+- Chegar ao aeroporto 3h antes. Terça/quarta têm preços menores.
+
+CÂMBIO E FINANÇAS:
+- Moeda: Boliviano (BOB). R$1 ≈ 1,50 BOB. US$1 ≈ 6,90 BOB.
+- Estratégia: 50% reais (casas de câmbio Plaza 24 de Septiembre), 20% dólares novos, 30% Wise/Nomad.
+- Orçamento por casal: USD 400–600 (≈ R$2.000–3.000) para 5 dias + 20% de margem.
+
+ELETRÔNICOS:
+- Tomadas: 220V, tipos A e C. Adaptador necessário para plugue brasileiro de 3 pinos.
+- Chip: Entel (melhor cobertura) ou Viva. eSIM: Airalo/Holafly. Vivo Américas: sem custo adicional.
+- Baixar Google Maps Offline de Santa Cruz antes de viajar.
+
+EMERGÊNCIAS:
+- Consulado do Brasil: +591 7600-1111. Polícia Turística: +591 (3) 336-5000.
+
+PASSEIOS:
+- Biocentro Güembé (piscinas e borboletário), Samaipata (ruínas incas, 3h), Plaza 24 de Septiembre, Ventura Mall.
+
+GASTRONOMIA:
+- Salteñas (empanada), Cuñapé (pão de queijo boliviano), Majadito, Pique Macho, Sopa de Maní.
+- Transporte: Uber ou inDrive. Evitar táxis brancos sem combinar preço.
+
+HOSPEDAGEM:
+- Bairro: Equipetrol (seguro, nobre, próximo à cerimônia ~10-15 min).
+- Airbnb: prédios novos em Equipetrol ou Sirari com piscina. Confirmar ar-condicionado em todos os quartos.`;
+
+  const SYSTEM_PT = `Você é um assistente simpático para convidados do casamento de Fábio e Ana em Santa Cruz de la Sierra, Bolívia, em 18/12/2026. Responda APENAS com base no guia abaixo. Se não souber, responda exatamente: NAOSEI: [resumo curto da pergunta]. Seja caloroso e conciso.\n\nGUIA:\n${GUIDE}`;
+  const SYSTEM_ES = `Eres un asistente simpático para los invitados de la boda de Fábio y Ana en Santa Cruz de la Sierra, Bolivia, el 18/12/2026. Responde SOLO con base en la guía. Si no sabes, responde exactamente: NAOSEI: [resumen corto]. Sé cálido y conciso.\n\nGUÍA:\n${GUIDE}`;
+
+  window.chatSetLang = function(lang) {
+    chatLang = lang;
+    const ptBtn = document.getElementById('chat-btn-pt');
+    const esBtn = document.getElementById('chat-btn-es');
+    const greeting = document.getElementById('chat-greeting');
+    if (lang === 'pt') {
+      ptBtn.style.background = 'rgba(255,255,255,0.3)'; ptBtn.style.color = 'white'; ptBtn.style.fontWeight = '700';
+      esBtn.style.background = 'rgba(255,255,255,0.1)'; esBtn.style.color = 'rgba(255,255,255,0.6)'; esBtn.style.fontWeight = 'normal';
+      document.getElementById('chat-input').placeholder = 'Digite sua dúvida sobre a viagem...';
+      greeting.textContent = 'Olá! Sou o assistente do casamento do Fábio & Ana 💍\nPode me perguntar sobre documentação, voos, hospedagem, clima, câmbio, passeios e muito mais!';
+    } else {
+      esBtn.style.background = 'rgba(255,255,255,0.3)'; esBtn.style.color = 'white'; esBtn.style.fontWeight = '700';
+      ptBtn.style.background = 'rgba(255,255,255,0.1)'; ptBtn.style.color = 'rgba(255,255,255,0.6)'; ptBtn.style.fontWeight = 'normal';
+      document.getElementById('chat-input').placeholder = 'Escribe tu duda sobre el viaje...';
+      greeting.textContent = '¡Hola! Soy el asistente de la boda de Fábio & Ana 💍\n¡Puedes preguntarme sobre documentación, vuelos, hospedaje, clima, cambio, paseos y mucho más!';
+    }
+  };
+
+  function addMessage(role, content, isUnknown, question) {
+    const msgs = document.getElementById('chat-messages');
+    const wrap = document.createElement('div');
+    wrap.style.cssText = `display:flex;justify-content:${role==='user'?'flex-end':'flex-start'};`;
+    const bubble = document.createElement('div');
+    if (role === 'user') {
+      bubble.style.cssText = 'background:#5a6b47;color:white;border-radius:18px 18px 4px 18px;padding:12px 16px;max-width:85%;font-size:14px;line-height:1.5;';
+      bubble.textContent = content;
+    } else if (isUnknown) {
+      bubble.style.cssText = 'background:white;border-radius:18px 18px 18px 4px;padding:14px 16px;max-width:85%;box-shadow:0 1px 4px rgba(0,0,0,0.08);color:#333;font-size:14px;line-height:1.6;';
+      const msg = chatLang === 'pt'
+        ? '😅 Não encontrei essa informação no guia. Fale diretamente com os responsáveis!'
+        : '😅 No encontré esa información en la guía. ¡Habla directamente con los responsables!';
+      const txt = document.createElement('p'); txt.style.margin='0 0 10px'; txt.textContent = msg;
+      const waMsg = chatLang === 'pt'
+        ? `Olá! Sou convidado do casamento do Fábio e Ana e tenho uma dúvida: ${question}`
+        : `¡Hola! Soy invitado a la boda de Fábio y Ana y tengo una duda: ${question}`;
+      const btn = document.createElement('a');
+      btn.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
+      btn.target = '_blank';
+      btn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#25D366;color:white;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;';
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>` +
+        (chatLang === 'pt' ? 'Perguntar no WhatsApp' : 'Preguntar por WhatsApp');
+      bubble.appendChild(txt); bubble.appendChild(btn);
+    } else {
+      bubble.style.cssText = 'background:white;border-radius:18px 18px 18px 4px;padding:12px 16px;max-width:85%;box-shadow:0 1px 4px rgba(0,0,0,0.08);color:#333;font-size:14px;line-height:1.6;white-space:pre-wrap;';
+      bubble.textContent = content;
+    }
+    wrap.appendChild(bubble); msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+    return bubble;
+  }
+
+  function addTyping() {
+    const msgs = document.getElementById('chat-messages');
+    const wrap = document.createElement('div'); wrap.id = 'chat-typing'; wrap.style.cssText = 'display:flex;justify-content:flex-start;';
+    const bubble = document.createElement('div'); bubble.style.cssText = 'background:white;border-radius:18px 18px 18px 4px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.08);';
+    bubble.innerHTML = `<style>@keyframes cb{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}</style><div style="display:flex;gap:4px;">${[0,1,2].map(i=>`<div style="width:7px;height:7px;border-radius:50%;background:#5a6b47;animation:cb 1.2s ${i*0.2}s infinite;"></div>`).join('')}</div>`;
+    wrap.appendChild(bubble); msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  window.chatSend = async function() {
+    const input = document.getElementById('chat-input');
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    addMessage('user', q);
+    chatHistory.push({ role: 'user', content: q });
+    addTyping();
+    document.getElementById('chat-send-btn').disabled = true;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: chatLang === 'pt' ? SYSTEM_PT : SYSTEM_ES,
+          messages: chatHistory
+        })
+      });
+      const data = await res.json();
+      const text = data.content?.map(b => b.text || '').join('') || '';
+      document.getElementById('chat-typing')?.remove();
+
+      if (text.startsWith('NAOSEI:')) {
+        const summary = text.replace('NAOSEI:', '').trim();
+        addMessage('assistant', null, true, summary);
+        chatHistory.push({ role: 'assistant', content: text });
+      } else {
+        addMessage('assistant', text);
+        chatHistory.push({ role: 'assistant', content: text });
+      }
+    } catch(e) {
+      document.getElementById('chat-typing')?.remove();
+      const err = chatLang === 'pt' ? 'Erro ao conectar. Tente novamente.' : 'Error al conectar. Intenta de nuevo.';
+      addMessage('assistant', err);
+    }
+    document.getElementById('chat-send-btn').disabled = false;
+  };
+})();
+</script>
+<!-- ============================================================ -->
         </div>
     </section>
 
