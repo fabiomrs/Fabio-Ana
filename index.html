@@ -74,7 +74,6 @@
 <!-- Começamos com overflow-hidden para travar a tela atrás do Pop-up de Idioma -->
 <body class="antialiased overflow-hidden">
 
-    <!-- Modal de Idioma de Boas-Vindas -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&amp;</span> A</div>
@@ -94,7 +93,6 @@
         </div>
     </div>
 
-    <!-- Navegação (Barra no topo) -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium">F <span class="italic font-light">&amp;</span> A</div>
@@ -105,7 +103,6 @@
         </div>
     </nav>
 
-    <!-- Capa do Site -->
     <header class="hero-bg min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-20 relative">
         <p class="text-white/90 tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-medium drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
         <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
@@ -121,7 +118,6 @@
         </p>
     </header>
 
-    <!-- Contagem Regressiva -->
     <section class="py-16 bg-white text-center shadow-sm relative z-10 border-b border-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-8 text-[#2d3326]" data-i18n="countdown_title">Faltam...</h2>
@@ -137,7 +133,6 @@
         </div>
     </section>
 
-    <!-- Locais (Igreja e Recepção) -->
     <section class="py-24 bg-[#fcfbf9]">
         <div class="container mx-auto px-6 max-w-5xl">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
@@ -145,9 +140,11 @@
                 <!-- Igreja -->
                 <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                        <!-- Ícone Igreja -->
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 22v-9m0 0l-3 3m3-3l3 3m-3-12V3m-2 2h4m-8 6h12a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9a2 2 0 012-2z"/>
+                        <!-- Ícone Igreja (Atualizado) -->
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
                         </svg>
                     </div>
                     <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
@@ -179,12 +176,10 @@
         </div>
     </section>
 
-    <!-- Programação (Linha do Tempo) -->
     <section class="py-24 bg-white">
         <div class="container mx-auto px-6 max-w-3xl">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="timeline_title">Programação</h2>
             <div class="relative border-l-2 border-[#a3b18a]/30 ml-4 md:ml-12 py-2">
-                <!-- Itens da programação -->
                 <div class="mb-10 ml-8 relative group">
                     <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
                     <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">17:30</span><span data-i18n="t1">Cerimônia Religiosa</span></h3>
@@ -217,29 +212,34 @@
         </div>
     </section>
 
-    <!-- Informações Importantes (Traje e Crianças) -->
     <section class="py-20 bg-[#fcfbf9] border-y border-gray-100">
         <div class="container mx-auto px-6 max-w-4xl grid md:grid-cols-2 gap-10">
             <!-- Traje -->
             <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
                 <h3 class="font-serif text-3xl mb-6 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
                 <div class="flex justify-center gap-10 mb-6">
-                    <!-- Ícone Vestido Feminino (Formal) -->
+                    <!-- Ícone Vestido (Atualizado) -->
                     <div class="flex flex-col items-center">
                         <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 3h6l2 7-3 12H10L7 10l2-7z"/><path d="M12 3v7"/><path d="M9.5 10c.5 2 2.5 2 3 0"/>
+                            <path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" />
+                            <path d="M8.5 10c-2 4-3.5 11-3.5 11h14s-1.5-7-3.5-11" />
                         </svg>
                         <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
                     </div>
-                    <!-- Ícone Terno Masculino (Formal) -->
+                    <!-- Ícone Terno (Atualizado) -->
                     <div class="flex flex-col items-center">
                         <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 3l-2 8 4 11h8l4-11-2-8-6 4-6-4z"/><path d="M10 7l2 4 2-4"/><circle cx="12" cy="15" r="1"/><circle cx="12" cy="18" r="1"/>
+                            <path d="M7 3h10l3 18H4L7 3z" />
+                            <path d="M12 3v18" />
+                            <path d="M7 3l5 7 5-7" />
+                            <path d="M12 10l-2 4h4l-2-4z" />
                         </svg>
                         <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                     </div>
                 </div>
-                <p class="text-gray-600 font-bold text-lg tracking-wide">Passeio Completo</p>
+                <p class="text-gray-800 font-bold text-xl tracking-wide mb-2">Passeio Completo</p>
+                <!-- Descrição Adicional de Traje -->
+                <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
             </div>
             
             <!-- Aviso Adultos -->
@@ -253,7 +253,6 @@
         </div>
     </section>
 
-    <!-- Confirmação de Presença -->
     <section class="py-24 bg-white border-b border-gray-100">
         <div class="container mx-auto px-6 text-center max-w-2xl">
             <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
@@ -268,7 +267,6 @@
         </div>
     </section>
 
-    <!-- Lista de Presentes -->
     <section class="py-24 bg-[#fcfbf9]">
         <div class="container mx-auto px-6 text-center max-w-4xl">
             <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
@@ -299,7 +297,6 @@
         </div>
     </section>
 
-    <!-- Dúvidas com IA Integrada -->
     <section class="py-20 bg-white border-y border-gray-100">
         <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
             <div class="mb-10">
@@ -308,21 +305,18 @@
                 <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
             </div>
             
-            <!-- Janela do Assistente Embutida e Ajustada para Tela Cheia Responsiva -->
+            <!-- O iframe da IA não carrega o src inicialmente para evitar a quebra do Scroll. Ele é injetado no JS. -->
             <div class="bg-[#fcfbf9] rounded-2xl overflow-hidden shadow-sm border border-gray-200">
-                <!-- Usando h-[75vh] para preencher a tela sem necessidade de scroll duplo -->
-                <iframe src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full h-[75vh] md:h-[650px] border-0" allow="clipboard-write" allowfullscreen></iframe>
+                <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full h-[75vh] min-h-[700px] md:min-h-[850px] border-0" allow="clipboard-write" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Galeria de Fotos Mosaico -->
     <section class="py-24 bg-[#fcfbf9]">
         <div class="container mx-auto px-4 max-w-6xl">
             <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
             
             <div class="masonry-grid">
-                <!-- Imagens chamando onclick e enviando o índice (0 a 9) -->
                 <div class="masonry-item gallery-wrap" onclick="openLightbox(0)">
                     <img src="foto (1).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80'" alt="Momento 1">
                     <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
@@ -402,10 +396,11 @@
         <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
-    <!-- Scripts (Lógicas Unificadas) -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
+            // Força o navegador a começar no topo da tela, independentemente do cache
+            window.scrollTo(0, 0);
+
             // --- 1. EFEITO NAVBAR ---
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
@@ -445,7 +440,7 @@
                 }, 1000);
             } catch (e) { console.error("Erro na contagem regressiva:", e); }
 
-            // --- 3. MÚSICA COM PROTEÇÃO ---
+            // --- 3. MÚSICA E INTERAÇÃO INICIAL ---
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
@@ -471,7 +466,7 @@
                 }
             });
 
-            // --- 4. FUNÇÃO DE ENTRADA DO SITE (Modal de Boas-vindas) ---
+            // --- 4. FUNÇÃO DE ENTRADA DO SITE (Gatilho da IA e Música) ---
             window.enterSite = function(lang) {
                 // Seta o idioma
                 setLanguage(lang);
@@ -483,14 +478,18 @@
                 modalBox.classList.add('scale-95');
                 modal.classList.add('opacity-0');
                 
+                // Agora que o usuário já interagiu, carrega a IA (Evita scroll automático pro fim da página)
+                const aiIframe = document.getElementById('ai-iframe');
+                if(aiIframe.getAttribute('data-src')) {
+                    aiIframe.src = aiIframe.getAttribute('data-src');
+                }
+
                 setTimeout(() => {
                     modal.classList.add('hidden');
-                    // Libera o scroll da página
                     document.body.classList.remove('overflow-hidden');
                 }, 500);
 
-                // Como o usuário já clicou na tela (interação), 
-                // os navegadores permitem que a música inicie!
+                // Toca a música!
                 let playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
                     playPromise.then(function() {
@@ -533,7 +532,6 @@
                 lightbox.classList.remove('hidden');
                 lightbox.style.display = 'flex';
                 setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
-                // Usando classList toggle na tag HTML para prevenir bugs no iOS
                 document.documentElement.style.overflow = 'hidden'; 
             };
 
@@ -632,6 +630,7 @@
                     dress_code: "Traje",
                     dress_women: "Mulheres",
                     dress_men: "Homens",
+                    dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial",
                     kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
                     rsvp_title: "Confirme sua Presença",
@@ -676,6 +675,7 @@
                     dress_code: "Vestimenta",
                     dress_women: "Mujeres",
                     dress_men: "Hombres",
+                    dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial",
                     kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta con total tranquilidad y diversión, hemos optado por realizar una recepción exclusiva para adultos. Agradecemos mucho el cariño y la comprensión de todos los padres.",
                     rsvp_title: "Confirma tu Asistencia",
