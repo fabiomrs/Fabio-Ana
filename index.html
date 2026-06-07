@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casamento - Fabio & Ana Isabel</title>
     
-    <!-- Carregando Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Carregando Fontes Elegantes do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- Estilos customizados e globais -->
     <style>
         body {
             font-family: 'Lato', sans-serif;
@@ -71,9 +67,10 @@
         .gallery-wrap:hover .gallery-overlay { opacity: 1; }
     </style>
 </head>
-<!-- Começamos com overflow-hidden para travar a tela atrás do Pop-up de Idioma -->
+
 <body class="antialiased overflow-hidden">
 
+    <!-- Pop-up inicial de idioma bloqueando a tela -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&amp;</span> A</div>
@@ -93,7 +90,7 @@
         </div>
     </div>
 
-    <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4">
+    <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium">F <span class="italic font-light">&amp;</span> A</div>
             <div class="flex space-x-5 items-center">
@@ -140,7 +137,7 @@
                 <!-- Igreja -->
                 <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                     <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                        <!-- Ícone Igreja (Atualizado) -->
+                        <!-- Ícone Igreja Refinado -->
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" />
@@ -218,7 +215,7 @@
             <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
                 <h3 class="font-serif text-3xl mb-6 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
                 <div class="flex justify-center gap-10 mb-6">
-                    <!-- Ícone Vestido (Atualizado) -->
+                    <!-- Ícone Vestido Formal (Feminino) -->
                     <div class="flex flex-col items-center">
                         <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" />
@@ -226,7 +223,7 @@
                         </svg>
                         <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
                     </div>
-                    <!-- Ícone Terno (Atualizado) -->
+                    <!-- Ícone Terno/Smoking (Masculino) -->
                     <div class="flex flex-col items-center">
                         <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7 3h10l3 18H4L7 3z" />
@@ -238,7 +235,6 @@
                     </div>
                 </div>
                 <p class="text-gray-800 font-bold text-xl tracking-wide mb-2">Passeio Completo</p>
-                <!-- Descrição Adicional de Traje -->
                 <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
             </div>
             
@@ -297,7 +293,7 @@
         </div>
     </section>
 
-    <section class="py-20 bg-white border-y border-gray-100">
+    <section class="py-20 bg-white border-y border-gray-100" id="ai-section">
         <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
             <div class="mb-10">
                 <svg class="w-12 h-12 text-[#a3b18a] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
@@ -305,9 +301,9 @@
                 <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
             </div>
             
-            <!-- O iframe da IA não carrega o src inicialmente para evitar a quebra do Scroll. Ele é injetado no JS. -->
+            <!-- IMPORTANTE: O data-src impede que a IA carregue na hora de abrir o site, evitando que ela puxe a tela para baixo. -->
             <div class="bg-[#fcfbf9] rounded-2xl overflow-hidden shadow-sm border border-gray-200">
-                <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full h-[75vh] min-h-[700px] md:min-h-[850px] border-0" allow="clipboard-write" allowfullscreen></iframe>
+                <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full min-h-[800px] border-0" allow="clipboard-write" allowfullscreen></iframe>
             </div>
         </div>
     </section>
@@ -361,7 +357,6 @@
         </div>
     </section>
 
-    <!-- Modal do Lightbox (Fundo Escuro) -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2">
            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -377,7 +372,6 @@
         </div>
     </div>
 
-    <!-- Rodapé -->
     <footer class="bg-[#2d3326] text-white py-12 text-center">
         <div class="container mx-auto px-6">
             <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&amp;</span> Ana Isabel</h2>
@@ -386,19 +380,18 @@
         </div>
     </footer>
 
-    <!-- Player de Áudio -->
     <audio id="bg-music" loop preload="auto">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-xl z-50 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110">
+    <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-xl z-50 transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110 hidden-until-enter opacity-0">
         <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Força o navegador a começar no topo da tela, independentemente do cache
+            // Força o topo da tela
             window.scrollTo(0, 0);
 
             // --- 1. EFEITO NAVBAR ---
@@ -411,7 +404,7 @@
                 }
             });
 
-            // --- 2. CONTAGEM REGRESSIVA ---
+            // --- 2. CONTAGEM REGRESSIVA (Formato ISO) ---
             try {
                 const targetDate = new Date("2026-12-18T17:30:00").getTime();
                 
@@ -466,7 +459,7 @@
                 }
             });
 
-            // --- 4. FUNÇÃO DE ENTRADA DO SITE (Gatilho da IA e Música) ---
+            // --- 4. FUNÇÃO DE ENTRADA DO SITE (Gatilho da Música e UI) ---
             window.enterSite = function(lang) {
                 // Seta o idioma
                 setLanguage(lang);
@@ -478,11 +471,10 @@
                 modalBox.classList.add('scale-95');
                 modal.classList.add('opacity-0');
                 
-                // Agora que o usuário já interagiu, carrega a IA (Evita scroll automático pro fim da página)
-                const aiIframe = document.getElementById('ai-iframe');
-                if(aiIframe.getAttribute('data-src')) {
-                    aiIframe.src = aiIframe.getAttribute('data-src');
-                }
+                // Exibe os elementos ocultos (Navbar e Música)
+                document.querySelectorAll('.hidden-until-enter').forEach(el => {
+                    el.classList.remove('opacity-0');
+                });
 
                 setTimeout(() => {
                     modal.classList.add('hidden');
@@ -502,7 +494,28 @@
                 }
             };
 
-            // --- 5. FUNÇÃO PIX ---
+            // --- 5. LAZY LOAD DA IA (Impede o roubo de scroll) ---
+            // Só carrega a IA quando o usuário rolar a tela até perto dela
+            const aiIframe = document.getElementById('ai-iframe');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (aiIframe.getAttribute('data-src')) {
+                                aiIframe.src = aiIframe.getAttribute('data-src');
+                                aiIframe.removeAttribute('data-src'); 
+                            }
+                            observer.disconnect(); // Para de observar depois que carrega
+                        }
+                    });
+                }, { rootMargin: "0px 0px 800px 0px" }); // Carrega 800px antes de chegar nela
+                observer.observe(document.getElementById('ai-section'));
+            } else {
+                // Fallback para navegadores muito antigos
+                aiIframe.src = aiIframe.getAttribute('data-src');
+            }
+
+            // --- 6. FUNÇÃO PIX ---
             window.copyPix = function() {
                 const pixKey = "42999215431";
                 const msgEl = document.getElementById('copy-msg');
@@ -518,7 +531,7 @@
                 document.body.removeChild(textArea);
             };
 
-            // --- 6. LÓGICA DO LIGHTBOX DA GALERIA ---
+            // --- 7. LÓGICA DO LIGHTBOX DA GALERIA ---
             window.currentImageIndex = 0;
             const imageElements = document.querySelectorAll('.gallery-img');
             const images = Array.from(imageElements).map(img => img.src);
@@ -570,7 +583,7 @@
                 }
             });
 
-            // --- 7. SISTEMA DE TRADUÇÃO BILINGUE ---
+            // --- 8. SISTEMA DE TRADUÇÃO BILINGUE ---
             window.setLanguage = function(lang) {
                 const ptBtn = document.getElementById('btn-pt');
                 const esBtn = document.getElementById('btn-es');
@@ -590,6 +603,7 @@
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.getAttribute('data-i18n');
                     if (translations[lang] && translations[lang][key]) {
+                        // Preserva ícones SVG dentro dos elementos se houver
                         if(el.children.length > 0) {
                             Array.from(el.childNodes).forEach(node => {
                                 if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0) {
