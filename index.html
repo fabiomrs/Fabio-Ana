@@ -30,7 +30,6 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        /* Grid estilo Masonry (Pinterest) para a galeria */
         .masonry-grid {
             column-count: 2;
             column-gap: 1rem;
@@ -41,7 +40,6 @@
             break-inside: avoid;
             margin-bottom: 1rem;
         }
-        /* Efeito de hover na galeria e Presentes */
         .gallery-wrap, .gift-wrap {
             position: relative;
             overflow: hidden;
@@ -68,7 +66,6 @@
         
         #ai-iframe-container { overflow: hidden; height: 100%; }
         
-        /* Fade in para views virtuais */
         .fade-enter {
             animation: fadeIn 0.5s ease forwards;
         }
@@ -77,7 +74,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Loading spinner para QR Code */
         .loader {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #5a6b47;
@@ -92,10 +88,9 @@
 
 <body class="antialiased overflow-hidden">
 
-    <!-- Pop-up inicial de idioma bloqueando a tela -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
-            <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&amp;</span> A</div>
+            <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-1">Bem-vindo(a)</h2>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-8">Bienvenido(a)</h2>
             
@@ -112,17 +107,15 @@
         </div>
     </div>
 
-    <!-- Navegação / Atalhos -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="toggleView('main')">F <span class="italic font-light">&amp;</span> A</div>
+            <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="navTo('home')">F <span class="italic font-light">&</span> A</div>
             
-            <!-- Menu de Atalhos (Desktop) -->
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="#locais" onclick="toggleView('main')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_locais">Locais</a>
-                <a href="#programacao" onclick="toggleView('main')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_programacao">Programação</a>
-                <a href="#rsvp" onclick="toggleView('main')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_rsvp">Confirmação</a>
-                <a href="#presentes" onclick="toggleView('main')" class="text-xs font-bold text-[#5a6b47] hover:text-[#435234] uppercase tracking-widest transition-colors" data-i18n="nav_presentes">Presentes</a>
+                <a href="javascript:void(0)" onclick="navTo('locais')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_locais">Locais</a>
+                <a href="javascript:void(0)" onclick="navTo('programacao')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_programacao">Programação</a>
+                <a href="javascript:void(0)" onclick="navTo('rsvp')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_rsvp">Confirmação</a>
+                <a href="javascript:void(0)" onclick="navTo('presentes')" class="text-xs font-bold text-[#5a6b47] hover:text-[#435234] uppercase tracking-widest transition-colors" data-i18n="nav_presentes">Presentes</a>
             </div>
 
             <div class="flex space-x-5 items-center">
@@ -132,13 +125,12 @@
         </div>
     </nav>
 
-    <!-- CONTAINER DA PÁGINA PRINCIPAL -->
     <div id="main-view">
-        <header class="hero-bg min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-20 relative">
+        <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-20 relative">
             <p class="text-white/90 tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-medium drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
             <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
                 Fabio Miguel<br>
-                <span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&amp;</span>
+                <span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&</span>
                 Ana Isabel
             </h1>
             <div class="w-24 h-[1px] bg-[#d1daba] my-8 opacity-70"></div>
@@ -168,7 +160,6 @@
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
-                    <!-- Igreja -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
@@ -186,7 +177,6 @@
                         </a>
                     </div>
 
-                    <!-- Recepção -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
@@ -243,7 +233,6 @@
 
         <section class="py-20 bg-[#fcfbf9] border-y border-gray-100">
             <div class="container mx-auto px-6 max-w-4xl grid md:grid-cols-2 gap-10">
-                <!-- Traje -->
                 <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
                     <h3 class="font-serif text-3xl mb-6 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
                     <div class="flex justify-center gap-10 mb-6">
@@ -268,7 +257,6 @@
                     <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
                 </div>
                 
-                <!-- Aviso Adultos -->
                 <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
                     <div class="w-12 h-12 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-4 text-[#5a6b47]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
@@ -298,7 +286,6 @@
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
                 <p class="text-gray-500 mb-10 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, disponibilizamos nossos dados abaixo.</p>
                 
-                <!-- Botão de Acesso à Nova Página Virtual de Presentes -->
                 <div class="mb-14">
                     <button onclick="toggleView('gifts')" class="inline-flex items-center px-10 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
@@ -313,7 +300,6 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 mt-10">
-                    <!-- Pix Brasil -->
                     <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-2 bg-[#5a6b47]"></div>
                         <p class="font-serif text-2xl font-bold text-[#2d3326] mb-6" data-i18n="pix_title">Brasil (Pix)</p>
@@ -326,11 +312,10 @@
                         <p id="copy-msg" class="text-[#5a6b47] text-sm mt-3 opacity-0 transition-opacity font-semibold h-5" data-i18n="copy_success">Chave copiada com sucesso! ✓</p>
                     </div>
 
-                    <!-- QR Bolívia -->
                     <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-2 bg-[#a3b18a]"></div>
                         <p class="font-serif text-2xl font-bold text-[#2d3326] mb-6" data-i18n="bolivia_title">Bolivia (QR)</p>
-                        <img src="qr-bolivia.jpg" onerror="this.src='https://placehold.co/200x200/f0f3ea/5a6b47?text=QR+Code+Bolivia'" alt="QR Code Bolivia" class="w-48 h-48 mb-6 object-contain rounded-lg">
+                        <img src="QR.svg" onerror="this.src='https://placehold.co/200x200/f0f3ea/5a6b47?text=QR+Bolivia'" alt="QR Code Bolivia" class="w-48 h-48 mb-6 object-contain rounded-lg">
                         <p class="text-sm text-gray-500 font-medium leading-relaxed" data-i18n="bolivia_desc">Escanee el código QR desde su aplicación bancaria para realizar su regalo.</p>
                     </div>
                 </div>
@@ -399,31 +384,23 @@
                 </div>
             </div>
         </section>
-    </div> <!-- FIM DO MAIN VIEW -->
-
-    <!-- CONTAINER DA LISTA VIRTUAL DE PRESENTES -->
-    <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
+    </div> <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
         <div class="container mx-auto px-6 max-w-6xl">
-            <!-- Botão Voltar -->
-            <button onclick="toggleView('main')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm mb-10 group">
+            <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm mb-10 group">
                 <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 <span data-i18n="btn_back_home">Voltar ao Início</span>
             </button>
 
-            <!-- Títulos -->
             <div class="text-center mb-16">
                 <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="gifts_list_title">Lista de Presentes</h2>
                 <p class="text-gray-500 text-lg" data-i18n="gifts_list_sub">Escolha com carinho um item para ajudar a compor nosso lar e lua de mel.</p>
             </div>
 
-            <!-- Grid de Itens que será populado pelo JavaScript -->
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Javascript injeta os itens dinamicamente aqui -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- Modal Pix / QR Bolívia Presente Específico -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center relative shadow-2xl">
             <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors">
@@ -435,7 +412,6 @@
             <p id="modal-gift-price" class="text-3xl text-gray-800 mb-6 font-serif"></p>
             <div class="w-16 h-[1px] bg-gray-200 mx-auto mb-6"></div>
             
-            <!-- Visão Português (Brasil / PIX dinâmico) -->
             <div id="modal-view-pt" class="hidden">
                 <p class="text-sm text-gray-500 mb-4 font-medium">Use o QR Code ou a chave Copia e Cola no app do seu banco:</p>
                 <div class="relative w-48 h-48 mx-auto mb-4 border border-gray-100 rounded-lg p-2 bg-white flex items-center justify-center">
@@ -452,16 +428,14 @@
                 <p id="gift-copy-msg" class="text-[#5a6b47] text-sm mt-3 opacity-0 transition-opacity font-semibold h-5" data-i18n="copy_success">Código copiado com sucesso! ✓</p>
             </div>
 
-            <!-- Visão Espanhol (Bolívia / QR Estático) -->
             <div id="modal-view-es" class="hidden">
                 <p class="text-sm text-gray-500 mb-6 font-medium" data-i18n="modal_gift_inst_es">Escanea este código QR desde tu aplicación bancaria para realizar el pago en Bolivianos.</p>
-                <img src="qr-bolivia.jpg" onerror="this.src='https://placehold.co/200/f0f3ea/5a6b47?text=QR+Bolivia'" class="w-48 h-48 mx-auto mb-6 border border-gray-100 rounded-lg p-2 shadow-sm object-contain">
+                <img src="QR.svg" onerror="this.src='https://placehold.co/200/f0f3ea/5a6b47?text=QR+Bolivia'" class="w-48 h-48 mx-auto mb-6 border border-gray-100 rounded-lg p-2 shadow-sm object-contain">
                 <p class="text-sm text-gray-400 italic">Cuenta a nombre de Ana Isabel Zambrana</p>
             </div>
         </div>
     </div>
 
-    <!-- Lightbox de Imagens Pessoais -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2">
            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -479,13 +453,12 @@
 
     <footer class="bg-[#2d3326] text-white py-12 text-center relative z-10">
         <div class="container mx-auto px-6">
-            <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&amp;</span> Ana Isabel</h2>
+            <h2 class="font-serif text-3xl mb-4">Fabio <span class="italic font-light">&</span> Ana Isabel</h2>
             <p class="text-[#a3b18a] text-sm tracking-widest uppercase mb-8" data-i18n="date_value_short">18 Dezembro 2026</p>
             <p class="text-white/30 text-xs font-light">Feito com ❤️ para o nosso grande dia.</p>
         </div>
     </footer>
 
-    <!-- Botão e Controle de Música -->
     <audio id="bg-music" loop preload="auto">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
@@ -590,7 +563,33 @@
                 }
             };
 
-            // --- 5. NAVEGAÇÃO DE PÁGINA ÚNICA (SPA) PARA PRESENTES ---
+            // --- 5. NAVEGAÇÃO DE PÁGINA E LINKS DO CABEÇALHO ---
+            window.navTo = function(sectionId) {
+                const mainView = document.getElementById('main-view');
+                const giftsView = document.getElementById('gifts-view');
+                
+                // Se o usuário clicar em algo que está na Home e ele estiver nos Presentes
+                if (sectionId !== 'gifts' && mainView.classList.contains('hidden')) {
+                    giftsView.classList.add('hidden');
+                    mainView.classList.remove('hidden');
+                    mainView.classList.add('fade-enter');
+                }
+
+                // Aguarda um instante para o DOM aparecer se tiver trocado de view
+                setTimeout(() => {
+                    if (sectionId === 'home') {
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    } else if (sectionId !== 'gifts') {
+                        const el = document.getElementById(sectionId);
+                        if (el) {
+                            const offset = 80; // Altura do cabeçalho
+                            const top = el.getBoundingClientRect().top + window.scrollY - offset;
+                            window.scrollTo({top: top, behavior: 'smooth'});
+                        }
+                    }
+                }, 50);
+            };
+
             window.toggleView = function(view) {
                 const mainView = document.getElementById('main-view');
                 const giftsView = document.getElementById('gifts-view');
@@ -600,11 +599,6 @@
                     giftsView.classList.remove('hidden');
                     giftsView.classList.add('fade-enter');
                     window.scrollTo(0,0);
-                } else {
-                    giftsView.classList.add('hidden');
-                    mainView.classList.remove('hidden');
-                    mainView.classList.add('fade-enter');
-                    setTimeout(() => window.scrollTo(0,0), 10);
                 }
             };
 
@@ -686,7 +680,7 @@
                 if (e.target.id === 'lightbox') { closeLightbox(); }
             });
 
-            // --- 9. DADOS E RENDERIZAÇÃO DA LISTA DE PRESENTES COM IMAGENS REAIS ---
+            // --- 9. DADOS E RENDERIZAÇÃO DA LISTA DE PRESENTES ---
             const giftListItems = [
                 { id: 1, pt: "Cota de Lua de Mel Simbólica", es: "Cuota Luna de Miel Simbólica", price: 200, priceBs: 260, img: "https://images.unsplash.com/photo-1548281146-24e1017dfce7?w=500&q=80" },
                 { id: 2, pt: "Passeio Turístico Guiado", es: "Paseo Turístico Guiado", price: 250, priceBs: 320, img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80" },
@@ -747,23 +741,7 @@
                 });
             }
 
-            // --- 10. GERAÇÃO DINÂMICA DE PIX (PAYLOAD E QR CODE) ---
-            function crc16(payload) {
-                let crc = 0xFFFF;
-                for (let i = 0; i < payload.length; i++) {
-                    crc ^= payload.charCodeAt(i) << 8;
-                    for (let j = 0; j < 8; j++) {
-                        if ((crc & 0x8000) !== 0) {
-                            crc = (crc << 1) ^ 0x1021;
-                        } else {
-                            crc = crc << 1;
-                        }
-                    }
-                }
-                let hex = (crc & 0xFFFF).toString(16).toUpperCase();
-                return hex.padStart(4, '0');
-            }
-
+            // --- 10. GERAÇÃO DINÂMICA DE PIX ROBUSTA (EMV CRC16-CCITT-FALSE) ---
             function generatePixPayload(key, amount, name, city) {
                 const formatField = (id, value) => {
                     const len = value.length.toString().padStart(2, '0');
@@ -777,20 +755,34 @@
                 const amtStr = amount.toFixed(2);
                 const amtField = amount > 0 ? formatField("54", amtStr) : "";
                 const country = formatField("58", "BR");
-                const merchantName = formatField("59", name.substring(0, 25));
-                const merchantCity = formatField("60", city.substring(0, 15));
-                const txid = formatField("62", formatField("05", "***")); 
+                const merchantName = formatField("59", name);
+                const merchantCity = formatField("60", city);
+                const txid = formatField("62", formatField("05", "***"));
                 
                 const payloadStr = "000201" + merchantAccount + merchantCateg + currency + amtField + country + merchantName + merchantCity + txid + "6304";
                 
-                return payloadStr + crc16(payloadStr);
+                // CRC16 Polinômio 0x1021
+                let crc = 0xFFFF;
+                for (let c = 0; c < payloadStr.length; c++) {
+                    crc ^= payloadStr.charCodeAt(c) << 8;
+                    for (let i = 0; i < 8; i++) {
+                        if (crc & 0x8000) {
+                            crc = (crc << 1) ^ 0x1021;
+                        } else {
+                            crc = crc << 1;
+                        }
+                    }
+                    crc &= 0xFFFF; // Garante que fica em 16 bits
+                }
+                const hex = crc.toString(16).toUpperCase().padStart(4, '0');
+                return payloadStr + hex;
             }
 
             window.copyPixPayload = function() {
                 const textArea = document.getElementById('modal-pix-payload');
                 const msgEl = document.getElementById('gift-copy-msg');
                 textArea.select();
-                textArea.setSelectionRange(0, 99999); // Mobile
+                textArea.setSelectionRange(0, 99999); 
                 try {
                     document.execCommand('copy');
                     msgEl.classList.remove('opacity-0');
@@ -798,7 +790,7 @@
                 } catch (err) { }
             };
 
-            // --- 11. MODAL DINÂMICO DOS PRESENTES (BILINGUE) ---
+            // --- 11. MODAL DINÂMICO DOS PRESENTES ---
             window.openGiftModal = function(id) {
                 const gift = giftListItems.find(g => g.id === id);
                 if (!gift) return;
@@ -817,11 +809,11 @@
                     viewEs.classList.add('hidden');
                     viewPt.classList.remove('hidden');
                     
-                    // Gerar payload exato para o valor
+                    // Gera o payload do PIX dinamicamente com base no valor
                     const payload = generatePixPayload("+5542999215431", gift.price, "Fabio e Ana Isabel", "Ponta Grossa");
                     document.getElementById('modal-pix-payload').value = payload;
                     
-                    // Exibir loader enquanto carrega QR da API
+                    // Exibe Loader e chama API do QR Code
                     document.getElementById('pix-loader').style.display = 'block';
                     document.getElementById('modal-pix-qr').src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(payload);
 
@@ -884,7 +876,6 @@
                     }
                 });
 
-                // Re-renderiza a galeria de presentes para atualizar moedas
                 renderGiftsGrid();
             };
 
