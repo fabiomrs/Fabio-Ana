@@ -121,7 +121,7 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
-                    <!-- Recepção (Atualizado para Taças de Champagne) -->
+                    <!-- Recepção -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
@@ -343,12 +343,23 @@
         </div>
     </footer>
 
-    <audio id="bg-music" loop preload="auto"><source src="musica.mp3" type="audio/mpeg"></audio>
+    <!-- Botão e Controle de Música Atualizado (Mini Player) -->
+    <audio id="bg-music" preload="auto"></audio>
 
-    <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-xl z-[150] transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110 hidden-until-enter opacity-0">
-        <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </button>
+    <div id="music-player" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full shadow-xl z-[150] transition-all duration-300 flex items-center justify-center transform hidden-until-enter opacity-0 px-3 py-1 space-x-1">
+        <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        
+        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
+            <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        
+        <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -375,17 +386,69 @@
                 }, 1000);
             } catch (e) { }
 
-            // Música
+            // --- 3. MÚSICA E INTERAÇÃO INICIAL (PLAYLIST) ---
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
             const iconPause = document.getElementById('icon-pause');
-            document.getElementById('music-btn').addEventListener('click', function() {
-                if (window.isPlaying) { bgMusic.pause(); iconPlay.classList.remove('hidden'); iconPause.classList.add('hidden'); window.isPlaying = false; } 
-                else { bgMusic.play().then(() => { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); window.isPlaying = true; }).catch(()=>{}); }
+            
+            // Array com as músicas da playlist
+            const playlist = ['musica.mp3', 'musica1.mp3', 'musica2.mp3'];
+            let currentTrack = 0;
+            
+            // Define a primeira música
+            bgMusic.src = playlist[currentTrack];
+
+            // Atualiza os ícones do player
+            function updatePlayerUI() {
+                if (window.isPlaying) {
+                    iconPlay.classList.add('hidden');
+                    iconPause.classList.remove('hidden');
+                } else {
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                }
+            }
+
+            // Vai para a próxima quando a atual terminar
+            bgMusic.addEventListener('ended', function() {
+                currentTrack = (currentTrack + 1) % playlist.length;
+                bgMusic.src = playlist[currentTrack];
+                if (window.isPlaying) bgMusic.play().catch(()=>{});
             });
 
-            // Entrada Site
+            // Botão Voltar
+            document.getElementById('prev-btn').addEventListener('click', function() {
+                currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+                bgMusic.src = playlist[currentTrack];
+                if (window.isPlaying) bgMusic.play().catch(()=>{});
+            });
+
+            // Botão Avançar
+            document.getElementById('next-btn').addEventListener('click', function() {
+                currentTrack = (currentTrack + 1) % playlist.length;
+                bgMusic.src = playlist[currentTrack];
+                if (window.isPlaying) bgMusic.play().catch(()=>{});
+            });
+
+            // Botão Play/Pause Central
+            document.getElementById('music-btn').addEventListener('click', function() {
+                if (window.isPlaying) {
+                    bgMusic.pause();
+                    window.isPlaying = false;
+                } else {
+                    let playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(function() {
+                            window.isPlaying = true;
+                            updatePlayerUI();
+                        }).catch(function(error) { });
+                    }
+                }
+                updatePlayerUI();
+            });
+
+            // --- 4. FUNÇÃO DE ENTRADA DO SITE ---
             window.enterSite = function(lang) {
                 setLanguage(lang);
                 const modal = document.getElementById('welcome-modal');
@@ -394,7 +457,14 @@
                 modal.classList.add('opacity-0');
                 document.querySelectorAll('.hidden-until-enter').forEach(el => el.classList.remove('opacity-0'));
                 setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
-                bgMusic.play().then(() => { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); window.isPlaying = true; }).catch(()=>{});
+
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        window.isPlaying = true;
+                        updatePlayerUI();
+                    }).catch(function(error) { });
+                }
             };
 
             // SPA Navegação Correta
@@ -500,11 +570,9 @@
                 const btnLabel = activeLang === 'pt' ? 'Presentear' : 'Regalar';
 
                 giftListItems.forEach(gift => {
-                    // Conversão fixa de 1.3 para Bolivianos (exemplo de negócio passado nas msgs anteriores, pode ser atualizado se necessário)
                     const priceBs = Math.round(gift.price * 1.3);
                     const comparePrice = activeLang === 'pt' ? gift.price : priceBs;
 
-                    // Filtro inteligente (aplica o corte de preço na moeda certa)
                     let show = true;
                     if (currentFilter === 'under300') { if (comparePrice > (activeLang==='pt'?300:400)) show = false; }
                     if (currentFilter === '300to800') { if (comparePrice <= (activeLang==='pt'?300:400) || comparePrice > (activeLang==='pt'?800:1000)) show = false; }
@@ -651,7 +719,6 @@
                     ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.remove('text-gray-400', 'border-transparent');
                     esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    // Ajuste labels de filtro pt
                     document.getElementById('filter-under300').innerText = "Até R$300";
                     document.getElementById('filter-300to800').innerText = "R$300–800";
                     document.getElementById('filter-800to1500').innerText = "R$800–1500";
@@ -660,7 +727,6 @@
                     esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.remove('text-gray-400', 'border-transparent');
                     ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    // Ajuste labels de filtro es
                     document.getElementById('filter-under300').innerText = "Hasta Bs.400";
                     document.getElementById('filter-300to800').innerText = "Bs.400–1000";
                     document.getElementById('filter-800to1500').innerText = "Bs.1000–2000";
