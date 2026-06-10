@@ -23,66 +23,26 @@
             background-position: center;
             background-attachment: fixed;
         }
-        .btn-hover {
-            transition: all 0.3s ease;
-        }
-        .btn-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .masonry-grid {
-            column-count: 2;
-            column-gap: 1rem;
-        }
+        .btn-hover { transition: all 0.3s ease; }
+        .btn-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .masonry-grid { column-count: 2; column-gap: 1rem; }
         @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
         @media (min-width: 1024px) { .masonry-grid { column-count: 4; } }
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1rem;
-        }
-        .gallery-wrap, .gift-wrap {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.5rem;
-            cursor: pointer;
-        }
-        .gallery-img, .gift-img {
-            width: 100%;
-            transition: transform 0.6s ease;
-        }
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background-color: rgba(45, 51, 38, 0.4);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .gallery-wrap:hover .gallery-img { transform: scale(1.05); }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+        .gallery-wrap, .gift-wrap { position: relative; overflow: hidden; border-radius: 0.5rem; cursor: pointer; }
+        .gallery-img, .gift-img { width: 100%; transition: transform 0.6s ease; }
+        .gallery-overlay { position: absolute; inset: 0; background-color: rgba(45, 51, 38, 0.4); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .gallery-wrap:hover .gallery-img, .gift-wrap:hover .gift-img { transform: scale(1.05); }
         .gallery-wrap:hover .gallery-overlay { opacity: 1; }
-        .gift-wrap:hover .gift-img { transform: scale(1.05); }
-        
         #ai-iframe-container { overflow: hidden; height: 100%; }
-        
-        .fade-enter {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #5a6b47;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
+        .fade-enter { animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #5a6b47; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Filtros Scroll Hide */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 
@@ -93,31 +53,24 @@
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-1">Bem-vindo(a)</h2>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-8">Bienvenido(a)</h2>
-            
             <p class="text-gray-500 mb-8 text-sm uppercase tracking-widest font-bold">Selecione o Idioma<br><span class="text-xs text-gray-400 font-medium">Seleccione el idioma</span></p>
-            
             <div class="flex flex-col space-y-4">
-                <button onclick="enterSite('pt')" class="px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold tracking-widest transition-all shadow-md transform hover:scale-105">
-                    Português
-                </button>
-                <button onclick="enterSite('es')" class="px-8 py-4 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full font-bold tracking-widest transition-all shadow-md transform hover:scale-105">
-                    Español
-                </button>
+                <button onclick="enterSite('pt')" class="px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold tracking-widest transition-all shadow-md transform hover:scale-105">Português</button>
+                <button onclick="enterSite('es')" class="px-8 py-4 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full font-bold tracking-widest transition-all shadow-md transform hover:scale-105">Español</button>
             </div>
         </div>
     </div>
 
+    <!-- Navegação -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="navTo('home')">F <span class="italic font-light">&</span> A</div>
-            
             <div class="hidden md:flex space-x-6 items-center">
                 <a href="javascript:void(0)" onclick="navTo('locais')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_locais">Locais</a>
                 <a href="javascript:void(0)" onclick="navTo('programacao')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_programacao">Programação</a>
                 <a href="javascript:void(0)" onclick="navTo('rsvp')" class="text-xs font-bold text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest transition-colors" data-i18n="nav_rsvp">Confirmação</a>
                 <a href="javascript:void(0)" onclick="navTo('presentes')" class="text-xs font-bold text-[#5a6b47] hover:text-[#435234] uppercase tracking-widest transition-colors" data-i18n="nav_presentes">Presentes</a>
             </div>
-
             <div class="flex space-x-5 items-center">
                 <button onclick="setLanguage('pt')" id="btn-pt" class="text-sm font-bold text-[#5a6b47] border-b-2 border-[#5a6b47] pb-1 transition-all">PT</button>
                 <button onclick="setLanguage('es')" id="btn-es" class="text-sm font-medium text-gray-400 hover:text-[#5a6b47] pb-1 border-b-2 border-transparent transition-all">ES</button>
@@ -129,15 +82,12 @@
         <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-20 relative">
             <p class="text-white/90 tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-medium drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
             <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
-                Fabio Miguel<br>
-                <span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&</span>
-                Ana Isabel
+                Fabio Miguel<br><span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&</span>Ana Isabel
             </h1>
             <div class="w-24 h-[1px] bg-[#d1daba] my-8 opacity-70"></div>
             <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-light drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
             <p class="text-lg text-white/90 font-medium tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Início às 17:30
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:30
             </p>
         </header>
 
@@ -160,23 +110,21 @@
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
+                    <!-- Igreja -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
                             </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="church_address">6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia</p>
                         <a href="https://www.google.com/maps/place/Parroquia+La+Resurrecci%C3%B3n/data=!4m2!3m1!1s0x0:0x7b0ba4ed26d8eb18?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span data-i18n="map_btn">Abrir GPS / Maps</span>
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
-
+                    <!-- Recepção -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
@@ -187,8 +135,7 @@
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="dinner_address">1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra</p>
                         <a href="https://www.google.com/maps/place/Garden+House+Eventos+Boutique/data=!4m2!3m1!1s0x0:0x91be73e13c48923d?sa=X&ved=1t:2428&ictx=111" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span data-i18n="map_btn">Abrir GPS / Maps</span>
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
                 </div>
@@ -199,34 +146,13 @@
             <div class="container mx-auto px-6 max-w-3xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="timeline_title">Programação</h2>
                 <div class="relative border-l-2 border-[#a3b18a]/30 ml-4 md:ml-12 py-2">
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">17:30</span><span data-i18n="t1">Cerimônia Religiosa</span></h3>
-                    </div>
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:00</span><span data-i18n="t2">Sessão de Fotos</span></h3>
-                    </div>
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:30</span><span data-i18n="t3">Brinde aos Noivos</span></h3>
-                    </div>
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">20:00</span><span data-i18n="t4">Jantar</span></h3>
-                    </div>
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">21:30</span><span data-i18n="t5">Baile</span></h3>
-                    </div>
-                    <div class="mb-10 ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">00:00</span><span data-i18n="t6">Petiscos</span></h3>
-                    </div>
-                    <div class="ml-8 relative group">
-                        <span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span>
-                        <h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">02:30</span><span data-i18n="t7">Despedida</span></h3>
-                    </div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">17:30</span><span data-i18n="t1">Cerimônia Religiosa</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:00</span><span data-i18n="t2">Sessão de Fotos</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:30</span><span data-i18n="t3">Brinde aos Noivos</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">20:00</span><span data-i18n="t4">Jantar</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">21:30</span><span data-i18n="t5">Baile</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">00:00</span><span data-i18n="t6">Petiscos</span></h3></div>
+                    <div class="ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">02:30</span><span data-i18n="t7">Despedida</span></h3></div>
                 </div>
             </div>
         </section>
@@ -237,19 +163,11 @@
                     <h3 class="font-serif text-3xl mb-6 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
                     <div class="flex justify-center gap-10 mb-6">
                         <div class="flex flex-col items-center">
-                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" />
-                                <path d="M8.5 10c-2 4-3.5 11-3.5 11h14s-1.5-7-3.5-11" />
-                            </svg>
+                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" /><path d="M8.5 10c-2 4-3.5 11-3.5 11h14s-1.5-7-3.5-11" /></svg>
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 3h10l3 18H4L7 3z" />
-                                <path d="M12 3v18" />
-                                <path d="M7 3l5 7 5-7" />
-                                <path d="M12 10l-2 4h4l-2-4z" />
-                            </svg>
+                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l3 18H4L7 3z" /><path d="M12 3v18" /><path d="M7 3l5 7 5-7" /><path d="M12 10l-2 4h4l-2-4z" /></svg>
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                         </div>
                     </div>
@@ -271,12 +189,8 @@
             <div class="container mx-auto px-6 text-center max-w-2xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
                 <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.</p>
-                
-                <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20de%20Fabio%20e%20Ana%20Isabel." 
-                   target="_blank" 
-                   class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-lg transition-transform transform hover:scale-105">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                    <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
+                <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20de%20Fabio%20e%20Ana%20Isabel." target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-lg transition-transform transform hover:scale-105">
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
                 </a>
             </div>
         </section>
@@ -285,20 +199,17 @@
             <div class="container mx-auto px-6 text-center max-w-4xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
                 <p class="text-gray-500 mb-10 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, disponibilizamos nossos dados abaixo.</p>
-                
                 <div class="mb-14">
                     <button onclick="toggleView('gifts')" class="inline-flex items-center px-10 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                         <span data-i18n="btn_full_list">Ver Lista Completa de Presentes Especiais</span>
                     </button>
                 </div>
-
                 <div class="flex items-center justify-center my-8">
                     <div class="w-24 h-[1px] bg-gray-200"></div>
                     <span class="px-4 text-sm text-gray-400 font-bold tracking-widest uppercase" data-i18n="or_text">Ou contribuição livre</span>
                     <div class="w-24 h-[1px] bg-gray-200"></div>
                 </div>
-
                 <div class="grid md:grid-cols-2 gap-8 mt-10">
                     <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-2 bg-[#5a6b47]"></div>
@@ -311,7 +222,6 @@
                         </button>
                         <p id="copy-msg" class="text-[#5a6b47] text-sm mt-3 opacity-0 transition-opacity font-semibold h-5" data-i18n="copy_success">Chave copiada com sucesso! ✓</p>
                     </div>
-
                     <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-2 bg-[#a3b18a]"></div>
                         <p class="font-serif text-2xl font-bold text-[#2d3326] mb-6" data-i18n="bolivia_title">Bolivia (QR)</p>
@@ -329,7 +239,6 @@
                     <h2 class="font-serif text-4xl text-[#2d3326] mb-4" data-i18n="ai_title">Dúvidas? Pergunte para nossa IA</h2>
                     <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
                 </div>
-                
                 <div class="bg-[#fcfbf9] rounded-2xl overflow-hidden shadow-sm border border-gray-200" id="ai-iframe-container">
                     <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full min-h-[1040px] border-0 h-full" allow="clipboard-write" allowfullscreen scrolling="no"></iframe>
                 </div>
@@ -339,115 +248,135 @@
         <section class="py-24 bg-[#fcfbf9]">
             <div class="container mx-auto px-4 max-w-6xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
-                
                 <div class="masonry-grid">
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)">
-                        <img src="foto (1).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80'" alt="Momento 1">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)">
-                        <img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 2">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)">
-                        <img src="foto (3).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80'" alt="Momento 3">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(3)">
-                        <img src="foto (4).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80'" alt="Momento 4">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(4)">
-                        <img src="foto (5).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80'" alt="Momento 5">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(5)">
-                        <img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 6">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(6)">
-                        <img src="foto (7).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1542042161784-26ab9e041e89?w=800&q=80'" alt="Momento 7">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(7)">
-                        <img src="foto (8).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80'" alt="Momento 8">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(8)">
-                        <img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 9">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(9)">
-                        <img src="foto (10).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80'" alt="Momento 10">
-                        <div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div>
-                    </div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (1).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (3).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(3)"><img src="foto (4).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80'" alt="Momento 4"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(4)"><img src="foto (5).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80'" alt="Momento 5"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(5)"><img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 6"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(6)"><img src="foto (7).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1542042161784-26ab9e041e89?w=800&q=80'" alt="Momento 7"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(7)"><img src="foto (8).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80'" alt="Momento 8"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(8)"><img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 9"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(9)"><img src="foto (10).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80'" alt="Momento 10"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
                 </div>
             </div>
         </section>
-    </div> <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm mb-10 group">
-                <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                <span data-i18n="btn_back_home">Voltar ao Início</span>
-            </button>
+    </div> <!-- FIM DO MAIN VIEW -->
 
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="gifts_list_title">Lista de Presentes</h2>
-                <p class="text-gray-500 text-lg" data-i18n="gifts_list_sub">Escolha com carinho um item para ajudar a compor nosso lar e lua de mel.</p>
+    <!-- CONTAINER DA LISTA VIRTUAL DE PRESENTES -->
+    <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <!-- Cabeçalho Presentes -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm group w-full md:w-auto justify-center md:justify-start">
+                    <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span data-i18n="btn_back_home">Voltar ao convite</span>
+                </button>
+                <div class="text-center md:text-right">
+                    <h2 class="font-serif text-4xl text-[#2d3326] mb-2" data-i18n="gifts_list_title">Lista de Presentes</h2>
+                    <p class="text-gray-500 text-sm" data-i18n="gifts_list_sub">Escolha com carinho um item para ajudar a compor nosso lar.</p>
+                </div>
             </div>
 
-            <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Card: Contribuição de Valor Livre -->
+            <div class="bg-white rounded-2xl shadow-sm border border-[#a3b18a]/30 p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 transform hover:-translate-y-1 transition-transform">
+                <div class="text-center md:text-left">
+                    <h3 class="font-serif text-2xl text-[#2d3326] mb-2" data-i18n="free_gift_title">Contribuir com valor livre</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="free_gift_desc">Prefere escolher o valor? Digite abaixo e geramos seu Pix instantaneamente.</p>
                 </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <div class="relative w-full sm:w-48">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold" id="currency-symbol">R$</span>
+                        <input type="number" id="free-value-input" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-lg rounded-full focus:ring-[#5a6b47] focus:border-[#5a6b47] block pl-12 pr-4 py-3 font-bold" placeholder="0,00" min="1" step="1">
+                    </div>
+                    <button onclick="openCustomGiftModal()" class="px-8 py-3 bg-[#5a6b47] text-white hover:bg-[#435234] transition-colors rounded-full font-bold uppercase tracking-wider text-sm shadow-md whitespace-nowrap">
+                        <span data-i18n="btn_generate_pix">Gerar Pix</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros de Preço -->
+            <div class="flex gap-3 overflow-x-auto no-scrollbar mb-10 pb-2 justify-start md:justify-center" id="filters-container">
+                <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-[#5a6b47] text-white whitespace-nowrap" data-i18n="filter_all">Todos</button>
+                <button onclick="setFilter('under300')" id="filter-under300" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_under300">Até R$300</button>
+                <button onclick="setFilter('300to800')" id="filter-300to800" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_300to800">R$300–800</button>
+                <button onclick="setFilter('800to1500')" id="filter-800to1500" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_800to1500">R$800–1500</button>
+                <button onclick="setFilter('above1500')" id="filter-above1500" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_above1500">R$1500+</button>
+            </div>
+
+            <!-- Grid de Presentes Dinâmico -->
+            <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Javascript injeta os itens aqui -->
+            </div>
         </div>
     </div>
 
+    <!-- Modal Pagamento Presente Dinâmico -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center relative shadow-2xl">
-            <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
+            <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
-            <h3 class="font-serif text-2xl mb-2 text-[#2d3326] mt-4" data-i18n="modal_gift_txt">Você escolheu presentear com:</h3>
-            <p id="modal-gift-name" class="text-xl font-bold text-[#5a6b47] mb-2 leading-tight"></p>
-            <p id="modal-gift-price" class="text-3xl text-gray-800 mb-6 font-serif"></p>
+            <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-2 mt-4" data-i18n="modal_gift_txt">Você escolheu:</p>
+            <h3 id="modal-gift-name" class="font-serif text-2xl text-[#2d3326] mb-2 leading-tight"></h3>
+            <p id="modal-gift-price" class="text-3xl font-bold text-[#5a6b47] mb-6"></p>
             <div class="w-16 h-[1px] bg-gray-200 mx-auto mb-6"></div>
             
+            <!-- Visão Português (Brasil / PIX dinâmico com Nome e WhatsApp) -->
             <div id="modal-view-pt" class="hidden">
-                <p class="text-sm text-gray-500 mb-4 font-medium">Use o QR Code ou a chave Copia e Cola no app do seu banco:</p>
-                <div class="relative w-48 h-48 mx-auto mb-4 border border-gray-100 rounded-lg p-2 bg-white flex items-center justify-center">
+                <div class="mb-6 text-left">
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Seu Nome / De quem é o presente?</label>
+                    <input type="text" id="guest-name" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ex: João e Maria">
+                </div>
+
+                <div class="relative w-48 h-48 mx-auto mb-4 border border-gray-100 rounded-xl p-2 bg-white flex items-center justify-center shadow-sm">
                     <div id="pix-loader" class="loader absolute"></div>
                     <img id="modal-pix-qr" src="" class="w-full h-full object-contain relative z-10" onload="document.getElementById('pix-loader').style.display='none'">
                 </div>
-                
                 <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Pix Copia e Cola</p>
-                <textarea id="modal-pix-payload" class="w-full text-xs text-gray-400 bg-gray-50 p-2 rounded border border-gray-200 mb-4 h-16 break-all focus:outline-none resize-none" readonly></textarea>
+                <textarea id="modal-pix-payload" class="w-full text-xs text-gray-400 bg-gray-50 p-3 rounded-lg border border-gray-200 mb-4 h-16 break-all focus:outline-none resize-none" readonly></textarea>
                 
-                <button onclick="copyPixPayload()" class="w-full px-6 py-4 bg-[#5a6b47] text-white hover:bg-[#435234] transition-colors duration-300 rounded-full font-bold uppercase tracking-wider shadow-md">
-                    <span data-i18n="copy_btn">Copiar Código Pix</span>
-                </button>
-                <p id="gift-copy-msg" class="text-[#5a6b47] text-sm mt-3 opacity-0 transition-opacity font-semibold h-5" data-i18n="copy_success">Código copiado com sucesso! ✓</p>
+                <div class="flex flex-col gap-3">
+                    <button onclick="copyPixPayload()" class="w-full px-6 py-4 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#a3b18a] hover:text-white transition-colors duration-300 rounded-full font-bold uppercase tracking-wider shadow-sm flex justify-center items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                        <span data-i18n="copy_btn">Copiar Código Pix</span>
+                    </button>
+                    <p id="gift-copy-msg" class="text-[#5a6b47] text-sm opacity-0 transition-opacity font-semibold h-4 mb-2 -mt-1" data-i18n="copy_success">Código copiado! ✓</p>
+
+                    <button onclick="notifyWhatsApp()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-full font-bold uppercase tracking-wider shadow-md flex justify-center items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        <span data-i18n="btn_notify_wa">Avisar que presenteei</span>
+                    </button>
+                </div>
             </div>
 
+            <!-- Visão Espanhol (Bolívia / QR Estático e WhatsApp) -->
             <div id="modal-view-es" class="hidden">
-                <p class="text-sm text-gray-500 mb-6 font-medium" data-i18n="modal_gift_inst_es">Escanea este código QR desde tu aplicación bancaria para realizar el pago en Bolivianos.</p>
-                <img src="QR.svg" onerror="this.src='https://placehold.co/200/f0f3ea/5a6b47?text=QR+Bolivia'" class="w-48 h-48 mx-auto mb-6 border border-gray-100 rounded-lg p-2 shadow-sm object-contain">
-                <p class="text-sm text-gray-400 italic">Cuenta a nombre de Ana Isabel Zambrana</p>
+                <div class="mb-6 text-left">
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Tu Nombre:</label>
+                    <input type="text" id="guest-name-es" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ej: Juan y Maria">
+                </div>
+                <p class="text-sm text-gray-500 mb-6 font-medium" data-i18n="modal_gift_inst_es">Escanea este código QR desde tu aplicación bancaria para realizar el pago.</p>
+                <img src="QR.svg" onerror="this.src='https://placehold.co/200/f0f3ea/5a6b47?text=QR+Bolivia'" class="w-48 h-48 mx-auto mb-6 border border-gray-100 rounded-xl p-2 shadow-sm object-contain">
+                <p class="text-xs text-gray-400 italic mb-6">Cuenta a nombre de Ana Isabel Zambrana</p>
+                
+                <button onclick="notifyWhatsAppES()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-full font-bold uppercase tracking-wider shadow-md flex justify-center items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    <span data-i18n="btn_notify_wa">Avisar que regalé</span>
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- Lightbox Galeria -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2">
-           <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <div class="relative w-full h-full flex items-center justify-center p-4">
-            <button onclick="prevImage(event)" class="absolute left-2 md:left-8 text-white/50 hover:text-white transition-colors z-50 p-2">
-                <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
+            <button onclick="prevImage(event)" class="absolute left-2 md:left-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
             <img id="lightbox-img" src="" class="max-h-[85vh] max-w-full object-contain rounded-md shadow-2xl transition-opacity duration-300">
-            <button onclick="nextImage(event)" class="absolute right-2 md:right-8 text-white/50 hover:text-white transition-colors z-50 p-2">
-                <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
+            <button onclick="nextImage(event)" class="absolute right-2 md:right-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
         </div>
     </div>
 
@@ -459,9 +388,7 @@
         </div>
     </footer>
 
-    <audio id="bg-music" loop preload="auto">
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bg-music" loop preload="auto"><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <button id="music-btn" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#5a6b47] text-white p-4 rounded-full shadow-xl z-[150] transition-all duration-300 focus:outline-none flex items-center justify-center transform hover:scale-110 hidden-until-enter opacity-0">
         <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -472,120 +399,63 @@
         document.addEventListener("DOMContentLoaded", function() {
             window.scrollTo(0, 0);
 
-            // --- 1. EFEITO NAVBAR ---
+            // Efeito Navbar
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
+                if (window.scrollY > 50) { nav.classList.add('shadow-md'); } 
+                else { nav.classList.remove('shadow-md'); }
             });
 
-            // --- 2. CONTAGEM REGRESSIVA ---
+            // Contagem Regressiva
             try {
                 const targetDate = new Date("2026-12-18T17:30:00").getTime();
                 const countdown = setInterval(function() {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
-
-                    if (distance < 0) {
-                        clearInterval(countdown);
-                        document.getElementById("days").innerText = "00";
-                        document.getElementById("hours").innerText = "00";
-                        document.getElementById("minutes").innerText = "00";
-                        document.getElementById("seconds").innerText = "00";
-                        return;
-                    }
-
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                    document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-                    document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+                    if (distance < 0) { clearInterval(countdown); return; }
+                    document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                    document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                    document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                    document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
                 }, 1000);
-            } catch (e) { console.error("Erro na contagem:", e); }
+            } catch (e) { }
 
-            // --- 3. MÚSICA E INTERAÇÃO INICIAL ---
+            // Música
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
             const iconPause = document.getElementById('icon-pause');
-
             document.getElementById('music-btn').addEventListener('click', function() {
-                if (window.isPlaying) {
-                    bgMusic.pause();
-                    iconPlay.classList.remove('hidden');
-                    iconPause.classList.add('hidden');
-                    window.isPlaying = false;
-                } else {
-                    let playPromise = bgMusic.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(function() {
-                            iconPlay.classList.add('hidden');
-                            iconPause.classList.remove('hidden');
-                            window.isPlaying = true;
-                        }).catch(function(error) { });
-                    }
-                }
+                if (window.isPlaying) { bgMusic.pause(); iconPlay.classList.remove('hidden'); iconPause.classList.add('hidden'); window.isPlaying = false; } 
+                else { bgMusic.play().then(() => { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); window.isPlaying = true; }).catch(()=>{}); }
             });
 
-            // --- 4. FUNÇÃO DE ENTRADA DO SITE ---
+            // Entrada Site
             window.enterSite = function(lang) {
                 setLanguage(lang);
-                
                 const modal = document.getElementById('welcome-modal');
                 const modalBox = document.getElementById('welcome-box');
-                modalBox.classList.remove('scale-100');
-                modalBox.classList.add('scale-95');
+                modalBox.classList.remove('scale-100'); modalBox.classList.add('scale-95');
                 modal.classList.add('opacity-0');
-                
-                document.querySelectorAll('.hidden-until-enter').forEach(el => {
-                    el.classList.remove('opacity-0');
-                });
-
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }, 500);
-
-                let playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(function() {
-                        iconPlay.classList.add('hidden');
-                        iconPause.classList.remove('hidden');
-                        window.isPlaying = true;
-                    }).catch(function(error) { });
-                }
+                document.querySelectorAll('.hidden-until-enter').forEach(el => el.classList.remove('opacity-0'));
+                setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
+                bgMusic.play().then(() => { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); window.isPlaying = true; }).catch(()=>{});
             };
 
-            // --- 5. NAVEGAÇÃO DE PÁGINA E LINKS DO CABEÇALHO ---
+            // SPA Navegação Correta
             window.navTo = function(sectionId) {
                 const mainView = document.getElementById('main-view');
                 const giftsView = document.getElementById('gifts-view');
-                
-                // Se o usuário clicar em algo que está na Home e ele estiver nos Presentes
                 if (sectionId !== 'gifts' && mainView.classList.contains('hidden')) {
                     giftsView.classList.add('hidden');
                     mainView.classList.remove('hidden');
                     mainView.classList.add('fade-enter');
                 }
-
-                // Aguarda um instante para o DOM aparecer se tiver trocado de view
                 setTimeout(() => {
-                    if (sectionId === 'home') {
-                        window.scrollTo({top: 0, behavior: 'smooth'});
-                    } else if (sectionId !== 'gifts') {
+                    if (sectionId === 'home') { window.scrollTo({top: 0, behavior: 'smooth'}); } 
+                    else if (sectionId !== 'gifts') {
                         const el = document.getElementById(sectionId);
-                        if (el) {
-                            const offset = 80; // Altura do cabeçalho
-                            const top = el.getBoundingClientRect().top + window.scrollY - offset;
-                            window.scrollTo({top: top, behavior: 'smooth'});
-                        }
+                        if (el) { const offset = 80; const top = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: top, behavior: 'smooth'}); }
                     }
                 }, 50);
             };
@@ -593,123 +463,85 @@
             window.toggleView = function(view) {
                 const mainView = document.getElementById('main-view');
                 const giftsView = document.getElementById('gifts-view');
-                
                 if (view === 'gifts') {
-                    mainView.classList.add('hidden');
-                    giftsView.classList.remove('hidden');
-                    giftsView.classList.add('fade-enter');
-                    window.scrollTo(0,0);
+                    mainView.classList.add('hidden'); giftsView.classList.remove('hidden'); giftsView.classList.add('fade-enter'); window.scrollTo(0,0);
+                } else {
+                    giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter'); window.scrollTo(0,0);
                 }
             };
 
-            // --- 6. LAZY LOAD DA IA ---
+            // IA Lazy Load
             const aiIframe = document.getElementById('ai-iframe');
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
+                const observer = new IntersectionObserver((entries, obs) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            if (aiIframe.getAttribute('data-src')) {
-                                aiIframe.src = aiIframe.getAttribute('data-src');
-                                aiIframe.removeAttribute('data-src'); 
-                            }
-                            observer.disconnect(); 
-                        }
+                        if (entry.isIntersecting) { if (aiIframe.getAttribute('data-src')) { aiIframe.src = aiIframe.getAttribute('data-src'); aiIframe.removeAttribute('data-src'); } obs.disconnect(); }
                     });
                 }, { rootMargin: "0px 0px 800px 0px" }); 
                 observer.observe(document.getElementById('ai-section'));
-            } else {
-                aiIframe.src = aiIframe.getAttribute('data-src');
-            }
+            } else { aiIframe.src = aiIframe.getAttribute('data-src'); }
 
-            // --- 7. FUNÇÃO PIX UNIVERSAL (Tela Principal) ---
             window.copyPix = function(elementId) {
                 const pixKey = "42999215431";
-                const msgEl = document.getElementById(elementId);
-                let textArea = document.createElement("textarea");
-                textArea.value = pixKey;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    if (msgEl) {
-                        msgEl.classList.remove('opacity-0');
-                        setTimeout(() => { msgEl.classList.add('opacity-0'); }, 3000);
-                    }
-                } catch (err) {}
+                let textArea = document.createElement("textarea"); textArea.value = pixKey; document.body.appendChild(textArea); textArea.select();
+                try { document.execCommand('copy'); const msgEl = document.getElementById(elementId); if (msgEl) { msgEl.classList.remove('opacity-0'); setTimeout(() => { msgEl.classList.add('opacity-0'); }, 3000); } } catch (err) {}
                 document.body.removeChild(textArea);
             };
 
-            // --- 8. LÓGICA DO LIGHTBOX DA GALERIA ---
+            // Galeria
             window.currentImageIndex = 0;
-            const imageElements = document.querySelectorAll('.gallery-img');
-            const images = Array.from(imageElements).map(img => img.src);
+            const images = Array.from(document.querySelectorAll('.gallery-img')).map(img => img.src);
+            window.openLightbox = function(index) { currentImageIndex = index; const lb = document.getElementById('lightbox'); document.getElementById('lightbox-img').src = images[currentImageIndex]; lb.classList.remove('hidden'); lb.style.display = 'flex'; setTimeout(() => lb.classList.remove('opacity-0'), 10); document.documentElement.style.overflow = 'hidden'; };
+            window.closeLightbox = function() { const lb = document.getElementById('lightbox'); lb.classList.add('opacity-0'); setTimeout(() => { lb.classList.add('hidden'); lb.style.display = 'none'; }, 300); document.documentElement.style.overflow = 'auto'; };
+            window.prevImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
+            window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
+            document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
-            window.openLightbox = function(index) {
-                currentImageIndex = index;
-                const lightbox = document.getElementById('lightbox');
-                document.getElementById('lightbox-img').src = images[currentImageIndex];
-                lightbox.classList.remove('hidden');
-                lightbox.style.display = 'flex';
-                setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
-                document.documentElement.style.overflow = 'hidden'; 
-            };
-
-            window.closeLightbox = function() {
-                const lightbox = document.getElementById('lightbox');
-                lightbox.classList.add('opacity-0');
-                setTimeout(() => {
-                    lightbox.classList.add('hidden');
-                    lightbox.style.display = 'none';
-                }, 300);
-                document.documentElement.style.overflow = 'auto';
-            };
-
-            window.prevImage = function(e) {
-                e.stopPropagation();
-                currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
-                document.getElementById('lightbox-img').src = images[currentImageIndex];
-            };
-
-            window.nextImage = function(e) {
-                e.stopPropagation();
-                currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
-                document.getElementById('lightbox-img').src = images[currentImageIndex];
-            };
-
-            document.getElementById('lightbox').addEventListener('click', function(e) {
-                if (e.target.id === 'lightbox') { closeLightbox(); }
-            });
-
-            // --- 9. DADOS E RENDERIZAÇÃO DA LISTA DE PRESENTES ---
+            // --- LISTA DE PRESENTES REALISTA (25 ITENS) ---
             const giftListItems = [
-                { id: 1, pt: "Cota de Lua de Mel Simbólica", es: "Cuota Luna de Miel Simbólica", price: 200, priceBs: 260, img: "https://images.unsplash.com/photo-1548281146-24e1017dfce7?w=500&q=80" },
-                { id: 2, pt: "Passeio Turístico Guiado", es: "Paseo Turístico Guiado", price: 250, priceBs: 320, img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80" },
-                { id: 3, pt: "Passeio de Barco na Lua de Mel", es: "Paseo en Barco Luna de Miel", price: 300, priceBs: 390, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&q=80" },
-                { id: 4, pt: "Aluguel de Carro (1 Dia)", es: "Alquiler de Auto (1 Día)", price: 350, priceBs: 450, img: "https://images.unsplash.com/photo-1503376762366-2ce96aed6645?w=500&q=80" },
-                { id: 5, pt: "Massagem Relaxante para o Casal", es: "Masaje Relajante en Pareja", price: 400, priceBs: 520, img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&q=80" },
-                { id: 6, pt: "Cota para Micro-ondas", es: "Cuota para Microondas", price: 450, priceBs: 580, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=500&q=80" },
-                { id: 7, pt: "Jantar Romântico de Lua de Mel", es: "Cena Romántica de Luna de Miel", price: 500, priceBs: 650, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80" },
-                { id: 8, pt: "Cota Passagens Aéreas", es: "Cuota Pasajes Aéreos", price: 550, priceBs: 710, img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=500&q=80" },
-                { id: 9, pt: "Cota Máquina de Café Expresso", es: "Cuota Máquina de Café", price: 600, priceBs: 780, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500&q=80" },
-                { id: 10, pt: "Air Fryer (Fritadeira)", es: "Freidora de Aire", price: 650, priceBs: 840, img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&q=80" },
-                { id: 11, pt: "Jogo de Panelas Completo", es: "Juego de Ollas Completo", price: 700, priceBs: 910, img: "https://images.unsplash.com/photo-1584990347449-a162d3381a1d?w=500&q=80" },
-                { id: 12, pt: "Cota Primeira Noite de Hotel", es: "Cuota Primera Noche de Hotel", price: 800, priceBs: 1040, img: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=500&q=80" },
-                { id: 13, pt: "Cota Máquina de Lavar Roupas", es: "Cuota Lavadora de Ropas", price: 900, priceBs: 1170, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80" },
-                { id: 14, pt: "Cota Sofá Retrátil", es: "Cuota Sofá Retráctil", price: 1000, priceBs: 1300, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80" },
-                { id: 15, pt: "Adega Climatizada", es: "Cava de Vinos", price: 1100, priceBs: 1430, img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=500&q=80" },
-                { id: 16, pt: "Aspirador de Pó Robô Inteligente", es: "Aspiradora Robot Inteligente", price: 1200, priceBs: 1560, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80" },
-                { id: 17, pt: "Cota Geladeira", es: "Cuota Refrigerador", price: 1300, priceBs: 1690, img: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=500&q=80" },
-                { id: 18, pt: "Cama Box de Casal (Cota)", es: "Cama Box Matrimonial (Cuota)", price: 1500, priceBs: 1950, img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500&q=80" },
-                { id: 19, pt: "Pacote de Mergulho (Lua de Miel)", es: "Paquete de Buceo (Luna de Miel)", price: 1600, priceBs: 2080, img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=500&q=80" },
-                { id: 20, pt: "Cota Ar Condicionado", es: "Cuota Aire Acondicionado", price: 1800, priceBs: 2340, img: "https://images.unsplash.com/photo-1615873968403-89e068629265?w=500&q=80" },
-                { id: 21, pt: "Cota TV da Sala 65\"", es: "Cuota TV de la Sala 65\"", price: 2000, priceBs: 2600, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
-                { id: 22, pt: "Cota Móveis Planejados (Parte 1)", es: "Cuota Muebles Planificados", price: 2200, priceBs: 2860, img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&q=80" },
-                { id: 23, pt: "Cota Lua de Mel VIP", es: "Cuota Luna de Miel VIP", price: 2500, priceBs: 3250, img: "https://images.unsplash.com/photo-1590523264426-896894520cf8?w=500&q=80" },
-                { id: 24, pt: "Cota Reforma da Cozinha", es: "Cuota Remodelación Cocina", price: 2800, priceBs: 3640, img: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80" },
-                { id: 25, pt: "Upgrade de Voo (Classe Executiva)", es: "Upgrade Vuelo (Clase Ejecutiva)", price: 3000, priceBs: 3900, img: "https://images.unsplash.com/photo-1540339832862-474599807836?w=500&q=80" }
+                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 200, img: "https://images.unsplash.com/photo-1583556018884-17724a737f1e?w=500&q=80" },
+                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 250, img: "https://images.unsplash.com/photo-1616694602685-644782bb5d5f?w=500&q=80" },
+                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 300, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&q=80" },
+                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 350, img: "https://images.unsplash.com/photo-1582283578018-09ee0b15b3c3?w=500&q=80" },
+                { id: 5, pt: "Air Fryer Compacta", es: "Freidora de Aire Compacta", price: 400, img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&q=80" },
+                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 450, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500&q=80" },
+                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 500, img: "https://images.unsplash.com/photo-1584990347449-a162d3381a1d?w=500&q=80" },
+                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 600, img: "https://images.unsplash.com/photo-1585237305953-b31c4f529124?w=500&q=80" },
+                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 700, img: "https://images.unsplash.com/photo-1603514064573-0435cebc6f62?w=500&q=80" },
+                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 800, img: "https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?w=500&q=80" },
+                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 900, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80" },
+                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 1000, img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=500&q=80" },
+                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 1100, img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&q=80" },
+                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 1200, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&q=80" },
+                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1300, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80" },
+                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1400, img: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=500&q=80" },
+                { id: 17, pt: "Robô Aspirador com Mapeamento", es: "Robot Aspiradora Inteligente", price: 1500, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80" },
+                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1700, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
+                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1900, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&q=80" },
+                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 2100, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
+                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 2300, img: "https://images.unsplash.com/photo-1615873968403-89e068629265?w=500&q=80" },
+                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 2500, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
+                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 2700, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80" },
+                { id: 24, pt: "Viagem Romântica de Final de Semana", es: "Viaje Romántico Fin de Semana", price: 2900, img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" },
+                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 3000, img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=500&q=80" }
             ];
 
             let activeLang = 'pt';
+            let currentFilter = 'all';
+
+            window.setFilter = function(filter) {
+                currentFilter = filter;
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('bg-[#5a6b47]', 'text-white', 'border-transparent');
+                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+                });
+                const activeBtn = document.getElementById('filter-' + filter);
+                if(activeBtn) {
+                    activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+                    activeBtn.classList.add('bg-[#5a6b47]', 'text-white', 'border-transparent');
+                }
+                renderGiftsGrid();
+            };
 
             function renderGiftsGrid() {
                 const grid = document.getElementById('gifts-grid');
@@ -718,20 +550,27 @@
                 const btnLabel = activeLang === 'pt' ? 'Presentear' : 'Regalar';
 
                 giftListItems.forEach(gift => {
+                    // Lógica do Filtro
+                    if (currentFilter === 'under300' && gift.price > 300) return;
+                    if (currentFilter === '300to800' && (gift.price <= 300 || gift.price > 800)) return;
+                    if (currentFilter === '800to1500' && (gift.price <= 800 || gift.price > 1500)) return;
+                    if (currentFilter === 'above1500' && gift.price <= 1500) return;
+
                     const title = activeLang === 'pt' ? gift.pt : gift.es;
+                    const priceBs = Math.round(gift.price * 1.3); // Conversão simulada BRL p/ BOB
                     const priceStr = activeLang === 'pt' ? 
                                      `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : 
-                                     `Bs. ${gift.priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
+                                     `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
 
                     const cardHTML = `
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
-                            <div class="gift-wrap h-48 w-full bg-gray-100 flex items-center justify-center">
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="gift-wrap h-56 w-full bg-gray-100 relative">
                                 <img src="${gift.img}" class="gift-img w-full h-full object-cover" alt="${title}" loading="lazy">
                             </div>
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h3 class="font-serif text-xl text-[#2d3326] mb-2 flex-grow">${title}</h3>
                                 <p class="text-[#5a6b47] font-bold text-2xl mb-6">${priceStr}</p>
-                                <button onclick="openGiftModal(${gift.id})" class="w-full py-3 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors rounded-full font-bold uppercase tracking-wider text-sm">
+                                <button onclick="openGiftModal(${gift.id}, null)" class="w-full py-3.5 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors rounded-full font-bold uppercase tracking-wider text-sm shadow-sm">
                                     ${btnLabel}
                                 </button>
                             </div>
@@ -741,59 +580,84 @@
                 });
             }
 
-            // --- 10. GERAÇÃO DINÂMICA DE PIX ROBUSTA (EMV CRC16-CCITT-FALSE) ---
+            // --- 10. GERAÇÃO DINÂMICA DE PIX EMV (BR.GOV.BCB.PIX) DE ALTA CONFIABILIDADE ---
+            function padFormat(id, value) {
+                const len = value.length.toString().padStart(2, '0');
+                return `${id}${len}${value}`;
+            }
+
             function generatePixPayload(key, amount, name, city) {
-                const formatField = (id, value) => {
-                    const len = value.length.toString().padStart(2, '0');
-                    return `${id}${len}${value}`;
-                };
+                let payload = "000201";
+                // Merchant Account Information
+                let gui = padFormat("00", "BR.GOV.BCB.PIX");
+                let chv = padFormat("01", key);
+                let merchantAccountInfo = padFormat("26", gui + chv);
+                payload += merchantAccountInfo;
+                // Category, Currency, Amount
+                payload += "52040000";
+                payload += "5303986";
+                if (amount > 0) {
+                    let amtStr = amount.toFixed(2);
+                    payload += padFormat("54", amtStr);
+                }
+                payload += "5802BR";
+                // Name & City (limited length to prevent EMV parsing errors)
+                payload += padFormat("59", name.substring(0, 25));
+                payload += padFormat("60", city.substring(0, 15));
+                // Transaction ID
+                let txid = padFormat("05", "***");
+                payload += padFormat("62", txid);
+                // CRC Prefix
+                payload += "6304";
                 
-                const gui = formatField("00", "BR.GOV.BCB.PIX") + formatField("01", key);
-                const merchantAccount = formatField("26", gui);
-                const merchantCateg = formatField("52", "0000");
-                const currency = formatField("53", "0986");
-                const amtStr = amount.toFixed(2);
-                const amtField = amount > 0 ? formatField("54", amtStr) : "";
-                const country = formatField("58", "BR");
-                const merchantName = formatField("59", name);
-                const merchantCity = formatField("60", city);
-                const txid = formatField("62", formatField("05", "***"));
-                
-                const payloadStr = "000201" + merchantAccount + merchantCateg + currency + amtField + country + merchantName + merchantCity + txid + "6304";
-                
-                // CRC16 Polinômio 0x1021
+                // Calculo CRC16-CCITT-FALSE (Polinômio 0x1021)
                 let crc = 0xFFFF;
-                for (let c = 0; c < payloadStr.length; c++) {
-                    crc ^= payloadStr.charCodeAt(c) << 8;
-                    for (let i = 0; i < 8; i++) {
-                        if (crc & 0x8000) {
+                for (let i = 0; i < payload.length; i++) {
+                    crc ^= payload.charCodeAt(i) << 8;
+                    for (let j = 0; j < 8; j++) {
+                        if ((crc & 0x8000) !== 0) {
                             crc = (crc << 1) ^ 0x1021;
                         } else {
                             crc = crc << 1;
                         }
                     }
-                    crc &= 0xFFFF; // Garante que fica em 16 bits
                 }
-                const hex = crc.toString(16).toUpperCase().padStart(4, '0');
-                return payloadStr + hex;
+                let hex = (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+                return payload + hex;
             }
 
             window.copyPixPayload = function() {
                 const textArea = document.getElementById('modal-pix-payload');
                 const msgEl = document.getElementById('gift-copy-msg');
-                textArea.select();
-                textArea.setSelectionRange(0, 99999); 
-                try {
-                    document.execCommand('copy');
-                    msgEl.classList.remove('opacity-0');
-                    setTimeout(() => { msgEl.classList.add('opacity-0'); }, 3000);
-                } catch (err) { }
+                textArea.select(); textArea.setSelectionRange(0, 99999); 
+                try { document.execCommand('copy'); msgEl.classList.remove('opacity-0'); setTimeout(() => { msgEl.classList.add('opacity-0'); }, 3000); } catch (err) { }
             };
 
-            // --- 11. MODAL DINÂMICO DOS PRESENTES ---
-            window.openGiftModal = function(id) {
-                const gift = giftListItems.find(g => g.id === id);
-                if (!gift) return;
+            // --- 11. MODAL DINÂMICO E WHATSAPP ---
+            window.currentGiftContext = { name: '', price: 0, pt: '', es: '' };
+
+            window.openCustomGiftModal = function() {
+                const inputVal = document.getElementById('free-value-input').value;
+                const val = parseFloat(inputVal.replace(',', '.'));
+                if (!val || val <= 0) { alert(activeLang==='pt'?'Por favor, insira um valor válido.':'Por favor ingrese un valor.'); return; }
+                
+                openGiftModal('custom', val);
+            };
+
+            window.openGiftModal = function(id, customValue = null) {
+                let giftNamePt, giftNameEs, giftPrice;
+                
+                if (id === 'custom') {
+                    giftPrice = customValue;
+                    giftNamePt = "Contribuição Especial";
+                    giftNameEs = "Contribución Especial";
+                } else {
+                    const gift = giftListItems.find(g => g.id === id);
+                    if (!gift) return;
+                    giftNamePt = gift.pt; giftNameEs = gift.es; giftPrice = gift.price;
+                }
+
+                window.currentGiftContext = { pt: giftNamePt, es: giftNameEs, price: giftPrice };
 
                 const nameEl = document.getElementById('modal-gift-name');
                 const priceEl = document.getElementById('modal-gift-price');
@@ -801,198 +665,121 @@
                 const viewPt = document.getElementById('modal-view-pt');
                 const viewEs = document.getElementById('modal-view-es');
 
-                nameEl.innerText = activeLang === 'pt' ? gift.pt : gift.es;
+                nameEl.innerText = activeLang === 'pt' ? giftNamePt : giftNameEs;
+                document.getElementById('guest-name').value = '';
+                document.getElementById('guest-name-es').value = '';
 
                 if (activeLang === 'pt') {
-                    // Visão Pix
-                    priceEl.innerText = `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-                    viewEs.classList.add('hidden');
-                    viewPt.classList.remove('hidden');
+                    priceEl.innerText = `R$ ${giftPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                    viewEs.classList.add('hidden'); viewPt.classList.remove('hidden');
                     
-                    // Gera o payload do PIX dinamicamente com base no valor
-                    const payload = generatePixPayload("+5542999215431", gift.price, "Fabio e Ana Isabel", "Ponta Grossa");
+                    // Gera Pix Definitivo
+                    const payload = generatePixPayload("+5542999215431", giftPrice, "Fabio e Ana Isabel", "Ponta Grossa");
                     document.getElementById('modal-pix-payload').value = payload;
                     
-                    // Exibe Loader e chama API do QR Code
                     document.getElementById('pix-loader').style.display = 'block';
                     document.getElementById('modal-pix-qr').src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(payload);
-
                 } else {
-                    // Visão Bolívia
-                    priceEl.innerText = `Bs. ${gift.priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
-                    viewPt.classList.add('hidden');
-                    viewEs.classList.remove('hidden');
+                    const priceBs = Math.round(giftPrice * 1.3);
+                    priceEl.innerText = `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
+                    viewPt.classList.add('hidden'); viewEs.classList.remove('hidden');
                 }
 
-                modal.classList.remove('hidden');
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                modal.classList.remove('hidden'); modal.style.display = 'flex'; setTimeout(() => modal.classList.remove('opacity-0'), 10);
             };
 
             window.closeGiftModal = function() {
                 const modal = document.getElementById('gift-modal');
                 modal.classList.add('opacity-0');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.style.display = 'none';
-                    document.getElementById('gift-copy-msg').classList.add('opacity-0');
-                }, 300);
+                setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; document.getElementById('gift-copy-msg').classList.add('opacity-0'); }, 300);
             };
 
-            document.getElementById('gift-modal').addEventListener('click', function(e) {
-                if (e.target.id === 'gift-modal') { closeGiftModal(); }
-            });
+            window.notifyWhatsApp = function() {
+                const guest = document.getElementById('guest-name').value || "Um amigo(a)";
+                const item = currentGiftContext.pt;
+                const priceStr = `R$ ${currentGiftContext.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                const msg = `Olá! Acabei de presentear vocês com o item: ${item} no valor de ${priceStr}. Com carinho, ${guest}`;
+                window.open(`https://wa.me/5542999215431?text=${encodeURIComponent(msg)}`, '_blank');
+            };
+
+            window.notifyWhatsAppES = function() {
+                const guest = document.getElementById('guest-name-es').value || "Un amigo(a)";
+                const item = currentGiftContext.es;
+                const priceBs = Math.round(currentGiftContext.price * 1.3);
+                const priceStr = `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
+                const msg = `¡Hola! Acabo de regalarles el ítem: ${item} por el valor de ${priceStr}. Con cariño, ${guest}`;
+                window.open(`https://wa.me/5542999215431?text=${encodeURIComponent(msg)}`, '_blank');
+            };
+
+            document.getElementById('gift-modal').addEventListener('click', function(e) { if (e.target.id === 'gift-modal') { closeGiftModal(); } });
 
             // --- 12. SISTEMA DE TRADUÇÃO ---
             window.setLanguage = function(lang) {
                 activeLang = lang;
-                const ptBtn = document.getElementById('btn-pt');
-                const esBtn = document.getElementById('btn-es');
+                const ptBtn = document.getElementById('btn-pt'); const esBtn = document.getElementById('btn-es');
 
                 if (lang === 'pt') {
-                    ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]');
-                    ptBtn.classList.remove('text-gray-400', 'border-transparent');
-                    esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]');
-                    esBtn.classList.add('text-gray-400', 'border-transparent');
+                    ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.remove('text-gray-400', 'border-transparent');
+                    esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.add('text-gray-400', 'border-transparent');
+                    document.getElementById('currency-symbol').innerText = "R$";
                 } else {
-                    esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]');
-                    esBtn.classList.remove('text-gray-400', 'border-transparent');
-                    ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]');
-                    ptBtn.classList.add('text-gray-400', 'border-transparent');
+                    esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.remove('text-gray-400', 'border-transparent');
+                    ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.add('text-gray-400', 'border-transparent');
+                    document.getElementById('currency-symbol').innerText = "Bs.";
                 }
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.getAttribute('data-i18n');
                     if (translations[lang] && translations[lang][key]) {
                         if(el.children.length > 0 && Array.from(el.childNodes).some(n => n.nodeType === 1)) {
-                            Array.from(el.childNodes).forEach(node => {
-                                if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0) {
-                                    node.nodeValue = " " + translations[lang][key];
-                                }
-                            });
-                        } else {
-                            el.innerText = translations[lang][key];
-                        }
+                            Array.from(el.childNodes).forEach(node => { if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0) { node.nodeValue = " " + translations[lang][key]; } });
+                        } else { el.innerText = translations[lang][key]; }
                     }
                 });
-
                 renderGiftsGrid();
             };
 
             const translations = {
                 pt: {
-                    invite: "Você está convidado para o casamento de",
-                    date: "18 de Dezembro de 2026",
-                    time: "Início às 17:30",
-                    nav_locais: "Locais",
-                    nav_programacao: "Programação",
-                    nav_rsvp: "Confirmação",
-                    nav_presentes: "Presentes",
-                    countdown_title: "Faltam...",
-                    days: "Dias",
-                    hours: "Horas",
-                    minutes: "Minutos",
-                    seconds: "Segundos",
-                    location_title: "Locais",
-                    church_title: "Cerimônia Religiosa",
-                    church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
-                    dinner_title: "Recepção",
-                    dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra",
-                    map_btn: "Abrir GPS / Maps",
-                    timeline_title: "Programação",
-                    t1: "Cerimônia Religiosa",
-                    t2: "Sessão de Fotos",
-                    t3: "Brinde aos Noivos",
-                    t4: "Jantar",
-                    t5: "Baile",
-                    t6: "Petiscos",
-                    t7: "Despedida",
-                    dress_code: "Traje",
-                    dress_women: "Mulheres",
-                    dress_men: "Homens",
-                    dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
-                    kids_title: "Aviso Especial",
-                    kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
-                    rsvp_title: "Confirme sua Presença",
-                    rsvp_desc: "Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.",
-                    rsvp_btn: "Confirmar pelo WhatsApp",
-                    gifts_title: "Sugestão de Presentes",
-                    gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, disponibilizamos nossos dados abaixo.",
-                    or_text: "Ou contribuição livre",
-                    btn_full_list: "Ver Lista Completa de Presentes Especiais",
-                    btn_back_home: "Voltar ao Início",
-                    gifts_list_title: "Lista de Presentes",
-                    gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar e lua de mel.",
-                    modal_gift_txt: "Você escolheu presentear com:",
-                    modal_gift_inst_es: "Escanea este código QR desde tu aplicación bancaria para realizar el pago en Bolivianos.",
-                    pix_title: "Brasil (Pix)",
-                    pix_key_label: "Chave Celular",
-                    copy_btn: "Copiar Código Pix",
-                    copy_success: "Código copiado com sucesso! ✓",
-                    bolivia_title: "Bolivia (QR)",
-                    bolivia_desc: "Escanee el código QR desde su aplicación bancaria para realizar su regalo.",
-                    ai_title: "Dúvidas? Pergunte para nossa IA",
-                    ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um \"Oi\" aqui embaixo!",
-                    gallery_title: "Nossos Momentos",
-                    date_value_short: "18 Dezembro 2026"
+                    invite: "Você está convidado para o casamento de", date: "18 de Dezembro de 2026", time: "Início às 17:30",
+                    nav_locais: "Locais", nav_programacao: "Programação", nav_rsvp: "Confirmação", nav_presentes: "Presentes",
+                    countdown_title: "Faltam...", days: "Dias", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+                    location_title: "Locais", church_title: "Cerimônia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
+                    dinner_title: "Recepção", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
+                    timeline_title: "Programação", t1: "Cerimônia Religiosa", t2: "Sessão de Fotos", t3: "Brinde aos Noivos", t4: "Jantar", t5: "Baile", t6: "Petiscos", t7: "Despedida",
+                    dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
+                    kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos.",
+                    rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo.", rsvp_btn: "Confirmar pelo WhatsApp",
+                    gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, disponibilizamos nossos dados abaixo.",
+                    or_text: "Ou contribuição livre", btn_full_list: "Ver Lista Completa de Presentes Especiais", btn_back_home: "Voltar ao convite",
+                    gifts_list_title: "Lista de Presentes", gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar.",
+                    free_gift_title: "Contribuir com valor livre", free_gift_desc: "Prefere escolher o valor? Digite ao lado e geramos seu Pix instantaneamente.", btn_generate_pix: "Gerar Pix",
+                    filter_all: "Todos", filter_under300: "Até R$300", filter_300to800: "R$300–800", filter_800to1500: "R$800–1500", filter_above1500: "R$1500+",
+                    modal_gift_txt: "Você escolheu:", copy_btn: "Copiar Código Pix", copy_success: "Código copiado! ✓", btn_notify_wa: "Avisar que presenteei",
+                    pix_title: "Brasil (Pix)", pix_key_label: "Chave Celular", bolivia_title: "Bolivia (QR)", bolivia_desc: "Escanee el código QR desde su aplicación bancaria para realizar su regalo.",
+                    ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
                 },
                 es: {
-                    invite: "Estás invitado a la boda de",
-                    date: "18 de Diciembre de 2026",
-                    time: "Inicio a las 17:30",
-                    nav_locais: "Ubicaciones",
-                    nav_programacao: "Programación",
-                    nav_rsvp: "Confirmación",
-                    nav_presentes: "Regalos",
-                    countdown_title: "Faltan...",
-                    days: "Días",
-                    hours: "Horas",
-                    minutes: "Minutos",
-                    seconds: "Segundos",
-                    location_title: "Ubicaciones",
-                    church_title: "Ceremonia Religiosa",
-                    church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
-                    dinner_title: "Recepción",
-                    dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra",
-                    map_btn: "Abrir GPS / Maps",
-                    timeline_title: "Programación",
-                    t1: "Ceremonia Religiosa",
-                    t2: "Sesión de Fotos",
-                    t3: "Brindis a los Novios",
-                    t4: "Cena",
-                    t5: "Baile",
-                    t6: "Aperitivos",
-                    t7: "Despedida",
-                    dress_code: "Vestimenta",
-                    dress_women: "Mujeres",
-                    dress_men: "Hombres",
-                    dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
-                    kids_title: "Aviso Especial",
-                    kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta con total tranquilidad y diversión, hemos optado por realizar una recepción exclusiva para adultos. Agradecemos mucho el cariño y la comprensión de todos los padres.",
-                    rsvp_title: "Confirma tu Asistencia",
-                    rsvp_desc: "¡Tu presencia es muy importante para nosotros! Por favor, confirma tu asistencia haciendo clic en el botón de abajo para enviar un mensaje a nuestro WhatsApp.",
-                    rsvp_btn: "Confirmar por WhatsApp",
-                    gifts_title: "Sugerencia de Regalos",
-                    gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo y ayudarnos con nuestra luna de miel, proporcionamos nuestros datos a continuación.",
-                    or_text: "O contribución libre",
-                    btn_full_list: "Ver Lista Completa de Regalos Especiales",
-                    btn_back_home: "Volver al Inicio",
-                    gifts_list_title: "Lista de Regalos",
-                    gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar y luna de miel.",
-                    modal_gift_txt: "Elegiste regalar:",
-                    modal_gift_inst_es: "Escanea este código QR desde tu aplicación bancaria para realizar el pago en Bolivianos.",
-                    pix_title: "Brasil (Pix)",
-                    pix_key_label: "Clave Celular",
-                    copy_btn: "Copiar Código Pix",
-                    copy_success: "¡Código copiado con éxito! ✓",
-                    bolivia_title: "Bolivia (QR)",
-                    bolivia_desc: "Escanee el código QR desde su aplicación bancaria para realizar su regalo.",
-                    ai_title: "¿Dudas? Pregunta a nuestra IA",
-                    ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda para ayudarte. ¡Solo envíanos un \"Hola\" aquí abajo!",
-                    gallery_title: "Nuestros Momentos",
-                    date_value_short: "18 Diciembre 2026"
+                    invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:30",
+                    nav_locais: "Ubicaciones", nav_programacao: "Programación", nav_rsvp: "Confirmación", nav_presentes: "Regalos",
+                    countdown_title: "Faltan...", days: "Días", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+                    location_title: "Ubicaciones", church_title: "Ceremonia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
+                    dinner_title: "Recepción", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
+                    timeline_title: "Programación", t1: "Ceremonia Religiosa", t2: "Sesión de Fotos", t3: "Brindis a los Novios", t4: "Cena", t5: "Baile", t6: "Aperitivos", t7: "Despedida",
+                    dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
+                    kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
+                    rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! Por favor, confirma tu asistencia haciendo clic en el botón de abajo.", rsvp_btn: "Confirmar por WhatsApp",
+                    gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, proporcionamos nuestros datos a continuación.",
+                    or_text: "O contribución libre", btn_full_list: "Ver Lista Completa de Regalos Especiales", btn_back_home: "Volver a la invitación",
+                    gifts_list_title: "Lista de Regalos", gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar.",
+                    free_gift_title: "Contribución libre", free_gift_desc: "¿Prefieres elegir el valor? Escríbelo y generaremos tu QR.", btn_generate_pix: "Generar Pago",
+                    filter_all: "Todos", filter_under300: "Hasta Bs.400", filter_300to800: "Bs.400–1000", filter_800to1500: "Bs.1000–2000", filter_above1500: "Bs.2000+",
+                    modal_gift_txt: "Elegiste:", copy_btn: "Copiar Código", copy_success: "¡Código copiado! ✓", btn_notify_wa: "Avisar que regalé", modal_gift_inst_es: "Escanea este código QR desde tu aplicación bancaria para realizar el pago.",
+                    pix_title: "Brasil (Pix)", pix_key_label: "Clave Celular", bolivia_title: "Bolivia (QR)", bolivia_desc: "Escanee el código QR desde su aplicación bancaria para realizar su regalo.",
+                    ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026"
                 }
             };
+            renderGiftsGrid();
         });
     </script>
 </body>
