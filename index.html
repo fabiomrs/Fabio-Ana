@@ -18,7 +18,7 @@
             font-family: 'Playfair Display', serif;
         }
         .hero-bg {
-            background-image: linear-gradient(rgba(45, 51, 38, 0.6), rgba(45, 51, 38, 0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(to right, rgba(45, 51, 38, 0.85) 0%, rgba(45, 51, 38, 0.4) 60%, rgba(45, 51, 38, 0.1) 100%), url('foto (1).jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -76,16 +76,18 @@
     </nav>
 
     <div id="main-view">
-        <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center items-center text-center px-4 pt-20 relative">
-            <p class="text-white/90 tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-medium drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
-                Fabio Miguel<br><span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#d1daba]">&</span>Ana Isabel
-            </h1>
-            <div class="w-24 h-[1px] bg-[#d1daba] my-8 opacity-70"></div>
-            <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-light drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
-            <p class="text-lg text-white/90 font-medium tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:30
-            </p>
+        <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center px-6 md:px-20 pt-20 relative text-left">
+            <div class="max-w-3xl">
+                <p class="text-[#d1daba] tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-bold drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
+                    Fabio Miguel<br><span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#a3b18a]">&</span>Ana Isabel
+                </h1>
+                <div class="w-24 h-[2px] bg-[#a3b18a] my-8 opacity-90"></div>
+                <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-medium drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
+                <p class="text-lg text-[#d1daba] font-bold tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:30
+                </p>
+            </div>
         </header>
 
         <section class="py-16 bg-white text-center shadow-sm relative z-10 border-b border-gray-100">
