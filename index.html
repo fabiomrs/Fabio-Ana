@@ -92,6 +92,14 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:30
                 </p>
             </div>
+            
+            <!-- Indicador de Scroll com Animação -->
+            <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 transition-opacity duration-1000 z-30 pointer-events-none">
+                <p class="text-white/90 text-[10px] md:text-xs uppercase tracking-[0.2em] mb-2 font-bold drop-shadow-md" data-i18n="scroll_down">Deslize para baixo</p>
+                <div class="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center p-1 shadow-sm">
+                    <div class="w-1.5 h-2.5 bg-white rounded-full animate-bounce mt-1"></div>
+                </div>
+            </div>
         </header>
 
         <section class="py-16 bg-white text-center shadow-sm relative z-10 border-b border-gray-100">
@@ -426,7 +434,30 @@
                 modalBox.classList.remove('scale-100'); modalBox.classList.add('scale-95');
                 modal.classList.add('opacity-0');
                 document.querySelectorAll('.hidden-until-enter').forEach(el => el.classList.remove('opacity-0'));
-                setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
+                
+                setTimeout(() => { 
+                    modal.classList.add('hidden'); 
+                    document.body.classList.remove('overflow-hidden'); 
+                    
+                    // Mostra o indicador animado de rolar a tela
+                    const scrollInd = document.getElementById('scroll-indicator');
+                    if (scrollInd) {
+                        scrollInd.classList.remove('opacity-0');
+                        
+                        // Some automaticamente após 5 segundos
+                        const hideTimeout = setTimeout(() => {
+                            scrollInd.classList.add('opacity-0');
+                        }, 5000);
+
+                        // Oculta imediatamente se a pessoa rolar a página
+                        const hideOnScroll = () => {
+                            scrollInd.classList.add('opacity-0');
+                            window.removeEventListener('scroll', hideOnScroll);
+                            clearTimeout(hideTimeout); // Cancela o timer se a pessoa já rolou
+                        };
+                        window.addEventListener('scroll', hideOnScroll, { once: true });
+                    }
+                }, 500);
 
                 let playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
@@ -770,7 +801,7 @@
 
             const translations = {
                 pt: {
-                    invite: "Você está convidado para o casamento de", date: "18 de Dezembro de 2026", time: "Início às 17:30",
+                    invite: "Você está convidado para o casamento de", date: "18 de Dezembro de 2026", time: "Início às 17:30", scroll_down: "Deslize para baixo",
                     nav_locais: "Locais", nav_programacao: "Programação", nav_rsvp: "Confirmação", nav_presentes: "Presentes",
                     countdown_title: "Faltam...", days: "Dias", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
                     location_title: "Locais", church_title: "Cerimônia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
@@ -787,7 +818,7 @@
                     ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
                 },
                 es: {
-                    invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:30",
+                    invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:30", scroll_down: "Desliza hacia abajo",
                     nav_locais: "Ubicaciones", nav_programacao: "Programación", nav_rsvp: "Confirmación", nav_presentes: "Regalos",
                     countdown_title: "Faltan...", days: "Días", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
                     location_title: "Ubicaciones", church_title: "Ceremonia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
