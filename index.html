@@ -18,7 +18,6 @@
             font-family: 'Playfair Display', serif;
         }
         .hero-bg {
-            /* Gradiente escuro na esquerda sumindo para a direita + foto (1).jpg */
             background-image: linear-gradient(to right, rgba(45, 51, 38, 0.85) 0%, rgba(45, 51, 38, 0.4) 60%, rgba(45, 51, 38, 0.1) 100%), url('foto (1).jpg');
             background-size: cover;
             background-position: center;
@@ -30,10 +29,12 @@
         @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
         .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
         .gallery-wrap, .gift-wrap { position: relative; overflow: hidden; border-radius: 0.5rem; cursor: pointer; }
-        .gallery-img, .gift-img { width: 100%; transition: transform 0.6s ease; }
+        .gallery-img { width: 100%; transition: transform 0.6s ease; }
+        .gift-svg-container { transition: transform 0.5s ease; }
         .gallery-overlay { position: absolute; inset: 0; background-color: rgba(45, 51, 38, 0.4); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .gallery-wrap:hover .gallery-img, .gift-wrap:hover .gift-img { transform: scale(1.05); }
+        .gallery-wrap:hover .gallery-img { transform: scale(1.05); }
         .gallery-wrap:hover .gallery-overlay { opacity: 1; }
+        .gift-wrap:hover .gift-svg-container { transform: scale(1.1); }
         #ai-iframe-container { overflow: hidden; height: 100%; }
         .fade-enter { animation: fadeIn 0.5s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -46,7 +47,7 @@
 
 <body class="antialiased overflow-hidden">
 
-    <!-- Pop-up inicial de idioma -->
+    <!-- Pop-up inicial -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
@@ -60,7 +61,7 @@
         </div>
     </div>
 
-    <!-- Navegação -->
+    <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="navTo('home')">F <span class="italic font-light">&</span> A</div>
@@ -77,7 +78,7 @@
         </div>
     </nav>
 
-    <!-- PÁGINA PRINCIPAL -->
+    <!-- Main View -->
     <div id="main-view">
         <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center px-6 md:px-20 pt-20 relative text-left">
             <div class="max-w-3xl">
@@ -112,12 +113,9 @@
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
-                    <!-- Igreja -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
-                            </svg>
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" /></svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
@@ -126,13 +124,9 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
-                    <!-- Recepção -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <!-- Ícone Taças Brindando -->
-                            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/>
-                            </svg>
+                            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/></svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
@@ -193,7 +187,8 @@
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
                 <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.</p>
                 <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20de%20Fabio%20e%20Ana%20Isabel." target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-lg transition-transform transform hover:scale-105">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
                 </a>
             </div>
         </section>
@@ -261,13 +256,13 @@
             <!-- Filtros de Preço -->
             <div class="flex gap-3 overflow-x-auto no-scrollbar mb-10 pb-2 justify-start md:justify-center" id="filters-container">
                 <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-[#5a6b47] text-white whitespace-nowrap" data-i18n="filter_all">Todos</button>
-                <button onclick="setFilter('under300')" id="filter-under300" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_under300">Até 300</button>
-                <button onclick="setFilter('300to800')" id="filter-300to800" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_300to800">300–800</button>
-                <button onclick="setFilter('800to1500')" id="filter-800to1500" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_800to1500">800–1500</button>
-                <button onclick="setFilter('above1500')" id="filter-above1500" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_above1500">1500+</button>
+                <button onclick="setFilter('under200')" id="filter-under200" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_under200">Até 200</button>
+                <button onclick="setFilter('200to500')" id="filter-200to500" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_200to500">200–500</button>
+                <button onclick="setFilter('500to1000')" id="filter-500to1000" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_500to1000">500–1000</button>
+                <button onclick="setFilter('above1000')" id="filter-above1000" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_above1000">1000+</button>
             </div>
 
-            <!-- Grid de Itens (Inclui o Card de Valor Livre) -->
+            <!-- Grid de Itens -->
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Javascript injeta os itens dinamicamente aqui -->
             </div>
@@ -332,7 +327,7 @@
         </div>
     </div>
 
-    <!-- Lightbox de Imagens Pessoais -->
+    <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <div class="relative w-full h-full flex items-center justify-center p-4">
@@ -350,15 +345,11 @@
         </div>
     </footer>
 
-    <!-- Botão e Controle de Música -->
+    <!-- Player -->
     <audio id="bg-music" preload="auto"></audio>
-
     <div id="music-player" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full shadow-xl z-[150] transition-all duration-300 flex items-center justify-center transform hidden-until-enter opacity-0 px-3 py-1 space-x-1">
         <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
-            <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
+        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar"><svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
         <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     </div>
 
@@ -366,14 +357,12 @@
         document.addEventListener("DOMContentLoaded", function() {
             window.scrollTo(0, 0);
 
-            // Efeito Navbar
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) { nav.classList.add('shadow-md'); } 
                 else { nav.classList.remove('shadow-md'); }
             });
 
-            // Contagem Regressiva
             try {
                 const targetDate = new Date("2026-12-18T17:30:00").getTime();
                 const countdown = setInterval(function() {
@@ -387,7 +376,6 @@
                 }, 1000);
             } catch (e) { }
 
-            // --- MÚSICA E PLAYLIST ---
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
@@ -431,7 +419,6 @@
                 updatePlayerUI();
             });
 
-            // --- FUNÇÃO DE ENTRADA DO SITE ---
             window.enterSite = function(lang) {
                 setLanguage(lang);
                 const modal = document.getElementById('welcome-modal');
@@ -447,7 +434,6 @@
                 }
             };
 
-            // SPA Navegação
             window.navTo = function(sectionId) {
                 const mainView = document.getElementById('main-view');
                 const giftsView = document.getElementById('gifts-view');
@@ -476,7 +462,6 @@
                 }
             };
 
-            // IA Lazy Load
             const aiIframe = document.getElementById('ai-iframe');
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries, obs) => {
@@ -487,7 +472,6 @@
                 observer.observe(document.getElementById('ai-section'));
             } else { aiIframe.src = aiIframe.getAttribute('data-src'); }
 
-            // Galeria (Atualizado com índices 0, 1 e 2 apenas)
             window.currentImageIndex = 0;
             const images = Array.from(document.querySelectorAll('.gallery-img')).map(img => img.src);
             window.openLightbox = function(index) { currentImageIndex = index; const lb = document.getElementById('lightbox'); document.getElementById('lightbox-img').src = images[currentImageIndex]; lb.classList.remove('hidden'); lb.style.display = 'flex'; setTimeout(() => lb.classList.remove('opacity-0'), 10); document.documentElement.style.overflow = 'hidden'; };
@@ -496,33 +480,35 @@
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
-            // --- LISTA DE PRESENTES REALISTA (25 itens) ---
+            // Helper para encapsular os ícones SVG
+            const svgIcon = (paths) => `<svg class="w-16 h-16 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+
             const giftListItems = [
-                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 200, img: "https://images.unsplash.com/photo-1583556018884-17724a737f1e?w=500&q=80" },
-                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 250, img: "https://images.unsplash.com/photo-1616694602685-644782bb5d5f?w=500&q=80" },
-                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 300, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&q=80" },
-                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 350, img: "https://images.unsplash.com/photo-1582283578018-09ee0b15b3c3?w=500&q=80" },
-                { id: 5, pt: "Air Fryer Compacta", es: "Freidora de Aire Compacta", price: 400, img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&q=80" },
-                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 450, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=500&q=80" },
-                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 500, img: "https://images.unsplash.com/photo-1584990347449-a162d3381a1d?w=500&q=80" },
-                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 600, img: "https://images.unsplash.com/photo-1585237305953-b31c4f529124?w=500&q=80" },
-                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 700, img: "https://images.unsplash.com/photo-1603514064573-0435cebc6f62?w=500&q=80" },
-                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 800, img: "https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?w=500&q=80" },
-                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 900, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80" },
-                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 1000, img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=500&q=80" },
-                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 1100, img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&q=80" },
-                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 1200, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&q=80" },
-                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1300, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&q=80" },
-                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1400, img: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=500&q=80" },
-                { id: 17, pt: "Robô Aspirador com Mapeamento", es: "Robot Aspiradora Inteligente", price: 1500, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80" },
-                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1700, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
-                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1900, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&q=80" },
-                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 2100, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
-                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 2300, img: "https://images.unsplash.com/photo-1615873968403-89e068629265?w=500&q=80" },
-                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 2500, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&q=80" },
-                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 2700, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80" },
-                { id: 24, pt: "Viagem Romântica de Final de Semana", es: "Viaje Romántico Fin de Semana", price: 2900, img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" },
-                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 3000, img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=500&q=80" }
+                { id: 1, pt: "Cota de Lua de Mel Simbólica", es: "Cuota Luna de Miel Simbólica", price: 50, icon: svgIcon('<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>') },
+                { id: 2, pt: "Passeio Turístico Guiado", es: "Paseo Turístico Guiado", price: 75, icon: svgIcon('<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>') },
+                { id: 3, pt: "Jantar Romântico de Lua de Mel", es: "Cena Romántica de Luna de Miel", price: 100, icon: svgIcon('<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>') },
+                { id: 4, pt: "Passeio de Barco na Lua de Mel", es: "Paseo en Barco Luna de Miel", price: 150, icon: svgIcon('<path d="M2 20h20"/><path d="M4 16c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M8 12L10 4 19 12Z"/>') },
+                { id: 5, pt: "Massagem Relaxante para o Casal", es: "Masaje Relajante en Pareja", price: 200, icon: svgIcon('<path d="M12 22c4.97-1.7 8-6.16 8-11A8 8 0 0 0 4 11c0 4.84 3.03 9.3 8 11z"/><path d="M12 11V3"/><path d="M12 11L7 6"/><path d="M12 11l5-5"/>') },
+                { id: 6, pt: "Cota para Micro-ondas", es: "Cuota para Microondas", price: 250, icon: svgIcon('<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M18 9v6"/><path d="M6 10h6"/><path d="M6 14h6"/>') },
+                { id: 7, pt: "Aluguel de Carro (1 Dia)", es: "Alquiler de Auto (1 Día)", price: 300, icon: svgIcon('<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>') },
+                { id: 8, pt: "Air Fryer (Fritadeira)", es: "Freidora de Aire", price: 350, icon: svgIcon('<rect x="4" y="6" width="16" height="14" rx="3"/><path d="M8 12h8"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>') },
+                { id: 9, pt: "Cota Máquina de Café Expresso", es: "Cuota Máquina de Café", price: 400, icon: svgIcon('<path d="M18 8h1a2 2 0 0 1 0 4h-1"/><path d="M6 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6z"/><path d="M6 8h12"/><path d="M10 2v2"/><path d="M14 2v2"/>') },
+                { id: 10, pt: "Jogo de Panelas Completo", es: "Juego de Ollas Completo", price: 450, icon: svgIcon('<path d="M4 8h16"/><path d="M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M9 4h6"/><path d="M10 8V4"/><path d="M14 8V4"/>') },
+                { id: 11, pt: "Aspirador de Pó Robô Inteligente", es: "Aspiradora Robot Inteligente", price: 500, icon: svgIcon('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/>') },
+                { id: 12, pt: "Cota Primeira Noite de Hotel", es: "Cuota Primera Noche de Hotel", price: 600, icon: svgIcon('<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>') },
+                { id: 13, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 700, icon: svgIcon('<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/><path d="M10 14h4"/>') },
+                { id: 14, pt: "Adega Climatizada", es: "Cava de Vinos", price: 800, icon: svgIcon('<path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/>') },
+                { id: 15, pt: "Cota Passagens Aéreas", es: "Cuota Pasajes Aéreos", price: 900, icon: svgIcon('<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M12 5v14"/>') },
+                { id: 16, pt: "Cota Máquina de Lavar Roupas", es: "Cuota Lavadora de Ropas", price: 1000, icon: svgIcon('<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 8h.01"/>') },
+                { id: 17, pt: "Cota Ar Condicionado", es: "Cuota Aire Acondicionado", price: 1100, icon: svgIcon('<rect x="2" y="6" width="20" height="8" rx="2"/><path d="M6 18h12"/><path d="M10 14v4"/><path d="M14 14v4"/>') },
+                { id: 18, pt: "Cota Geladeira", es: "Cuota Refrigerador", price: 1200, icon: svgIcon('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14"/><path d="M9 14v2"/><path d="M9 5v2"/>') },
+                { id: 19, pt: "Cama Box de Casal (Cota)", es: "Cama Box Matrimonial (Cuota)", price: 1300, icon: svgIcon('<path d="M2 4v16"/><path d="M22 10v10"/><path d="M2 16h20"/><path d="M4 10h16a2 2 0 0 1 2 2v4H2v-4a2 2 0 0 1 2-2Z"/>') },
+                { id: 20, pt: "Cota Sofá Retrátil", es: "Cuota Sofá Retráctil", price: 1400, icon: svgIcon('<path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 9v4"/>') },
+                { id: 21, pt: "Cota TV da Sala 65\"", es: "Cuota TV de la Sala 65\"", price: 1500, icon: svgIcon('<rect x="2" y="7" width="20" height="10" rx="2"/><path d="M17 2l-5 5-5-5"/><path d="M12 17v5"/><path d="M8 22h8"/>') },
+                { id: 22, pt: "Pacote de Mergulho VIP", es: "Paquete de Buceo VIP", price: 1600, icon: svgIcon('<path d="M2 12h20"/><path d="M8 16c2 0 2 2 4 2s2-2 4-2"/><path d="M6 8l2-4 8 4"/>') },
+                { id: 23, pt: "Cota Móveis Planejados", es: "Cuota Muebles Planificados", price: 1800, icon: svgIcon('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/><path d="M12 4v16"/><path d="M8 8h.01"/><path d="M8 16h.01"/><path d="M16 8h.01"/><path d="M16 16h.01"/>') },
+                { id: 24, pt: "Upgrade de Voo (Classe Executiva)", es: "Upgrade Vuelo (Clase Ejecutiva)", price: 1900, icon: svgIcon('<path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4Z"/><path d="M12 22V16l-3-3"/>') },
+                { id: 25, pt: "Cota Lua de Mel VIP", es: "Cuota Luna de Miel VIP", price: 2000, icon: svgIcon('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>') }
             ];
 
             let activeLang = 'pt';
@@ -570,14 +556,15 @@
                 grid.insertAdjacentHTML('beforeend', freeCardHTML);
 
                 giftListItems.forEach(gift => {
-                    const priceBs = Math.round(gift.price * 1.3);
+                    const priceBs = gift.price * 2; // R$ 50 = 100 Bs
                     const comparePrice = activeLang === 'pt' ? gift.price : priceBs;
 
                     let show = true;
-                    if (currentFilter === 'under300') { if (comparePrice > (activeLang==='pt'?300:400)) show = false; }
-                    if (currentFilter === '300to800') { if (comparePrice <= (activeLang==='pt'?300:400) || comparePrice > (activeLang==='pt'?800:1000)) show = false; }
-                    if (currentFilter === '800to1500') { if (comparePrice <= (activeLang==='pt'?800:1000) || comparePrice > (activeLang==='pt'?1500:2000)) show = false; }
-                    if (currentFilter === 'above1500') { if (comparePrice <= (activeLang==='pt'?1500:2000)) show = false; }
+                    // Lógica de Filtros (Em Reais)
+                    if (currentFilter === 'under200') { if (gift.price > 200) show = false; }
+                    if (currentFilter === '200to500') { if (gift.price <= 200 || gift.price > 500) show = false; }
+                    if (currentFilter === '500to1000') { if (gift.price <= 500 || gift.price > 1000) show = false; }
+                    if (currentFilter === 'above1000') { if (gift.price <= 1000) show = false; }
 
                     if (!show) return;
 
@@ -588,8 +575,10 @@
 
                     const cardHTML = `
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
-                            <div class="gift-wrap h-56 w-full bg-gray-100 relative">
-                                <img src="${gift.img}" class="gift-img w-full h-full object-cover" alt="${title}" loading="lazy">
+                            <div class="gift-wrap h-48 w-full bg-[#fcfbf9] border-b border-gray-100 flex items-center justify-center">
+                                <div class="gift-svg-container p-6 bg-white rounded-full shadow-sm">
+                                    ${gift.icon}
+                                </div>
                             </div>
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h3 class="font-serif text-xl text-[#2d3326] mb-2 flex-grow">${title}</h3>
@@ -604,7 +593,6 @@
                 });
             }
 
-            // --- GERADOR PIX SEGURO CRC16 EMV ---
             function padFormat(id, value) {
                 const len = value.length.toString().padStart(2, '0');
                 return `${id}${len}${value}`;
@@ -660,7 +648,7 @@
                     return;
                 }
                 
-                window.currentGiftContext = { pt: "Contribuição Livre", es: "Contribución Libre", price: activeLang === 'pt' ? val : (val / 1.3) };
+                window.currentGiftContext = { pt: "Contribuição Livre", es: "Contribución Libre", price: activeLang === 'pt' ? val : (val / 2) };
                 
                 const nameEl = document.getElementById('modal-gift-name');
                 const priceEl = document.getElementById('modal-gift-price');
@@ -713,7 +701,7 @@
                     document.getElementById('pix-loader').style.display = 'block';
                     document.getElementById('modal-pix-qr').src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(payload);
                 } else {
-                    const priceBs = Math.round(gift.price * 1.3);
+                    const priceBs = gift.price * 2;
                     priceEl.innerText = `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
                     viewPt.classList.add('hidden'); viewEs.classList.remove('hidden');
                 }
@@ -738,7 +726,7 @@
             window.notifyWhatsAppES = function() {
                 const guest = document.getElementById('guest-name-es').value || "Un amigo(a)";
                 const item = currentGiftContext.es;
-                const priceBs = Math.round(currentGiftContext.price * 1.3);
+                const priceBs = currentGiftContext.price * 2;
                 const priceStr = `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
                 const msg = `¡Hola! Acabo de regalarles el ítem: ${item} por el valor de ${priceStr}. Con cariño, ${guest}`;
                 window.open(`https://wa.me/5542999215431?text=${encodeURIComponent(msg)}`, '_blank');
@@ -755,18 +743,18 @@
                     ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.remove('text-gray-400', 'border-transparent');
                     esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    document.getElementById('filter-under300').innerText = "Até R$300";
-                    document.getElementById('filter-300to800').innerText = "R$300–800";
-                    document.getElementById('filter-800to1500').innerText = "R$800–1500";
-                    document.getElementById('filter-above1500').innerText = "R$1500+";
+                    document.getElementById('filter-under200').innerText = "Até R$ 200";
+                    document.getElementById('filter-200to500').innerText = "R$ 200–500";
+                    document.getElementById('filter-500to1000').innerText = "R$ 500–1000";
+                    document.getElementById('filter-above1000').innerText = "R$ 1000+";
                 } else {
                     esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.remove('text-gray-400', 'border-transparent');
                     ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    document.getElementById('filter-under300').innerText = "Hasta Bs.400";
-                    document.getElementById('filter-300to800').innerText = "Bs.400–1000";
-                    document.getElementById('filter-800to1500').innerText = "Bs.1000–2000";
-                    document.getElementById('filter-above1500').innerText = "Bs.2000+";
+                    document.getElementById('filter-under200').innerText = "Hasta Bs. 400";
+                    document.getElementById('filter-200to500').innerText = "Bs. 400–1000";
+                    document.getElementById('filter-500to1000').innerText = "Bs. 1000–2000";
+                    document.getElementById('filter-above1000').innerText = "Bs. 2000+";
                 }
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -794,7 +782,7 @@
                     gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos duas listas de presentes para facilitar para nossos convidados de ambos os países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Voltar ao convite",
                     gifts_list_title: "Lista de Presentes", gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar.",
-                    filter_all: "Todos",
+                    filter_all: "Todos", filter_under200: "Até R$ 200", filter_200to500: "R$ 200–500", filter_500to1000: "R$ 500–1000", filter_above1000: "R$ 1000+",
                     modal_gift_txt: "Você escolheu:", copy_btn: "Copiar Código Pix", copy_success: "Código copiado! ✓", btn_notify_wa: "Avisar que presenteei",
                     ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
                 },
@@ -811,7 +799,7 @@
                     gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos dos listas de regalos para facilitar a los invitados de ambos países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Volver a la invitación",
                     gifts_list_title: "Lista de Regalos", gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar.",
-                    filter_all: "Todos",
+                    filter_all: "Todos", filter_under200: "Hasta Bs. 400", filter_200to500: "Bs. 400–1000", filter_500to1000: "Bs. 1000–2000", filter_above1000: "Bs. 2000+",
                     modal_gift_txt: "Elegiste:", copy_btn: "Copiar Código", copy_success: "¡Código copiado! ✓", btn_notify_wa: "Avisar que regalé", modal_gift_inst_es: "Escanea este código QR desde tu aplicación bancaria para realizar el pago.",
                     ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026"
                 }
