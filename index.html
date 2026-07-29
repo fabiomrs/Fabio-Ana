@@ -29,25 +29,33 @@
         @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
         .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
         .gallery-wrap, .gift-wrap { position: relative; overflow: hidden; border-radius: 0.5rem; cursor: pointer; }
-        .gallery-img { width: 100%; transition: transform 0.6s ease; }
-        .gift-svg-container { transition: transform 0.5s ease; }
+        .gallery-img, .gift-img { width: 100%; transition: transform 0.6s ease; }
         .gallery-overlay { position: absolute; inset: 0; background-color: rgba(45, 51, 38, 0.4); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .gallery-wrap:hover .gallery-img { transform: scale(1.05); }
+        .gallery-wrap:hover .gallery-img, .gift-wrap:hover .gift-img { transform: scale(1.05); }
         .gallery-wrap:hover .gallery-overlay { opacity: 1; }
-        .gift-wrap:hover .gift-svg-container { transform: scale(1.1); }
         #ai-iframe-container { overflow: hidden; height: 100%; }
+        
         .fade-enter { animation: fadeIn 0.5s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #5a6b47; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animação do Indicador de Scroll */
+        @keyframes bounce-down {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .animate-bounce-down { animation: bounce-down 2s infinite; }
     </style>
 </head>
 
 <body class="antialiased overflow-hidden">
 
-    <!-- Pop-up inicial -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
@@ -61,7 +69,6 @@
         </div>
     </div>
 
-    <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="navTo('home')">F <span class="italic font-light">&</span> A</div>
@@ -78,10 +85,9 @@
         </div>
     </nav>
 
-    <!-- Main View -->
     <div id="main-view">
         <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center px-6 md:px-20 pt-20 relative text-left">
-            <div class="max-w-3xl">
+            <div class="max-w-3xl z-10">
                 <p class="text-[#d1daba] tracking-[0.25em] uppercase text-xs md:text-sm mb-6 font-bold drop-shadow-md" data-i18n="invite">Você está convidado para o casamento de</p>
                 <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 text-white leading-tight drop-shadow-xl">
                     Fabio Miguel<br><span class="text-3xl md:text-5xl italic font-light my-2 md:my-4 block text-[#a3b18a]">&</span>Ana Isabel
@@ -89,15 +95,15 @@
                 <div class="w-24 h-[2px] bg-[#a3b18a] my-8 opacity-90"></div>
                 <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-medium drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
                 <p class="text-lg text-[#d1daba] font-bold tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:30
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:00
                 </p>
             </div>
             
-            <!-- Indicador de Scroll com Animação -->
-            <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 transition-opacity duration-1000 z-30 pointer-events-none">
-                <p class="text-white/90 text-[10px] md:text-xs uppercase tracking-[0.2em] mb-2 font-bold drop-shadow-md" data-i18n="scroll_down">Deslize para baixo</p>
-                <div class="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center p-1 shadow-sm">
-                    <div class="w-1.5 h-2.5 bg-white rounded-full animate-bounce mt-1"></div>
+            <!-- Indicador de Scroll -->
+            <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 transition-opacity duration-700 hidden-until-enter">
+                <p class="text-[#d1daba] text-xs uppercase tracking-widest font-bold mb-2 drop-shadow-md" data-i18n="scroll_down">Deslize para baixo</p>
+                <div class="w-6 h-10 border-2 border-[#a3b18a] rounded-full flex justify-center pt-1 drop-shadow-md bg-black/20 backdrop-blur-sm">
+                    <div class="w-1 h-2 bg-[#d1daba] rounded-full animate-bounce-down"></div>
                 </div>
             </div>
         </header>
@@ -121,25 +127,41 @@
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
+                    <!-- Igreja -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" /></svg>
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
+                            </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="church_address">6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia</p>
-                        <a href="https://share.google/6bhxnbrxetTUDTa1n" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Parroquia+La+Resurrecci%C3%B3n,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto shadow-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
+                    <!-- Recepção -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 0 1-4.5 4.5h-.5v-7.5Z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/></svg>
+                            <svg class="w-12 h-12 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 6l3.5-3.5a1.5 1.5 0 0 1 2.1 2.1L16.5 7.7" />
+                                <path d="M12.5 15.5 18 21" />
+                                <path d="M16 22h4" />
+                                <path d="M10 6 6.5 2.5a1.5 1.5 0 0 0-2.1 2.1L7.5 7.7" />
+                                <path d="M11.5 15.5 6 21" />
+                                <path d="M4 22h4" />
+                                <path d="M10.8 12.8a2 2 0 0 0 2.4 0l4.6-4.6a2 2 0 0 0 0-2.8l-1.4-1.4a2 2 0 0 0-2.8 0l-4.6 4.6" />
+                                <path d="M13.2 12.8a2 2 0 0 1-2.4 0L6.2 8.2a2 2 0 0 1 0-2.8L7.6 4a2 2 0 0 1 2.8 0l4.6 4.6" />
+                                <circle cx="12" cy="7" r=".5" />
+                                <circle cx="10" cy="5" r=".5" />
+                                <circle cx="14" cy="5" r=".5" />
+                            </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="dinner_address">1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra</p>
-                        <a href="https://share.google/cg5NCtP8iw0GhWker" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Garden+House+Eventos+Boutique,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto shadow-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
@@ -151,13 +173,11 @@
             <div class="container mx-auto px-6 max-w-3xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="timeline_title">Programação</h2>
                 <div class="relative border-l-2 border-[#a3b18a]/30 ml-4 md:ml-12 py-2">
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">17:30</span><span data-i18n="t1">Cerimônia Religiosa</span></h3></div>
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:00</span><span data-i18n="t2">Sessão de Fotos</span></h3></div>
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:30</span><span data-i18n="t3">Brinde aos Noivos</span></h3></div>
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">20:00</span><span data-i18n="t4">Jantar</span></h3></div>
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">21:30</span><span data-i18n="t5">Baile</span></h3></div>
-                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">00:00</span><span data-i18n="t6">Petiscos</span></h3></div>
-                    <div class="ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">02:30</span><span data-i18n="t7">Despedida</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">17:00</span><span data-i18n="t1">Cerimônia Religiosa</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">19:30</span><span data-i18n="t2">Recepção dos Convidados</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">21:00</span><span data-i18n="t3">Jantar</span></h3></div>
+                    <div class="mb-10 ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#a3b18a] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#a3b18a] font-serif text-2xl mr-4 w-16">22:00</span><span data-i18n="t4">Baile</span></h3></div>
+                    <div class="ml-8 relative group"><span class="absolute -left-[43px] top-1 h-5 w-5 rounded-full bg-[#5a6b47] ring-4 ring-white group-hover:scale-125 transition-transform"></span><h3 class="flex md:items-center text-lg font-bold text-[#2d3326]"><span class="text-[#5a6b47] font-serif text-2xl mr-4 w-16">03:00</span><span data-i18n="t5">Despedida</span></h3></div>
                 </div>
             </div>
         </section>
@@ -176,7 +196,8 @@
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                         </div>
                     </div>
-                    <p class="text-gray-800 font-bold text-xl tracking-wide mb-2">Passeio Completo</p>
+                    <!-- Tradução inteligente: Passeio Completo (PT) ou Traje de Gala (ES) -->
+                    <p class="text-gray-800 font-bold text-xl tracking-wide mb-2" data-i18n="dress_style">Passeio Completo</p>
                     <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
                 </div>
                 
@@ -185,7 +206,7 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
                     <h3 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="kids_title">Aviso Especial</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed italic" data-i18n="kids_note">Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed italic" data-i18n="kids_note">Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos.</p>
                 </div>
             </div>
         </section>
@@ -193,10 +214,9 @@
         <section id="rsvp" class="py-24 bg-white border-b border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-6 text-center max-w-2xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
-                <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.</p>
+                <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo.</p>
                 <a href="https://wa.me/5542999215431?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20de%20Fabio%20e%20Ana%20Isabel." target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-sm tracking-wider uppercase rounded-full btn-hover font-bold shadow-lg transition-transform transform hover:scale-105">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                    <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
                 </a>
             </div>
         </section>
@@ -204,14 +224,12 @@
         <section id="presentes" class="py-24 bg-[#fcfbf9] scroll-mt-20">
             <div class="container mx-auto px-6 text-center max-w-4xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
-                <p class="text-gray-500 mb-10 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos duas listas de presentes para facilitar para nossos convidados de ambos os países.</p>
-                
+                <p class="text-gray-500 mb-10 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear, preparamos listas de presentes para facilitar.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-14">
                     <button onclick="toggleView('gifts', 'pt')" class="w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                         <span data-i18n="btn_full_list_br">Lista de Presentes (Brasil/Pix)</span>
                     </button>
-                    
                     <button onclick="toggleView('gifts', 'es')" class="w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                         <span data-i18n="btn_full_list_bo">Lista de Regalos (Bolivia/QR)</span>
@@ -225,7 +243,7 @@
                 <div class="mb-10">
                     <svg class="w-12 h-12 text-[#a3b18a] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                     <h2 class="font-serif text-4xl text-[#2d3326] mb-4" data-i18n="ai_title">Dúvidas? Pergunte para nossa IA</h2>
-                    <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
+                    <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento. Mande um "Oi" aqui embaixo!</p>
                 </div>
                 <div class="bg-[#fcfbf9] rounded-2xl overflow-hidden shadow-sm border border-gray-200" id="ai-iframe-container">
                     <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full min-h-[1040px] border-0 h-full" allow="clipboard-write" allowfullscreen scrolling="no"></iframe>
@@ -237,18 +255,16 @@
             <div class="container mx-auto px-4 max-w-6xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
                 <div class="masonry-grid">
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
                 </div>
             </div>
         </section>
     </div> <!-- FIM DO MAIN VIEW -->
 
-    <!-- VIEW DA LISTA DE PRESENTES -->
     <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
         <div class="container mx-auto px-6 max-w-6xl">
-            <!-- Header Presentes -->
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm group">
                     <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -261,7 +277,6 @@
                 <p class="text-gray-500 text-lg" data-i18n="gifts_list_sub">Escolha com carinho um item para ajudar a compor nosso lar.</p>
             </div>
 
-            <!-- Filtros de Preço -->
             <div class="flex gap-3 overflow-x-auto no-scrollbar mb-10 pb-2 justify-start md:justify-center" id="filters-container">
                 <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-[#5a6b47] text-white whitespace-nowrap" data-i18n="filter_all">Todos</button>
                 <button onclick="setFilter('under200')" id="filter-under200" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_under200">Até 200</button>
@@ -270,9 +285,8 @@
                 <button onclick="setFilter('above1000')" id="filter-above1000" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_above1000">1000+</button>
             </div>
 
-            <!-- Grid de Itens -->
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Javascript injeta os itens dinamicamente aqui -->
+                <!-- JS injeta os itens -->
             </div>
         </div>
     </div>
@@ -289,7 +303,6 @@
             <p id="modal-gift-price" class="text-3xl font-bold text-[#5a6b47] mb-6"></p>
             <div class="w-16 h-[1px] bg-gray-200 mx-auto mb-6"></div>
             
-            <!-- Visão Português (Brasil / PIX dinâmico) -->
             <div id="modal-view-pt" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Seu Nome / De quem é o presente?</label>
@@ -317,7 +330,7 @@
                 </div>
             </div>
 
-            <!-- Visão Espanhol (Bolívia / QR Estático) -->
+            <!-- Visão Espanhol (Bolívia / QR) -->
             <div id="modal-view-es" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Tu Nombre:</label>
@@ -353,11 +366,14 @@
         </div>
     </footer>
 
-    <!-- Player -->
+    <!-- Mini Player de Música -->
     <audio id="bg-music" preload="auto"></audio>
     <div id="music-player" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full shadow-xl z-[150] transition-all duration-300 flex items-center justify-center transform hidden-until-enter opacity-0 px-3 py-1 space-x-1">
         <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar"><svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
+            <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
         <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     </div>
 
@@ -367,12 +383,16 @@
 
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
-                if (window.scrollY > 50) { nav.classList.add('shadow-md'); } 
-                else { nav.classList.remove('shadow-md'); }
+                if (window.scrollY > 50) { nav.classList.add('shadow-md'); } else { nav.classList.remove('shadow-md'); }
+                
+                // Oculta o indicador de scroll se o usuário rolar
+                const scrollInd = document.getElementById('scroll-indicator');
+                if (window.scrollY > 100 && scrollInd) { scrollInd.classList.add('opacity-0'); }
             });
 
+            // Contagem
             try {
-                const targetDate = new Date("2026-12-18T17:30:00").getTime();
+                const targetDate = new Date("2026-12-18T17:00:00").getTime();
                 const countdown = setInterval(function() {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
@@ -384,11 +404,11 @@
                 }, 1000);
             } catch (e) { }
 
+            // Playlist
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
             const iconPause = document.getElementById('icon-pause');
-            
             const playlist = ['musica.mp3', 'musica1.mp3', 'musica2.mp3'];
             let currentTrack = 0;
             bgMusic.src = playlist[currentTrack];
@@ -399,20 +419,17 @@
             }
 
             bgMusic.addEventListener('ended', function() {
-                currentTrack = (currentTrack + 1) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
+                currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack];
                 if (window.isPlaying) bgMusic.play().catch(()=>{});
             });
 
             document.getElementById('prev-btn').addEventListener('click', function() {
-                currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
+                currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; bgMusic.src = playlist[currentTrack];
                 if (window.isPlaying) bgMusic.play().catch(()=>{});
             });
 
             document.getElementById('next-btn').addEventListener('click', function() {
-                currentTrack = (currentTrack + 1) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
+                currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack];
                 if (window.isPlaying) bgMusic.play().catch(()=>{});
             });
 
@@ -420,9 +437,7 @@
                 if (window.isPlaying) { bgMusic.pause(); window.isPlaying = false; } 
                 else {
                     let playPromise = bgMusic.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { });
-                    }
+                    if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); }
                 }
                 updatePlayerUI();
             });
@@ -433,31 +448,17 @@
                 const modalBox = document.getElementById('welcome-box');
                 modalBox.classList.remove('scale-100'); modalBox.classList.add('scale-95');
                 modal.classList.add('opacity-0');
+                
                 document.querySelectorAll('.hidden-until-enter').forEach(el => el.classList.remove('opacity-0'));
                 
-                setTimeout(() => { 
-                    modal.classList.add('hidden'); 
-                    document.body.classList.remove('overflow-hidden'); 
-                    
-                    // Mostra o indicador animado de rolar a tela
-                    const scrollInd = document.getElementById('scroll-indicator');
-                    if (scrollInd) {
-                        scrollInd.classList.remove('opacity-0');
-                        
-                        // Some automaticamente após 5 segundos
-                        const hideTimeout = setTimeout(() => {
-                            scrollInd.classList.add('opacity-0');
-                        }, 5000);
+                // Exibir e Esconder animação scroll (5 segs)
+                const scrollInd = document.getElementById('scroll-indicator');
+                if(scrollInd) {
+                    scrollInd.classList.remove('opacity-0');
+                    setTimeout(() => { scrollInd.classList.add('opacity-0'); }, 5000);
+                }
 
-                        // Oculta imediatamente se a pessoa rolar a página
-                        const hideOnScroll = () => {
-                            scrollInd.classList.add('opacity-0');
-                            window.removeEventListener('scroll', hideOnScroll);
-                            clearTimeout(hideTimeout); // Cancela o timer se a pessoa já rolou
-                        };
-                        window.addEventListener('scroll', hideOnScroll, { once: true });
-                    }
-                }, 500);
+                setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
 
                 let playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
@@ -465,13 +466,12 @@
                 }
             };
 
+            // SPA Nav
             window.navTo = function(sectionId) {
                 const mainView = document.getElementById('main-view');
                 const giftsView = document.getElementById('gifts-view');
                 if (sectionId !== 'gifts' && mainView.classList.contains('hidden')) {
-                    giftsView.classList.add('hidden');
-                    mainView.classList.remove('hidden');
-                    mainView.classList.add('fade-enter');
+                    giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter');
                 }
                 setTimeout(() => {
                     if (sectionId === 'home') { window.scrollTo({top: 0, behavior: 'smooth'}); } 
@@ -493,6 +493,7 @@
                 }
             };
 
+            // IA Observer
             const aiIframe = document.getElementById('ai-iframe');
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries, obs) => {
@@ -503,6 +504,7 @@
                 observer.observe(document.getElementById('ai-section'));
             } else { aiIframe.src = aiIframe.getAttribute('data-src'); }
 
+            // Galeria JS
             window.currentImageIndex = 0;
             const images = Array.from(document.querySelectorAll('.gallery-img')).map(img => img.src);
             window.openLightbox = function(index) { currentImageIndex = index; const lb = document.getElementById('lightbox'); document.getElementById('lightbox-img').src = images[currentImageIndex]; lb.classList.remove('hidden'); lb.style.display = 'flex'; setTimeout(() => lb.classList.remove('opacity-0'), 10); document.documentElement.style.overflow = 'hidden'; };
@@ -511,35 +513,37 @@
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
-            // Helper para encapsular os ícones SVG
-            const svgIcon = (paths) => `<svg class="w-16 h-16 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+            // --- 25 PRESENTES (ICONES SVG unificados e minimalistas) ---
+            const svgIconHome = `<svg class="w-16 h-16 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>`;
+            const svgIconKitchen = `<svg class="w-16 h-16 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>`;
+            const svgIconTravel = `<svg class="w-16 h-16 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
 
             const giftListItems = [
-                { id: 1, pt: "Cota de Lua de Mel Simbólica", es: "Cuota Luna de Miel Simbólica", price: 50, icon: svgIcon('<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>') },
-                { id: 2, pt: "Passeio Turístico Guiado", es: "Paseo Turístico Guiado", price: 75, icon: svgIcon('<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>') },
-                { id: 3, pt: "Jantar Romântico de Lua de Mel", es: "Cena Romántica de Luna de Miel", price: 100, icon: svgIcon('<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>') },
-                { id: 4, pt: "Passeio de Barco na Lua de Mel", es: "Paseo en Barco Luna de Miel", price: 150, icon: svgIcon('<path d="M2 20h20"/><path d="M4 16c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M8 12L10 4 19 12Z"/>') },
-                { id: 5, pt: "Massagem Relaxante para o Casal", es: "Masaje Relajante en Pareja", price: 200, icon: svgIcon('<path d="M12 22c4.97-1.7 8-6.16 8-11A8 8 0 0 0 4 11c0 4.84 3.03 9.3 8 11z"/><path d="M12 11V3"/><path d="M12 11L7 6"/><path d="M12 11l5-5"/>') },
-                { id: 6, pt: "Cota para Micro-ondas", es: "Cuota para Microondas", price: 250, icon: svgIcon('<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M18 9v6"/><path d="M6 10h6"/><path d="M6 14h6"/>') },
-                { id: 7, pt: "Aluguel de Carro (1 Dia)", es: "Alquiler de Auto (1 Día)", price: 300, icon: svgIcon('<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>') },
-                { id: 8, pt: "Air Fryer (Fritadeira)", es: "Freidora de Aire", price: 350, icon: svgIcon('<rect x="4" y="6" width="16" height="14" rx="3"/><path d="M8 12h8"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>') },
-                { id: 9, pt: "Cota Máquina de Café Expresso", es: "Cuota Máquina de Café", price: 400, icon: svgIcon('<path d="M18 8h1a2 2 0 0 1 0 4h-1"/><path d="M6 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6z"/><path d="M6 8h12"/><path d="M10 2v2"/><path d="M14 2v2"/>') },
-                { id: 10, pt: "Jogo de Panelas Completo", es: "Juego de Ollas Completo", price: 450, icon: svgIcon('<path d="M4 8h16"/><path d="M4 8v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M9 4h6"/><path d="M10 8V4"/><path d="M14 8V4"/>') },
-                { id: 11, pt: "Aspirador de Pó Robô Inteligente", es: "Aspiradora Robot Inteligente", price: 500, icon: svgIcon('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/>') },
-                { id: 12, pt: "Cota Primeira Noite de Hotel", es: "Cuota Primera Noche de Hotel", price: 600, icon: svgIcon('<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>') },
-                { id: 13, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 700, icon: svgIcon('<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/><path d="M10 14h4"/>') },
-                { id: 14, pt: "Adega Climatizada", es: "Cava de Vinos", price: 800, icon: svgIcon('<path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/>') },
-                { id: 15, pt: "Cota Passagens Aéreas", es: "Cuota Pasajes Aéreos", price: 900, icon: svgIcon('<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M12 5v14"/>') },
-                { id: 16, pt: "Cota Máquina de Lavar Roupas", es: "Cuota Lavadora de Ropas", price: 1000, icon: svgIcon('<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 8h.01"/>') },
-                { id: 17, pt: "Cota Ar Condicionado", es: "Cuota Aire Acondicionado", price: 1100, icon: svgIcon('<rect x="2" y="6" width="20" height="8" rx="2"/><path d="M6 18h12"/><path d="M10 14v4"/><path d="M14 14v4"/>') },
-                { id: 18, pt: "Cota Geladeira", es: "Cuota Refrigerador", price: 1200, icon: svgIcon('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14"/><path d="M9 14v2"/><path d="M9 5v2"/>') },
-                { id: 19, pt: "Cama Box de Casal (Cota)", es: "Cama Box Matrimonial (Cuota)", price: 1300, icon: svgIcon('<path d="M2 4v16"/><path d="M22 10v10"/><path d="M2 16h20"/><path d="M4 10h16a2 2 0 0 1 2 2v4H2v-4a2 2 0 0 1 2-2Z"/>') },
-                { id: 20, pt: "Cota Sofá Retrátil", es: "Cuota Sofá Retráctil", price: 1400, icon: svgIcon('<path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 9v4"/>') },
-                { id: 21, pt: "Cota TV da Sala 65\"", es: "Cuota TV de la Sala 65\"", price: 1500, icon: svgIcon('<rect x="2" y="7" width="20" height="10" rx="2"/><path d="M17 2l-5 5-5-5"/><path d="M12 17v5"/><path d="M8 22h8"/>') },
-                { id: 22, pt: "Pacote de Mergulho VIP", es: "Paquete de Buceo VIP", price: 1600, icon: svgIcon('<path d="M2 12h20"/><path d="M8 16c2 0 2 2 4 2s2-2 4-2"/><path d="M6 8l2-4 8 4"/>') },
-                { id: 23, pt: "Cota Móveis Planejados", es: "Cuota Muebles Planificados", price: 1800, icon: svgIcon('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/><path d="M12 4v16"/><path d="M8 8h.01"/><path d="M8 16h.01"/><path d="M16 8h.01"/><path d="M16 16h.01"/>') },
-                { id: 24, pt: "Upgrade de Voo (Classe Executiva)", es: "Upgrade Vuelo (Clase Ejecutiva)", price: 1900, icon: svgIcon('<path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4Z"/><path d="M12 22V16l-3-3"/>') },
-                { id: 25, pt: "Cota Lua de Mel VIP", es: "Cuota Luna de Miel VIP", price: 2000, icon: svgIcon('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>') }
+                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, icon: svgIconKitchen },
+                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 80, icon: svgIconHome },
+                { id: 3, pt: "Liquidificador", es: "Licuadora", price: 120, icon: svgIconKitchen },
+                { id: 4, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, icon: svgIconHome },
+                { id: 5, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 180, icon: svgIconKitchen },
+                { id: 6, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 250, icon: svgIconKitchen },
+                { id: 7, pt: "Cota para Micro-ondas", es: "Cuota para Microondas", price: 300, icon: svgIconKitchen },
+                { id: 8, pt: "Air Fryer Compacta", es: "Freidora de Aire Compacta", price: 350, icon: svgIconKitchen },
+                { id: 9, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica", price: 400, icon: svgIconKitchen },
+                { id: 10, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 450, icon: svgIconKitchen },
+                { id: 11, pt: "Aspirador de Pó", es: "Aspiradora de Polvo", price: 500, icon: svgIconHome },
+                { id: 12, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 600, icon: svgIconKitchen },
+                { id: 13, pt: "Adega Climatizada", es: "Cava de Vinos", price: 700, icon: svgIconHome },
+                { id: 14, pt: "Robô Aspirador Inteligente", es: "Robot Aspiradora", price: 800, icon: svgIconHome },
+                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 900, icon: svgIconKitchen },
+                { id: 16, pt: "Cama Box de Casal (Cota)", es: "Cama Matrimonial (Cuota)", price: 1000, icon: svgIconHome },
+                { id: 17, pt: "Máquina de Lavar (Cota)", es: "Lavadora (Cuota)", price: 1200, icon: svgIconHome },
+                { id: 18, pt: "Geladeira (Cota)", es: "Refrigerador (Cuota)", price: 1400, icon: svgIconKitchen },
+                { id: 19, pt: "Sofá Retrátil (Cota)", es: "Sofá Retráctil (Cuota)", price: 1500, icon: svgIconHome },
+                { id: 20, pt: "Smart TV 50\" (Cota)", es: "Smart TV 50\" (Cuota)", price: 1600, icon: svgIconHome },
+                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1700, icon: svgIconHome },
+                { id: 22, pt: "Jantar Romântico Lua de Mel", es: "Cena Romántica Luna de Miel", price: 1800, icon: svgIconTravel },
+                { id: 23, pt: "Passeios Lua de Mel", es: "Paseos Luna de Miel", price: 1900, icon: svgIconTravel },
+                { id: 24, pt: "Cota Passagens Aéreas", es: "Cuota Pasajes Aéreos", price: 1950, icon: svgIconTravel },
+                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, icon: svgIconTravel }
             ];
 
             let activeLang = 'pt';
@@ -548,14 +552,10 @@
             window.setFilter = function(filter) {
                 currentFilter = filter;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('bg-[#5a6b47]', 'text-white', 'border-transparent');
-                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+                    btn.classList.remove('bg-[#5a6b47]', 'text-white', 'border-transparent'); btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
                 });
                 const activeBtn = document.getElementById('filter-' + filter);
-                if(activeBtn) {
-                    activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
-                    activeBtn.classList.add('bg-[#5a6b47]', 'text-white', 'border-transparent');
-                }
+                if(activeBtn) { activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200'); activeBtn.classList.add('bg-[#5a6b47]', 'text-white', 'border-transparent'); }
                 renderGiftsGrid();
             };
 
@@ -564,13 +564,12 @@
                 grid.innerHTML = '';
                 
                 const btnLabel = activeLang === 'pt' ? 'Presentear' : 'Regalar';
-                
-                // CARD FIXO DE VALOR LIVRE (Sempre primeiro)
                 const freeTxt = activeLang === 'pt' ? "Contribuir com valor livre" : "Contribuir con valor libre";
                 const freeSub = activeLang === 'pt' ? "Prefere escolher o valor? Digite abaixo e geramos seu Pix instantaneamente" : "¿Prefiere elegir el valor? Escríbalo abajo y generamos su pago";
                 const btnFree = activeLang === 'pt' ? "Gerar Pagamento" : "Generar Pago";
                 const phFree = activeLang === 'pt' ? "Valor (R$)" : "Valor (Bs.)";
                 
+                // Card Fixo de Valor Livre
                 const freeCardHTML = `
                     <div class="bg-[#f0f3ea] rounded-2xl shadow-sm border border-[#a3b18a]/30 overflow-hidden flex flex-col hover:shadow-md transition-all">
                         <div class="p-6 flex flex-col flex-grow text-center justify-center">
@@ -587,31 +586,26 @@
                 grid.insertAdjacentHTML('beforeend', freeCardHTML);
 
                 giftListItems.forEach(gift => {
-                    const priceBs = gift.price * 2; // R$ 50 = 100 Bs
+                    const priceBs = gift.price * 2; // Real to Bob 1:2
                     const comparePrice = activeLang === 'pt' ? gift.price : priceBs;
 
                     let show = true;
-                    // Lógica de Filtros (Em Reais)
-                    if (currentFilter === 'under200') { if (gift.price > 200) show = false; }
-                    if (currentFilter === '200to500') { if (gift.price <= 200 || gift.price > 500) show = false; }
-                    if (currentFilter === '500to1000') { if (gift.price <= 500 || gift.price > 1000) show = false; }
-                    if (currentFilter === 'above1000') { if (gift.price <= 1000) show = false; }
+                    if (currentFilter === 'under200') { if (comparePrice > (activeLang==='pt'?200:400)) show = false; }
+                    if (currentFilter === '200to500') { if (comparePrice <= (activeLang==='pt'?200:400) || comparePrice > (activeLang==='pt'?500:1000)) show = false; }
+                    if (currentFilter === '500to1000') { if (comparePrice <= (activeLang==='pt'?500:1000) || comparePrice > (activeLang==='pt'?1000:2000)) show = false; }
+                    if (currentFilter === 'above1000') { if (comparePrice <= (activeLang==='pt'?1000:2000)) show = false; }
 
                     if (!show) return;
 
                     const title = activeLang === 'pt' ? gift.pt : gift.es;
-                    const priceStr = activeLang === 'pt' ? 
-                                     `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : 
-                                     `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
+                    const priceStr = activeLang === 'pt' ? `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
 
                     const cardHTML = `
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
-                            <div class="gift-wrap h-48 w-full bg-[#fcfbf9] border-b border-gray-100 flex items-center justify-center">
-                                <div class="gift-svg-container p-6 bg-white rounded-full shadow-sm">
-                                    ${gift.icon}
-                                </div>
+                            <div class="gift-wrap h-40 w-full bg-gradient-to-br from-[#fcfbf9] to-[#f0f3ea] flex items-center justify-center">
+                                ${gift.icon}
                             </div>
-                            <div class="p-6 flex flex-col flex-grow text-center">
+                            <div class="p-6 flex flex-col flex-grow text-center border-t border-gray-50">
                                 <h3 class="font-serif text-xl text-[#2d3326] mb-2 flex-grow">${title}</h3>
                                 <p class="text-[#5a6b47] font-bold text-2xl mb-6">${priceStr}</p>
                                 <button onclick="openGiftModal(${gift.id})" class="w-full py-3.5 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors rounded-full font-bold uppercase tracking-wider text-sm shadow-sm">
@@ -624,43 +618,28 @@
                 });
             }
 
-            function padFormat(id, value) {
-                const len = value.length.toString().padStart(2, '0');
-                return `${id}${len}${value}`;
-            }
+            function padFormat(id, value) { const len = value.length.toString().padStart(2, '0'); return `${id}${len}${value}`; }
 
             function generatePixPayload(key, amount, name, city) {
                 let payload = "000201";
                 let gui = padFormat("00", "BR.GOV.BCB.PIX");
                 let chv = padFormat("01", key);
-                let merchantAccountInfo = padFormat("26", gui + chv);
-                payload += merchantAccountInfo;
+                payload += padFormat("26", gui + chv);
                 payload += "52040000";
                 payload += "5303986";
-                if (amount > 0) {
-                    let amtStr = amount.toFixed(2);
-                    payload += padFormat("54", amtStr);
-                }
+                if (amount > 0) { payload += padFormat("54", amount.toFixed(2)); }
                 payload += "5802BR";
                 payload += padFormat("59", name.substring(0, 25));
                 payload += padFormat("60", city.substring(0, 15));
-                let txid = padFormat("05", "***");
-                payload += padFormat("62", txid);
+                payload += padFormat("62", padFormat("05", "***"));
                 payload += "6304";
                 
                 let crc = 0xFFFF;
                 for (let i = 0; i < payload.length; i++) {
                     crc ^= payload.charCodeAt(i) << 8;
-                    for (let j = 0; j < 8; j++) {
-                        if ((crc & 0x8000) !== 0) {
-                            crc = (crc << 1) ^ 0x1021;
-                        } else {
-                            crc = crc << 1;
-                        }
-                    }
+                    for (let j = 0; j < 8; j++) { if ((crc & 0x8000) !== 0) { crc = (crc << 1) ^ 0x1021; } else { crc = crc << 1; } }
                 }
-                let hex = (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
-                return payload + hex;
+                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
             }
 
             window.copyPixPayload = function() {
@@ -674,22 +653,17 @@
 
             window.openFreeModal = function() {
                 let val = parseFloat(document.getElementById('free-amount').value);
-                if(isNaN(val) || val <= 0) {
-                    alert(activeLang === 'pt' ? 'Por favor, digite um valor válido.' : 'Por favor, ingrese un valor válido.');
-                    return;
-                }
+                if(isNaN(val) || val <= 0) { alert(activeLang === 'pt' ? 'Por favor, digite um valor válido.' : 'Por favor, ingrese un valor válido.'); return; }
                 
                 window.currentGiftContext = { pt: "Contribuição Livre", es: "Contribución Libre", price: activeLang === 'pt' ? val : (val / 2) };
                 
-                const nameEl = document.getElementById('modal-gift-name');
-                const priceEl = document.getElementById('modal-gift-price');
+                document.getElementById('modal-gift-name').innerText = activeLang === 'pt' ? "Contribuição Livre" : "Contribución Libre";
+                document.getElementById('guest-name').value = ''; document.getElementById('guest-name-es').value = '';
+
                 const modal = document.getElementById('gift-modal');
                 const viewPt = document.getElementById('modal-view-pt');
                 const viewEs = document.getElementById('modal-view-es');
-
-                nameEl.innerText = activeLang === 'pt' ? "Contribuição Livre" : "Contribución Libre";
-                document.getElementById('guest-name').value = '';
-                document.getElementById('guest-name-es').value = '';
+                const priceEl = document.getElementById('modal-gift-price');
 
                 if (activeLang === 'pt') {
                     priceEl.innerText = `R$ ${val.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
@@ -712,23 +686,19 @@
 
                 window.currentGiftContext = { pt: gift.pt, es: gift.es, price: gift.price };
 
-                const nameEl = document.getElementById('modal-gift-name');
-                const priceEl = document.getElementById('modal-gift-price');
+                document.getElementById('modal-gift-name').innerText = activeLang === 'pt' ? gift.pt : gift.es;
+                document.getElementById('guest-name').value = ''; document.getElementById('guest-name-es').value = '';
+
                 const modal = document.getElementById('gift-modal');
                 const viewPt = document.getElementById('modal-view-pt');
                 const viewEs = document.getElementById('modal-view-es');
-
-                nameEl.innerText = activeLang === 'pt' ? gift.pt : gift.es;
-                document.getElementById('guest-name').value = '';
-                document.getElementById('guest-name-es').value = '';
+                const priceEl = document.getElementById('modal-gift-price');
 
                 if (activeLang === 'pt') {
                     priceEl.innerText = `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
                     viewEs.classList.add('hidden'); viewPt.classList.remove('hidden');
-                    
                     const payload = generatePixPayload("+5542999215431", gift.price, "Fabio e Ana Isabel", "Ponta Grossa");
                     document.getElementById('modal-pix-payload').value = payload;
-                    
                     document.getElementById('pix-loader').style.display = 'block';
                     document.getElementById('modal-pix-qr').src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(payload);
                 } else {
@@ -765,7 +735,7 @@
 
             document.getElementById('gift-modal').addEventListener('click', function(e) { if (e.target.id === 'gift-modal') { closeGiftModal(); } });
 
-            // --- SISTEMA DE TRADUÇÃO ---
+            // Idiomas e UI Filters
             window.setLanguage = function(lang) {
                 activeLang = lang;
                 const ptBtn = document.getElementById('btn-pt'); const esBtn = document.getElementById('btn-es');
@@ -774,18 +744,18 @@
                     ptBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.remove('text-gray-400', 'border-transparent');
                     esBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    document.getElementById('filter-under200').innerText = "Até R$ 200";
-                    document.getElementById('filter-200to500').innerText = "R$ 200–500";
-                    document.getElementById('filter-500to1000').innerText = "R$ 500–1000";
-                    document.getElementById('filter-above1000').innerText = "R$ 1000+";
+                    document.getElementById('filter-under200').innerText = "Até R$200";
+                    document.getElementById('filter-200to500').innerText = "R$200–500";
+                    document.getElementById('filter-500to1000').innerText = "R$500–1000";
+                    document.getElementById('filter-above1000').innerText = "R$1000+";
                 } else {
                     esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.remove('text-gray-400', 'border-transparent');
                     ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.add('text-gray-400', 'border-transparent');
                     
-                    document.getElementById('filter-under200').innerText = "Hasta Bs. 400";
-                    document.getElementById('filter-200to500').innerText = "Bs. 400–1000";
-                    document.getElementById('filter-500to1000').innerText = "Bs. 1000–2000";
-                    document.getElementById('filter-above1000').innerText = "Bs. 2000+";
+                    document.getElementById('filter-under200').innerText = "Hasta Bs.400";
+                    document.getElementById('filter-200to500').innerText = "Bs.400–1000";
+                    document.getElementById('filter-500to1000').innerText = "Bs.1000–2000";
+                    document.getElementById('filter-above1000').innerText = "Bs.2000+";
                 }
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -801,42 +771,41 @@
 
             const translations = {
                 pt: {
-                    invite: "Você está convidado para o casamento de", date: "18 de Dezembro de 2026", time: "Início às 17:30", scroll_down: "Deslize para baixo",
+                    invite: "Você está convidado para o casamento de", date: "18 de Dezembro de 2026", time: "Início às 17:00",
                     nav_locais: "Locais", nav_programacao: "Programação", nav_rsvp: "Confirmação", nav_presentes: "Presentes",
-                    countdown_title: "Faltam...", days: "Dias", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+                    countdown_title: "Faltam...", days: "Dias", hours: "Horas", minutes: "Minutos", seconds: "Segundos", scroll_down: "Deslize para baixo",
                     location_title: "Locais", church_title: "Cerimônia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
                     dinner_title: "Recepção", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
-                    timeline_title: "Programação", t1: "Cerimônia Religiosa", t2: "Sessão de Fotos", t3: "Brinde aos Noivos", t4: "Jantar", t5: "Baile", t6: "Petiscos", t7: "Despedida",
-                    dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
+                    timeline_title: "Programação", t1: "Cerimônia Religiosa", t2: "Recepção dos Convidados", t3: "Jantar", t4: "Baile", t5: "Despedida",
+                    dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_style: "Passeio Completo", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos.",
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo.", rsvp_btn: "Confirmar pelo WhatsApp",
-                    gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos duas listas de presentes para facilitar para nossos convidados de ambos os países.",
-                    btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Voltar ao convite",
+                    gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear, preparamos listas de presentes para facilitar.",
+                    btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Voltar ao Início",
                     gifts_list_title: "Lista de Presentes", gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar.",
-                    filter_all: "Todos", filter_under200: "Até R$ 200", filter_200to500: "R$ 200–500", filter_500to1000: "R$ 500–1000", filter_above1000: "R$ 1000+",
+                    filter_all: "Todos",
                     modal_gift_txt: "Você escolheu:", copy_btn: "Copiar Código Pix", copy_success: "Código copiado! ✓", btn_notify_wa: "Avisar que presenteei",
-                    ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
+                    ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. Mande um \"Oi\" aqui embaixo!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
                 },
                 es: {
-                    invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:30", scroll_down: "Desliza hacia abajo",
+                    invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:00",
                     nav_locais: "Ubicaciones", nav_programacao: "Programación", nav_rsvp: "Confirmación", nav_presentes: "Regalos",
-                    countdown_title: "Faltan...", days: "Días", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+                    countdown_title: "Faltan...", days: "Días", hours: "Horas", minutes: "Minutos", seconds: "Segundos", scroll_down: "Desliza hacia abajo",
                     location_title: "Ubicaciones", church_title: "Ceremonia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
                     dinner_title: "Recepción", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
-                    timeline_title: "Programación", t1: "Ceremonia Religiosa", t2: "Sesión de Fotos", t3: "Brindis a los Novios", t4: "Cena", t5: "Baile", t6: "Aperitivos", t7: "Despedida",
-                    dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
+                    timeline_title: "Programación", t1: "Ceremonia Religiosa", t2: "Recepción de Invitados", t3: "Cena", t4: "Baile", t5: "Despedida",
+                    dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_style: "Traje de Gala", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! Por favor, confirma tu asistencia haciendo clic en el botón de abajo.", rsvp_btn: "Confirmar por WhatsApp",
-                    gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos dos listas de regalos para facilitar a los invitados de ambos países.",
-                    btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Volver a la invitación",
+                    gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos dos listas de regalos para facilitar.",
+                    btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Volver al Inicio",
                     gifts_list_title: "Lista de Regalos", gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar.",
-                    filter_all: "Todos", filter_under200: "Hasta Bs. 400", filter_200to500: "Bs. 400–1000", filter_500to1000: "Bs. 1000–2000", filter_above1000: "Bs. 2000+",
+                    filter_all: "Todos",
                     modal_gift_txt: "Elegiste:", copy_btn: "Copiar Código", copy_success: "¡Código copiado! ✓", btn_notify_wa: "Avisar que regalé", modal_gift_inst_es: "Escanea este código QR desde tu aplicación bancaria para realizar el pago.",
                     ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026"
                 }
             };
             
-            // Renderiza inicial
             renderGiftsGrid();
         });
     </script>
