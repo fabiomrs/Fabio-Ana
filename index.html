@@ -34,7 +34,6 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .scroll-indicator { animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
-        /* Dropzone Upload */
         .dropzone { border: 2px dashed #a3b18a; background-color: #fcfbf9; transition: all 0.3s ease; }
         .dropzone:hover { background-color: #f0f3ea; border-color: #5a6b47; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
     </style>
@@ -42,7 +41,6 @@
 
 <body class="antialiased overflow-hidden">
 
-    <!-- Modal Inicial de Boas Vindas -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
@@ -56,7 +54,6 @@
         </div>
     </div>
 
-    <!-- Navegação Superior -->
     <nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-md transition-all duration-300 border-b border-gray-100 py-4 hidden-until-enter opacity-0">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="font-serif text-2xl tracking-wider text-[#5a6b47] font-medium cursor-pointer" onclick="navTo('home')">F <span class="italic font-light">&</span> A</div>
@@ -74,7 +71,6 @@
         </div>
     </nav>
 
-    <!-- Main View: Capa e Convite -->
     <div id="main-view">
         <header id="home" class="hero-bg min-h-[100svh] flex flex-col justify-center px-6 md:px-20 pt-20 relative text-left">
             <div class="max-w-3xl">
@@ -110,17 +106,15 @@
             </div>
         </section>
 
-        <!-- Seção: Locais -->
         <section id="locais" class="py-24 bg-[#fcfbf9] scroll-mt-20">
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
-                    <!-- Igreja -->
+                    
+                    <!-- Igreja com Imagem -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v5m-2-2h4" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7L4 12v10h16V12l-8-5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 22v-5a2 2 0 014 0v5" />
-                            </svg>
+                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1437604537860-3153835698b6?auto=format&fit=crop&w=300&q=80" alt="Igreja" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
@@ -129,13 +123,11 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
-                    <!-- Recepção -->
+                    
+                    <!-- Recepção com Imagem -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <!-- Duas taças cruzadas elegantes -->
-                                <path d="M7 3l4.5 4.5a2.5 2.5 0 0 1 0 3.53L10.09 12.44a2.5 2.5 0 0 1-3.53 0L2 7.94"/><path d="M11 12l-5 5"/><path d="M4 17h4"/><path d="M17 3l-4.5 4.5a2.5 2.5 0 0 0 0 3.53l1.41 1.41a2.5 2.5 0 0 0 3.53 0L22 7.94"/><path d="M13 12l5 5"/><path d="M16 17h4"/><path d="M8 4c.5-1 2-1 3 0l1 1c1 1 1 2.5 0 3.5l-1 1c-1 1-2.5 1-3.5 0l-1-1Z"/><path d="M16 4c-.5-1-2-1-3 0l-1 1c-1 1-1 2.5 0 3.5l1 1c1 1 2.5 1 3.5 0l1-1Z"/>
-                            </svg>
+                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=300&q=80" alt="Recepção" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
@@ -148,7 +140,6 @@
             </div>
         </section>
 
-        <!-- Seção: Programação -->
         <section id="programacao" class="py-24 bg-white scroll-mt-20">
             <div class="container mx-auto px-6 max-w-3xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="timeline_title">Programação</h2>
@@ -162,7 +153,6 @@
             </div>
         </section>
 
-        <!-- Seção Interativa de Upload de Fotos -->
         <section id="upload-fotos" class="py-20 bg-[#fcfbf9] border-y border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <div class="w-16 h-16 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
@@ -174,7 +164,6 @@
                 <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="upload_title">Nossa Visão, Seus Olhos</h2>
                 <p class="text-gray-500 mb-10 text-lg max-w-2xl mx-auto leading-relaxed" data-i18n="upload_desc">Queremos ver o nosso grande dia por várias visões! Tire muitas fotos e vídeos e adicione na nossa pasta compartilhada para guardarmos para sempre.</p>
                 
-                <!-- Área de Dropzone Interativa -->
                 <div onclick="openUploadModal()" class="dropzone p-10 rounded-2xl cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
                         <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
@@ -185,7 +174,6 @@
             </div>
         </section>
 
-        <!-- Informações Adicionais: Dress Code e Crianças -->
         <section class="py-20 bg-white border-b border-gray-100">
             <div class="container mx-auto px-6 max-w-4xl grid md:grid-cols-2 gap-10">
                 <div class="bg-[#fcfbf9] p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
@@ -214,7 +202,6 @@
             </div>
         </section>
 
-        <!-- RSVP -->
         <section id="rsvp" class="py-24 bg-white border-b border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-6 text-center max-w-2xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
@@ -226,7 +213,6 @@
             </div>
         </section>
 
-        <!-- Botões de Presente -->
         <section id="presentes" class="py-24 bg-[#fcfbf9] scroll-mt-20">
             <div class="container mx-auto px-6 text-center max-w-4xl">
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
@@ -246,7 +232,6 @@
             </div>
         </section>
 
-        <!-- Assistente IA -->
         <section id="ai-section" class="py-20 bg-white border-y border-gray-100">
             <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
                 <div class="mb-10">
@@ -260,7 +245,6 @@
             </div>
         </section>
 
-        <!-- Galeria Restrita (2, 6 e 9) -->
         <section class="py-24 bg-[#fcfbf9]">
             <div class="container mx-auto px-4 max-w-6xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
@@ -273,7 +257,6 @@
         </section>
     </div> <!-- FIM DO MAIN VIEW -->
 
-    <!-- VIEW DA LISTA DE PRESENTES VETORIAL -->
     <div id="gifts-view" class="hidden min-h-screen bg-[#fcfbf9] pt-28 pb-24">
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
@@ -288,7 +271,6 @@
                 <p class="text-gray-500 text-lg" data-i18n="gifts_list_sub">Escolha com carinho um item para ajudar a compor nosso lar.</p>
             </div>
 
-            <!-- Filtros Atualizados -->
             <div class="flex gap-3 overflow-x-auto no-scrollbar mb-10 pb-2 justify-start md:justify-center" id="filters-container">
                 <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-[#5a6b47] text-white whitespace-nowrap" data-i18n="filter_all">Todos</button>
                 <button onclick="setFilter('under200')" id="filter-under200" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_under200">Até 200</button>
@@ -298,12 +280,11 @@
             </div>
 
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Javascript injeta os itens dinamicamente aqui -->
+                <!-- Javascript injeta os itens com imagens dinamicamente aqui -->
             </div>
         </div>
     </div>
 
-    <!-- Modal Dinâmico do Presente -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
             <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-2">
@@ -315,13 +296,11 @@
             <p id="modal-gift-price" class="text-3xl font-bold text-[#5a6b47] mb-6"></p>
             <div class="w-16 h-[1px] bg-gray-200 mx-auto mb-6"></div>
             
-            <!-- Visão Português (Brasil / PIX dinâmico) -->
             <div id="modal-view-pt" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Seu Nome / De quem é o presente?</label>
                     <input type="text" id="guest-name" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ex: João e Maria">
                 </div>
-
                 <div class="relative w-48 h-48 mx-auto mb-4 border border-gray-100 rounded-xl p-2 bg-white flex items-center justify-center shadow-sm">
                     <div id="pix-loader" class="loader absolute"></div>
                     <img id="modal-pix-qr" src="" class="w-full h-full object-contain relative z-10" onload="document.getElementById('pix-loader').style.display='none'">
@@ -343,7 +322,6 @@
                 </div>
             </div>
 
-            <!-- Visão Espanhol (Bolívia / QR Estático Inteligente) -->
             <div id="modal-view-es" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Tu Nombre:</label>
@@ -361,7 +339,6 @@
         </div>
     </div>
 
-    <!-- Modal Educativo do Google Drive para Upload de Fotos -->
     <div id="drive-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center relative shadow-2xl">
             <button onclick="closeUploadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-2">
@@ -386,7 +363,6 @@
         </div>
     </div>
 
-    <!-- Lightbox de Imagens -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <div class="relative w-full h-full flex items-center justify-center p-4">
@@ -404,7 +380,6 @@
         </div>
     </footer>
 
-    <!-- Botão e Controle de Música -->
     <audio id="bg-music" preload="auto"></audio>
 
     <div id="music-player" class="fixed bottom-6 right-6 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full shadow-xl z-[150] transition-all duration-300 flex items-center justify-center transform hidden-until-enter opacity-0 px-3 py-1 space-x-1">
@@ -420,16 +395,13 @@
         document.addEventListener("DOMContentLoaded", function() {
             window.scrollTo(0, 0);
 
-            // Efeito Navbar
             window.addEventListener('scroll', function() {
                 const nav = document.getElementById('navbar');
                 const sp = document.getElementById('scroll-prompt');
-                if (window.scrollY > 50) { nav.classList.add('shadow-md'); } 
-                else { nav.classList.remove('shadow-md'); }
+                if (window.scrollY > 50) { nav.classList.add('shadow-md'); } else { nav.classList.remove('shadow-md'); }
                 if (sp && !sp.classList.contains('opacity-0') && window.scrollY > 20) { sp.classList.add('opacity-0'); }
             });
 
-            // Contagem Regressiva
             try {
                 const targetDate = new Date("2026-12-18T17:00:00").getTime();
                 const countdown = setInterval(function() {
@@ -443,12 +415,10 @@
                 }, 1000);
             } catch (e) { }
 
-            // MÚSICA E PLAYLIST
             window.isPlaying = false;
             const bgMusic = document.getElementById('bg-music');
             const iconPlay = document.getElementById('icon-play');
             const iconPause = document.getElementById('icon-pause');
-            
             const playlist = ['musica.mp3', 'musica1.mp3', 'musica2.mp3'];
             let currentTrack = 0;
             bgMusic.src = playlist[currentTrack];
@@ -458,36 +428,15 @@
                 else { iconPlay.classList.remove('hidden'); iconPause.classList.add('hidden'); }
             }
 
-            bgMusic.addEventListener('ended', function() {
-                currentTrack = (currentTrack + 1) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
-                if (window.isPlaying) bgMusic.play().catch(()=>{});
-            });
-
-            document.getElementById('prev-btn').addEventListener('click', function() {
-                currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
-                if (window.isPlaying) bgMusic.play().catch(()=>{});
-            });
-
-            document.getElementById('next-btn').addEventListener('click', function() {
-                currentTrack = (currentTrack + 1) % playlist.length;
-                bgMusic.src = playlist[currentTrack];
-                if (window.isPlaying) bgMusic.play().catch(()=>{});
-            });
-
+            bgMusic.addEventListener('ended', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
+            document.getElementById('prev-btn').addEventListener('click', function() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
+            document.getElementById('next-btn').addEventListener('click', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
             document.getElementById('music-btn').addEventListener('click', function() {
                 if (window.isPlaying) { bgMusic.pause(); window.isPlaying = false; } 
-                else {
-                    let playPromise = bgMusic.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { });
-                    }
-                }
+                else { let playPromise = bgMusic.play(); if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); } }
                 updatePlayerUI();
             });
 
-            // FUNÇÃO DE ENTRADA DO SITE
             window.enterSite = function(lang) {
                 setLanguage(lang);
                 const modal = document.getElementById('welcome-modal');
@@ -502,65 +451,35 @@
                 setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
 
                 let playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { });
-                }
+                if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); }
             };
 
-            // SPA Navegação
             window.navTo = function(sectionId) {
-                const mainView = document.getElementById('main-view');
-                const giftsView = document.getElementById('gifts-view');
-                if (sectionId !== 'gifts' && mainView.classList.contains('hidden')) {
-                    giftsView.classList.add('hidden');
-                    mainView.classList.remove('hidden');
-                    mainView.classList.add('fade-enter');
-                }
+                const mainView = document.getElementById('main-view'); const giftsView = document.getElementById('gifts-view');
+                if (sectionId !== 'gifts' && mainView.classList.contains('hidden')) { giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter'); }
                 setTimeout(() => {
                     if (sectionId === 'home') { window.scrollTo({top: 0, behavior: 'smooth'}); } 
-                    else if (sectionId !== 'gifts') {
-                        const el = document.getElementById(sectionId);
-                        if (el) { const offset = 80; const top = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: top, behavior: 'smooth'}); }
-                    }
+                    else if (sectionId !== 'gifts') { const el = document.getElementById(sectionId); if (el) { const offset = 80; const top = el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top: top, behavior: 'smooth'}); } }
                 }, 50);
             };
 
             window.toggleView = function(view, forcedLang = null) {
-                const mainView = document.getElementById('main-view');
-                const giftsView = document.getElementById('gifts-view');
+                const mainView = document.getElementById('main-view'); const giftsView = document.getElementById('gifts-view');
                 if (forcedLang) { setLanguage(forcedLang); }
-                if (view === 'gifts') {
-                    mainView.classList.add('hidden'); giftsView.classList.remove('hidden'); giftsView.classList.add('fade-enter'); window.scrollTo(0,0);
-                } else {
-                    giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter'); window.scrollTo(0,0);
-                }
+                if (view === 'gifts') { mainView.classList.add('hidden'); giftsView.classList.remove('hidden'); giftsView.classList.add('fade-enter'); window.scrollTo(0,0);
+                } else { giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter'); window.scrollTo(0,0); }
             };
 
-            // Modal de Upload de Fotos
-            window.openUploadModal = function() {
-                const modal = document.getElementById('drive-modal');
-                modal.classList.remove('hidden'); modal.style.display = 'flex';
-                setTimeout(() => modal.classList.remove('opacity-0'), 10);
-            };
-            window.closeUploadModal = function() {
-                const modal = document.getElementById('drive-modal');
-                modal.classList.add('opacity-0');
-                setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; }, 300);
-            };
+            window.openUploadModal = function() { const modal = document.getElementById('drive-modal'); modal.classList.remove('hidden'); modal.style.display = 'flex'; setTimeout(() => modal.classList.remove('opacity-0'), 10); };
+            window.closeUploadModal = function() { const modal = document.getElementById('drive-modal'); modal.classList.add('opacity-0'); setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; }, 300); };
             document.getElementById('drive-modal').addEventListener('click', function(e) { if (e.target.id === 'drive-modal') { closeUploadModal(); } });
 
-            // IA Lazy Load
             const aiIframe = document.getElementById('ai-iframe');
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) { if (aiIframe.getAttribute('data-src')) { aiIframe.src = aiIframe.getAttribute('data-src'); aiIframe.removeAttribute('data-src'); } obs.disconnect(); }
-                    });
-                }, { rootMargin: "0px 0px 800px 0px" }); 
+                const observer = new IntersectionObserver((entries, obs) => { entries.forEach(entry => { if (entry.isIntersecting) { if (aiIframe.getAttribute('data-src')) { aiIframe.src = aiIframe.getAttribute('data-src'); aiIframe.removeAttribute('data-src'); } obs.disconnect(); } }); }, { rootMargin: "0px 0px 800px 0px" }); 
                 observer.observe(document.getElementById('ai-section'));
             } else { aiIframe.src = aiIframe.getAttribute('data-src'); }
 
-            // Galeria
             window.currentImageIndex = 0;
             const images = Array.from(document.querySelectorAll('.gallery-img')).map(img => img.src);
             window.openLightbox = function(index) { currentImageIndex = index; const lb = document.getElementById('lightbox'); document.getElementById('lightbox-img').src = images[currentImageIndex]; lb.classList.remove('hidden'); lb.style.display = 'flex'; setTimeout(() => lb.classList.remove('opacity-0'), 10); document.documentElement.style.overflow = 'hidden'; };
@@ -569,61 +488,32 @@
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
-            // --- 25 ÍCONES VETORIAIS (ESTILO LINE ICON / OUTLINE PERFEITO) ---
-            const iconSvg = (path) => `<svg class="w-16 h-16 text-[#5a6b47]" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">${path}</svg>`;
-            
-            const p = {
-                taca: `<path d="M8 22h8"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5V3H7v7a5 5 0 0 0 5 5z"/>`,
-                toalha: `<path d="M20 14H4v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4Z"/><path d="M4 14V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M4 10h16"/>`,
-                cama: `<path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M3 13h18"/><path d="M6 10h4V7H6v3Z"/><path d="M14 10h4V7h-4v3Z"/>`,
-                faqueiro: `<path d="M17 3v18"/><path d="M17 3c-3 3-3 7-3 7h3"/><path d="M9 3v8a2 2 0 0 0 4 0V3"/><path d="M11 11v10"/><path d="M7 3v7"/>`,
-                airfryer: `<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M5 10h14"/><path d="M9 14h6"/><path d="M12 7v.01"/><path d="M12 14v3"/>`,
-                cafeteira: `<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8Z"/><path d="M9 2v2"/><path d="M15 2v2"/><path d="M6 8V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/>`,
-                panela: `<path d="M4 10a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4"/><path d="M2 10h20"/><path d="M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M9 2h6"/>`,
-                forno: `<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 11h16"/><path d="M10 15h4"/><path d="M9 8h.01"/><path d="M12 8h.01"/><path d="M15 8h.01"/>`,
-                jantar: `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/>`,
-                pressao: `<path d="M7 10h10"/><path d="M6 10v6a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-6H6Z"/><path d="M8 10V7a2 2 0 0 1 2-2h4"/><path d="M14 5l2-2"/><path d="M9 5h3"/>`,
-                robo: `<circle cx="12" cy="12" r="9"/><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M12 7a5 5 0 0 0-5 5"/><path d="M17 12a5 5 0 0 0-5-5"/>`,
-                adega: `<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 7h14"/><path d="M9 11h6"/><path d="M9 15h6"/><path d="M12 7v14"/>`,
-                expresso: `<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M5 9h14"/><path d="M9 14h6v3H9v-3Z"/><path d="M10 9V5"/><path d="M14 9V5"/><path d="M7 20v2"/><path d="M17 20v2"/>`,
-                aspirador: `<path d="M12 3v13"/><path d="M9 16h6v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-5Z"/><path d="M10 3h4"/>`,
-                cooktop: `<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M9 10h.01"/><path d="M15 10h.01"/><path d="M9 14h.01"/><path d="M15 14h.01"/>`,
-                panelaprem: `<path d="M3 14a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4"/><path d="M2 14h20"/><path d="M6 14v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><path d="M10 5h4"/><path d="M12 5V3"/>`,
-                robomap: `<circle cx="12" cy="14" r="8"/><path d="M12 6v2"/><path d="M10 4h4v2h-4z"/><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>`,
-                tv: `<rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 21h8"/><path d="M12 19v2"/><path d="M8 3l4 3 4-3"/>`,
-                lavalouca: `<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M5 9h14"/><path d="M9 14h6"/><path d="M9 17h6"/><path d="M12 6h.01"/>`,
-                arcondicionado: `<rect x="3" y="6" width="18" height="8" rx="2"/><path d="M7 14v3"/><path d="M12 14v4"/><path d="M17 14v3"/><path d="M7 10h10"/>`,
-                lavaseca: `<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 8h14"/><circle cx="12" cy="14" r="4"/>`,
-                viagem: `<rect x="6" y="8" width="12" height="14" rx="2"/><path d="M9 8V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3"/><path d="M6 13h12"/><path d="M6 17h12"/>`,
-                luademel: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`
-            };
-
             const giftListItems = [
-                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, icon: iconSvg(p.taca) },
-                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 100, icon: iconSvg(p.toalha) },
-                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, icon: iconSvg(p.cama) },
-                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 200, icon: iconSvg(p.faqueiro) },
-                { id: 5, pt: "Air Fryer Compacta", es: "Freidora de Aire Compacta", price: 250, icon: iconSvg(p.airfryer) },
-                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 300, icon: iconSvg(p.cafeteira) },
-                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 350, icon: iconSvg(p.panela) },
-                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 400, icon: iconSvg(p.forno) },
-                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 450, icon: iconSvg(p.jantar) },
-                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 500, icon: iconSvg(p.pressao) },
-                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 600, icon: iconSvg(p.robo) },
-                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 700, icon: iconSvg(p.adega) },
-                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 800, icon: iconSvg(p.expresso) },
-                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 900, icon: iconSvg(p.aspirador) },
-                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1000, icon: iconSvg(p.cooktop) },
-                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1100, icon: iconSvg(p.panelaprem) },
-                { id: 17, pt: "Robô Aspirador com Mapeamento", es: "Robot Aspiradora Inteligente", price: 1200, icon: iconSvg(p.robomap) },
-                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1300, icon: iconSvg(p.tv) },
-                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1400, icon: iconSvg(p.lavalouca) },
-                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 1500, icon: iconSvg(p.tv) },
-                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1600, icon: iconSvg(p.arcondicionado) },
-                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 1700, icon: iconSvg(p.tv) },
-                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 1800, icon: iconSvg(p.lavaseca) },
-                { id: 24, pt: "Viagem Romântica", es: "Viaje Romántico", price: 1900, icon: iconSvg(p.viagem) },
-                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, icon: iconSvg(p.luademel) }
+                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, img: "https://images.unsplash.com/photo-1583556018884-17724a737f1e?auto=format&fit=crop&w=400&q=80" },
+                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 100, img: "https://images.unsplash.com/photo-1616694602685-644782bb5d5f?auto=format&fit=crop&w=400&q=80" },
+                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80" },
+                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 200, img: "https://images.unsplash.com/photo-1582283578018-09ee0b15b3c3?auto=format&fit=crop&w=400&q=80" },
+                { id: 5, pt: "Utensílios de Cozinha", es: "Utensilios de Cocina", price: 250, img: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=400&q=80" },
+                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 300, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=400&q=80" },
+                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 350, img: "https://images.unsplash.com/photo-1584990347449-a162d3381a1d?auto=format&fit=crop&w=400&q=80" },
+                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 400, img: "https://images.unsplash.com/photo-1585237305953-b31c4f529124?auto=format&fit=crop&w=400&q=80" },
+                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 450, img: "https://images.unsplash.com/photo-1603514064573-0435cebc6f62?auto=format&fit=crop&w=400&q=80" },
+                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 500, img: "https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?auto=format&fit=crop&w=400&q=80" },
+                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 600, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80" },
+                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 700, img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=400&q=80" },
+                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 800, img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80" },
+                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 900, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=400&q=80" },
+                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1000, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=400&q=80" },
+                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1100, img: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=400&q=80" },
+                { id: 17, pt: "Robô Aspirador Inteligente", es: "Robot Aspiradora Inteligente", price: 1200, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80" },
+                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1300, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
+                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1400, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" },
+                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 1500, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
+                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1600, img: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=400&q=80" },
+                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 1700, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
+                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 1800, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=400&q=80" },
+                { id: 24, pt: "Viagem Romântica", es: "Viaje Romántico", price: 1900, img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=400&q=80" },
+                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?auto=format&fit=crop&w=400&q=80" }
             ];
 
             let activeLang = 'pt';
@@ -632,24 +522,18 @@
             window.setFilter = function(filter) {
                 currentFilter = filter;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('bg-[#5a6b47]', 'text-white', 'border-transparent');
-                    btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+                    btn.classList.remove('bg-[#5a6b47]', 'text-white', 'border-transparent'); btn.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
                 });
                 const activeBtn = document.getElementById('filter-' + filter);
-                if(activeBtn) {
-                    activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
-                    activeBtn.classList.add('bg-[#5a6b47]', 'text-white', 'border-transparent');
-                }
+                if(activeBtn) { activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200'); activeBtn.classList.add('bg-[#5a6b47]', 'text-white', 'border-transparent'); }
                 renderGiftsGrid();
             };
 
             function renderGiftsGrid() {
                 const grid = document.getElementById('gifts-grid');
                 grid.innerHTML = '';
-                
                 const btnLabel = activeLang === 'pt' ? 'Presentear' : 'Regalar';
                 
-                // CARD FIXO DE VALOR LIVRE
                 const freeTxt = activeLang === 'pt' ? "Contribuir com valor livre" : "Contribuir con valor libre";
                 const freeSub = activeLang === 'pt' ? "Prefere escolher o valor? Digite abaixo e geramos seu Pix instantaneamente" : "¿Prefiere elegir el valor? Escríbalo abajo y generamos su pago";
                 const btnFree = activeLang === 'pt' ? "Gerar Pagamento" : "Generar Pago";
@@ -661,7 +545,7 @@
                             <svg class="w-12 h-12 text-[#5a6b47] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <h3 class="font-serif text-xl text-[#2d3326] mb-2 font-bold">${freeTxt}</h3>
                             <p class="text-sm text-gray-500 mb-6">${freeSub}</p>
-                            <input type="number" id="free-amount" placeholder="${phFree}" class="w-full bg-white border border-[#a3b18a]/50 text-gray-800 text-center text-lg rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3 mb-4 font-bold placeholder-gray-400 focus:placeholder-transparent">
+                            <input type="number" id="free-amount" placeholder="${phFree}" class="w-full bg-white border border-[#a3b18a]/50 text-gray-800 text-center text-lg rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3 mb-2 font-bold placeholder-gray-400 focus:placeholder-transparent">
                             <span id="free-error" class="hidden text-red-500 text-xs font-bold uppercase mb-2">Digite um valor</span>
                             <button onclick="openFreeModal()" class="w-full py-3 bg-[#5a6b47] text-white hover:bg-[#435234] transition-colors rounded-full font-bold uppercase tracking-wider text-sm shadow-sm mt-auto">
                                 ${btnFree}
@@ -672,7 +556,7 @@
                 grid.insertAdjacentHTML('beforeend', freeCardHTML);
 
                 giftListItems.forEach(gift => {
-                    const priceBs = gift.price * 2; // Cotação 1 para 2 solicitada (Ex: R$ 50 = Bs. 100)
+                    const priceBs = gift.price * 2; 
                     const comparePrice = activeLang === 'pt' ? gift.price : priceBs;
 
                     let show = true;
@@ -680,16 +564,16 @@
                     if (currentFilter === '200to500') { if (comparePrice <= (activeLang==='pt'?200:400) || comparePrice > (activeLang==='pt'?500:1000)) show = false; }
                     if (currentFilter === '500to1000') { if (comparePrice <= (activeLang==='pt'?500:1000) || comparePrice > (activeLang==='pt'?1000:2000)) show = false; }
                     if (currentFilter === 'above1000') { if (comparePrice <= (activeLang==='pt'?1000:2000)) show = false; }
-
                     if (!show) return;
 
                     const title = activeLang === 'pt' ? gift.pt : gift.es;
                     const priceStr = activeLang === 'pt' ? `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
 
+                    // Usando Imagens Unsplash como capa do presente, com fallback para foto estática se falhar
                     const cardHTML = `
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
-                            <div class="h-40 w-full bg-[#f9faf7] flex items-center justify-center border-b border-gray-50">
-                                ${gift.icon}
+                            <div class="h-48 w-full bg-gray-100 relative overflow-hidden">
+                                <img src="${gift.img}" onerror="this.src='https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&q=80'" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt="${title}" loading="lazy">
                             </div>
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h3 class="font-serif text-xl text-[#2d3326] mb-2 flex-grow">${title}</h3>
@@ -705,7 +589,6 @@
             }
 
             function padFormat(id, value) { const len = value.length.toString().padStart(2, '0'); return `${id}${len}${value}`; }
-
             function generatePixPayload(key, amount, name, city) {
                 let payload = "000201"; let gui = padFormat("00", "BR.GOV.BCB.PIX"); let chv = padFormat("01", key);
                 payload += padFormat("26", gui + chv) + "520400005303986";
@@ -860,8 +743,8 @@
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo.", rsvp_btn: "Confirmar pelo WhatsApp",
                     gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos duas listas de presentes para facilitar para nossos convidados de ambos os países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Voltar ao convite",
-                    gifts_list_title: "Lista de Presentes", gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar.",
-                    filter_all: "Todos", modal_gift_txt: "Você escolheu:", copy_btn: "Copiar Código Pix", copy_success: "Código copiado! ✓", btn_notify_wa: "Avisar que presenteei",
+                    gifts_list_title: "Lista de Presentes", gifts_list_sub: "Escolha com carinho um item para ajudar a compor nosso lar.", filter_all: "Todos",
+                    modal_gift_txt: "Você escolheu:", copy_btn: "Copiar Código Pix", copy_success: "Código copiado! ✓", btn_notify_wa: "Avisar que presenteei",
                     ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026"
                 },
                 es: {
@@ -880,8 +763,8 @@
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! Por favor, confirma tu asistencia haciendo clic en el botón de abajo.", rsvp_btn: "Confirmar por WhatsApp",
                     gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos dos listas de regalos para facilitar a los invitados de ambos países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Lista de Regalos (Bolivia/QR)", btn_back_home: "Volver a la invitación",
-                    gifts_list_title: "Lista de Regalos", gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar.",
-                    filter_all: "Todos", modal_gift_txt: "Elegiste:", copy_btn: "Copiar Código", copy_success: "¡Código copiado! ✓", btn_notify_wa: "Avisar que regalé",
+                    gifts_list_title: "Lista de Regalos", gifts_list_sub: "Elige con cariño un artículo para ayudar a armar nuestro hogar.", filter_all: "Todos",
+                    modal_gift_txt: "Elegiste:", copy_btn: "Copiar Código", copy_success: "¡Código copiado! ✓", btn_notify_wa: "Avisar que regalé",
                     ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026"
                 }
             };
@@ -890,4 +773,4 @@
         });
     </script>
 </body>
-</html>
+                            </html>
