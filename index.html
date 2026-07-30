@@ -11,10 +11,7 @@
     <style>
         body { font-family: 'Lato', sans-serif; background-color: #fcfbf9; color: #333; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-        .hero-bg {
-            background-image: linear-gradient(to right, rgba(45, 51, 38, 0.85) 0%, rgba(45, 51, 38, 0.4) 60%, rgba(45, 51, 38, 0.1) 100%), url('foto (1).jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
+        .hero-bg { background-image: linear-gradient(to right, rgba(45, 51, 38, 0.85) 0%, rgba(45, 51, 38, 0.4) 60%, rgba(45, 51, 38, 0.1) 100%), url('foto (1).jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
         .btn-hover { transition: all 0.3s ease; }
         .btn-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         .masonry-grid { column-count: 2; column-gap: 1rem; }
@@ -40,7 +37,6 @@
 </head>
 
 <body class="antialiased overflow-hidden">
-
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/95 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
         <div class="text-center max-w-md w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="font-serif text-3xl tracking-wider text-[#5a6b47] font-medium mb-8">F <span class="italic font-light">&</span> A</div>
@@ -81,13 +77,13 @@
                 <div class="w-24 h-[2px] bg-[#a3b18a] my-8 opacity-90"></div>
                 <p class="text-xl md:text-2xl text-white tracking-widest uppercase mb-3 font-medium drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
                 <p class="text-lg text-[#d1daba] font-bold tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:00
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Início às 17:00
                 </p>
             </div>
             
             <div id="scroll-prompt" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 transition-opacity duration-700 pointer-events-none text-white drop-shadow-md">
                 <span class="text-xs uppercase tracking-widest font-bold mb-2 text-[#d1daba]" data-i18n="scroll_down">Deslize para baixo</span>
-                <svg class="w-6 h-6 scroll-indicator text-[#a3b18a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                <svg class="w-6 h-6 scroll-indicator text-[#a3b18a]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
             </div>
         </header>
 
@@ -111,33 +107,53 @@
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
                     
-                    <!-- Igreja com Ícone Vetorial de Linha -->
+                    <!-- Igreja com Ícone Exato do Anexo -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm flex items-center justify-center bg-white text-[#5a6b47]">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2v5m-2-2h4"/><path d="M12 7L4 12v10h16V12l-8-5z"/><path d="M10 22v-5a2 2 0 014 0v5"/>
+                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <!-- Cruz -->
+                                <path d="M12 2v4" />
+                                <path d="M10 4h4" />
+                                <!-- Corpo central da igreja -->
+                                <path d="M12 6l-4 4v12h8V10l-4-4z" />
+                                <!-- Telhados laterais -->
+                                <path d="M8 12l-4 3v7h4" />
+                                <path d="M16 12l4 3v7h-4" />
+                                <!-- Porta principal redonda -->
+                                <path d="M10 23v-5a2 2 0 014 0v5" />
                             </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="church_address">6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia</p>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Parroquia+La+Resurrecci%C3%B3n,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
                     
-                    <!-- Recepção com Ícone Vetorial de Taças -->
+                    <!-- Recepção com Ícone de Taças Brindando Exato do Anexo -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                         <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm flex items-center justify-center bg-white text-[#5a6b47]">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/>
+                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <!-- Taça Esquerda (Inclinada) -->
+                                <g transform="rotate(15 12 12) translate(-2.5, 1)">
+                                    <path d="M8 3h8l-1 6c-.5 2-1.5 3-3 3s-2.5-1-3-3L8 3z" />
+                                    <path d="M12 12v7" />
+                                    <path d="M9 19h6" />
+                                </g>
+                                <!-- Taça Direita (Inclinada) -->
+                                <g transform="rotate(-15 12 12) translate(2.5, 1)">
+                                    <path d="M8 3h8l-1 6c-.5 2-1.5 3-3 3s-2.5-1-3-3L8 3z" />
+                                    <path d="M12 12v7" />
+                                    <path d="M9 19h6" />
+                                </g>
                             </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
                         <p class="text-gray-500 mb-8 font-medium text-sm flex-grow leading-relaxed" data-i18n="dinner_address">1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra</p>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Garden+House+Eventos,+Octavo+Anillo,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-sm font-bold tracking-wider uppercase rounded-full btn-hover mt-auto">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
                 </div>
@@ -157,13 +173,12 @@
             </div>
         </section>
 
-        <!-- NOVIDADE: Dropzone Interativa para Fotos -->
+        <!-- Seção Dropzone de Fotos Pessoais -->
         <section id="upload-fotos" class="py-20 bg-[#fcfbf9] border-y border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <div class="w-16 h-16 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" />
                     </svg>
                 </div>
                 <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="upload_title">Nossa Visão, Seus Olhos</h2>
@@ -171,10 +186,10 @@
                 
                 <div onclick="openUploadModal()" class="dropzone p-10 rounded-2xl cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        <svg class="w-8 h-8 text-[#5a6b47]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     </div>
                     <p class="text-[#2d3326] font-bold text-xl mb-2" data-i18n="upload_box_title">Toque aqui para enviar suas fotos</p>
-                    <p class="text-gray-400 text-sm" data-i18n="upload_box_sub">Envie direto do seu rolo de câmera em alta qualidade</p>
+                    <p class="text-gray-400 text-sm" data-i18n="upload_box_sub">Envie direto do seu celular para nosso Google Drive</p>
                 </div>
             </div>
         </section>
@@ -185,11 +200,11 @@
                     <h3 class="font-serif text-3xl mb-6 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
                     <div class="flex justify-center gap-10 mb-6">
                         <div class="flex flex-col items-center">
-                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" /><path d="M8.5 10c-2 4-3.5 11-3.5 11h14s-1.5-7-3.5-11" /></svg>
+                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4l1.5 4-1.5 3H10L8.5 7 10 3z" /><path d="M8.5 10c-2 4-3.5 11-3.5 11h14s-1.5-7-3.5-11" /></svg>
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l3 18H4L7 3z" /><path d="M12 3v18" /><path d="M7 3l5 7 5-7" /><path d="M12 10l-2 4h4l-2-4z" /></svg>
+                            <svg class="w-14 h-14 text-[#5a6b47]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l3 18H4L7 3z" /><path d="M12 3v18" /><path d="M7 3l5 7 5-7" /><path d="M12 10l-2 4h4l-2-4z" /></svg>
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                         </div>
                     </div>
@@ -199,7 +214,7 @@
                 
                 <div class="bg-[#fcfbf9] p-10 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col justify-center">
                     <div class="w-12 h-12 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-4 text-[#5a6b47]">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
                     <h3 class="font-serif text-3xl mb-4 text-[#2d3326]" data-i18n="kids_title">Aviso Especial</h3>
                     <p class="text-gray-500 text-sm leading-relaxed italic" data-i18n="kids_note">Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.</p>
@@ -225,12 +240,12 @@
                 
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-14">
                     <button onclick="toggleView('gifts', 'pt')" class="w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                         <span data-i18n="btn_full_list_br">Lista de Presentes (Brasil/Pix)</span>
                     </button>
                     
                     <button onclick="toggleView('gifts', 'es')" class="w-full md:w-auto inline-flex justify-center items-center px-8 py-4 bg-[#a3b18a] hover:bg-[#85946f] text-white rounded-full font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
                         <span data-i18n="btn_full_list_bo">Lista de Regalos (Bolivia/QR)</span>
                     </button>
                 </div>
@@ -240,7 +255,7 @@
         <section id="ai-section" class="py-20 bg-white border-y border-gray-100">
             <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
                 <div class="mb-10">
-                    <svg class="w-12 h-12 text-[#a3b18a] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                    <svg class="w-12 h-12 text-[#a3b18a] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                     <h2 class="font-serif text-4xl text-[#2d3326] mb-4" data-i18n="ai_title">Dúvidas? Pergunte para nossa IA</h2>
                     <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
                 </div>
@@ -253,10 +268,11 @@
         <section class="py-24 bg-[#fcfbf9]">
             <div class="container mx-auto px-4 max-w-6xl">
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
+                <!-- Mantendo a galeria pessoal em fotografia pois são os noivos -->
                 <div class="masonry-grid">
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay rounded-lg"><svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
                 </div>
             </div>
         </section>
@@ -266,7 +282,7 @@
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-widest uppercase text-sm group">
-                    <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     <span data-i18n="btn_back_home">Voltar ao Início</span>
                 </button>
             </div>
@@ -284,16 +300,17 @@
                 <button onclick="setFilter('above1000')" id="filter-above1000" class="filter-btn px-6 py-2.5 rounded-full text-sm font-bold tracking-wider uppercase transition-colors bg-white border border-gray-200 text-gray-500 hover:border-[#5a6b47] hover:text-[#5a6b47] whitespace-nowrap" data-i18n="filter_above1000">1000+</button>
             </div>
 
+            <!-- Grid de Itens com SVG (Injetado via JS) -->
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Javascript injeta os itens dinamicamente aqui -->
             </div>
         </div>
     </div>
 
+    <!-- Modal Dinâmico do Presente -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
             <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
             <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-2 mt-4" data-i18n="modal_gift_txt">Você escolheu:</p>
@@ -301,6 +318,7 @@
             <p id="modal-gift-price" class="text-3xl font-bold text-[#5a6b47] mb-6"></p>
             <div class="w-16 h-[1px] bg-gray-200 mx-auto mb-6"></div>
             
+            <!-- Visão Português -->
             <div id="modal-view-pt" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Seu Nome / De quem é o presente?</label>
@@ -315,7 +333,7 @@
                 
                 <div class="flex flex-col gap-3">
                     <button onclick="copyPixPayload()" class="w-full px-6 py-4 bg-[#f0f3ea] text-[#5a6b47] hover:bg-[#a3b18a] hover:text-white transition-colors duration-300 rounded-full font-bold uppercase tracking-wider shadow-sm flex justify-center items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                         <span data-i18n="copy_btn">Copiar Código Pix</span>
                     </button>
                     <p id="gift-copy-msg" class="text-[#5a6b47] text-sm opacity-0 transition-opacity font-semibold h-4 mb-2 -mt-1" data-i18n="copy_success">Código copiado! ✓</p>
@@ -327,6 +345,7 @@
                 </div>
             </div>
 
+            <!-- Visão Espanhol -->
             <div id="modal-view-es" class="hidden">
                 <div class="mb-6 text-left">
                     <label class="block text-xs uppercase tracking-widest text-gray-500 font-bold mb-2">Tu Nombre:</label>
@@ -344,10 +363,11 @@
         </div>
     </div>
 
+    <!-- Modal Dropzone Drive -->
     <div id="drive-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center relative shadow-2xl">
             <button onclick="closeUploadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-100 rounded-full p-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="w-16 h-16 bg-[#f0f3ea] rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg class="w-8 h-8 text-[#5a6b47]" fill="currentColor" viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
@@ -369,11 +389,11 @@
     </div>
 
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <div class="relative w-full h-full flex items-center justify-center p-4">
-            <button onclick="prevImage(event)" class="absolute left-2 md:left-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+            <button onclick="prevImage(event)" class="absolute left-2 md:left-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"></path></svg></button>
             <img id="lightbox-img" src="" class="max-h-[85vh] max-w-full object-contain rounded-md shadow-2xl transition-opacity duration-300">
-            <button onclick="nextImage(event)" class="absolute right-2 md:right-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+            <button onclick="nextImage(event)" class="absolute right-2 md:right-8 text-white/50 hover:text-white transition-colors z-50 p-2"><svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></button>
         </div>
     </div>
 
@@ -493,52 +513,56 @@
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
+            // --- DICIONÁRIO DE ÍCONES DETALHADOS (LINE OUTLINE) ---
             const icons = {
-                glasses: `<path d="M4 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/>`,
+                wine: `<path d="M8 22h6M11 2v6M9 8h4a2 2 0 012 2v12H7V10a2 2 0 012-2zM9 2h4M16 12l1.5-4h3L22 12M17.5 12a2 2 0 004 0v-2h-4v2zM19.5 12v10M17 22h5"/>`,
+                glasses: `<g transform="rotate(15 12 12) translate(-2.5, 1)"><path d="M8 3h8l-1 6c-.5 2-1.5 3-3 3s-2.5-1-3-3L8 3z"/><path d="M12 12v7"/><path d="M9 19h6"/></g><g transform="rotate(-15 12 12) translate(2.5, 1)"><path d="M8 3h8l-1 6c-.5 2-1.5 3-3 3s-2.5-1-3-3L8 3z"/><path d="M12 12v7"/><path d="M9 19h6"/></g>`,
+                ring: `<circle cx="12" cy="14" r="6"/><path d="M10 6l2-3 2 3 2 2H8z"/>`,
+                cake: `<path d="M12 2v2"/><path d="M9 4h6v4H9z"/><path d="M7 8h10v5H7z"/><path d="M4 13h16v6H4z"/><path d="M2 19h20v2H2z"/>`,
+                gift: `<rect x="4" y="9" width="16" height="13" rx="1"/><rect x="3" y="5" width="18" height="4" rx="1"/><path d="M12 22V5"/><path d="M12 5c0-3 3-4 4-2s-4 2-4 2z"/><path d="M12 5c0-3-3-4-4-2s4 2 4 2z"/>`,
+                heart: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>`,
+                coffee: `<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M7 16h10v5H7zM12 11v5"/>`,
+                pot: `<path d="M3 11h18v6a4 4 0 01-4 4H7a4 4 0 01-4-4v-6zM3 11l2-4h14l2 4M10 4h4M2 14h2M20 14h2"/>`,
+                bed: `<rect x="3" y="14" width="18" height="6" rx="1"/><path d="M3 14V6M21 14V6M5 10h5v4H5zM14 10h5v4h-5zM3 20v2M21 20v2"/>`,
+                tv: `<rect x="2" y="5" width="20" height="12" rx="2"/><path d="M8 21h8M12 17v4M3 9l4-4M21 9l-4-4"/>`,
+                plane: `<path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21.5 4s-2 .5-3.5 2L14.5 9.5 6.3 7.7 5 9l6 4-3.5 3.5-3 1L3 19l4.5-1.5 1-3 3.5-3.5 4 6 1.3-1.3z"/>`,
                 towels: `<path d="M4 6h16a2 2 0 012 2v2H2V8a2 2 0 012-2z"/><path d="M2 10h20v4H2z"/><path d="M2 14h20v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>`,
-                bed: `<path d="M3 7v11m18-11v11m-18-3h18m-15-4h4v3H6zm8 0h4v3h-4z"/>`,
                 cutlery: `<path d="M7 2v10m-3-4v-6m6 0v6M7 12v10m10-20v14a4 4 0 01-4 4H10"/><path d="M17 22V2"/>`,
-                pot: `<path d="M4 8h16M2 8h2m16 0h2M5 8v8a4 4 0 004 4h6a4 4 0 004-4V8M9 4h6v4H9z"/>`,
-                coffee: `<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3"/><path d="M10 1v3"/><path d="M14 1v3"/>`,
                 oven: `<rect x="3" y="5" width="18" height="14" rx="2" ry="2"/><path d="M7 9h4M7 13h1M11 13h1M15 13h1M15 9h1"/>`,
                 plate: `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 2v1m0 18v1m10-10h-1M3 12H2"/>`,
                 robot: `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m9-9h-2M5 12H3"/>`,
-                wine: `<path d="M9 2h6M10 2v4a4 4 0 00-1 3v11a2 2 0 002 2h2a2 2 0 002-2V9a4 4 0 00-1-3V2M15 13H9"/>`,
                 vacuum: `<path d="M9 20h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zM12 12V3M10 3h4M8 20v2h8v-2"/>`,
                 stove: `<rect x="3" y="4" width="18" height="16" rx="2" ry="2"/><circle cx="9" cy="10" r="2"/><circle cx="15" cy="10" r="2"/><circle cx="12" cy="16" r="2"/>`,
-                tv: `<rect x="2" y="6" width="20" height="12" rx="2" ry="2"/><path d="M8 22h8M12 18v4M7 2l5 4 5-4"/>`,
                 washing: `<rect x="4" y="3" width="16" height="18" rx="2" ry="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6h4"/>`,
-                ac: `<rect x="3" y="6" width="18" height="12" rx="2" ry="2"/><path d="M7 10h10M7 14h10"/>`,
-                plane: `<path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21.5 4s-2 .5-3.5 2L14.5 9.5 6.3 7.7 5 9l6 4-3.5 3.5-3 1L3 19l4.5-1.5 1-3 3.5-3.5 4 6 1.3-1.3z"/>`,
-                heart: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>`
+                ac: `<rect x="3" y="6" width="18" height="12" rx="2" ry="2"/><path d="M7 10h10M7 14h10"/>`
             };
 
             const giftListItems = [
                 { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, icon: "glasses" },
                 { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 100, icon: "towels" },
-                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, icon: "bed" },
+                { id: 3, pt: "Jogo de Cama Casal", es: "Juego de Cama", price: 150, icon: "bed" },
                 { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 200, icon: "cutlery" },
                 { id: 5, pt: "Utensílios de Cozinha", es: "Utensilios de Cocina", price: 250, icon: "pot" },
-                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 300, icon: "coffee" },
-                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 350, icon: "pot" },
-                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 400, icon: "oven" },
-                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 450, icon: "plate" },
-                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 500, icon: "pot" },
-                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 600, icon: "robot" },
-                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 700, icon: "wine" },
-                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 800, icon: "coffee" },
-                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 900, icon: "vacuum" },
-                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1000, icon: "stove" },
-                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1100, icon: "pot" },
-                { id: 17, pt: "Robô Aspirador Inteligente", es: "Robot Aspiradora Inteligente", price: 1200, icon: "robot" },
+                { id: 6, pt: "Cafeteira Elétrica", es: "Cafetera Eléctrica", price: 300, icon: "coffee" },
+                { id: 7, pt: "Kit de Panelas", es: "Set de Ollas", price: 350, icon: "pot" },
+                { id: 8, pt: "Forno Elétrico", es: "Horno Eléctrico", price: 400, icon: "oven" },
+                { id: 9, pt: "Aparelho de Jantar", es: "Vajilla Completa", price: 450, icon: "plate" },
+                { id: 10, pt: "Panela de Pressão", es: "Olla de Presión", price: 500, icon: "pot" },
+                { id: 11, pt: "Robô Aspirador", es: "Robot Aspiradora", price: 600, icon: "robot" },
+                { id: 12, pt: "Adega Climatizada", es: "Cava de Vinos", price: 700, icon: "wine" },
+                { id: 13, pt: "Máquina de Café", es: "Máquina de Café", price: 800, icon: "coffee" },
+                { id: 14, pt: "Aspirador Vertical", es: "Aspiradora Vertical", price: 900, icon: "vacuum" },
+                { id: 15, pt: "Cooktop", es: "Cocina", price: 1000, icon: "stove" },
+                { id: 16, pt: "Conjunto Premium", es: "Set Premium", price: 1100, icon: "gift" },
+                { id: 17, pt: "Robô Mapeador", es: "Robot Inteligente", price: 1200, icon: "robot" },
                 { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1300, icon: "tv" },
-                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1400, icon: "washing" },
+                { id: 19, pt: "Lava-Louças", es: "Lavavajillas", price: 1400, icon: "washing" },
                 { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 1500, icon: "tv" },
-                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1600, icon: "ac" },
+                { id: 21, pt: "Ar-Condicionado", es: "Aire Acondicionado", price: 1600, icon: "ac" },
                 { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 1700, icon: "tv" },
-                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 1800, icon: "washing" },
+                { id: 23, pt: "Lava e Seca", es: "Lavadora y Secadora", price: 1800, icon: "washing" },
                 { id: 24, pt: "Viagem Romântica", es: "Viaje Romántico", price: 1900, icon: "plane" },
-                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, icon: "heart" }
+                { id: 25, pt: "Lua de Mel", es: "Luna de Miel", price: 2000, icon: "heart" }
             ];
 
             let activeLang = 'pt';
@@ -567,7 +591,9 @@
                 const freeCardHTML = `
                     <div class="bg-[#f0f3ea] rounded-2xl shadow-sm border border-[#a3b18a]/30 overflow-hidden flex flex-col hover:shadow-md transition-all">
                         <div class="p-6 flex flex-col flex-grow text-center justify-center">
-                            <svg class="w-12 h-12 text-[#5a6b47] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-16 h-16 text-[#5a6b47] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                ${icons.gift}
+                            </svg>
                             <h3 class="font-serif text-xl text-[#2d3326] mb-2 font-bold">${freeTxt}</h3>
                             <p class="text-sm text-gray-500 mb-6">${freeSub}</p>
                             <input type="number" id="free-amount" placeholder="${phFree}" class="w-full bg-white border border-[#a3b18a]/50 text-gray-800 text-center text-lg rounded-lg focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3 mb-2 font-bold placeholder-gray-400 focus:placeholder-transparent">
@@ -593,12 +619,12 @@
 
                     const title = activeLang === 'pt' ? gift.pt : gift.es;
                     const priceStr = activeLang === 'pt' ? `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
-                    const iconPath = icons[gift.icon] || icons.pot; 
+                    const iconPath = icons[gift.icon] || icons.gift; 
 
                     const cardHTML = `
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
                             <div class="h-48 w-full bg-[#f9f9f6] flex items-center justify-center text-[#5a6b47] group border-b border-gray-100">
-                                <svg class="w-24 h-24 transition-transform duration-500 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="w-24 h-24 transition-transform duration-500 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     ${iconPath}
                                 </svg>
                             </div>
@@ -720,7 +746,7 @@
 
             document.getElementById('gift-modal').addEventListener('click', function(e) { if (e.target.id === 'gift-modal') { closeGiftModal(); } });
 
-            // --- TRADUÇÃO E FINALIZAÇÃO ---
+            // --- TRADUÇÃO ---
             window.setLanguage = function(lang) {
                 activeLang = lang;
                 const ptBtn = document.getElementById('btn-pt'); const esBtn = document.getElementById('btn-es');
@@ -765,7 +791,7 @@
                     dinner_title: "Recepção", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
                     timeline_title: "Programação", t1: "Cerimônia Religiosa", t2: "Recepção no Garden House", t3: "Jantar", t4: "Baile", t5: "Despedida",
                     upload_title: "Nossa Visão, Seus Olhos", upload_desc: "Queremos ver o nosso grande dia por várias visões! Tire muitas fotos e vídeos e adicione na nossa pasta compartilhada para guardarmos para sempre.",
-                    upload_box_title: "Toque aqui para enviar suas fotos", upload_box_sub: "Envie direto do seu rolo de câmera em alta qualidade",
+                    upload_box_title: "Toque aqui para enviar suas fotos", upload_box_sub: "Envie direto do seu celular para nosso Google Drive",
                     drive_title: "Álbum Compartilhado", drive_desc: "Para garantir que suas fotos mantenham a qualidade máxima, usamos uma pasta segura do Google Drive.",
                     drive_step_title: "Como funciona:", drive_step_1: "Toque no botão abaixo para abrir a pasta.", drive_step_2: "No Drive, toque no ícone \"+\" (Novo).", drive_step_3: "Selecione suas fotos favoritas do celular!", drive_btn: "Acessar Pasta no Drive",
                     dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
@@ -785,7 +811,7 @@
                     dinner_title: "Recepción", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
                     timeline_title: "Programación", t1: "Ceremonia Religiosa", t2: "Recepción en Garden House", t3: "Cena", t4: "Baile", t5: "Despedida",
                     upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Toma fotos y agrégalas a nuestra carpeta compartida para que las guardemos por siempre.",
-                    upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu galería en alta calidad",
+                    upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu celular en alta calidad",
                     drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
                     drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícono \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
                     dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
@@ -803,4 +829,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
