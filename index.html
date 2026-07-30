@@ -111,10 +111,12 @@
                 <h2 class="font-serif text-4xl mb-16 text-center text-[#2d3326]" data-i18n="location_title">Locais</h2>
                 <div class="grid md:grid-cols-2 gap-10 text-center">
                     
-                    <!-- Igreja com Imagem -->
+                    <!-- Igreja com Ícone Vetorial de Linha -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
-                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1437604537860-3153835698b6?auto=format&fit=crop&w=300&q=80" alt="Igreja" class="w-full h-full object-cover">
+                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm flex items-center justify-center bg-white text-[#5a6b47]">
+                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v5m-2-2h4"/><path d="M12 7L4 12v10h16V12l-8-5z"/><path d="M10 22v-5a2 2 0 014 0v5"/>
+                            </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="church_title">Cerimônia Religiosa</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Parroquia La Resurrección</p>
@@ -124,10 +126,12 @@
                         </a>
                     </div>
                     
-                    <!-- Recepção com Imagem -->
+                    <!-- Recepção com Ícone Vetorial de Taças -->
                     <div class="bg-white p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
-                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=300&q=80" alt="Recepção" class="w-full h-full object-cover">
+                        <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#f0f3ea] shadow-sm flex items-center justify-center bg-white text-[#5a6b47]">
+                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/>
+                            </svg>
                         </div>
                         <h3 class="font-serif text-3xl mb-2 text-[#2d3326]" data-i18n="dinner_title">Recepção</h3>
                         <p class="text-[#5a6b47] font-bold text-lg mb-2">Garden House Eventos</p>
@@ -153,6 +157,7 @@
             </div>
         </section>
 
+        <!-- NOVIDADE: Dropzone Interativa para Fotos -->
         <section id="upload-fotos" class="py-20 bg-[#fcfbf9] border-y border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <div class="w-16 h-16 bg-[#a3b18a]/15 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
@@ -188,7 +193,7 @@
                             <span class="text-xs mt-3 uppercase tracking-widest text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                         </div>
                     </div>
-                    <p class="text-gray-800 font-bold text-xl tracking-wide mb-2" data-i18n="dress_style">Passeio Completo</p>
+                    <p class="text-gray-800 font-bold text-xl tracking-wide mb-2" id="dress-style-text">Passeio Completo</p>
                     <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
                 </div>
                 
@@ -280,7 +285,7 @@
             </div>
 
             <div id="gifts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Javascript injeta os itens com imagens dinamicamente aqui -->
+                <!-- Javascript injeta os itens dinamicamente aqui -->
             </div>
         </div>
     </div>
@@ -488,32 +493,52 @@
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
 
+            const icons = {
+                glasses: `<path d="M4 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M6.5 12.5V20"/><path d="M4.5 20h4"/><path d="M15 5h5v3a4.5 4.5 0 01-4.5 4.5h-.5v-7.5z"/><path d="M17.5 12.5V20"/><path d="M15.5 20h4"/><path d="M10 7h4"/>`,
+                towels: `<path d="M4 6h16a2 2 0 012 2v2H2V8a2 2 0 012-2z"/><path d="M2 10h20v4H2z"/><path d="M2 14h20v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>`,
+                bed: `<path d="M3 7v11m18-11v11m-18-3h18m-15-4h4v3H6zm8 0h4v3h-4z"/>`,
+                cutlery: `<path d="M7 2v10m-3-4v-6m6 0v6M7 12v10m10-20v14a4 4 0 01-4 4H10"/><path d="M17 22V2"/>`,
+                pot: `<path d="M4 8h16M2 8h2m16 0h2M5 8v8a4 4 0 004 4h6a4 4 0 004-4V8M9 4h6v4H9z"/>`,
+                coffee: `<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3"/><path d="M10 1v3"/><path d="M14 1v3"/>`,
+                oven: `<rect x="3" y="5" width="18" height="14" rx="2" ry="2"/><path d="M7 9h4M7 13h1M11 13h1M15 13h1M15 9h1"/>`,
+                plate: `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 2v1m0 18v1m10-10h-1M3 12H2"/>`,
+                robot: `<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m9-9h-2M5 12H3"/>`,
+                wine: `<path d="M9 2h6M10 2v4a4 4 0 00-1 3v11a2 2 0 002 2h2a2 2 0 002-2V9a4 4 0 00-1-3V2M15 13H9"/>`,
+                vacuum: `<path d="M9 20h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zM12 12V3M10 3h4M8 20v2h8v-2"/>`,
+                stove: `<rect x="3" y="4" width="18" height="16" rx="2" ry="2"/><circle cx="9" cy="10" r="2"/><circle cx="15" cy="10" r="2"/><circle cx="12" cy="16" r="2"/>`,
+                tv: `<rect x="2" y="6" width="20" height="12" rx="2" ry="2"/><path d="M8 22h8M12 18v4M7 2l5 4 5-4"/>`,
+                washing: `<rect x="4" y="3" width="16" height="18" rx="2" ry="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6h4"/>`,
+                ac: `<rect x="3" y="6" width="18" height="12" rx="2" ry="2"/><path d="M7 10h10M7 14h10"/>`,
+                plane: `<path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21.5 4s-2 .5-3.5 2L14.5 9.5 6.3 7.7 5 9l6 4-3.5 3.5-3 1L3 19l4.5-1.5 1-3 3.5-3.5 4 6 1.3-1.3z"/>`,
+                heart: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>`
+            };
+
             const giftListItems = [
-                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, img: "https://images.unsplash.com/photo-1583556018884-17724a737f1e?auto=format&fit=crop&w=400&q=80" },
-                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 100, img: "https://images.unsplash.com/photo-1616694602685-644782bb5d5f?auto=format&fit=crop&w=400&q=80" },
-                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80" },
-                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 200, img: "https://images.unsplash.com/photo-1582283578018-09ee0b15b3c3?auto=format&fit=crop&w=400&q=80" },
-                { id: 5, pt: "Utensílios de Cozinha", es: "Utensilios de Cocina", price: 250, img: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=400&q=80" },
-                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 300, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=400&q=80" },
-                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 350, img: "https://images.unsplash.com/photo-1584990347449-a162d3381a1d?auto=format&fit=crop&w=400&q=80" },
-                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 400, img: "https://images.unsplash.com/photo-1585237305953-b31c4f529124?auto=format&fit=crop&w=400&q=80" },
-                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 450, img: "https://images.unsplash.com/photo-1603514064573-0435cebc6f62?auto=format&fit=crop&w=400&q=80" },
-                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 500, img: "https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?auto=format&fit=crop&w=400&q=80" },
-                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 600, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80" },
-                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 700, img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=400&q=80" },
-                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 800, img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80" },
-                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 900, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=400&q=80" },
-                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1000, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=400&q=80" },
-                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1100, img: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=400&q=80" },
-                { id: 17, pt: "Robô Aspirador Inteligente", es: "Robot Aspiradora Inteligente", price: 1200, img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80" },
-                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1300, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
-                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1400, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" },
-                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 1500, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
-                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1600, img: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=400&q=80" },
-                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 1700, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400&q=80" },
-                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 1800, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=400&q=80" },
-                { id: 24, pt: "Viagem Romântica", es: "Viaje Romántico", price: 1900, img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=400&q=80" },
-                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?auto=format&fit=crop&w=400&q=80" }
+                { id: 1, pt: "Jogo de Taças de Cristal", es: "Juego de Copas de Cristal", price: 50, icon: "glasses" },
+                { id: 2, pt: "Kit de Toalhas Premium", es: "Set de Toallas Premium", price: 100, icon: "towels" },
+                { id: 3, pt: "Jogo de Cama Casal 300 Fios", es: "Juego de Cama 300 Hilos", price: 150, icon: "bed" },
+                { id: 4, pt: "Faqueiro Inox Completo", es: "Juego de Cubiertos Inox", price: 200, icon: "cutlery" },
+                { id: 5, pt: "Utensílios de Cozinha", es: "Utensilios de Cocina", price: 250, icon: "pot" },
+                { id: 6, pt: "Cafeteira Elétrica Programável", es: "Cafetera Eléctrica Programable", price: 300, icon: "coffee" },
+                { id: 7, pt: "Kit de Panelas Antiaderentes", es: "Set de Ollas Antiadherentes", price: 350, icon: "pot" },
+                { id: 8, pt: "Forno Elétrico de Bancada", es: "Horno Eléctrico de Mesa", price: 400, icon: "oven" },
+                { id: 9, pt: "Aparelho de Jantar Completo", es: "Vajilla Completa", price: 450, icon: "plate" },
+                { id: 10, pt: "Panela de Pressão Elétrica", es: "Olla de Presión Eléctrica", price: 500, icon: "pot" },
+                { id: 11, pt: "Robô Aspirador Básico", es: "Robot Aspiradora Básico", price: 600, icon: "robot" },
+                { id: 12, pt: "Adega Climatizada Pequena", es: "Cava de Vinos Pequeña", price: 700, icon: "wine" },
+                { id: 13, pt: "Máquina de Café Expresso", es: "Máquina de Café Expreso", price: 800, icon: "coffee" },
+                { id: 14, pt: "Aspirador Vertical Sem Fio", es: "Aspiradora Vertical Inalámbrica", price: 900, icon: "vacuum" },
+                { id: 15, pt: "Cooktop de Indução", es: "Cocina de Inducción", price: 1000, icon: "stove" },
+                { id: 16, pt: "Conjunto de Panelas Premium", es: "Set de Ollas Premium", price: 1100, icon: "pot" },
+                { id: 17, pt: "Robô Aspirador Inteligente", es: "Robot Aspiradora Inteligente", price: 1200, icon: "robot" },
+                { id: 18, pt: "Smart TV 32\"", es: "Smart TV 32\"", price: 1300, icon: "tv" },
+                { id: 19, pt: "Lava-Louças Compacta", es: "Lavavajillas Compacta", price: 1400, icon: "washing" },
+                { id: 20, pt: "Smart TV 43\"", es: "Smart TV 43\"", price: 1500, icon: "tv" },
+                { id: 21, pt: "Ar-Condicionado Inverter", es: "Aire Acondicionado Inverter", price: 1600, icon: "ac" },
+                { id: 22, pt: "Smart TV 50\"", es: "Smart TV 50\"", price: 1700, icon: "tv" },
+                { id: 23, pt: "Máquina Lava e Seca (cota)", es: "Lavadora y Secadora (cuota)", price: 1800, icon: "washing" },
+                { id: 24, pt: "Viagem Romântica", es: "Viaje Romántico", price: 1900, icon: "plane" },
+                { id: 25, pt: "Lua de Mel (cota especial)", es: "Luna de Miel (cuota especial)", price: 2000, icon: "heart" }
             ];
 
             let activeLang = 'pt';
@@ -568,12 +593,14 @@
 
                     const title = activeLang === 'pt' ? gift.pt : gift.es;
                     const priceStr = activeLang === 'pt' ? `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : `Bs. ${priceBs.toLocaleString('es-BO', {minimumFractionDigits: 2})}`;
+                    const iconPath = icons[gift.icon] || icons.pot; 
 
-                    // Usando Imagens Unsplash como capa do presente, com fallback para foto estática se falhar
                     const cardHTML = `
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-all transform hover:-translate-y-1">
-                            <div class="h-48 w-full bg-gray-100 relative overflow-hidden">
-                                <img src="${gift.img}" onerror="this.src='https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=400&q=80'" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt="${title}" loading="lazy">
+                            <div class="h-48 w-full bg-[#f9f9f6] flex items-center justify-center text-[#5a6b47] group border-b border-gray-100">
+                                <svg class="w-24 h-24 transition-transform duration-500 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    ${iconPath}
+                                </svg>
                             </div>
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h3 class="font-serif text-xl text-[#2d3326] mb-2 flex-grow">${title}</h3>
@@ -693,6 +720,7 @@
 
             document.getElementById('gift-modal').addEventListener('click', function(e) { if (e.target.id === 'gift-modal') { closeGiftModal(); } });
 
+            // --- TRADUÇÃO E FINALIZAÇÃO ---
             window.setLanguage = function(lang) {
                 activeLang = lang;
                 const ptBtn = document.getElementById('btn-pt'); const esBtn = document.getElementById('btn-es');
@@ -705,6 +733,7 @@
                     document.getElementById('filter-200to500').innerText = "R$200–500";
                     document.getElementById('filter-500to1000').innerText = "R$500–1000";
                     document.getElementById('filter-above1000').innerText = "R$1000+";
+                    document.getElementById('dress-style-text').innerText = "Passeio Completo";
                 } else {
                     esBtn.classList.add('text-[#5a6b47]', 'border-[#5a6b47]'); esBtn.classList.remove('text-gray-400', 'border-transparent');
                     ptBtn.classList.remove('text-[#5a6b47]', 'border-[#5a6b47]'); ptBtn.classList.add('text-gray-400', 'border-transparent');
@@ -713,6 +742,7 @@
                     document.getElementById('filter-200to500').innerText = "Bs.400–1000";
                     document.getElementById('filter-500to1000').innerText = "Bs.1000–2000";
                     document.getElementById('filter-above1000').innerText = "Bs.2000+";
+                    document.getElementById('dress-style-text').innerText = "Traje formal";
                 }
 
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -738,7 +768,7 @@
                     upload_box_title: "Toque aqui para enviar suas fotos", upload_box_sub: "Envie direto do seu rolo de câmera em alta qualidade",
                     drive_title: "Álbum Compartilhado", drive_desc: "Para garantir que suas fotos mantenham a qualidade máxima, usamos uma pasta segura do Google Drive.",
                     drive_step_title: "Como funciona:", drive_step_1: "Toque no botão abaixo para abrir a pasta.", drive_step_2: "No Drive, toque no ícone \"+\" (Novo).", drive_step_3: "Selecione suas fotos favoritas do celular!", drive_btn: "Acessar Pasta no Drive",
-                    dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_style: "Passeio Completo", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
+                    dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! Por favor, confirme sua presença clicando no botão abaixo.", rsvp_btn: "Confirmar pelo WhatsApp",
                     gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos duas listas de presentes para facilitar para nossos convidados de ambos os países.",
@@ -758,7 +788,7 @@
                     upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu galería en alta calidad",
                     drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
                     drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícono \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
-                    dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_style: "Traje formal", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
+                    dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! Por favor, confirma tu asistencia haciendo clic en el botón de abajo.", rsvp_btn: "Confirmar por WhatsApp",
                     gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos dos listas de regalos para facilitar a los invitados de ambos países.",
@@ -773,4 +803,4 @@
         });
     </script>
 </body>
-                            </html>
+</html>
