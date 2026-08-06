@@ -581,26 +581,50 @@
 
             // --- DICIONÁRIO DE ÍCONES VETORIAIS (LINHA FINA, ELEGANTE) ---
             const icons = {
-                wine: `<path d="M8 21.5h6M11 12.5v8.5M9.3 6h4a1.6 1.6 0 011.6 1.6v10.7H7.7V7.6A1.6 1.6 0 019.3 6zM9.3 2h4M16.2 10.8l1.2-3.2h2.4l1.2 3.2M17.4 10.8a1.8 1.8 0 003.6 0v-1.7h-3.6v1.7zM19.2 10.8V21M17 21h4.4"/>`,
-                glasses: `<g transform="translate(2.3, 1) rotate(13 12 12)"><path d="M8.3 3.5h7.4l-0.8 5.6c-0.4 1.9-1.4 2.9-3.4 2.9s-3-1-3.4-2.9L8.3 3.5z"/><path d="M12 12v7.5"/><path d="M9.3 19.5h5.4"/></g><g transform="translate(-2.3, 1) rotate(-13 12 12)"><path d="M8.3 3.5h7.4l-0.8 5.6c-0.4 1.9-1.4 2.9-3.4 2.9s-3-1-3.4-2.9L8.3 3.5z"/><path d="M12 12v7.5"/><path d="M9.3 19.5h5.4"/></g>`,
-                ring: `<circle cx="12" cy="14.5" r="5.3"/><path d="M10.3 6.3L12 3.3l1.7 3 1.7 1.7H8.6z"/>`,
-                cake: `<path d="M12 2.2v1.8"/><path d="M9.6 4h4.8v3.4H9.6z"/><path d="M7.4 7.4h9.2v4.4H7.4z"/><path d="M4.5 11.8h15v5.7h-15z"/><path d="M3 17.9h18v1.8H3z"/>`,
-                gift: `<rect x="4.3" y="9.3" width="15.4" height="12" rx="0.5"/><rect x="3.3" y="5.3" width="17.4" height="4" rx="0.5"/><path d="M12 21.3V5.3"/><path d="M12 5.3c0-2.8 2.8-3.7 3.7-1.9s-3.7 1.9-3.7 1.9z"/><path d="M12 5.3c0-2.8-2.8-3.7-3.7-1.9s3.7 1.9 3.7 1.9z"/>`,
-                heart: `<path d="M20.4 5a5 5 0 00-7.1 0L12 6.3l-1.3-1.3a5 5 0 00-7.1 7.1l1.3 1.3L12 20.7l7.1-7.1 1.3-1.3a5 5 0 000-7.1z"/>`,
-                coffee: `<rect x="5.3" y="3.3" width="13.4" height="17.4" rx="1.6"/><path d="M9 7.3h6M9 11h6M7.4 15.7h9.2v4.7H7.4z"/>`,
-                pot: `<path d="M3.5 11.5h17v5.5a3.7 3.7 0 01-3.7 3.7H7.2a3.7 3.7 0 01-3.7-3.7v-5.5zM3.5 11.5l1.8-3.7h13.4l1.8 3.7M10.2 4.3h3.6M2.3 14h1.6M20.1 14h1.6"/>`,
-                bed: `<rect x="3.3" y="13.7" width="17.4" height="5.7" rx="0.8"/><path d="M3.3 13.7V6.3M20.7 13.7V6.3M5.3 9.7h4.4v4H5.3zM14.3 9.7h4.4v4h-4.4zM3.3 19.4v1.7M20.7 19.4v1.7"/>`,
-                tv: `<rect x="2.3" y="5.3" width="19.4" height="11.4" rx="1.6"/><path d="M8 20.7h8M12 16.7v4M3.3 9.3l3.7-3.7M20.7 9.3L17 5.6"/>`,
-                plane: `<path d="M17.6 19L16 11.2l3.3-3.3c1.4-1.4 1.9-3.3 1.9-3.3s-1.9.5-3.3 1.9l-3.3 3.3-7.7-1.7L5.6 9l5.6 3.7-3.3 3.3-2.8.9L3.3 19l4.2-1.4.9-2.8 3.3-3.3 3.7 5.6z"/>`,
-                towels: `<path d="M4.3 6.3h15.4a1.6 1.6 0 011.6 1.6v1.6H2.7V7.9a1.6 1.6 0 011.6-1.6z"/><path d="M2.7 10.3h18.6v3.4H2.7z"/><path d="M2.7 13.7h18.6v3.4a1.6 1.6 0 01-1.6 1.6H4.3a1.6 1.6 0 01-1.6-1.6v-3.4z"/>`,
-                cutlery: `<path d="M7.2 2.3v9.4m-2.7-3.7v-5.7m5.4 0v5.7M7.2 11.7v9.6m9.6-19v18.6"/><path d="M17.2 12.3a3.5 3.5 0 003.5-3.5V2.3"/>`,
-                oven: `<rect x="3.3" y="5.3" width="17.4" height="13.4" rx="1.2" ry="1.2"/><path d="M6.5 9h4.5M6.5 12.5h1M10 12.5h1M14 12.5h1M14 9h1"/>`,
-                plate: `<circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="4.6"/><path d="M12 3.6v1M12 19.4v1M20.4 12h-1M4.6 12h-1"/>`,
-                robot: `<circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.6v1.7M12 18.7v1.7M20.4 12h-1.7M5.3 12H3.6"/>`,
-                vacuum: `<path d="M9.3 19.3h5.4a1.6 1.6 0 001.6-1.6v-3.4a1.6 1.6 0 00-1.6-1.6H9.3a1.6 1.6 0 00-1.6 1.6v3.4a1.6 1.6 0 001.6 1.6zM12 12.3V3.6M10.3 3.6h3.4M8.3 19.3v1.7h7.4v-1.7"/>`,
-                stove: `<rect x="3.3" y="4.3" width="17.4" height="15.4" rx="1.6" ry="1.6"/><circle cx="9" cy="9.7" r="1.7"/><circle cx="15" cy="9.7" r="1.7"/><circle cx="12" cy="15.3" r="1.7"/>`,
-                washing: `<rect x="4.3" y="3.3" width="15.4" height="17.4" rx="1.6" ry="1.6"/><circle cx="12" cy="13" r="3.7"/><path d="M8.3 6.3h3.4"/>`,
-                ac: `<rect x="3.3" y="6.3" width="17.4" height="11.4" rx="1.6" ry="1.6"/><path d="M7.2 10.3h9.6M7.2 13.7h9.6"/>`
+                // par de taças de cristal
+                glasses: `<g transform="translate(2.4,1.1) rotate(12 12 12)"><path d="M8.6 3.4h6.8l-0.7 4.9c-0.35 1.9-1.5 2.9-3.2 2.9s-2.85-1-3.2-2.9z"/><path d="M12 11.2v7.9"/><path d="M9.3 19.4h5.4"/></g><g transform="translate(-2.4,1.1) rotate(-12 12 12)"><path d="M8.6 3.4h6.8l-0.7 4.9c-0.35 1.9-1.5 2.9-3.2 2.9s-2.85-1-3.2-2.9z"/><path d="M12 11.2v7.9"/><path d="M9.3 19.4h5.4"/></g>`,
+                // aliança
+                ring: `<circle cx="12" cy="14.3" r="5.1"/><path d="M10.1 6.3L12 3.1l1.9 3.2 1.7 1.7H8.4z"/>`,
+                // bolo de casamento
+                cake: `<path d="M12 2.1v2"/><path d="M9.8 4.1h4.4v3H9.8z"/><path d="M7.6 7.1h8.8v4H7.6z"/><path d="M4.6 11.1h14.8v6H4.6z"/><path d="M3 17.6h18v1.6H3z"/>`,
+                // caixa de presente
+                gift: `<rect x="4.2" y="9.6" width="15.6" height="10.4" rx="1"/><rect x="3.1" y="6.1" width="17.8" height="3.9" rx="1"/><path d="M12 6.1v14"/><path d="M12 6.1c-0.4-2.4-2.9-3.3-4.1-2.1-1.2 1.2 0.1 2.1 4.1 2.1z"/><path d="M12 6.1c0.4-2.4 2.9-3.3 4.1-2.1 1.2 1.2-0.1 2.1-4.1 2.1z"/>`,
+                // coração / lua de mel
+                heart: `<path d="M12 20.3s-7.2-4.4-9.4-8.7C1.1 8.4 2.6 5.2 5.8 4.6c1.9-0.4 3.6 0.5 4.7 2 1.1-1.5 2.8-2.4 4.7-2 3.2 0.6 4.7 3.8 3.2 7-2.2 4.3-9.4 8.7-9.4 8.7z"/>`,
+                // xícara com vapor (cafeteira elétrica)
+                coffee: `<path d="M6 9.3h10.5v5.6a4.1 4.1 0 01-4.1 4.1h-2.3a4.1 4.1 0 01-4.1-4.1V9.3z"/><path d="M16.5 10.8H18a2 2 0 010 4h-1.5"/><path d="M8.6 6.4c0-1 0.9-1 0.9-2M12.3 6.4c0-1 0.9-1 0.9-2"/>`,
+                // panela com tampa
+                pot: `<path d="M4 12h16v4.5a4 4 0 01-4 4H8a4 4 0 01-4-4V12z"/><path d="M2 14.3h2M20 14.3h2"/><rect x="9.3" y="7.1" width="5.4" height="2.1" rx="1"/><circle cx="12" cy="6.1" r="1"/>`,
+                // panela de pressão (com válvula)
+                pressure: `<path d="M4 12.4h16v4.1a4 4 0 01-4 4H8a4 4 0 01-4-4v-4.1z"/><path d="M2 14.6h2M20 14.6h2"/><path d="M9 12.4V9.5a3 3 0 016 0v2.9"/><circle cx="12" cy="7" r="1"/>`,
+                // cama de casal
+                bed: `<path d="M4 8.2v10.4"/><path d="M4 13.4h16v5.2H4z"/><rect x="6" y="9.6" width="4.6" height="3.2" rx="1"/><rect x="13.4" y="9.6" width="4.6" height="3.2" rx="1"/><path d="M4 18.6v1.7M20 18.6v1.7"/><path d="M20 13.4V8.2"/>`,
+                // televisão
+                tv: `<rect x="3.2" y="5.2" width="17.6" height="11.4" rx="1.4"/><path d="M9 20h6M12 16.6V20"/>`,
+                // avião de papel — viagem romântica
+                plane: `<path d="M20.7 3.3L3.4 10.4l6.7 2.4 2.4 6.7 8.2-16.2z"/><path d="M10.1 12.8l3.1-3.1"/>`,
+                // toalhas dobradas
+                towels: `<rect x="4" y="5.8" width="16" height="3.1" rx="1"/><rect x="4" y="10.1" width="16" height="3.1" rx="1"/><rect x="4" y="14.4" width="16" height="3.1" rx="1"/>`,
+                // faqueiro (garfo e faca)
+                cutlery: `<path d="M7.3 2.2v6.9a1.3 1.3 0 002.6 0V2.2M8.6 2.2v6.9M9.9 2.2v6.9M8.6 9.1v12.7"/><path d="M16.2 2.2c-0.9 2.6-1.2 4.3-1.2 6.1a2 2 0 002 2v11.5"/>`,
+                // forno elétrico
+                oven: `<rect x="3.4" y="4.6" width="17.2" height="14.8" rx="1.4"/><rect x="6" y="7.2" width="12" height="2.2" rx="1"/><circle cx="7.2" cy="15.6" r="1"/><circle cx="12" cy="15.6" r="1"/><circle cx="16.8" cy="15.6" r="1"/>`,
+                // aparelho de jantar (pratos empilhados)
+                plate: `<ellipse cx="12" cy="6.6" rx="7.6" ry="2.1"/><path d="M4.4 6.6v3.4c0 1.16 3.4 2.1 7.6 2.1s7.6-0.94 7.6-2.1V6.6"/><path d="M4.4 13.4c0 1.16 3.4 2.1 7.6 2.1s7.6-0.94 7.6-2.1"/><path d="M4.4 10v3.4M19.6 10v3.4"/>`,
+                // robô aspirador (vista de cima)
+                robot: `<circle cx="12" cy="13" r="7"/><circle cx="12" cy="13" r="2"/><path d="M9.1 7.6l0.8 1.4M14.9 7.6l-0.8 1.4"/>`,
+                // garrafa de vinho — adega climatizada
+                wine: `<path d="M10.2 2.2h3.6v3.6l1.5 2.5v11.5a2 2 0 01-2 2h-2.6a2 2 0 01-2-2V8.3l1.5-2.5V2.2z"/><path d="M10.2 7h3.6"/>`,
+                // máquina de café expresso
+                espresso: `<rect x="4.2" y="4.6" width="15.6" height="7.4" rx="1.2"/><path d="M8.6 12v2.2M15.4 12v2.2"/><path d="M7.6 14.2h8.8l-1 5.6H8.6z"/><circle cx="17" cy="8" r="1"/>`,
+                // aspirador vertical
+                vacuum: `<circle cx="7.6" cy="19.2" r="1.9"/><path d="M7.6 17.3V6.2"/><path d="M7.6 6.2a2.9 2.9 0 012.9-2.9h1"/><rect x="5.3" y="9.2" width="4.6" height="3.6" rx="1"/>`,
+                // cooktop / robô inteligente (indução)
+                stove: `<rect x="3.4" y="4.6" width="17.2" height="14.8" rx="1.4"/><circle cx="8.4" cy="10" r="2.1"/><circle cx="15.6" cy="10" r="2.1"/><circle cx="12" cy="15.6" r="2.1"/>`,
+                // lava-louças / lava e seca (tambor)
+                washing: `<rect x="4.4" y="3.2" width="15.2" height="17.6" rx="1.6"/><circle cx="12" cy="13.2" r="3.7"/><path d="M8.2 6.2h3.4"/>`,
+                // ar-condicionado
+                ac: `<rect x="3.4" y="6.4" width="17.2" height="10.6" rx="1.6"/><path d="M7.2 10.4h9.6M7.2 13.4h9.6"/>`
             };
 
             const giftListItems = [
@@ -608,15 +632,15 @@
                 { id: 2, pt: "Kit de Toalhas Premium", price: 100, icon: "towels" },
                 { id: 3, pt: "Jogo de Cama Casal", price: 150, icon: "bed" },
                 { id: 4, pt: "Faqueiro Inox Completo", price: 200, icon: "cutlery" },
-                { id: 5, pt: "Utensílios de Cozinha", price: 250, icon: "pot" },
+                { id: 5, pt: "Utensílios de Cozinha", price: 250, icon: "cutlery" },
                 { id: 6, pt: "Cafeteira Elétrica", price: 300, icon: "coffee" },
                 { id: 7, pt: "Kit de Panelas", price: 350, icon: "pot" },
                 { id: 8, pt: "Forno Elétrico", price: 400, icon: "oven" },
                 { id: 9, pt: "Aparelho de Jantar", price: 450, icon: "plate" },
-                { id: 10, pt: "Panela de Pressão", price: 500, icon: "pot" },
+                { id: 10, pt: "Panela de Pressão", price: 500, icon: "pressure" },
                 { id: 11, pt: "Robô Aspirador", price: 600, icon: "robot" },
                 { id: 12, pt: "Adega Climatizada", price: 700, icon: "wine" },
-                { id: 13, pt: "Máquina de Café", price: 800, icon: "coffee" },
+                { id: 13, pt: "Máquina de Café", price: 800, icon: "espresso" },
                 { id: 14, pt: "Aspirador Vertical", price: 900, icon: "vacuum" },
                 { id: 15, pt: "Cooktop", price: 1000, icon: "stove" },
                 { id: 16, pt: "Conjunto Premium", price: 1100, icon: "gift" },
