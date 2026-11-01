@@ -500,14 +500,40 @@
         </div>
     </footer>
 
-    <!-- Spotify Playlist Flutuante -->
-    <div id="music-player" class="fixed bottom-4 right-4 z-[150] transition-all duration-500 hidden-until-enter opacity-0 flex flex-col items-end">
-        <button onclick="toggleSpotifyPlayer()" class="mb-1.5 px-3 py-1.5 bg-white border border-[color:var(--line)] hover:border-[color:var(--gold-soft)] text-[#5a6b47] rounded-full shadow-md text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 transition-all">
-            <i data-lucide="music" class="w-3.5 h-3.5" stroke-width="1.5"></i>
-            <span id="spotify-toggle-label">Minimizar Música</span>
-        </button>
-        <div id="spotify-iframe-wrap" class="w-[300px] sm:w-[340px] rounded-xl overflow-hidden shadow-2xl border border-[color:var(--line)] bg-white transition-all duration-300">
-            <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/0YyfmVaHZU8bWxcaijx1zB?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <!-- Áudio MP3 de Fundo (Autoplay ao entrar) -->
+    <audio id="bg-music" preload="auto"></audio>
+
+    <!-- Player Híbrido Flutuante (MP3 Automático + Gaveta da Playlist Completa no Spotify) -->
+    <div id="music-player-wrapper" class="fixed bottom-6 right-6 z-[150] transition-all duration-300 flex flex-col items-end hidden-until-enter opacity-0">
+        
+        <!-- Gaveta com a Playlist Completa do Spotify (Oculta inicialmente) -->
+        <div id="spotify-drawer" class="hidden mb-3 w-[300px] sm:w-[340px] rounded-xl overflow-hidden shadow-2xl border border-[color:var(--line)] bg-[#2d3326] transition-all duration-300">
+            <div class="px-4 py-2.5 bg-[#2d3326] text-white flex justify-between items-center text-[11px] uppercase tracking-widest font-bold">
+                <span class="flex items-center gap-2"><i data-lucide="disc" class="w-4 h-4 text-[#1DB954]"></i> Playlist Completa</span>
+                <button onclick="toggleSpotifyDrawer()" class="text-white/70 hover:text-white p-1">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/0YyfmVaHZU8bWxcaijx1zB?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <!-- Barra de Controles MP3 + Botão Spotify -->
+        <div id="music-player" class="bg-white border border-[color:var(--line)] hover:border-[color:var(--gold-soft)] text-[#5a6b47] rounded-full shadow-xl flex items-center justify-center px-3 py-1 space-x-1">
+            <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior">
+                <i data-lucide="skip-back" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+            </button>
+            <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
+                <div id="icon-play"><i data-lucide="play" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
+                <div id="icon-pause" class="hidden"><i data-lucide="pause" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
+            </button>
+            <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música">
+                <i data-lucide="skip-forward" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+            </button>
+            <span class="h-5 w-[1px] bg-[color:var(--line)] mx-1"></span>
+            <button onclick="toggleSpotifyDrawer()" class="px-3 py-1.5 rounded-full bg-[#1DB954]/10 hover:bg-[#1DB954] text-[#1DB954] hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5" title="Abrir Playlist no Spotify">
+                <i data-lucide="list-music" class="w-4 h-4" stroke-width="1.5"></i>
+                <span>Spotify</span>
+            </button>
         </div>
     </div>
 
@@ -545,18 +571,43 @@
                 }, 1000);
             } catch (e) { }
 
-            // Controle de Minimizar/Expandir o Player do Spotify
-            let spotifyMinimized = false;
-            window.toggleSpotifyPlayer = function() {
-                const wrap = document.getElementById('spotify-iframe-wrap');
-                const label = document.getElementById('spotify-toggle-label');
-                spotifyMinimized = !spotifyMinimized;
-                if (spotifyMinimized) {
-                    wrap.classList.add('hidden');
-                    label.innerText = activeLang === 'es' ? 'Abrir Música' : 'Abrir Música';
+            // --- CONTROLE DO PLAYER HÍBRIDO (MP3 + SPOTIFY) ---
+            window.isPlaying = false;
+            const bgMusic = document.getElementById('bg-music');
+            const iconPlay = document.getElementById('icon-play');
+            const iconPause = document.getElementById('icon-pause');
+            const playlist = ['musica.mp3', 'musica1.mp3', 'musica2.mp3'];
+            let currentTrack = 0;
+            bgMusic.src = playlist[currentTrack];
+
+            function updatePlayerUI() {
+                if (window.isPlaying) { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); }
+                else { iconPlay.classList.remove('hidden'); iconPause.classList.add('hidden'); }
+            }
+
+            bgMusic.addEventListener('ended', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
+            document.getElementById('prev-btn').addEventListener('click', function() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
+            document.getElementById('next-btn').addEventListener('click', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
+            document.getElementById('music-btn').addEventListener('click', function() {
+                if (window.isPlaying) { bgMusic.pause(); window.isPlaying = false; }
+                else { let playPromise = bgMusic.play(); if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); } }
+                updatePlayerUI();
+            });
+
+            window.toggleSpotifyDrawer = function() {
+                const drawer = document.getElementById('spotify-drawer');
+                const isHidden = drawer.classList.contains('hidden');
+                if (isHidden) {
+                    drawer.classList.remove('hidden');
+                    drawer.classList.add('fade-enter');
+                    // Pausa a música MP3 de fundo automaticamente para o convidado ouvir o Spotify sem sobreposição
+                    if (window.isPlaying) {
+                        bgMusic.pause();
+                        window.isPlaying = false;
+                        updatePlayerUI();
+                    }
                 } else {
-                    wrap.classList.remove('hidden');
-                    label.innerText = activeLang === 'es' ? 'Minimizar Música' : 'Minimizar Música';
+                    drawer.classList.add('hidden');
                 }
             };
 
@@ -572,6 +623,9 @@
                 if (sp) { setTimeout(() => { sp.classList.remove('opacity-0'); }, 1000); setTimeout(() => { sp.classList.add('opacity-0'); }, 6000); }
 
                 setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
+
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); }
             };
 
             window.navTo = function(sectionId) {
@@ -1009,7 +1063,7 @@
                     timeline_title: "Programación", t1: "Iglesia", t2: "Recepción en Garden House", t3: "Vals y Brindis", t4: "Cena", t5: "Fiesta", t6: "Despedida",
                     upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Toma fotos y agrégalas a nuestra carpeta compartida para que las guardemos por siempre.",
                     upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu celular en alta calidad",
-                    drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantenengan la máxima calidad, usamos una carpeta segura de Google Drive.",
+                    drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
                     drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícone \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
                     dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
