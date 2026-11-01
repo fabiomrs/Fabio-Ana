@@ -75,6 +75,9 @@
 
         .countdown-box { border:1px solid var(--line); background:#fff; border-radius: 2px; }
 
+        .chat-bubble-bot { background-color: #ffffff; border: 1px solid var(--line); color: #2d3326; border-radius: 12px 12px 12px 2px; }
+        .chat-bubble-user { background-color: var(--sage); color: #ffffff; border-radius: 12px 12px 2px 12px; }
+
         ::selection { background: var(--olive); color: #fff; }
     </style>
 </head>
@@ -185,15 +188,16 @@
             </div>
         </section>
 
+        <!-- Confirmação de Presença (Abre o Mini-Chat) -->
         <section id="rsvp" class="py-28 bg-white border-b border-[color:var(--line)] scroll-mt-20">
             <div class="container mx-auto px-6 text-center max-w-2xl reveal">
                 <p class="eyebrow mb-3">contamos com você</p>
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
                 <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! A confirmação de presença é obrigatória e deve ser feita até o dia 30/11. Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.</p>
-                <a href="https://wa.me/5515996020108?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20no%20casamento%20de%20Fabio%20e%20Ana%20Isabel." target="_blank" class="inline-flex items-center justify-center px-9 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-xs tracking-[0.2em] uppercase rounded-sm btn-hover font-bold shadow-lg">
+                <button onclick="openRsvpChat()" class="inline-flex items-center justify-center px-9 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-xs tracking-[0.2em] uppercase rounded-sm btn-hover font-bold shadow-lg cursor-pointer">
                     <i data-lucide="message-circle" class="w-5 h-5 mr-3" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
-                </a>
+                </button>
             </div>
         </section>
 
@@ -367,6 +371,47 @@
         </div>
     </div>
 
+    <!-- Modal Mini-Chat RSVP -->
+    <div id="rsvp-chat-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-[#fcfbf9] rounded-sm max-w-md w-full relative shadow-2xl border border-[color:var(--line)] overflow-hidden flex flex-col max-h-[85vh]">
+            <!-- Header do Chat -->
+            <div class="bg-[#5a6b47] text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center font-serif text-lg">F&amp;A</div>
+                    <div class="text-left">
+                        <h3 class="font-serif text-base leading-tight" data-i18n="chat_header_title">Confirmação de Presença</h3>
+                        <p class="text-[11px] text-white/80 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#25D366] inline-block"></span> Online</p>
+                    </div>
+                </div>
+                <button onclick="closeRsvpChat()" class="text-white/80 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10">
+                    <i data-lucide="x" class="w-5 h-5" stroke-width="1.5"></i>
+                </button>
+            </div>
+
+            <!-- Corpo de Mensagens do Chat -->
+            <div id="rsvp-chat-messages" class="p-5 overflow-y-auto space-y-3 flex-grow min-h-[280px] max-h-[55vh] flex flex-col"></div>
+
+            <!-- Rodapé de Input do Chat -->
+            <div id="rsvp-chat-controls" class="p-4 bg-white border-t border-[color:var(--line)]">
+                <div id="rsvp-input-row" class="flex gap-2">
+                    <input type="text" id="rsvp-chat-input" class="flex-grow bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-sm focus:ring-[#5a6b47] focus:border-[#5a6b47] px-4 py-3 focus:outline-none" placeholder="Digite sua resposta...">
+                    <button onclick="handleRsvpSend()" class="px-5 py-3 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-sm font-bold text-xs uppercase tracking-widest transition-colors flex items-center justify-center">
+                        <i data-lucide="send" class="w-4 h-4" stroke-width="1.5"></i>
+                    </button>
+                </div>
+                <div id="rsvp-finish-row" class="hidden flex-col gap-2">
+                    <button onclick="sendRsvpToWhatsApp()" class="w-full py-3.5 bg-[#25D366] hover:bg-[#20b858] text-white rounded-sm font-bold text-xs uppercase tracking-[0.15em] transition-all shadow-md flex items-center justify-center">
+                        <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.5"></i>
+                        <span data-i18n="chat_btn_send_wa">Enviar Confirmação no WhatsApp</span>
+                    </button>
+                    <button onclick="resetRsvpChat()" class="w-full py-2 text-[11px] text-gray-400 hover:text-[#5a6b47] uppercase tracking-widest font-bold transition-colors" data-i18n="chat_btn_restart">
+                        Preencher novamente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Dinâmico do Presente -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-white rounded-sm p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
@@ -455,19 +500,15 @@
         </div>
     </footer>
 
-    <audio id="bg-music" preload="auto"></audio>
-
-    <div id="music-player" class="fixed bottom-6 right-6 bg-white border border-[color:var(--line)] hover:border-[color:var(--gold-soft)] text-[#5a6b47] rounded-full shadow-xl z-[150] transition-all duration-300 flex items-center justify-center transform hidden-until-enter opacity-0 px-3 py-1 space-x-1">
-        <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior">
-            <i data-lucide="skip-back" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+    <!-- Spotify Playlist Flutuante -->
+    <div id="music-player" class="fixed bottom-4 right-4 z-[150] transition-all duration-500 hidden-until-enter opacity-0 flex flex-col items-end">
+        <button onclick="toggleSpotifyPlayer()" class="mb-1.5 px-3 py-1.5 bg-white border border-[color:var(--line)] hover:border-[color:var(--gold-soft)] text-[#5a6b47] rounded-full shadow-md text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 transition-all">
+            <i data-lucide="music" class="w-3.5 h-3.5" stroke-width="1.5"></i>
+            <span id="spotify-toggle-label">Minimizar Música</span>
         </button>
-        <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
-            <div id="icon-play"><i data-lucide="play" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
-            <div id="icon-pause" class="hidden"><i data-lucide="pause" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
-        </button>
-        <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música">
-            <i data-lucide="skip-forward" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
-        </button>
+        <div id="spotify-iframe-wrap" class="w-[300px] sm:w-[340px] rounded-xl overflow-hidden shadow-2xl border border-[color:var(--line)] bg-white transition-all duration-300">
+            <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/0YyfmVaHZU8bWxcaijx1zB?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
     </div>
 
     <script>
@@ -504,27 +545,20 @@
                 }, 1000);
             } catch (e) { }
 
-            window.isPlaying = false;
-            const bgMusic = document.getElementById('bg-music');
-            const iconPlay = document.getElementById('icon-play');
-            const iconPause = document.getElementById('icon-pause');
-            const playlist = ['musica.mp3', 'musica1.mp3', 'musica2.mp3'];
-            let currentTrack = 0;
-            bgMusic.src = playlist[currentTrack];
-
-            function updatePlayerUI() {
-                if (window.isPlaying) { iconPlay.classList.add('hidden'); iconPause.classList.remove('hidden'); }
-                else { iconPlay.classList.remove('hidden'); iconPause.classList.add('hidden'); }
-            }
-
-            bgMusic.addEventListener('ended', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
-            document.getElementById('prev-btn').addEventListener('click', function() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
-            document.getElementById('next-btn').addEventListener('click', function() { currentTrack = (currentTrack + 1) % playlist.length; bgMusic.src = playlist[currentTrack]; if (window.isPlaying) bgMusic.play().catch(()=>{}); });
-            document.getElementById('music-btn').addEventListener('click', function() {
-                if (window.isPlaying) { bgMusic.pause(); window.isPlaying = false; }
-                else { let playPromise = bgMusic.play(); if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); } }
-                updatePlayerUI();
-            });
+            // Controle de Minimizar/Expandir o Player do Spotify
+            let spotifyMinimized = false;
+            window.toggleSpotifyPlayer = function() {
+                const wrap = document.getElementById('spotify-iframe-wrap');
+                const label = document.getElementById('spotify-toggle-label');
+                spotifyMinimized = !spotifyMinimized;
+                if (spotifyMinimized) {
+                    wrap.classList.add('hidden');
+                    label.innerText = activeLang === 'es' ? 'Abrir Música' : 'Abrir Música';
+                } else {
+                    wrap.classList.remove('hidden');
+                    label.innerText = activeLang === 'es' ? 'Minimizar Música' : 'Minimizar Música';
+                }
+            };
 
             window.enterSite = function(lang) {
                 setLanguage(lang);
@@ -538,9 +572,6 @@
                 if (sp) { setTimeout(() => { sp.classList.remove('opacity-0'); }, 1000); setTimeout(() => { sp.classList.add('opacity-0'); }, 6000); }
 
                 setTimeout(() => { modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 500);
-
-                let playPromise = bgMusic.play();
-                if (playPromise !== undefined) { playPromise.then(function() { window.isPlaying = true; updatePlayerUI(); }).catch(function(error) { }); }
             };
 
             window.navTo = function(sectionId) {
@@ -576,6 +607,155 @@
             window.prevImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             window.nextImage = function(e) { e.stopPropagation(); currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1; document.getElementById('lightbox-img').src = images[currentImageIndex]; };
             document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target.id === 'lightbox') { closeLightbox(); } });
+
+            // --- MINI-CHAT DE CONFIRMAÇÃO DE PRESENÇA (RSVP) ---
+            let rsvpStep = 'QTY';
+            let rsvpQty = 0;
+            let rsvpGuestNames = [];
+
+            function appendChatBubble(text, sender) {
+                const container = document.getElementById('rsvp-chat-messages');
+                const bubble = document.createElement('div');
+                if (sender === 'bot') {
+                    bubble.className = 'chat-bubble-bot px-4 py-3 text-sm max-w-[85%] self-start shadow-sm fade-enter text-left';
+                } else {
+                    bubble.className = 'chat-bubble-user px-4 py-3 text-sm max-w-[85%] self-end shadow-sm fade-enter text-left';
+                }
+                bubble.innerHTML = text;
+                container.appendChild(bubble);
+                container.scrollTop = container.scrollHeight;
+            }
+
+            window.openRsvpChat = function() {
+                const modal = document.getElementById('rsvp-chat-modal');
+                modal.classList.remove('hidden');
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                resetRsvpChat();
+            };
+
+            window.closeRsvpChat = function() {
+                const modal = document.getElementById('rsvp-chat-modal');
+                modal.classList.add('opacity-0');
+                setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; }, 300);
+            };
+
+            document.getElementById('rsvp-chat-modal').addEventListener('click', function(e) {
+                if (e.target.id === 'rsvp-chat-modal') closeRsvpChat();
+            });
+
+            window.resetRsvpChat = function() {
+                rsvpStep = 'QTY';
+                rsvpQty = 0;
+                rsvpGuestNames = [];
+                const container = document.getElementById('rsvp-chat-messages');
+                container.innerHTML = '';
+                document.getElementById('rsvp-input-row').classList.remove('hidden');
+                document.getElementById('rsvp-finish-row').classList.add('hidden');
+                document.getElementById('rsvp-finish-row').classList.remove('flex');
+
+                const input = document.getElementById('rsvp-chat-input');
+                input.value = '';
+                input.type = 'number';
+                input.min = '1';
+                input.max = '15';
+                input.placeholder = activeLang === 'es' ? 'Ej: 2' : 'Ex: 2';
+
+                const welcomeMsg = activeLang === 'es'
+                    ? '¡Hola! Qué alegría contar contigo en nuestra boda. 💍✨<br><br>Para comenzar, ¿<b>cuántas personas</b> (incluyéndote a ti) desean confirmar asistencia? Escribe solo el número:'
+                    : 'Olá! Que alegria ter você no nosso casamento! 💍✨<br><br>Para começarmos, <b>quantas pessoas</b> (incluindo você) vão comparecer? Digite apenas o número:';
+
+                appendChatBubble(welcomeMsg, 'bot');
+                setTimeout(() => input.focus(), 150);
+            };
+
+            window.handleRsvpSend = function() {
+                const input = document.getElementById('rsvp-chat-input');
+                const val = input.value.trim();
+                if (!val) return;
+
+                appendChatBubble(val, 'user');
+                input.value = '';
+
+                if (rsvpStep === 'QTY') {
+                    const num = parseInt(val, 10);
+                    if (isNaN(num) || num <= 0 || num > 15) {
+                        const errMsg = activeLang === 'es'
+                            ? 'Por favor, introduce un número válido de personas (entre 1 y 15).'
+                            : 'Por favor, digite um número válido de pessoas (entre 1 e 15).';
+                        setTimeout(() => appendChatBubble(errMsg, 'bot'), 250);
+                        return;
+                    }
+                    rsvpQty = num;
+                    rsvpStep = 'NAMES';
+                    input.type = 'text';
+                    input.placeholder = activeLang === 'es' ? 'Nombre completo...' : 'Nome completo...';
+
+                    setTimeout(() => {
+                        if (rsvpQty === 1) {
+                            const msg = activeLang === 'es'
+                                ? '¡Perfecto! Por favor, escribe tu <b>nombre completo</b>:'
+                                : 'Perfeito! Agora, por favor, digite o seu <b>nome completo</b>:';
+                            appendChatBubble(msg, 'bot');
+                        } else {
+                            const msg = activeLang === 'es'
+                                ? `¡Excelente, ${rsvpQty} personas! Escribe el <b>nombre completo del invitado 1</b> (tu nombre):`
+                                : `Perfeito, ${rsvpQty} pessoas! Digite o <b>nome completo da 1ª pessoa</b> (seu nome):`;
+                            appendChatBubble(msg, 'bot');
+                        }
+                        input.focus();
+                    }, 250);
+                    return;
+                }
+
+                if (rsvpStep === 'NAMES') {
+                    rsvpGuestNames.push(val);
+                    const currentCount = rsvpGuestNames.length;
+
+                    if (currentCount < rsvpQty) {
+                        const nextIdx = currentCount + 1;
+                        setTimeout(() => {
+                            const msg = activeLang === 'es'
+                                ? `Anotado. Ahora escribe el <b>nombre completo del invitado ${nextIdx}</b>:`
+                                : `Anotado! Agora digite o <b>nome completo da ${nextIdx}ª pessoa</b>:`;
+                            appendChatBubble(msg, 'bot');
+                            input.focus();
+                        }, 250);
+                    } else {
+                        rsvpStep = 'DONE';
+                        const namesFormatted = rsvpGuestNames.map((n, i) => `${i + 1}. ${n}`).join('<br>');
+                        setTimeout(() => {
+                            const doneMsg = activeLang === 'es'
+                                ? `¡Todo listo! Confirmaremos a <b>${rsvpQty} persona(s)</b>:<br><br>${namesFormatted}<br><br>Haz clic en el botón verde de abajo para enviarnos la confirmación por WhatsApp.`
+                                : `Tudo pronto! Vamos confirmar <b>${rsvpQty} pessoa(s)</b>:<br><br>${namesFormatted}<br><br>Clique no botão verde abaixo para nos enviar a confirmação no WhatsApp.`;
+                            appendChatBubble(doneMsg, 'bot');
+                            document.getElementById('rsvp-input-row').classList.add('hidden');
+                            const finishRow = document.getElementById('rsvp-finish-row');
+                            finishRow.classList.remove('hidden');
+                            finishRow.classList.add('flex');
+                        }, 250);
+                    }
+                }
+            };
+
+            document.getElementById('rsvp-chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleRsvpSend();
+                }
+            });
+
+            window.sendRsvpToWhatsApp = function() {
+                const namesList = rsvpGuestNames.join(', ');
+                let msg = '';
+                if (activeLang === 'es') {
+                    msg = `¡Hola! Me gustaría confirmar asistencia a la boda de Fabio y Ana Isabel.\n\n*Cantidad de personas:* ${rsvpQty}\n*Nombre(s):* ${namesList}`;
+                } else {
+                    msg = `Olá! Gostaria de confirmar presença no casamento de Fabio e Ana Isabel.\n\n*Quantidade de pessoas:* ${rsvpQty}\n*Nome(s):* ${namesList}`;
+                }
+                window.open(`https://wa.me/5515996020108?text=${encodeURIComponent(msg)}`, '_blank');
+                closeRsvpChat();
+            };
 
             // --- DICIONÁRIO LUCIDE PARA PRESENTES DINÂMICOS ---
             const giftListItems = [
@@ -814,6 +994,7 @@
                     dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! A confirmação de presença é obrigatória e deve ser feita até o dia 30/11. Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.", rsvp_btn: "Confirmar pelo WhatsApp",
+                    chat_header_title: "Confirmação de Presença", chat_btn_send_wa: "Enviar Confirmação no WhatsApp", chat_btn_restart: "Preencher novamente",
                     gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos opções para facilitar para nossos convidados de ambos os países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Regalos (Bolivia/QR)", btn_back_home: "Voltar ao Início",
                     ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026",
@@ -828,11 +1009,12 @@
                     timeline_title: "Programación", t1: "Iglesia", t2: "Recepción en Garden House", t3: "Vals y Brindis", t4: "Cena", t5: "Fiesta", t6: "Despedida",
                     upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Toma fotos y agrégalas a nuestra carpeta compartida para que las guardemos por siempre.",
                     upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu celular en alta calidad",
-                    drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
+                    drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantenengan la máxima calidad, usamos una carpeta segura de Google Drive.",
                     drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícone \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
                     dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! La confirmación de asistencia es obligatoria y debe realizarse hasta el 30/11. Por favor, confirma tu asistencia haciendo clic en el botón de abajo para enviar un mensaje a nuestro WhatsApp.", rsvp_btn: "Confirmar por WhatsApp",
+                    chat_header_title: "Confirmación de Asistencia", chat_btn_send_wa: "Enviar Confirmación por WhatsApp", chat_btn_restart: "Rellenar de nuevo",
                     gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos opciones para facilitar a los invitados de ambos países.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Regalos (Bolivia/QR)", btn_back_home: "Volver al Inicio",
                     ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026",
