@@ -260,15 +260,15 @@
                     <i data-lucide="camera" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
                 </div>
                 <h2 class="font-serif text-4xl mb-5 text-[#2d3326]" data-i18n="upload_title">Nossa Visão, Seus Olhos</h2>
-                <p class="text-gray-500 mb-10 text-lg max-w-2xl mx-auto leading-relaxed" data-i18n="upload_desc">Queremos ver o nosso grande dia por várias visões! Tire muitas fotos e vídeos e adicione na nossa pasta compartilhada para guardarmos para sempre.</p>
+                <p class="text-gray-500 mb-10 text-lg max-w-2xl mx-auto leading-relaxed" data-i18n="upload_desc">Queremos ver o nosso grande dia por várias visões! Compartilhe as fotos que você tirar durante o evento pelo link abaixo, e elas estarão disponíveis na TV da festa.</p>
 
-                <div onclick="openUploadModal()" class="dropzone p-10 rounded-2xl cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
+                <a href="https://www.photoguest.com.br/public/events/public?code=3586" target="_blank" rel="noopener" class="dropzone p-10 rounded-2xl cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
                     <div class="w-14 h-14 icon-bubble rounded-full flex items-center justify-center mb-4 text-[#5a6b47] group-hover:bg-[#a3b18a]/30 transition-colors duration-300">
                         <i data-lucide="cloud-upload" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
                     </div>
                     <p class="text-[#2d3326] font-serif text-xl mb-2" data-i18n="upload_box_title">Toque aqui para enviar suas fotos</p>
-                    <p class="text-gray-400 text-xs uppercase tracking-widest" data-i18n="upload_box_sub">Envie direto do seu celular para nosso Google Drive</p>
-                </div>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-md" data-i18n="upload_box_sub">Compartilhe as fotos que você tirou durante o evento. Elas estarão disponíveis na TV.</p>
+                </a>
             </div>
         </section>
 
@@ -513,31 +513,6 @@
         </div>
     </div>
 
-    <!-- Modal Dropzone Drive -->
-    <div id="drive-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-white rounded-2xl p-10 max-w-md w-full text-center relative shadow-2xl">
-            <button onclick="closeUploadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-50 rounded-full p-2 border border-[color:var(--line)]">
-                <i data-lucide="x" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
-            </button>
-            <div class="w-14 h-14 icon-bubble rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                <i data-lucide="folder-up" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
-            </div>
-            <h3 class="font-serif text-2xl text-[#2d3326] mb-4" data-i18n="drive_title">Álbum Compartilhado</h3>
-            <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n="drive_desc">Para garantir que suas fotos mantenham a qualidade máxima, usamos uma pasta segura do Google Drive.</p>
-            <div class="bg-gray-50 p-5 rounded-2xl text-left mb-8 border border-[color:var(--line)]">
-                <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3" data-i18n="drive_step_title">Como funciona:</p>
-                <ol class="text-sm text-gray-600 space-y-2">
-                    <li class="flex"><span class="text-[#5a6b47] font-serif mr-2">1.</span> <span data-i18n="drive_step_1">Toque no botão abaixo para abrir a pasta.</span></li>
-                    <li class="flex"><span class="text-[#5a6b47] font-serif mr-2">2.</span> <span data-i18n="drive_step_2">No Drive, toque no ícone "+" (Novo).</span></li>
-                    <li class="flex"><span class="text-[#5a6b47] font-serif mr-2">3.</span> <span data-i18n="drive_step_3">Selecione suas fotos favoritas do celular!</span></li>
-                </ol>
-            </div>
-            <a href="https://drive.google.com/drive/folders/1fTq3XezTDU3-Uz8RZlN5-zh8w17pScKt" target="_blank" onclick="closeUploadModal()" class="w-full inline-flex justify-center px-6 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-2xl font-bold uppercase tracking-[0.15em] text-xs transition-all shadow-md">
-                <span data-i18n="drive_btn">Acessar Pasta no Drive</span>
-            </a>
-        </div>
-    </div>
-
     <!-- Lightbox Galeria -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2">
@@ -707,9 +682,6 @@
                 } else { giftsView.classList.add('hidden'); mainView.classList.remove('hidden'); mainView.classList.add('fade-enter'); window.scrollTo(0,0); }
             };
 
-            window.openUploadModal = function() { const modal = document.getElementById('drive-modal'); modal.classList.remove('hidden'); modal.style.display = 'flex'; setTimeout(() => modal.classList.remove('opacity-0'), 10); };
-            window.closeUploadModal = function() { const modal = document.getElementById('drive-modal'); modal.classList.add('opacity-0'); setTimeout(() => { modal.classList.add('hidden'); modal.style.display = 'none'; }, 300); };
-            document.getElementById('drive-modal').addEventListener('click', function(e) { if (e.target.id === 'drive-modal') { closeUploadModal(); } });
 
             const aiIframe = document.getElementById('ai-iframe');
             if ('IntersectionObserver' in window) {
@@ -1122,10 +1094,8 @@
                     location_title: "Locais", church_title: "Cerimônia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
                     dinner_title: "Recepção", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
                     timeline_title: "Programação", t1: "Igreja", t2: "Recepção Garden House", t3: "Valsa - Brinde", t4: "Jantar", t5: "Festa", t6: "Despedida",
-                    upload_title: "Nossa Visão, Seus Olhos", upload_desc: "Queremos ver o nosso grande dia por várias visões! Tire muitas fotos e vídeos e adicione na nossa pasta compartilhada para guardarmos para sempre.",
-                    upload_box_title: "Toque aqui para enviar suas fotos", upload_box_sub: "Envie direto do seu celular para nosso Google Drive",
-                    drive_title: "Álbum Compartilhado", drive_desc: "Para garantir que suas fotos mantenham a qualidade máxima, usamos uma pasta segura do Google Drive.",
-                    drive_step_title: "Como funciona:", drive_step_1: "Toque no botão abaixo para abrir a pasta.", drive_step_2: "No Drive, toque no ícone \"+\" (Novo).", drive_step_3: "Selecione suas fotos favoritas do celular!", drive_btn: "Acessar Pasta no Drive",
+                    upload_title: "Nossa Visão, Seus Olhos", upload_desc: "Queremos ver o nosso grande dia por várias visões! Compartilhe as fotos que você tirar durante o evento pelo link abaixo, e elas estarão disponíveis na TV da festa.",
+                    upload_box_title: "Toque aqui para enviar suas fotos", upload_box_sub: "Compartilhe as fotos que você tirou durante o evento. Elas estarão disponíveis na TV.",
                     dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! A confirmação de presença é obrigatória e deve ser feita até o dia 30/11. Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.", rsvp_btn: "Confirmar pelo WhatsApp",
@@ -1144,10 +1114,8 @@
                     location_title: "Ubicaciones", church_title: "Ceremonia Religiosa", church_address: "6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia",
                     dinner_title: "Recepción", dinner_address: "1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra", map_btn: "Abrir GPS / Maps",
                     timeline_title: "Programación", t1: "Iglesia", t2: "Recepción en Garden House", t3: "Vals y Brindis", t4: "Cena", t5: "Fiesta", t6: "Despedida",
-                    upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Toma fotos y agrégalas a nuestra carpeta compartida para que las guardemos por siempre.",
-                    upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu celular en alta calidad",
-                    drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
-                    drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícone \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
+                    upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Comparte las fotos que tomes durante el evento con el enlace de abajo y estarán disponibles en la TV de la fiesta.",
+                    upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Comparte las fotos que tomaste durante el evento. Estarán disponibles en la TV.",
                     dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! La confirmación de asistencia es obligatoria y debe realizarse hasta el 30/11. Por favor, confirma tu asistencia haciendo clic en el botón de abajo para enviar un mensaje a nuestro WhatsApp.", rsvp_btn: "Confirmar por WhatsApp",
