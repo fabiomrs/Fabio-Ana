@@ -6,58 +6,38 @@
     <title>Casamento - Fabio & Ana Isabel</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Cormorant+Garamond:ital,wght@1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <!-- Script Oficial do Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root{
-            --cream:#fbfaf6; --cream-deep:#f3f0e7;
-            --sage:#566b4a; --sage-dark:#3d4f33; --olive:#a3b18a;
-            --ink:#232a1d; --gold:#b8935f; --gold-soft:#dccaa4;
-            --line:rgba(35,42,29,0.09);
-            --shadow-soft:0 24px 60px -28px rgba(35,42,29,.28);
+            --cream:#fcfbf9;
+            --cream-deep:#f6f4ee;
+            --sage:#5a6b47;
+            --sage-dark:#435234;
+            --olive:#a3b18a;
+            --ink:#2d3326;
+            --gold:#b8935f;
+            --gold-soft:#d9c7a3;
+            --line:rgba(45,51,38,0.10);
         }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--cream); color: #3a3f34; }
-        h1, h2, h3, .font-serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.01em; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--cream); color: #3a3f34; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .font-script { font-family: 'Cormorant Garamond', serif; font-style: italic; }
-        :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-        ::selection { background: var(--olive); color: #fff; }
 
-        /* Bordas arredondadas modernas */
-        html .rounded-2xl { border-radius: 1.5rem; }
-        html button.rounded-2xl, html a.rounded-2xl { border-radius: 9999px; }
-        html input.rounded-2xl, html textarea.rounded-2xl { border-radius: .9rem; }
-
-        /* Navegação em vidro */
-        #navbar { background: rgba(251,250,246,.72) !important; backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); }
-
-        /* Hero */
         .hero-bg {
-            background-image: linear-gradient(115deg, rgba(24,29,19,0.86) 0%, rgba(24,29,19,0.55) 45%, rgba(24,29,19,0.2) 80%, rgba(24,29,19,0.05) 100%), url('foto (1).jpg');
+            background-image: linear-gradient(115deg, rgba(29,34,24,0.82) 0%, rgba(29,34,24,0.52) 45%, rgba(29,34,24,0.18) 78%, rgba(29,34,24,0.05) 100%), url('foto (1).jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
         }
-        @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
-        .chip { display:inline-flex; align-items:center; gap:.55rem; padding:.65rem 1.05rem; border-radius:9999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); color:#fff; font-size:.85rem; font-weight:500; }
-        .chip svg { width:1.1rem; height:1.1rem; color:var(--gold-soft); flex:none; }
-        .btn-solid, .btn-glass, .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.95rem 1.7rem; border-radius:9999px; font-weight:700; font-size:.85rem; transition:all .3s ease; cursor:pointer; }
-        .btn-solid { background:#fff; color:var(--sage-dark); }
-        .btn-solid:hover { background:var(--gold-soft); transform:translateY(-2px); }
-        .btn-glass { color:#fff; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.08); backdrop-filter:blur(10px); }
-        .btn-glass:hover { background:rgba(255,255,255,.2); transform:translateY(-2px); }
-        .btn-gold { background:var(--gold-soft); color:var(--ink); padding:.9rem 1.9rem; }
-        .btn-gold:hover { background:#fff; transform:translateY(-2px); }
-
         .btn-hover { transition: all 0.35s cubic-bezier(.2,.7,.3,1); }
         .btn-hover:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(45,51,38,0.28); }
 
-        /* Galeria */
         .masonry-grid { column-count: 2; column-gap: 1.1rem; }
         @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
         .masonry-item { break-inside: avoid; margin-bottom: 1.1rem; }
-        .gallery-wrap { position: relative; overflow: hidden; border-radius: 1.25rem; cursor: pointer; }
+        .gallery-wrap { position: relative; overflow: hidden; border-radius: 0.25rem; cursor: pointer; }
         .gallery-img { width: 100%; transition: transform 0.9s cubic-bezier(.2,.7,.2,1); display:block; }
         .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(29,34,24,0.55), rgba(29,34,24,0.05)); opacity: 0; transition: opacity 0.4s ease; display: flex; align-items: flex-end; justify-content: flex-start; padding: 1rem; }
         .gallery-wrap:hover .gallery-img { transform: scale(1.06); }
@@ -66,8 +46,10 @@
         #ai-iframe-container { overflow: hidden; height: 100%; }
         .fade-enter { animation: fadeIn 0.6s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1); }
         .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
         .loader { border: 1.5px solid #eee; border-top: 1.5px solid var(--sage); border-radius: 50%; width: 22px; height: 22px; animation: spin 0.9s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -75,55 +57,46 @@
         .scroll-indicator { animation: bounce 2.4s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px); } 60% { transform: translateY(-4px); } }
 
-        html .dropzone { border: 1.5px dashed var(--gold-soft); background-color: #fff; border-radius: 1.75rem; transition: all 0.35s ease; }
-        html .dropzone:hover { background-color: var(--cream-deep); border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+        .dropzone { border: 1px solid var(--line); background-color: #ffffff; transition: all 0.35s ease; }
+        .dropzone:hover { background-color: var(--cream-deep); border-color: var(--gold-soft); transform: translateY(-2px); box-shadow: 0 20px 40px -20px rgba(45,51,38,0.18); }
 
         .ornament { display:flex; align-items:center; justify-content:center; gap:0.85rem; }
         .ornament .rule { height:1px; width:40px; background: linear-gradient(90deg, transparent, var(--gold-soft)); }
         .ornament .rule.flip { background: linear-gradient(90deg, var(--gold-soft), transparent); }
         .ornament .dot { width:5px; height:5px; border-radius:50%; background: var(--gold); transform: rotate(45deg); }
-        .eyebrow { font-family:'Cormorant Garamond', serif; font-style: italic; letter-spacing: 0.06em; color: var(--gold); font-size: 1.15rem; }
 
-        html .card-elegant { background:#fff; border:1px solid var(--line); border-radius:1.75rem; box-shadow:0 10px 30px -20px rgba(35,42,29,.2); transition: all 0.4s cubic-bezier(.2,.7,.2,1); }
-        html .card-elegant:hover { border-color: var(--gold-soft); box-shadow: var(--shadow-soft); transform: translateY(-4px); }
+        .eyebrow { font-family:'Cormorant Garamond', serif; font-style: italic; letter-spacing: 0.08em; color: var(--gold); font-size: 1.05rem; }
+
+        .card-elegant { background:#fff; border:1px solid var(--line); transition: all 0.4s cubic-bezier(.2,.7,.2,1); }
+        .card-elegant:hover { border-color: var(--gold-soft); box-shadow: 0 30px 60px -30px rgba(45,51,38,0.22); transform: translateY(-4px); }
+
+        .card-special { background: linear-gradient(180deg, #fffdf8 0%, #ffffff 100%); border: 1.5px solid var(--gold); transition: all 0.4s cubic-bezier(.2,.7,.2,1); }
+        .card-special:hover { box-shadow: 0 30px 60px -25px rgba(184,147,95,0.35); transform: translateY(-4px); }
+
         .btn-outline-elegant { border:1px solid var(--sage); color: var(--sage); transition: all 0.35s ease; }
         .btn-outline-elegant:hover { background: var(--sage); color:#fff; }
-        .icon-bubble { background: linear-gradient(145deg, rgba(86,107,74,.14), rgba(184,147,95,.18)); box-shadow: inset 0 0 0 1px rgba(86,107,74,.12); }
 
-        .countdown-box { border:1px solid var(--line); background:linear-gradient(180deg,#fff,var(--cream-deep)); border-radius:1.25rem; min-width:4.5rem; box-shadow:0 14px 30px -22px rgba(35,42,29,.35); }
+        .countdown-box { border:1px solid var(--line); background:#fff; border-radius: 2px; }
 
-        .chat-bubble-bot { background-color: #ffffff; border: 1px solid var(--line); color: #2d3326; border-radius: 18px 18px 18px 4px; }
-        .chat-bubble-user { background-color: var(--sage); color: #ffffff; border-radius: 18px 18px 4px 18px; }
+        .chat-bubble-bot { background-color: #ffffff; border: 1px solid var(--line); color: #2d3326; border-radius: 12px 12px 12px 2px; }
+        .chat-bubble-user { background-color: var(--sage); color: #ffffff; border-radius: 12px 12px 2px 12px; }
 
-        /* Aviso de presentes simbólicos */
-        .notice { display:flex; gap:1rem; align-items:flex-start; text-align:left; max-width:42rem; margin:0 auto 2.5rem; padding:1.25rem 1.5rem; border-radius:1.5rem; background:linear-gradient(135deg,#fff,#f7f1e3); border:1px solid var(--gold-soft); box-shadow:0 18px 40px -28px rgba(184,147,95,.6); }
-        .notice-icon { flex:none; width:2.75rem; height:2.75rem; border-radius:9999px; display:flex; align-items:center; justify-content:center; background:rgba(184,147,95,.16); color:var(--gold); }
-
-        /* Cards de presente */
-        .gift-icon-area { background: linear-gradient(160deg,#faf8f2,#efeadb); border-bottom:1px solid var(--line); }
-        .special-gift { background: radial-gradient(120% 140% at 0% 0%, #4b6140 0%, #2d3a25 60%, #232a1d 100%); color:#fff; border:1px solid rgba(220,202,164,.45); box-shadow:0 30px 60px -30px rgba(35,42,29,.6); }
-        .special-icon { flex:none; width:6.5rem; height:6.5rem; border-radius:1.75rem; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:var(--gold-soft); }
-        .special-badge { display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .85rem; border-radius:9999px; background:rgba(220,202,164,.18); color:var(--gold-soft); font-size:.78rem; font-weight:700; }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-            .reveal { opacity: 1; transform: none; }
-        }
+        ::selection { background: var(--olive); color: #fff; }
     </style>
 </head>
 
 <body class="antialiased overflow-hidden">
     <!-- Pop-up Inicial -->
     <div id="welcome-modal" class="fixed inset-0 bg-[#fcfbf9]/97 backdrop-blur-md z-[100] flex flex-col justify-center items-center px-6 transition-opacity duration-700">
-        <div class="text-center max-w-md w-full bg-white p-10 md:p-12 rounded-2xl shadow-2xl border border-[color:var(--line)] transform transition-transform duration-500 scale-100" id="welcome-box">
+        <div class="text-center max-w-md w-full bg-white p-10 md:p-12 rounded-sm shadow-2xl border border-[color:var(--line)] transform transition-transform duration-500 scale-100" id="welcome-box">
             <div class="ornament mb-6"><span class="rule"></span><span class="dot"></span><span class="rule flip"></span></div>
             <div class="font-serif text-4xl tracking-wide text-[#2d3326] font-medium mb-8">F <span class="font-script text-[color:var(--gold)]">&amp;</span> A</div>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-1">Bem-vindo(a)</h2>
             <h2 class="font-serif text-2xl text-[#2d3326] mb-8">Bienvenido(a)</h2>
             <p class="text-gray-400 mb-8 text-xs uppercase tracking-[0.25em] font-bold">Selecione o Idioma<br><span class="text-[11px] text-gray-400 font-medium tracking-widest">Seleccione el idioma</span></p>
             <div class="flex flex-col space-y-3">
-                <button onclick="enterSite('pt')" class="px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-2xl font-bold tracking-[0.2em] text-sm transition-all shadow-md">PORTUGUÊS</button>
-                <button onclick="enterSite('es')" class="px-8 py-4 border border-[#5a6b47] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white rounded-2xl font-bold tracking-[0.2em] text-sm transition-all">ESPAÑOL</button>
+                <button onclick="enterSite('pt')" class="px-8 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-sm font-bold tracking-[0.2em] text-sm transition-all shadow-md">PORTUGUÊS</button>
+                <button onclick="enterSite('es')" class="px-8 py-4 border border-[#5a6b47] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white rounded-sm font-bold tracking-[0.2em] text-sm transition-all">ESPAÑOL</button>
             </div>
         </div>
     </div>
@@ -156,20 +129,15 @@
                     <span class="h-[1px] w-16 bg-[color:var(--gold-soft)] opacity-90"></span>
                     <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--gold-soft)] rotate-45"></span>
                 </div>
-                <div class="flex flex-wrap gap-3 mb-9">
-                    <span class="chip"><i data-lucide="calendar-heart" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="date">18 de Dezembro de 2026</span></span>
-                    <span class="chip"><i data-lucide="clock" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="time">Início às 17:30</span></span>
-                    <span class="chip"><i data-lucide="map-pin" stroke-linecap="round" stroke-linejoin="round"></i><span>Santa Cruz de la Sierra, Bolívia</span></span>
-                </div>
-                <div class="flex flex-wrap gap-3">
-                    <button onclick="navTo('rsvp')" class="btn-solid" data-i18n="hero_rsvp">Confirmar presença</button>
-                    <button onclick="navTo('presentes')" class="btn-glass" data-i18n="hero_gifts">Sugestão de presentes</button>
-                </div>
+                <p class="text-lg md:text-xl text-white tracking-[0.25em] uppercase mb-3 font-medium drop-shadow-md" data-i18n="date">18 de Dezembro de 2026</p>
+                <p class="text-base text-[#e3ddc9] font-medium tracking-wide drop-shadow-md flex items-center gap-2" data-i18n="time">
+                    <i data-lucide="clock" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i> Início às 17:30
+                </p>
             </div>
 
             <div id="scroll-prompt" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 transition-opacity duration-700 pointer-events-none text-white drop-shadow-md">
                 <span class="text-[10px] uppercase tracking-[0.3em] font-bold mb-2 text-[#e3ddc9]" data-i18n="scroll_down">Deslize para baixo</span>
-                <i data-lucide="chevrons-down" class="w-6 h-6 scroll-indicator text-[color:var(--gold-soft)]" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="mouse" class="w-6 h-6 scroll-indicator text-[color:var(--gold-soft)]" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </div>
         </header>
 
@@ -195,28 +163,28 @@
                 <div class="grid md:grid-cols-2 gap-8 text-center">
 
                     <!-- Igreja -->
-                    <div class="card-elegant p-10 md:p-12 rounded-2xl flex flex-col h-full reveal">
-                        <div class="w-16 h-16 mx-auto mb-7 rounded-full icon-bubble flex items-center justify-center text-[#5a6b47]">
-                            <i data-lucide="church" class="w-8 h-8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <div class="card-elegant p-10 md:p-12 rounded-sm flex flex-col h-full reveal">
+                        <div class="w-16 h-16 mx-auto mb-7 rounded-full bg-[#5a6b47]/10 flex items-center justify-center text-[#5a6b47]">
+                            <i data-lucide="church" class="w-8 h-8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                         </div>
                         <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold mb-3" data-i18n="church_title">Cerimônia Religiosa</p>
                         <h3 class="font-serif text-2xl md:text-3xl mb-3 text-[#2d3326]">Parroquia La Resurrección</h3>
                         <p class="text-gray-500 mb-9 font-medium text-sm flex-grow leading-relaxed" data-i18n="church_address">6RWG+MM9, Crisanto Valverde, Santa Cruz de la Sierra, Bolívia</p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Parroquia+La+Resurrecci%C3%B3n,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-[11px] font-bold tracking-[0.2em] uppercase rounded-2xl btn-hover mt-auto">
-                            <i data-lucide="navigation" class="w-5 h-5 mr-2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="map_btn">Abrir GPS / Maps</span>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Parroquia+La+Resurrecci%C3%B3n,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-[11px] font-bold tracking-[0.2em] uppercase rounded-sm btn-hover mt-auto">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
 
                     <!-- Recepção -->
-                    <div class="card-elegant p-10 md:p-12 rounded-2xl flex flex-col h-full reveal">
-                        <div class="w-16 h-16 mx-auto mb-7 rounded-full icon-bubble flex items-center justify-center text-[#5a6b47]">
-                            <i data-lucide="wine" class="w-8 h-8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <div class="card-elegant p-10 md:p-12 rounded-sm flex flex-col h-full reveal">
+                        <div class="w-16 h-16 mx-auto mb-7 rounded-full bg-[#5a6b47]/10 flex items-center justify-center text-[#5a6b47]">
+                            <i data-lucide="wine" class="w-8 h-8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                         </div>
                         <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold mb-3" data-i18n="dinner_title">Recepção</p>
                         <h3 class="font-serif text-2xl md:text-3xl mb-3 text-[#2d3326]">Garden House Eventos</h3>
                         <p class="text-gray-500 mb-9 font-medium text-sm flex-grow leading-relaxed" data-i18n="dinner_address">1 Cuadra Pasando La Sede De Blooming, Octavo Anillo, Santa Cruz de la Sierra</p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=Garden+House+Eventos,+Octavo+Anillo,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-[11px] font-bold tracking-[0.2em] uppercase rounded-2xl btn-hover mt-auto">
-                            <i data-lucide="navigation" class="w-5 h-5 mr-2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="map_btn">Abrir GPS / Maps</span>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Garden+House+Eventos,+Octavo+Anillo,+Santa+Cruz+de+la+Sierra,+Bolivia" target="_blank" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#5a6b47] hover:bg-[#435234] text-white text-[11px] font-bold tracking-[0.2em] uppercase rounded-sm btn-hover mt-auto">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i><span data-i18n="map_btn">Abrir GPS / Maps</span>
                         </a>
                     </div>
                 </div>
@@ -229,8 +197,8 @@
                 <p class="eyebrow mb-3">contamos com você</p>
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="rsvp_title">Confirme sua Presença</h2>
                 <p class="text-gray-500 mb-10 text-lg leading-relaxed" data-i18n="rsvp_desc">Sua presença é muito importante para nós! A confirmação de presença é obrigatória e deve ser feita até o dia 30/11. Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.</p>
-                <button onclick="openRsvpChat()" class="inline-flex items-center justify-center px-9 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-xs tracking-[0.2em] uppercase rounded-2xl btn-hover font-bold shadow-lg cursor-pointer">
-                    <i data-lucide="message-circle" class="w-5 h-5 mr-3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <button onclick="openRsvpChat()" class="inline-flex items-center justify-center px-9 py-4 bg-[#25D366] hover:bg-[#20b858] text-white text-xs tracking-[0.2em] uppercase rounded-sm btn-hover font-bold shadow-lg cursor-pointer">
+                    <i data-lucide="message-circle" class="w-5 h-5 mr-3" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     <span data-i18n="rsvp_btn">Confirmar pelo WhatsApp</span>
                 </button>
             </div>
@@ -256,15 +224,15 @@
 
         <section id="upload-fotos" class="py-24 bg-[#fcfbf9] border-y border-[color:var(--line)] scroll-mt-20">
             <div class="container mx-auto px-6 max-w-4xl text-center reveal">
-                <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center mx-auto mb-7 text-[#5a6b47]">
-                    <i data-lucide="camera" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center mx-auto mb-7 text-[#5a6b47]">
+                    <i data-lucide="camera" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                 </div>
                 <h2 class="font-serif text-4xl mb-5 text-[#2d3326]" data-i18n="upload_title">Nossa Visão, Seus Olhos</h2>
                 <p class="text-gray-500 mb-10 text-lg max-w-2xl mx-auto leading-relaxed" data-i18n="upload_desc">Queremos ver o nosso grande dia por várias visões! Tire muitas fotos e vídeos e adicione na nossa pasta compartilhada para guardarmos para sempre.</p>
 
-                <div onclick="openUploadModal()" class="dropzone p-10 rounded-2xl cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
-                    <div class="w-14 h-14 icon-bubble rounded-full flex items-center justify-center mb-4 text-[#5a6b47] group-hover:bg-[#a3b18a]/30 transition-colors duration-300">
-                        <i data-lucide="cloud-upload" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <div onclick="openUploadModal()" class="dropzone p-10 rounded-sm cursor-pointer flex flex-col items-center justify-center max-w-2xl mx-auto group">
+                    <div class="w-14 h-14 bg-[#5a6b47]/10 rounded-full flex items-center justify-center mb-4 text-[#5a6b47] group-hover:bg-[#a3b18a]/30 transition-colors duration-300">
+                        <i data-lucide="upload-cloud" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     </div>
                     <p class="text-[#2d3326] font-serif text-xl mb-2" data-i18n="upload_box_title">Toque aqui para enviar suas fotos</p>
                     <p class="text-gray-400 text-xs uppercase tracking-widest" data-i18n="upload_box_sub">Envie direto do seu celular para nosso Google Drive</p>
@@ -273,33 +241,44 @@
         </section>
 
         <section class="py-24 bg-white border-b border-[color:var(--line)]">
-            <div class="container mx-auto px-6 max-w-4xl grid md:grid-cols-2 gap-8">
-                <div class="bg-[#fcfbf9] p-10 md:p-12 rounded-2xl border border-[color:var(--line)] text-center flex flex-col justify-center reveal">
-                    <h3 class="font-serif text-3xl mb-7 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
-                    <div class="flex justify-center gap-12 mb-7">
-                        <div class="flex flex-col items-center">
-                            <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center text-[#5a6b47]">
-                                <i data-lucide="gem" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+            <div class="container mx-auto px-6 max-w-4xl space-y-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-[#fcfbf9] p-10 md:p-12 rounded-sm border border-[color:var(--line)] text-center flex flex-col justify-center reveal">
+                        <h3 class="font-serif text-3xl mb-7 text-[#2d3326]" data-i18n="dress_code">Traje</h3>
+                        <div class="flex justify-center gap-12 mb-7">
+                            <div class="flex flex-col items-center">
+                                <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center text-[#5a6b47]">
+                                    <i data-lucide="sparkles" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+                                </div>
+                                <span class="text-[10px] mt-3 uppercase tracking-[0.2em] text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
                             </div>
-                            <span class="text-[10px] mt-3 uppercase tracking-[0.2em] text-gray-400 font-bold" data-i18n="dress_women">Mulheres</span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center text-[#5a6b47]">
-                                <i data-lucide="shirt" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center text-[#5a6b47]">
+                                    <i data-lucide="tie" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+                                </div>
+                                <span class="text-[10px] mt-3 uppercase tracking-[0.2em] text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                             </div>
-                            <span class="text-[10px] mt-3 uppercase tracking-[0.2em] text-gray-400 font-bold" data-i18n="dress_men">Homens</span>
                         </div>
+                        <p class="text-gray-800 font-serif text-2xl tracking-wide mb-2" id="dress-style-text">Passeio Completo</p>
+                        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
                     </div>
-                    <p class="text-gray-800 font-serif text-2xl tracking-wide mb-2" id="dress-style-text">Passeio Completo</p>
-                    <p class="text-gray-500 text-sm leading-relaxed" data-i18n="dress_desc">Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.</p>
+
+                    <div class="bg-[#fcfbf9] p-10 md:p-12 rounded-sm border border-[color:var(--line)] text-center flex flex-col justify-center reveal">
+                        <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center mx-auto mb-5 text-[#5a6b47]">
+                            <i data-lucide="info" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+                        </div>
+                        <h3 class="font-serif text-3xl mb-5 text-[#2d3326]" data-i18n="kids_title">Aviso Especial</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed italic" data-i18n="kids_note">Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.</p>
+                    </div>
                 </div>
 
-                <div class="bg-[#fcfbf9] p-10 md:p-12 rounded-2xl border border-[color:var(--line)] text-center flex flex-col justify-center reveal">
-                    <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center mx-auto mb-5 text-[#5a6b47]">
-                        <i data-lucide="info" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <!-- Aviso Importante sobre Presentes Físicos (2º local em destaque) -->
+                <div class="bg-[#f6f4ee] p-8 md:p-10 rounded-sm border border-[color:var(--gold-soft)] text-center flex flex-col items-center justify-center reveal">
+                    <div class="w-14 h-14 rounded-full bg-[#b8935f]/15 flex items-center justify-center mx-auto mb-5 text-[color:var(--gold)]">
+                        <i data-lucide="luggage" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     </div>
-                    <h3 class="font-serif text-3xl mb-5 text-[#2d3326]" data-i18n="kids_title">Aviso Especial</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed italic" data-i18n="kids_note">Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.</p>
+                    <h3 class="font-serif text-2xl md:text-3xl mb-4 text-[#2d3326]" data-i18n="physical_gifts_title">Aviso sobre Presentes Físicos</h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed max-w-2xl" data-i18n="physical_gifts_note">Como moramos no Brasil, infelizmente não conseguiremos receber nem transportar presentes físicos da Bolívia de volta para casa. Por esse motivo, caso deseje nos presentear, aceitaremos somente contribuições em dinheiro (Pix, QR ou em espécie). Todas as sugestões de presentes abaixo são simbólicas.</p>
                 </div>
             </div>
         </section>
@@ -308,24 +287,27 @@
             <div class="container mx-auto px-6 text-center max-w-4xl reveal">
                 <p class="eyebrow mb-3">para o nosso novo lar</p>
                 <h2 class="font-serif text-4xl mb-6 text-[#2d3326]" data-i18n="gifts_title">Sugestão de Presentes</h2>
-                <p class="text-gray-500 mb-10 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos opções para facilitar para nossos convidados de ambos os países.</p>
+                <p class="text-gray-500 mb-8 text-lg" data-i18n="gifts_desc">Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos opções para facilitar para nossos convidados de ambos os países.</p>
 
-                <div class="notice">
-                    <div class="notice-icon"><i data-lucide="package-x" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div>
+                <!-- Destaque sobre presentes físicos e lista simbólica -->
+                <div class="bg-white border border-[color:var(--gold-soft)] rounded-sm p-6 md:p-7 max-w-2xl mx-auto mb-10 text-sm text-gray-600 leading-relaxed flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 shadow-sm">
+                    <div class="w-11 h-11 rounded-full bg-[#b8935f]/15 flex items-center justify-center text-[color:var(--gold)] shrink-0">
+                        <i data-lucide="alert-circle" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
+                    </div>
                     <div>
-                        <h3 class="font-serif text-lg text-[#2d3326] mb-1" data-i18n="gifts_notice_title">Presentes simbólicos, apenas em dinheiro</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed" data-i18n="gifts_notice_text">Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguiríamos trazê-los. Por isso, aceitaremos somente dinheiro, e as sugestões de presentes são simbólicas.</p>
+                        <p class="font-bold text-[#2d3326] uppercase tracking-[0.15em] text-[11px] mb-1.5" data-i18n="gifts_symbolic_label">Importante — Presentes Simbólicos</p>
+                        <p data-i18n="gifts_symbolic_notice">Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguimos trazê-los. Portanto, somente será aceito dinheiro (via Pix, QR ou em espécie), e todas as sugestões de presentes são simbólicas.</p>
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-center items-center gap-5 mt-14">
-                    <button onclick="toggleView('gifts', 'pt')" class="w-full md:w-auto inline-flex justify-center items-center px-9 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-2xl font-bold uppercase tracking-[0.15em] text-xs transition-all shadow-lg btn-hover">
-                        <i data-lucide="gift" class="w-5 h-5 mr-3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-5 mt-10">
+                    <button onclick="toggleView('gifts', 'pt')" class="w-full md:w-auto inline-flex justify-center items-center px-9 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-sm font-bold uppercase tracking-[0.15em] text-xs transition-all shadow-lg btn-hover">
+                        <i data-lucide="gift" class="w-5 h-5 mr-3" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                         <span data-i18n="btn_full_list_br">Lista de Presentes (Brasil/Pix)</span>
                     </button>
 
-                    <button onclick="toggleView('gifts', 'es')" class="w-full md:w-auto inline-flex justify-center items-center px-9 py-4 border border-[#5a6b47] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white rounded-2xl font-bold uppercase tracking-[0.15em] text-xs transition-all">
-                        <i data-lucide="qr-code" class="w-5 h-5 mr-3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <button onclick="toggleView('gifts', 'es')" class="w-full md:w-auto inline-flex justify-center items-center px-9 py-4 border border-[#5a6b47] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white rounded-sm font-bold uppercase tracking-[0.15em] text-xs transition-all">
+                        <i data-lucide="qr-code" class="w-5 h-5 mr-3" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                         <span data-i18n="btn_full_list_bo">Regalos (Bolivia/QR)</span>
                     </button>
                 </div>
@@ -335,13 +317,13 @@
         <section id="ai-section" class="py-24 bg-white border-y border-[color:var(--line)]">
             <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl reveal">
                 <div class="mb-10">
-                    <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center mx-auto mb-5 text-[#5a6b47]">
-                        <i data-lucide="bot" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center mx-auto mb-5 text-[#5a6b47]">
+                        <i data-lucide="bot" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     </div>
                     <h2 class="font-serif text-4xl text-[#2d3326] mb-4" data-i18n="ai_title">Dúvidas? Pergunte para nossa IA</h2>
                     <p class="text-gray-500 text-lg" data-i18n="ai_desc">Criamos um assistente inteligente com todos os detalhes do nosso casamento para ajudar você. É só mandar um "Oi" aqui embaixo!</p>
                 </div>
-                <div class="bg-[#fcfbf9] rounded-2xl overflow-hidden shadow-sm border border-[color:var(--line)]" id="ai-iframe-container">
+                <div class="bg-[#fcfbf9] rounded-sm overflow-hidden shadow-sm border border-[color:var(--line)]" id="ai-iframe-container">
                     <iframe id="ai-iframe" data-src="https://f-bio-ana-assistente-de-casamento-189076566468.us-east1.run.app" title="Assistente Casamento Fábio & Ana" class="w-full min-h-[1040px] border-0 h-full" allow="clipboard-write" allowfullscreen scrolling="no"></iframe>
                 </div>
             </div>
@@ -354,9 +336,9 @@
                     <h2 class="font-serif text-4xl text-center text-[#2d3326]" data-i18n="gallery_title">Nossos Momentos</h2>
                 </div>
                 <div class="masonry-grid reveal">
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
-                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(0)"><img src="foto (2).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80'" alt="Momento 1"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(1)"><img src="foto (6).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80'" alt="Momento 2"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
+                    <div class="masonry-item gallery-wrap" onclick="openLightbox(2)"><img src="foto (9).jpg" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80'" alt="Momento 3"><div class="gallery-overlay"><i data-lucide="maximize" class="w-8 h-8 text-white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div></div>
                 </div>
             </div>
         </section>
@@ -366,25 +348,20 @@
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <button onclick="navTo('presentes')" class="inline-flex items-center text-gray-500 hover:text-[#5a6b47] transition-colors font-bold tracking-[0.2em] uppercase text-xs group">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     <span data-i18n="btn_back_home">Voltar ao Início</span>
                 </button>
             </div>
 
-            <div class="notice">
-                    <div class="notice-icon"><i data-lucide="package-x" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div>
-                    <div>
-                        <h3 class="font-serif text-lg text-[#2d3326] mb-1" data-i18n="gifts_notice_title">Presentes simbólicos, apenas em dinheiro</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed" data-i18n="gifts_notice_text">Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguiríamos trazê-los. Por isso, aceitaremos somente dinheiro, e as sugestões de presentes são simbólicas.</p>
-                    </div>
-                </div>
-
             <!-- VISÃO BRASIL -->
             <div id="gifts-br-content">
-                <div class="text-center mb-12">
+                <div class="text-center mb-10">
                     <p class="eyebrow mb-3">com carinho</p>
-                    <h2 class="font-serif text-4xl mb-4 text-[#2d3326]">Sugestões de Presentes</h2>
-                    <p class="text-gray-500 text-lg">Cada item é simbólico: o valor é enviado por Pix e nenhum presente físico será entregue.</p>
+                    <h2 class="font-serif text-4xl mb-4 text-[#2d3326]">Lista de Presentes</h2>
+                    <p class="text-gray-500 text-lg mb-6">Escolha com carinho um item simbólico para ajudar a compor nosso lar.</p>
+                    <div class="bg-[#f6f4ee] border border-[color:var(--gold-soft)] rounded-sm px-6 py-4 max-w-2xl mx-auto text-sm text-gray-600 leading-relaxed">
+                        <strong class="text-[#2d3326]">Aviso:</strong> Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguimos trazê-los. Portanto, somente será aceito dinheiro (Pix), e todos os itens abaixo são simbólicos.
+                    </div>
                 </div>
                 <div class="flex gap-3 overflow-x-auto no-scrollbar mb-10 pb-2 justify-start md:justify-center" id="filters-container">
                     <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-colors bg-[#5a6b47] text-white whitespace-nowrap">Todos</button>
@@ -398,23 +375,26 @@
 
             <!-- VISÃO BOLÍVIA -->
             <div id="gifts-bo-content" class="hidden">
-                <div class="text-center mb-12">
+                <div class="text-center mb-10">
                     <p class="eyebrow mb-3">con cariño</p>
                     <h2 class="font-serif text-4xl mb-4 text-[#2d3326]" data-i18n="bo_gift_title">Contribución Libre</h2>
-                    <p class="text-gray-500 text-lg max-w-2xl mx-auto" data-i18n="bo_gift_desc">Elige el valor que desees regalarnos. Escanea este código QR desde tu aplicación bancaria (BNB / Simple) para realizar tu aporte, ya que el sistema no permite generar un código para cada valor específico.</p>
+                    <p class="text-gray-500 text-lg max-w-2xl mx-auto mb-6" data-i18n="bo_gift_desc">Elige el valor que desees regalarnos. Escanea este código QR desde tu aplicación bancaria (BNB / Simple) para realizar tu aporte, ya que el sistema no permite generar un código para cada valor específico.</p>
+                    <div class="bg-[#f6f4ee] border border-[color:var(--gold-soft)] rounded-sm px-6 py-4 max-w-2xl mx-auto text-sm text-gray-600 leading-relaxed" data-i18n="bo_physical_notice">
+                        Importante: No podremos recibir regalos físicos en Bolivia, ya que vivimos en Brasil y no podemos llevarlos con nosotros. Por lo tanto, solo se aceptará dinero (por QR o en efectivo), y las sugerencias de regalos son simbólicas.
+                    </div>
                 </div>
 
-                <div class="bg-white p-10 rounded-2xl border border-[color:var(--line)] max-w-md mx-auto text-center">
-                    <img src="QR.svg" onerror="this.src='https://placehold.co/200/f6f4ee/5a6b47?text=QR+Bolivia'" class="w-56 h-56 mx-auto mb-6 border border-[color:var(--line)] rounded-2xl p-2 object-contain">
+                <div class="bg-white p-10 rounded-sm border border-[color:var(--line)] max-w-md mx-auto text-center">
+                    <img src="QR.svg" onerror="this.src='https://placehold.co/200/f6f4ee/5a6b47?text=QR+Bolivia'" class="w-56 h-56 mx-auto mb-6 border border-[color:var(--line)] rounded-sm p-2 object-contain">
                     <p class="text-xs text-gray-400 italic mb-8">Cuenta a nombre de Ana Isabel Zambrana</p>
 
                     <div class="text-left mb-6">
                         <label class="block text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-2">Tu Nombre:</label>
-                        <input type="text" id="bo-guest-name" class="w-full bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-2xl focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ej: Juan y Maria">
+                        <input type="text" id="bo-guest-name" class="w-full bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-sm focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ej: Juan y Maria">
                     </div>
 
-                    <button onclick="notifyWhatsAppBO()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-2xl font-bold uppercase tracking-[0.15em] text-xs shadow-md flex justify-center items-center">
-                        <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                    <button onclick="notifyWhatsAppBO()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-sm font-bold uppercase tracking-[0.15em] text-xs shadow-md flex justify-center items-center">
+                        <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                         <span data-i18n="btn_notify_wa">Avisar que regalé</span>
                     </button>
                 </div>
@@ -424,7 +404,7 @@
 
     <!-- Modal Mini-Chat RSVP -->
     <div id="rsvp-chat-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-[#fcfbf9] rounded-2xl max-w-md w-full relative shadow-2xl border border-[color:var(--line)] overflow-hidden flex flex-col max-h-[85vh]">
+        <div class="bg-[#fcfbf9] rounded-sm max-w-md w-full relative shadow-2xl border border-[color:var(--line)] overflow-hidden flex flex-col max-h-[85vh]">
             <!-- Header do Chat -->
             <div class="bg-[#5a6b47] text-white px-6 py-4 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
@@ -445,13 +425,13 @@
             <!-- Rodapé de Input do Chat -->
             <div id="rsvp-chat-controls" class="p-4 bg-white border-t border-[color:var(--line)]">
                 <div id="rsvp-input-row" class="flex gap-2">
-                    <input type="text" id="rsvp-chat-input" class="flex-grow bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-2xl focus:ring-[#5a6b47] focus:border-[#5a6b47] px-4 py-3 focus:outline-none" placeholder="Digite sua resposta...">
-                    <button onclick="handleRsvpSend()" class="px-5 py-3 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-2xl font-bold text-xs uppercase tracking-widest transition-colors flex items-center justify-center">
+                    <input type="text" id="rsvp-chat-input" class="flex-grow bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-sm focus:ring-[#5a6b47] focus:border-[#5a6b47] px-4 py-3 focus:outline-none" placeholder="Digite sua resposta...">
+                    <button onclick="handleRsvpSend()" class="px-5 py-3 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-sm font-bold text-xs uppercase tracking-widest transition-colors flex items-center justify-center">
                         <i data-lucide="send" class="w-4 h-4" stroke-width="1.5"></i>
                     </button>
                 </div>
                 <div id="rsvp-finish-row" class="hidden flex-col gap-2">
-                    <button onclick="sendRsvpToWhatsApp()" class="w-full py-3.5 bg-[#25D366] hover:bg-[#20b858] text-white rounded-2xl font-bold text-xs uppercase tracking-[0.15em] transition-all shadow-md flex items-center justify-center">
+                    <button onclick="sendRsvpToWhatsApp()" class="w-full py-3.5 bg-[#25D366] hover:bg-[#20b858] text-white rounded-sm font-bold text-xs uppercase tracking-[0.15em] transition-all shadow-md flex items-center justify-center">
                         <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.5"></i>
                         <span data-i18n="chat_btn_send_wa">Enviar Confirmação no WhatsApp</span>
                     </button>
@@ -465,37 +445,36 @@
 
     <!-- Modal Dinâmico do Presente -->
     <div id="gift-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
+        <div class="bg-white rounded-sm p-8 max-w-md w-full text-center relative shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
             <button onclick="closeGiftModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-50 rounded-full p-2 border border-[color:var(--line)]">
-                <i data-lucide="x" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="x" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
 
-            <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-2 mt-4">Você escolheu:</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-2 mt-4">Você escolheu (item simbólico):</p>
             <h3 id="modal-gift-name" class="font-serif text-2xl text-[#2d3326] mb-2 leading-tight"></h3>
-            <p id="modal-gift-price" class="text-3xl font-serif text-[#5a6b47] mb-2"></p>
-            <p class="text-xs text-gray-400 mb-6">Presente simbólico — o valor é enviado por Pix</p>
+            <p id="modal-gift-price" class="text-3xl font-serif text-[#5a6b47] mb-6"></p>
             <div class="ornament mb-6"><span class="rule"></span><span class="dot"></span><span class="rule flip"></span></div>
 
             <div class="mb-6 text-left">
                 <label class="block text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-2">Seu Nome / De quem é o presente?</label>
-                <input type="text" id="guest-name" class="w-full bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-2xl focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ex: João e Maria">
+                <input type="text" id="guest-name" class="w-full bg-gray-50 border border-[color:var(--line)] text-gray-800 text-sm rounded-sm focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3" placeholder="Ex: João e Maria">
             </div>
-            <div class="relative w-48 h-48 mx-auto mb-4 border border-[color:var(--line)] rounded-2xl p-2 bg-white flex items-center justify-center">
+            <div class="relative w-48 h-48 mx-auto mb-4 border border-[color:var(--line)] rounded-sm p-2 bg-white flex items-center justify-center">
                 <div id="pix-loader" class="loader absolute"></div>
                 <img id="modal-pix-qr" src="" class="w-full h-full object-contain relative z-10" onload="document.getElementById('pix-loader').style.display='none'">
             </div>
             <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-1">Pix Copia e Cola</p>
-            <textarea id="modal-pix-payload" class="w-full text-xs text-gray-400 bg-gray-50 p-3 rounded-2xl border border-[color:var(--line)] mb-4 h-16 break-all focus:outline-none resize-none" readonly></textarea>
+            <textarea id="modal-pix-payload" class="w-full text-xs text-gray-400 bg-gray-50 p-3 rounded-sm border border-[color:var(--line)] mb-4 h-16 break-all focus:outline-none resize-none" readonly></textarea>
 
             <div class="flex flex-col gap-3">
-                <button onclick="copyPixPayload()" class="w-full px-6 py-4 bg-[#f6f4ee] text-[#5a6b47] hover:bg-[#a3b18a] hover:text-white transition-colors duration-300 rounded-2xl font-bold uppercase tracking-[0.15em] text-xs flex justify-center items-center">
-                    <i data-lucide="copy" class="w-5 h-5 mr-2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <button onclick="copyPixPayload()" class="w-full px-6 py-4 bg-[#f6f4ee] text-[#5a6b47] hover:bg-[#a3b18a] hover:text-white transition-colors duration-300 rounded-sm font-bold uppercase tracking-[0.15em] text-xs flex justify-center items-center">
+                    <i data-lucide="copy" class="w-5 h-5 mr-2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     <span>Copiar Código Pix</span>
                 </button>
                 <p id="gift-copy-msg" class="text-[#5a6b47] text-sm opacity-0 transition-opacity font-semibold h-4 mb-2 -mt-1">Código copiado! ✓</p>
 
-                <button onclick="notifyWhatsApp()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-2xl font-bold uppercase tracking-[0.15em] text-xs shadow-md flex justify-center items-center">
-                    <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <button onclick="notifyWhatsApp()" class="w-full px-6 py-4 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-300 rounded-sm font-bold uppercase tracking-[0.15em] text-xs shadow-md flex justify-center items-center">
+                    <i data-lucide="message-circle" class="w-5 h-5 mr-2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                     <span>Avisar que presenteei</span>
                 </button>
             </div>
@@ -504,16 +483,16 @@
 
     <!-- Modal Dropzone Drive -->
     <div id="drive-modal" class="fixed inset-0 bg-black/80 z-[300] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-white rounded-2xl p-10 max-w-md w-full text-center relative shadow-2xl">
+        <div class="bg-white rounded-sm p-10 max-w-md w-full text-center relative shadow-2xl">
             <button onclick="closeUploadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-800 transition-colors bg-gray-50 rounded-full p-2 border border-[color:var(--line)]">
-                <i data-lucide="x" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="x" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
-            <div class="w-14 h-14 icon-bubble rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
-                <i data-lucide="folder-up" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+            <div class="w-14 h-14 bg-[#5a6b47]/10 rounded-full flex items-center justify-center mx-auto mb-6 text-[#5a6b47]">
+                <i data-lucide="folder-up" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </div>
             <h3 class="font-serif text-2xl text-[#2d3326] mb-4" data-i18n="drive_title">Álbum Compartilhado</h3>
             <p class="text-gray-500 mb-6 text-sm leading-relaxed" data-i18n="drive_desc">Para garantir que suas fotos mantenham a qualidade máxima, usamos uma pasta segura do Google Drive.</p>
-            <div class="bg-gray-50 p-5 rounded-2xl text-left mb-8 border border-[color:var(--line)]">
+            <div class="bg-gray-50 p-5 rounded-sm text-left mb-8 border border-[color:var(--line)]">
                 <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3" data-i18n="drive_step_title">Como funciona:</p>
                 <ol class="text-sm text-gray-600 space-y-2">
                     <li class="flex"><span class="text-[#5a6b47] font-serif mr-2">1.</span> <span data-i18n="drive_step_1">Toque no botão abaixo para abrir a pasta.</span></li>
@@ -521,7 +500,7 @@
                     <li class="flex"><span class="text-[#5a6b47] font-serif mr-2">3.</span> <span data-i18n="drive_step_3">Selecione suas fotos favoritas do celular!</span></li>
                 </ol>
             </div>
-            <a href="https://drive.google.com/drive/folders/1fTq3XezTDU3-Uz8RZlN5-zh8w17pScKt" target="_blank" onclick="closeUploadModal()" class="w-full inline-flex justify-center px-6 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-2xl font-bold uppercase tracking-[0.15em] text-xs transition-all shadow-md">
+            <a href="https://drive.google.com/drive/folders/1fTq3XezTDU3-Uz8RZlN5-zh8w17pScKt" target="_blank" onclick="closeUploadModal()" class="w-full inline-flex justify-center px-6 py-4 bg-[#5a6b47] hover:bg-[#435234] text-white rounded-sm font-bold uppercase tracking-[0.15em] text-xs transition-all shadow-md">
                 <span data-i18n="drive_btn">Acessar Pasta no Drive</span>
             </a>
         </div>
@@ -530,15 +509,15 @@
     <!-- Lightbox Galeria -->
     <div id="lightbox" class="fixed inset-0 bg-black/95 z-[200] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2">
-            <i data-lucide="x" class="w-10 h-10" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+            <i data-lucide="x" class="w-10 h-10" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
         </button>
         <div class="relative w-full h-full flex items-center justify-center p-4">
             <button onclick="prevImage(event)" class="absolute left-2 md:left-8 text-white/50 hover:text-white transition-colors z-50 p-2">
-                <i data-lucide="chevron-left" class="w-12 h-12 md:w-16 md:h-16" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="chevron-left" class="w-12 h-12 md:w-16 md:h-16" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
-            <img id="lightbox-img" src="" class="max-h-[85vh] max-w-full object-contain rounded-2xl shadow-2xl transition-opacity duration-300">
+            <img id="lightbox-img" src="" class="max-h-[85vh] max-w-full object-contain rounded-sm shadow-2xl transition-opacity duration-300">
             <button onclick="nextImage(event)" class="absolute right-2 md:right-8 text-white/50 hover:text-white transition-colors z-50 p-2">
-                <i data-lucide="chevron-right" class="w-12 h-12 md:w-16 md:h-16" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="chevron-right" class="w-12 h-12 md:w-16 md:h-16" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
         </div>
     </div>
@@ -548,7 +527,7 @@
             <div class="ornament mb-5"><span class="rule" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25))"></span><span class="dot" style="background:var(--gold-soft)"></span><span class="rule flip" style="background:linear-gradient(90deg,rgba(255,255,255,0.25),transparent)"></span></div>
             <h2 class="font-serif text-3xl mb-4">Fabio <span class="font-script text-[color:var(--gold-soft)]">&amp;</span> Ana Isabel</h2>
             <p class="text-[color:var(--gold-soft)] text-xs tracking-[0.3em] uppercase mb-8" data-i18n="date_value_short">18 Dezembro 2026</p>
-            <p class="text-white/30 text-xs font-light"><span class="inline-flex items-center gap-1.5">Feito com <i data-lucide="heart" class="w-3.5 h-3.5 text-[color:var(--gold-soft)]"></i> para o nosso grande dia.</span></p>
+            <p class="text-white/30 text-xs font-light">Feito com ❤️ para o nosso grande dia.</p>
         </div>
     </footer>
 
@@ -561,7 +540,7 @@
         <!-- Gaveta com a Playlist Completa do Spotify (Oculta inicialmente) -->
         <div id="spotify-drawer" class="hidden mb-3 w-[300px] sm:w-[340px] rounded-xl overflow-hidden shadow-2xl border border-[color:var(--line)] bg-[#2d3326] transition-all duration-300">
             <div class="px-4 py-2.5 bg-[#2d3326] text-white flex justify-between items-center text-[11px] uppercase tracking-widest font-bold">
-                <span class="flex items-center gap-2"><i data-lucide="disc-3" class="w-4 h-4 text-[#1DB954]"></i> Playlist Completa</span>
+                <span class="flex items-center gap-2"><i data-lucide="disc" class="w-4 h-4 text-[#1DB954]"></i> Playlist Completa</span>
                 <button onclick="toggleSpotifyDrawer()" class="text-white/70 hover:text-white p-1">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
@@ -572,14 +551,14 @@
         <!-- Barra de Controles MP3 + Botão Spotify -->
         <div id="music-player" class="bg-white border border-[color:var(--line)] hover:border-[color:var(--gold-soft)] text-[#5a6b47] rounded-full shadow-xl flex items-center justify-center px-3 py-1 space-x-1">
             <button id="prev-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Música Anterior">
-                <i data-lucide="skip-back" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="skip-back" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
             <button id="music-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Tocar / Pausar">
-                <div id="icon-play"><i data-lucide="play" class="w-6 h-6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div>
-                <div id="icon-pause" class="hidden"><i data-lucide="pause" class="w-6 h-6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i></div>
+                <div id="icon-play"><i data-lucide="play" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
+                <div id="icon-pause" class="hidden"><i data-lucide="pause" class="w-6 h-6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i></div>
             </button>
             <button id="next-btn" class="p-2 hover:scale-110 transition-transform focus:outline-none" title="Próxima Música">
-                <i data-lucide="skip-forward" class="w-5 h-5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                <i data-lucide="skip-forward" class="w-5 h-5" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
             </button>
             <span class="h-5 w-[1px] bg-[color:var(--line)] mx-1"></span>
             <button onclick="toggleSpotifyDrawer()" class="px-3 py-1.5 rounded-full bg-[#1DB954]/10 hover:bg-[#1DB954] text-[#1DB954] hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5" title="Abrir Playlist no Spotify">
@@ -863,7 +842,7 @@
                 closeRsvpChat();
             };
 
-            // --- DICIONÁRIO LUCIDE PARA PRESENTES DINÂMICOS ---
+            // --- DICIONÁRIO LUCIDE PARA PRESENTES DINÂMICOS (ITENS SIMBÓLICOS) ---
             const giftListItems = [
                 { id: 1, pt: "Jogo de Taças de Cristal", price: 50, icon: "wine" },
                 { id: 2, pt: "Kit de Toalhas Premium", price: 100, icon: "bath" },
@@ -873,14 +852,14 @@
                 { id: 6, pt: "Cafeteira Elétrica", price: 300, icon: "coffee" },
                 { id: 7, pt: "Kit de Panelas", price: 350, icon: "cooking-pot" },
                 { id: 8, pt: "Forno Elétrico", price: 400, icon: "microwave" },
-                { id: 9, pt: "Aparelho de Jantar", price: 450, icon: "soup" },
-                { id: 10, pt: "Panela de Pressão", price: 500, icon: "chef-hat" },
+                { id: 9, pt: "Aparelho de Jantar", price: 450, icon: "circle-dashed" },
+                { id: 10, pt: "Panela de Pressão", price: 500, icon: "cooking-pot" },
                 { id: 11, pt: "Robô Aspirador", price: 600, icon: "bot" },
                 { id: 12, pt: "Adega Climatizada", price: 700, icon: "thermometer-snowflake" },
                 { id: 13, pt: "Máquina de Café", price: 800, icon: "coffee" },
                 { id: 14, pt: "Aspirador Vertical", price: 900, icon: "wind" },
                 { id: 15, pt: "Cooktop", price: 1000, icon: "flame" },
-                { id: 16, pt: "Conjunto Premium", price: 1100, icon: "gem" },
+                { id: 16, pt: "Conjunto Premium", price: 1100, icon: "gift" },
                 { id: 17, pt: "Robô Inteligente", price: 1200, icon: "cpu" },
                 { id: 18, pt: "Smart TV 32\"", price: 1300, icon: "tv" },
                 { id: 19, pt: "Lava-Louças", price: 1400, icon: "washing-machine" },
@@ -888,8 +867,8 @@
                 { id: 21, pt: "Ar-Condicionado", price: 1600, icon: "air-vent" },
                 { id: 22, pt: "Smart TV 50\"", price: 1700, icon: "tv" },
                 { id: 23, pt: "Lava e Seca", price: 1800, icon: "washing-machine" },
-                { id: 24, pt: "Viagem Romântica", price: 1900, icon: "plane-takeoff" },
-                { id: 25, pt: "Lua de Mel", price: 2000, icon: "tree-palm" },
+                { id: 24, pt: "Viagem Romântica", price: 1900, icon: "plane" },
+                { id: 25, pt: "Lua de Mel", price: 2000, icon: "heart" },
                 { id: 26, pt: "PS5 com GTA VI", price: 4000, icon: "gamepad-2", special: true }
             ];
 
@@ -916,16 +895,16 @@
                 const phFree = "Valor (R$)";
 
                 const freeCardHTML = `
-                    <div class="bg-[#f6f4ee] rounded-2xl border border-[color:var(--gold-soft)] overflow-hidden flex flex-col hover:shadow-md transition-all">
+                    <div class="bg-[#f6f4ee] rounded-sm border border-[color:var(--gold-soft)] overflow-hidden flex flex-col hover:shadow-md transition-all">
                         <div class="p-6 flex flex-col flex-grow text-center justify-center">
-                            <div class="w-14 h-14 rounded-full icon-bubble flex items-center justify-center mx-auto mb-3 text-[#5a6b47]">
-                                <i data-lucide="gift" class="w-7 h-7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                            <div class="w-14 h-14 rounded-full bg-[#5a6b47]/10 flex items-center justify-center mx-auto mb-3 text-[#5a6b47]">
+                                <i data-lucide="gift" class="w-7 h-7" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                             </div>
                             <h3 class="font-serif text-xl text-[#2d3326] mb-2">${freeTxt}</h3>
                             <p class="text-sm text-gray-500 mb-6">${freeSub}</p>
-                            <input type="number" id="free-amount" placeholder="${phFree}" class="w-full bg-white border border-[color:var(--gold-soft)] text-gray-800 text-center text-lg rounded-2xl focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3 mb-2 font-bold placeholder-gray-400 focus:placeholder-transparent">
+                            <input type="number" id="free-amount" placeholder="${phFree}" class="w-full bg-white border border-[color:var(--gold-soft)] text-gray-800 text-center text-lg rounded-sm focus:ring-[#5a6b47] focus:border-[#5a6b47] block px-4 py-3 mb-2 font-bold placeholder-gray-400 focus:placeholder-transparent">
                             <span id="free-error" class="hidden text-red-500 text-xs font-bold uppercase mb-2">Digite um valor válido</span>
-                            <button onclick="openFreeModal()" class="w-full py-3 bg-[#5a6b47] text-white hover:bg-[#435234] transition-colors rounded-2xl font-bold uppercase tracking-[0.15em] text-xs mt-auto">
+                            <button onclick="openFreeModal()" class="w-full py-3 bg-[#5a6b47] text-white hover:bg-[#435234] transition-colors rounded-sm font-bold uppercase tracking-[0.15em] text-xs mt-auto">
                                 ${btnFree}
                             </button>
                         </div>
@@ -933,7 +912,7 @@
                 `;
                 grid.insertAdjacentHTML('beforeend', freeCardHTML);
 
-                [...giftListItems].sort((a, b) => (b.special ? 1 : 0) - (a.special ? 1 : 0)).forEach(gift => {
+                giftListItems.forEach(gift => {
                     let show = true;
                     if (currentFilter === 'under200') { if (gift.price > 200) show = false; }
                     if (currentFilter === '200to500') { if (gift.price <= 200 || gift.price > 500) show = false; }
@@ -942,36 +921,37 @@
                     if (!show) return;
 
                     const title = gift.pt;
-                    if (gift.special) {
-                        const spPrice = `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-                        grid.insertAdjacentHTML('beforeend', `
-                            <div class="special-gift md:col-span-2 rounded-3xl relative overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-8 p-8 md:p-10">
-                                <div class="special-icon"><i data-lucide="gamepad-2" class="w-12 h-12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></i></div>
-                                <div class="flex-grow text-center md:text-left">
-                                    <span class="special-badge"><i data-lucide="sparkles" class="w-4 h-4" stroke-width="1.75"></i> Presente especial</span>
-                                    <h3 class="font-serif text-3xl mt-4 mb-2">${title}</h3>
-                                    <p class="text-white/70 text-sm leading-relaxed mb-6 max-w-md">Um presente especial para animar o nosso novo lar. Como todos os outros, é simbólico: o valor é enviado por Pix.</p>
-                                    <div class="flex flex-col sm:flex-row items-center gap-4 md:justify-start justify-center">
-                                        <span class="font-serif text-3xl text-[color:var(--gold-soft)]">${spPrice}</span>
-                                        <button onclick="openGiftModal(${gift.id})" class="btn-gold">Presentear</button>
-                                    </div>
-                                </div>
-                            </div>`);
-                        return;
-                    }
                     const priceStr = `R$ ${gift.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
 
+                    const isSpecial = Boolean(gift.special);
+                    const cardClass = isSpecial
+                        ? 'rounded-sm overflow-hidden flex flex-col card-special relative'
+                        : 'bg-white rounded-sm border border-[color:var(--line)] overflow-hidden flex flex-col card-elegant';
+                    const headerBgClass = isSpecial
+                        ? 'h-44 w-full bg-gradient-to-b from-[#f6f1e4] to-[#fbfaf7] flex items-center justify-center text-[color:var(--gold)] group border-b border-[color:var(--gold-soft)] relative'
+                        : 'h-44 w-full bg-[#fbfaf7] flex items-center justify-center text-[#5a6b47] group border-b border-[color:var(--line)]';
+                    const iconCircleClass = isSpecial
+                        ? 'w-16 h-16 rounded-full bg-[#b8935f]/15 flex items-center justify-center text-[color:var(--gold)] transition-transform duration-500 group-hover:scale-110'
+                        : 'w-16 h-16 rounded-full bg-[#5a6b47]/10 flex items-center justify-center text-[#5a6b47] transition-transform duration-500 group-hover:scale-110';
+                    const btnClass = isSpecial
+                        ? 'w-full py-3.5 bg-[color:var(--gold)] text-white hover:bg-[#9c7a4a] transition-colors rounded-sm font-bold uppercase tracking-[0.15em] text-xs shadow-sm'
+                        : 'w-full py-3.5 bg-[#f6f4ee] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors rounded-sm font-bold uppercase tracking-[0.15em] text-xs';
+                    const badgeHTML = isSpecial
+                        ? '<span class="absolute top-3 right-3 bg-[color:var(--gold)] text-white text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-sm shadow-sm">Presente Especial</span>'
+                        : '';
+
                     const cardHTML = `
-                        <div class="bg-white rounded-2xl border border-[color:var(--line)] overflow-hidden flex flex-col card-elegant">
-                            <div class="gift-icon-area h-40 w-full flex items-center justify-center text-[#5a6b47] group">
-                                <div class="w-16 h-16 rounded-full icon-bubble flex items-center justify-center text-[#5a6b47] transition-transform duration-500 group-hover:scale-110">
-                                    <i data-lucide="${gift.icon}" class="w-8 h-8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></i>
+                        <div class="${cardClass}">
+                            <div class="${headerBgClass}">
+                                ${badgeHTML}
+                                <div class="${iconCircleClass}">
+                                    <i data-lucide="${gift.icon}" class="w-8 h-8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></i>
                                 </div>
                             </div>
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h3 class="font-serif text-lg text-[#2d3326] mb-2 flex-grow">${title}</h3>
-                                <p class="text-[#5a6b47] font-serif text-2xl mb-6">${priceStr}</p>
-                                <button onclick="openGiftModal(${gift.id})" class="w-full py-3.5 bg-[#f6f4ee] text-[#5a6b47] hover:bg-[#5a6b47] hover:text-white transition-colors rounded-2xl font-bold uppercase tracking-[0.15em] text-xs">
+                                <p class="${isSpecial ? 'text-[color:var(--gold)]' : 'text-[#5a6b47]'} font-serif text-2xl mb-6">${priceStr}</p>
+                                <button onclick="openGiftModal(${gift.id})" class="${btnClass}">
                                     Presentear
                                 </button>
                             </div>
@@ -982,7 +962,7 @@
                 
                 // Força a renderização do Lucide com strokeWidth global 1.25 e injeta na tela
                 lucide.createIcons({
-                    strokeWidth: 1.6
+                    strokeWidth: 1.25
                 });
             }
 
@@ -1117,14 +1097,16 @@
                     drive_step_title: "Como funciona:", drive_step_1: "Toque no botão abaixo para abrir a pasta.", drive_step_2: "No Drive, toque no ícone \"+\" (Novo).", drive_step_3: "Selecione suas fotos favoritas do celular!", drive_btn: "Acessar Pasta no Drive",
                     dress_code: "Traje", dress_women: "Mulheres", dress_men: "Homens", dress_desc: "Sugerimos terno e gravata para os homens e vestido longo ou midi para as mulheres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantir a segurança e permitir que todos os adultos aproveitem a festa com total tranquilidade e diversão, optamos por realizar uma recepção exclusiva para adultos. Agradecemos muito o carinho e a compreensão de todos os papais e mamães.",
+                    physical_gifts_title: "Aviso sobre Presentes Físicos", physical_gifts_note: "Como moramos no Brasil, infelizmente não conseguiremos receber nem transportar presentes físicos da Bolívia de volta para casa. Por esse motivo, caso deseje nos presentear, aceitaremos somente contribuições em dinheiro (Pix, QR ou em espécie). Todas as sugestões de presentes abaixo são simbólicas.",
                     rsvp_title: "Confirme sua Presença", rsvp_desc: "Sua presença é muito importante para nós! A confirmação de presença é obrigatória e deve ser feita até o dia 30/11. Por favor, confirme sua presença clicando no botão abaixo para enviar uma mensagem ao nosso WhatsApp.", rsvp_btn: "Confirmar pelo WhatsApp",
                     chat_header_title: "Confirmação de Presença", chat_btn_send_wa: "Enviar Confirmação no WhatsApp", chat_btn_restart: "Preencher novamente",
                     gifts_title: "Sugestão de Presentes", gifts_desc: "Nossa maior alegria é a sua presença! Mas se desejar nos presentear e nos ajudar com a nossa lua de mel, preparamos opções para facilitar para nossos convidados de ambos os países.",
+                    gifts_symbolic_label: "Importante — Presentes Simbólicos", gifts_symbolic_notice: "Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguimos trazê-los. Portanto, somente será aceito dinheiro (via Pix, QR ou em espécie), e todas as sugestões de presentes são simbólicas.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Regalos (Bolivia/QR)", btn_back_home: "Voltar ao Início",
                     ai_title: "Dúvidas? Pergunte para nossa IA", ai_desc: "Criamos um assistente inteligente com todos os detalhes do nosso casamento. É só mandar um \"Oi\"!", gallery_title: "Nossos Momentos", date_value_short: "18 Dezembro 2026",
-                    bo_gift_title: "Contribuição Livre", bo_gift_desc: "Escolha o valor que desejar nos presentear. Escaneie este código QR a partir do seu aplicativo bancário para realizar sua contribuição, visto que o banco não permite gerar um código para cada valor.", btn_notify_wa: "Avisar que presenteei",
-                    hero_rsvp: "Confirmar presença", hero_gifts: "Sugestão de presentes",
-                    gifts_notice_title: "Presentes simbólicos, apenas em dinheiro", gifts_notice_text: "Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguiríamos trazê-los. Por isso, aceitaremos somente dinheiro, e as sugestões de presentes são simbólicas."
+                    bo_gift_title: "Contribuição Livre", bo_gift_desc: "Escolha o valor que desejar nos presentear. Escaneie este código QR a partir do seu aplicativo bancário para realizar sua contribuição, visto que o banco não permite gerar um código para cada valor.",
+                    bo_physical_notice: "Importante: Não poderemos receber presentes físicos na Bolívia, pois moramos no Brasil e não conseguimos trazê-los. Portanto, somente será aceito dinheiro (por QR ou em espécie), e as sugestões de presentes são simbólicas.",
+                    btn_notify_wa: "Avisar que presenteei"
                 },
                 es: {
                     invite: "Estás invitado a la boda de", date: "18 de Diciembre de 2026", time: "Inicio a las 17:30", scroll_down: "Desliza hacia abajo",
@@ -1136,23 +1118,25 @@
                     upload_title: "Nuestra Visión, Tus Ojos", upload_desc: "¡Queremos ver nuestro gran día a través de varias visiones! Toma fotos y agrégalas a nuestra carpeta compartida para que las guardemos por siempre.",
                     upload_box_title: "Toca aquí para enviar tus fotos", upload_box_sub: "Sube directamente desde tu celular en alta calidad",
                     drive_title: "Álbum Compartido", drive_desc: "Para asegurar que tus fotos mantengan la máxima calidad, usamos una carpeta segura de Google Drive.",
-                    drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícone \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
+                    drive_step_title: "Cómo funciona:", drive_step_1: "Toca el botón de abajo para abrir la carpeta.", drive_step_2: "En Drive, toca el ícono \"+\" (Nuevo).", drive_step_3: "¡Selecciona tus fotos favoritas!", drive_btn: "Abrir Carpeta en Drive",
                     dress_code: "Vestimenta", dress_women: "Mujeres", dress_men: "Hombres", dress_desc: "Sugerimos traje y corbata para los hombres y vestido largo o midi para las mujeres.",
                     kids_title: "Aviso Especial", kids_note: "Para garantizar la seguridad y permitir que todos los adultos disfruten de la fiesta, hemos optado por realizar una recepción exclusiva para adultos.",
+                    physical_gifts_title: "Aviso sobre Regalos Físicos", physical_gifts_note: "Como vivimos en Brasil, lamentablemente no podremos recibir ni transportar regalos físicos desde Bolivia de regreso a casa. Por este motivo, si deseas hacernos un obsequio, solo se aceptará dinero (por QR, Pix o en efectivo). Todas las sugerencias de regalos son simbólicas.",
                     rsvp_title: "Confirma tu Asistencia", rsvp_desc: "¡Tu presencia es muy importante para nosotros! La confirmación de asistencia es obligatoria y debe realizarse hasta el 30/11. Por favor, confirma tu asistencia haciendo clic en el botón de abajo para enviar un mensaje a nuestro WhatsApp.", rsvp_btn: "Confirmar por WhatsApp",
                     chat_header_title: "Confirmación de Asistencia", chat_btn_send_wa: "Enviar Confirmación por WhatsApp", chat_btn_restart: "Rellenar de nuevo",
                     gifts_title: "Sugerencia de Regalos", gifts_desc: "¡Nuestra mayor alegría es tu presencia! Pero si deseas hacernos un regalo, preparamos opciones para facilitar a los invitados de ambos países.",
+                    gifts_symbolic_label: "Importante — Regalos Simbólicos", gifts_symbolic_notice: "No podremos recibir regalos físicos en Bolivia, ya que vivimos en Brasil y no podemos llevarlos con nosotros. Por lo tanto, solo se aceptará dinero (por QR, Pix o en efectivo), y todas las sugerencias de regalos son simbólicas.",
                     btn_full_list_br: "Lista de Presentes (Brasil/Pix)", btn_full_list_bo: "Regalos (Bolivia/QR)", btn_back_home: "Volver al Inicio",
                     ai_title: "¿Dudas? Pregunta a nuestra IA", ai_desc: "Hemos creado un asistente inteligente con todos los detalles de nuestra boda. ¡Solo envíanos un \"Hola\"!", gallery_title: "Nuestros Momentos", date_value_short: "18 Diciembre 2026",
-                    bo_gift_title: "Contribución Libre", bo_gift_desc: "Elige el valor que desees regalarnos. Escanea este código QR desde tu aplicación bancaria (BNB / Simple) para realizar tu aporte, ya que el sistema no permite generar un código dinámico para cada valor específico.", btn_notify_wa: "Avisar que regalé",
-                    hero_rsvp: "Confirmar asistencia", hero_gifts: "Sugerencia de regalos",
-                    gifts_notice_title: "Regalos simbólicos, solo dinero", gifts_notice_text: "No podremos recibir regalos físicos en Bolivia, ya que vivimos en Brasil y no podríamos llevarlos con nosotros. Por eso, aceptaremos únicamente dinero, y las sugerencias de regalos son simbólicas."
+                    bo_gift_title: "Contribución Libre", bo_gift_desc: "Elige el valor que desees regalarnos. Escanea este código QR desde tu aplicación bancaria (BNB / Simple) para realizar tu aporte, ya que el sistema no permite generar un código dinámico para cada valor específico.",
+                    bo_physical_notice: "Importante: No podremos recibir regalos físicos en Bolivia, ya que vivimos en Brasil y no podemos llevarlos con nosotros. Por lo tanto, solo se aceptará dinero (por QR o en efectivo), y las sugerencias de regalos son simbólicas.",
+                    btn_notify_wa: "Avisar que regalé"
                 }
             };
 
             // Processa todos os ícones Lucide na inicialização da página com as configurações de traço
             lucide.createIcons({
-                strokeWidth: 1.6
+                strokeWidth: 1.25
             });
             
             // Inicia o grid e também força os ícones
